@@ -1,0 +1,56 @@
+@use "../utilities";
+@use '../media-queries';
+
+.containerLoginForm {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: url('../../Assets/icons/svg/login-top.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: top -250px right 0px;
+        z-index: utilities.z-index(back);
+
+        @media #{media-queries.$max-sm} {
+            background-position: top -100px right 0px;
+        }
+        @media #{(media-queries.$break-sm)} and #{(media-queries.$max-xl)} {
+            background-position: top -250px right 0px;
+        }
+        @media #{(media-queries.$break-xl)} and #{(media-queries.$max-4k-xxl)} {
+            background-position: top -400px right 0px;
+        }
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: url('../../Assets/icons/svg/login-bottom.svg');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: bottom 0px right 0px;
+        z-index: utilities.z-index(back);
+    }
+
+    .titleLogin {
+        font-weight: utilities.font-weight(regular);
+        font-size: 22px;
+        width: 100%;
+        margin: 0;
+    }
+}

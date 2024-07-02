@@ -1,0 +1,220 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../../Assets/icons/fonts/icomoon.eot?9c3fou');
+  src:  url('../../Assets/icons/fonts/icomoon.eot?9c3fou#iefix') format('embedded-opentype'),
+    url('../../Assets/icons/fonts/icomoon.ttf?9c3fou') format('truetype'),
+    url('../../Assets/icons/fonts/icomoon.woff?9c3fou') format('woff'),
+    url('../../Assets/icons/fonts/icomoon.svg?9c3fou#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-points:before {
+  content: "\e93f";
+}
+.icon-take-screenshot:before {
+  content: "\e936";
+  color: #fff;
+}
+.icon-alert:before {
+  content: "\e900";
+}
+.icon-announcement:before {
+  content: "\e901";
+}
+.icon-arrowColapseLeft:before {
+  content: "\e902";
+}
+.icon-arrowColapseRight:before {
+  content: "\e903";
+}
+.icon-autorenew:before {
+  content: "\e904";
+}
+.icon-bell:before {
+  content: "\e905";
+}
+.icon-bellNotification:before {
+  content: "\e906";
+}
+.icon-blur:before {
+  content: "\e907";
+}
+.icon-brightness:before {
+  content: "\e908";
+}
+.icon-camera:before {
+  content: "\e909";
+}
+.icon-cart:before {
+  content: "\e90a";
+}
+.icon-celebration:before {
+  content: "\e90b";
+}
+.icon-check:before {
+  content: "\e90c";
+}
+.icon-chevronDown:before {
+  content: "\e90d";
+}
+.icon-chevronLeft:before {
+  content: "\e90e";
+}
+.icon-chevronRight:before {
+  content: "\e90f";
+}
+.icon-chevronUp:before {
+  content: "\e910";
+}
+.icon-clients:before {
+  content: "\e911";
+}
+.icon-clipboard:before {
+  content: "\e912";
+}
+.icon-close:before {
+  content: "\e913";
+}
+.icon-comment:before {
+  content: "\e914";
+}
+.icon-contentCopy:before {
+  content: "\e915";
+}
+.icon-dashboard:before {
+  content: "\e916";
+}
+.icon-date:before {
+  content: "\e917";
+}
+.icon-delete:before {
+  content: "\e918";
+}
+.icon-document:before {
+  content: "\e919";
+}
+.icon-download:before {
+  content: "\e91a";
+}
+.icon-edit:before {
+  content: "\e91b";
+}
+.icon-energy:before {
+  content: "\e91c";
+}
+.icon-energyFilled:before {
+  content: "\e91d";
+}
+.icon-exit:before {
+  content: "\e91e";
+}
+.icon-filter:before {
+  content: "\e91f";
+}
+.icon-flag:before {
+  content: "\e920";
+}
+.icon-headsetMic:before {
+  content: "\e921";
+}
+.icon-home:before {
+  content: "\e922";
+}
+.icon-hourglass:before {
+  content: "\e923";
+}
+.icon-improvement:before {
+  content: "\e924";
+}
+.icon-location:before {
+  content: "\e925";
+}
+.icon-minus:before {
+  content: "\e926";
+}
+.icon-money:before {
+  content: "\e927";
+}
+.icon-mood:before {
+  content: "\e928";
+}
+.icon-moodFilled:before {
+  content: "\e929";
+}
+.icon-mop:before {
+  content: "\e92a";
+}
+.icon-passwordHidden:before {
+  content: "\e92b";
+}
+.icon-passwordVisible:before {
+  content: "\e92c";
+}
+.icon-personalInformation:before {
+  content: "\e92d";
+}
+.icon-plus:before {
+  content: "\e92e";
+}
+.icon-reward:before {
+  content: "\e92f";
+}
+.icon-rutes:before {
+  content: "\e930";
+}
+.icon-scanDelete:before {
+  content: "\e931";
+}
+.icon-sdCard:before {
+  content: "\e932";
+}
+.icon-search:before {
+  content: "\e933";
+}
+.icon-share:before {
+  content: "\e934";
+}
+.icon-shareWindows:before {
+  content: "\e935";
+}
+.icon-starFilled:before {
+  content: "\e937";
+}
+.icon-starUnfilled:before {
+  content: "\e938";
+}
+.icon-stats:before {
+  content: "\e939";
+}
+.icon-tasks:before {
+  content: "\e93a";
+}
+.icon-time:before {
+  content: "\e93b";
+}
+.icon-upload:before {
+  content: "\e93c";
+}
+.icon-users:before {
+  content: "\e93d";
+}
+.icon-wifiOff:before {
+  content: "\e93e";
+}

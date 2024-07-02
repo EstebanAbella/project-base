@@ -1,0 +1,26 @@
+// Main breakpoints
+$break-xs: "(min-width: 600px)";
+$break-sm: "(min-width: 768px)";
+$break-md: "(min-width: 992px)";
+$break-lg: "(min-width: 1081px)";
+$break-xl: "(min-width: 1200px)";
+$break-xxl: "(min-width: 1366px)";
+$break-xxxl: "(min-width: 1920px)";
+$break-4k: "(min-width: 2500px)";
+$break-4k-xl: "(min-width: 2800px)";
+$break-4k-xxl: "(min-width: 3600px)";
+
+$max-xs: "(max-width: 600px)";
+$max-sm: "(max-width: 768px)";
+$max-md: "(max-width: 992px)";
+$max-lg: "(max-width: 1080px)";
+$max-xl: "(max-width: 1200px)";
+$max-xxl: "(max-width: 1366px)";
+$max-xxxl: "(max-width: 1920px)";
+$max-4k: "(max-width: 2500px)";
+$max-4k-xl: "(max-width: 2800px)";
+$max-4k-xxl: "(max-width: 4200px)";
+
+$max-h-xs: "(max-height: 500px)";
+$max-h-sm: "(max-height: 600px)";
+$max-h-md: "(max-height: 730px)";

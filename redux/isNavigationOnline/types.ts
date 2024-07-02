@@ -1,0 +1,2 @@
+//Online-offLine
+export const IS_NAVIGATION_ONLINE_FETCH = 'IS_NAVIGATION_ONLINE_FETCH'

@@ -1,0 +1,48 @@
+@use "../utilities";
+
+header {
+    position: relative;
+    width: 100%;
+    height: 10vh;
+    background-color: $white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    z-index: utilities.z-index(triple);
+
+    .containerAvatar {
+        position: relative;
+        
+        .avatar {
+            background: $tertiaryDefault;
+            border-radius: 50%;
+            margin-left: 8px;
+
+            width: 40px;
+            height: 40px;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            font-size: 1.25rem;
+            align-items: center;
+            flex-shrink: 0;
+            line-height: 1;
+            user-select: none;
+            border-radius: 50%;
+            justify-content: center;
+            color: $white;
+            font-weight: utilities.font-weight(semibold);
+        }
+
+        .pointNotification {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: $redVipo;
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+        }
+    }
+}

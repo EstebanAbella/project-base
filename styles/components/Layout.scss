@@ -1,0 +1,30 @@
+@use '../media-queries';
+@use "../utilities";
+
+.layout {
+    position: relative;
+    min-width: 100%;
+    min-height: 100vh;
+    padding-top: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    > div {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: utilities.z-index(triple);
+    }
+
+    .children {
+        min-width: 80%;
+
+        @media #{media-queries.$max-sm} {
+            min-width: 95%;
+        }
+    }
+}
+

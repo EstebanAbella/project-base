@@ -1,0 +1,186 @@
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { RootState } from '../redux/rootReducer'
+import { ServerStatus } from '../Utils/Types/global'
+import { doRestorePasswordValidated } from '../redux/auth/actions'
+import { useRouter } from 'next/router'
+import Button, { ButtonType } from '../components/Button'
+import Loader from '../components/Loader'
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    restorePasswordValidatedStatus: state.auth.restorePasswordValidatedStatus,
+  }
+}
+const mapDispatchToProps = {
+  doRestorePasswordValidated,
+}
+
+export type RestorePasswordPropsType = {
+  doRestorePasswordValidated: Function
+  restorePasswordValidatedStatus: ServerStatus
+}
+
+const RestorePassword = ({
+  restorePasswordValidatedStatus,
+  doRestorePasswordValidated,
+}: RestorePasswordPropsType) => {
+  // Datos de la contraseña
+  const [password, setPassword] = useState('')
+  // Visibilidad Contraseña
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  // Indicador de campo vacio de la contraseña
+  const [passwordEmpty, setPasswordEmpty] = useState<boolean>(false)
+  // Token
+  const [tokenParams, setTokenParams] = useState('')
+  // Repetir contraseña
+  // Visibilidad Contraseña
+  const [showPasswordRepeated, setShowPasswordRepeated] =
+    useState<boolean>(false)
+  // Datos de la contraseña
+  const [passwordRepeated, setPasswordRepeated] = useState('')
+  // Indicador de campo vacio de la contraseña
+  const [passwordRepeatedEmpty, setPasswordRepeatedEmpty] =
+    useState<boolean>(false)
+  // Estado del botton
+  const [stateButton, setStateButton] = useState<boolean>(true)
+
+  const router = useRouter()
+  const { token } = router.query
+
+  useEffect(() => {
+    if (restorePasswordValidatedStatus === ServerStatus.FETCH) {
+      router.push('/login')
+    }
+  }, [restorePasswordValidatedStatus])
+
+  useEffect(() => {
+    token && setTokenParams(token as string)
+  }, [token])
+
+  useEffect(() => {
+    if (password === '' && passwordRepeated === '') return
+    if (validateForm() && tokenParams !== '') {
+      setStateButton(false)
+    } else {
+      setStateButton(true)
+    }
+  }, [password, passwordRepeated])
+
+  const handleClick = () => {
+    if (validateForm() && tokenParams !== '') {
+      doRestorePasswordValidated({
+        newPassword: password,
+        token: tokenParams,
+      })
+    }
+  }
+
+  const validateForm = () => {
+    if (password === '' || password.length < 8) {
+      setPasswordEmpty(true)
+    } else {
+      setPasswordEmpty(false)
+    }
+
+    if (passwordRepeated === '' || passwordRepeated !== password) {
+      setPasswordRepeatedEmpty(true)
+    } else {
+      setPasswordRepeatedEmpty(false)
+    }
+
+    if (
+      password === '' ||
+      password.length < 8 ||
+      passwordRepeated === '' ||
+      passwordRepeated !== password
+    ) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  return (
+    <form>
+      <img src="/logo.png" width={'80%'} alt="logo" />
+      <h1>Restore Password</h1>
+
+      <div className="inputPasswordContainer">
+        <input
+          type={showPassword ? 'text' : 'password'}
+          name="password"
+          value={password}
+          placeholder="Password"
+          required
+          onChange={(e) => setPassword(e.target.value)}
+          className="input"
+        />
+        <span
+          className={
+            showPassword ? 'icon-passwordVisible' : 'icon-passwordHidden'
+          }
+          id={'icon'}
+          onClick={() => setShowPassword(!showPassword)}
+        ></span>
+      </div>
+      <div className="messageForm">
+        {passwordEmpty ? 'Debes usar 8 o más caracteres' : ''}
+      </div>
+
+      <div className="inputPasswordContainer">
+        <input
+          type={showPasswordRepeated ? 'text' : 'password'}
+          name="passwordRepeated"
+          value={passwordRepeated}
+          placeholder="Password Repeated"
+          required
+          onChange={(e) => setPasswordRepeated(e.target.value)}
+          className="input"
+        />
+        <span
+          className={
+            showPasswordRepeated
+              ? 'icon-passwordVisible'
+              : 'icon-passwordHidden'
+          }
+          id={'icon'}
+          onClick={() => setShowPasswordRepeated(!showPasswordRepeated)}
+        ></span>
+      </div>
+      <div className="messageForm">
+        {passwordEmpty ? 'Las contraseñas deben coincidir' : ''}
+      </div>
+
+      <div
+        className="messageForm"
+        style={{
+          marginBottom: '5px',
+        }}
+      >
+        {restorePasswordValidatedStatus === ServerStatus.FETCH_ERROR && (
+          <p style={{ color: 'red', margin: '0' }}>
+            Error al cambiar contraseña
+          </p>
+        )}
+      </div>
+
+      <Button
+        value={
+          restorePasswordValidatedStatus === ServerStatus.FETCHING
+            ? 'Cargando'
+            : 'Cambiar contraseña'
+        }
+        type={ButtonType.PRIMARY}
+        onClick={handleClick}
+        disabled={stateButton}
+      />
+
+      <div className="messageForm">
+        {restorePasswordValidatedStatus === ServerStatus.FETCHING && <Loader />}
+      </div>
+    </form>
+  )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RestorePassword)

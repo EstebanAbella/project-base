@@ -1,0 +1,37 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $white;
+  width: 100%;
+  position: fixed;
+  border-radius: 3px;
+  bottom: 0;
+  left: 0;
+  padding: 20px 24px;
+  border: 0px;
+  .logo {
+    max-width: 60px;
+  }
+  .promptInstall {
+    width: calc(100% - 20px);
+    margin: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    p{
+      margin: 0;
+      color: $primaryDefault;
+      font-size: 16px;
+      font-weight: 400;
+      text-transform: none;
+      margin-left: -56px;
+    }
+  }
+}
+

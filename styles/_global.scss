@@ -1,0 +1,33 @@
+@import "./variables";
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $graySkeleton;
+    @include mixins.custom_scrollbar();
+    #__next {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        main {
+            display: flex;
+            width: 100%;
+        }
+    }
+}
+
+body {
+    &.themeDark {
+        --themeColor: #F4F2EE;
+        --themeBackgroundColor: #000;
+    }
+
+    &.themeLight {
+        --themeColor: #000;
+        --themeBackgroundColor: #F4F2EE;
+    }
+}
