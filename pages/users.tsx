@@ -300,6 +300,8 @@ copiar lo mismo de usuarios en items
 
 relacionar items con clientes
 
+proteger ruta usuarios solo para roles admin
+
 llamada para validar token por ususario
 
 dar estilos sitio web
