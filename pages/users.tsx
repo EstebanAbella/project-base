@@ -290,3 +290,19 @@ const Users = ({
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users)
+/*
+add user: generar el id en el back
+update user: que funcione y completar automaticamente los datos del modal
+
+copiar lo mismo de usuarios en clientes
+
+copiar lo mismo de usuarios en items
+
+relacionar items con clientes
+
+llamada para validar token por ususario
+
+dar estilos sitio web
+
+eliminar lo que no es necesario
+*/
