@@ -8,7 +8,7 @@ export type ModalPropsType = {
   text?: []
   textButton?: string
   onClick?: (e: any) => void
-  setStateModal: (e: any) => void
+  setStateModal: (e: any) => void | undefined
   stateModal: boolean
   dataForm?: Array<dataFormType>
 }
@@ -31,12 +31,18 @@ const Modal = ({
   onClick,
   dataForm,
 }: ModalPropsType) => {
-  const [form, setForm] = useState({})
+  const [form, setForm] = useState<any>()
 
   useEffect(() => {
     if (dataForm?.length !== 0) {
-      const setPropertyForm = dataForm?.map((data) => data.name)
-      console.log(setPropertyForm)
+      const setPropertyForm = dataForm?.reduce(
+        (obj: { [key: string]: string }, item: dataFormType) => {
+          obj[item.name] = ''
+          return obj
+        },
+        {}
+      )
+      setForm(setPropertyForm)
     }
   }, [dataForm])
 
@@ -63,6 +69,8 @@ const Modal = ({
             </div>
           )}
           {dataForm?.length !== 0 &&
+            form &&
+            Object.keys(form).length !== 0 &&
             dataForm?.map((data) => (
               <TextField
                 label={data.label}
@@ -72,10 +80,12 @@ const Modal = ({
                 type={data.type}
                 placeholder={data.placeholder}
                 onChange={handleChange}
-                // value={form[data.name]}
+                value={form[data.name] ? form[data.name] : ''}
               ></TextField>
             ))}
-          {textButton && <Button value={textButton} onClick={onClick}></Button>}
+          {textButton && onClick && (
+            <Button value={textButton} onClick={() => onClick(form)}></Button>
+          )}
         </div>
       </div>
     </section>

@@ -76,12 +76,11 @@ const Users = ({
       userEditStatus === ServerStatus.FETCH
     )
       getUsers()
+    setStateModal(false)
   }, [userCreateStatus, userDeleteStatus, userEditStatus])
 
   const createUserObject = [
     {
-      // value: {form.name},
-      // onChange: {handleChange}
       label: 'Id',
       name: 'id',
       typeTextField: TextFieldType.PRIMARY,
@@ -90,8 +89,6 @@ const Users = ({
       placeholder: 'Id',
     },
     {
-      // value: {form.name},
-      // onChange: {handleChange}
       label: 'Nombre',
       name: 'name',
       typeTextField: TextFieldType.PRIMARY,
@@ -100,8 +97,6 @@ const Users = ({
       placeholder: 'Escriba su nombre',
     },
     {
-      // value: {form.name},
-      // onChange: {handleChange}
       label: 'E-mail',
       name: 'email',
       typeTextField: TextFieldType.PRIMARY,
@@ -110,8 +105,14 @@ const Users = ({
       placeholder: 'email@email.com',
     },
     {
-      // value: {form.name},
-      // onChange: {handleChange}
+      label: 'Password',
+      name: 'password',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'password',
+      placeholder: 'Password',
+    },
+    {
       label: 'Role',
       name: 'role',
       typeTextField: TextFieldType.PRIMARY,
@@ -121,6 +122,10 @@ const Users = ({
     },
   ]
 
+  const handleClickCreateUSer = (data: any) => {
+    createUser(data)
+  }
+
   return (
     <AccessConsume>
       <Layout isNavigation={false}>
@@ -129,7 +134,7 @@ const Users = ({
           setStateModal={setStateModal}
           dataForm={createUserObject}
           textButton={'Add user'}
-          onClick={() => createUser()}
+          onClick={handleClickCreateUSer}
         />
         <section className="usersPage">
           <h1>Users</h1>
