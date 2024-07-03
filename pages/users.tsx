@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RootState } from '../redux/rootReducer'
 import {
   createUser,
@@ -15,6 +15,8 @@ import Loader from '../components/Loader'
 import AccessConsume from '../wrappers/auth/AccessConsume'
 import Layout from '../components/Layout'
 import router from 'next/router'
+import Modal from '../components/Modal'
+import { TextFieldType } from '../components/TextField'
 
 const mapStateToProps = (state: RootState) => {
   const usersReducer = state.user
@@ -61,6 +63,8 @@ const Users = ({
   userDeleteStatus,
   userEditStatus,
 }: UsersPropType) => {
+  const [stateModal, setStateModal] = useState<boolean>(false)
+
   useEffect(() => {
     getUsers()
   }, [])
@@ -73,78 +77,131 @@ const Users = ({
     )
       getUsers()
   }, [userCreateStatus, userDeleteStatus, userEditStatus])
+
+  const createUserObject = [
+    {
+      // value: {form.name},
+      // onChange: {handleChange}
+      label: 'Id',
+      name: 'id',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'number',
+      placeholder: 'Id',
+    },
+    {
+      // value: {form.name},
+      // onChange: {handleChange}
+      label: 'Nombre',
+      name: 'name',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'text',
+      placeholder: 'Escriba su nombre',
+    },
+    {
+      // value: {form.name},
+      // onChange: {handleChange}
+      label: 'E-mail',
+      name: 'email',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'email',
+      placeholder: 'email@email.com',
+    },
+    {
+      // value: {form.name},
+      // onChange: {handleChange}
+      label: 'Role',
+      name: 'role',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'select',
+      placeholder: '-',
+    },
+  ]
+
   return (
     <AccessConsume>
       <Layout isNavigation={false}>
+        <Modal
+          stateModal={stateModal}
+          setStateModal={setStateModal}
+          dataForm={createUserObject}
+          textButton={'Add user'}
+          onClick={() => createUser()}
+        />
         <section className="usersPage">
           <h1>Users</h1>
-          <section className="addUserAction">
-            <Button
-              type={ButtonType.SUCCESS}
-              value={'Add user'}
-              onClick={() => createUser()}
-              extraClassName={'buttonTable'}
-            ></Button>
-          </section>
           {usersStatus !== ServerStatus.FETCHING && (
-            <table className="table table-striped table-bordered">
-              <thead className="table-dark">
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">E-mail</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users ? (
-                  users?.map((data) => (
-                    <tr key={data.id}>
+            <>
+              <section className="addUserAction">
+                <Button
+                  type={ButtonType.SUCCESS}
+                  value={'Add user'}
+                  onClick={() => setStateModal(true)}
+                  extraClassName={'buttonTable'}
+                ></Button>
+              </section>
+              <table className="table table-striped table-bordered">
+                <thead className="table-dark">
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users ? (
+                    users?.map((data) => (
+                      <tr key={data.id}>
+                        <>
+                          <td>{data.id}</td>
+                          <td>
+                            <p
+                              onClick={() =>
+                                router.push(`/userSelected/${data.id}`)
+                              }
+                              style={{ cursor: 'pointer' }}
+                            >
+                              {data.name}
+                            </p>
+                          </td>
+                          <td>{data.email}</td>
+                          <td>{data.role}</td>
+                          <td className="containerButtonTable">
+                            <Button
+                              type={ButtonType.ERROR}
+                              value={'Delete'}
+                              onClick={() => deleteUser(data.id)}
+                              extraClassName={'buttonTable'}
+                            ></Button>
+                            <Button
+                              type={ButtonType.INFORMATION}
+                              value={'Update'}
+                              onClick={() => editUser(data.id)}
+                              extraClassName={'buttonTable'}
+                            ></Button>
+                          </td>
+                        </>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
                       <>
-                        <td>{data.id}</td>
-                        <td>
-                          <p
-                            onClick={() =>
-                              router.push(`/userSelected/${data.id}`)
-                            }
-                            style={{ cursor: 'pointer' }}
-                          >
-                            {data.name}
-                          </p>
-                        </td>
-                        <td>{data.email}</td>
-                        <td>{data.role}</td>
-                        <td className="containerButtonTable">
-                          <Button
-                            type={ButtonType.ERROR}
-                            value={'Delete'}
-                            onClick={() => deleteUser(data.id)}
-                            extraClassName={'buttonTable'}
-                          ></Button>
-                          <Button
-                            type={ButtonType.INFORMATION}
-                            value={'Update'}
-                            onClick={() => editUser(data.id)}
-                            extraClassName={'buttonTable'}
-                          ></Button>
-                        </td>
+                        <td>{'-'}</td>
+                        <td>{'-'}</td>
+                        <td>{'-'}</td>
+                        <td>{'-'}</td>
+                        <td>{'-'}</td>
                       </>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <>
-                      <td>{'-'}</td>
-                      <td>{'-'}</td>
-                      <td>{'-'}</td>
-                      <td>{'-'}</td>
-                      <td>{'-'}</td>
-                    </>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+                  )}
+                </tbody>
+              </table>
+            </>
           )}
 
           {usersStatus === ServerStatus.FETCHING && <Loader></Loader>}

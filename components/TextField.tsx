@@ -15,25 +15,31 @@ const TextField = ({
   value = '',
   label = '',
   name = '',
-  type = TextFieldType.PRIMARY,
+  typeTextField = TextFieldType.PRIMARY,
   disabled = false,
   onChange = () => {},
+  type = '',
+  placeholder = '',
 }: {
   value?: string
   label?: string
   name?: string
-  type?: TextFieldType
+  type?: string
+  typeTextField?: TextFieldType
   disabled?: boolean
   onChange?: (e: any) => void
+  placeholder?: string
 }) => {
   return (
-    <div className={`textField ${type}`}>
+    <div className={`textField ${typeTextField}`}>
       <label>{label}</label>
       <input
         name={name}
         disabled={disabled}
-        defaultValue={value}
+        value={value}
         onChange={onChange}
+        type={type}
+        placeholder={placeholder}
       />
     </div>
   )
