@@ -14,6 +14,7 @@ import { ServerStatus } from '../Utils/Types/global'
 import Loader from '../components/Loader'
 import AccessConsume from '../wrappers/auth/AccessConsume'
 import Layout from '../components/Layout'
+import router from 'next/router'
 
 const mapStateToProps = (state: RootState) => {
   const usersReducer = state.user
@@ -82,6 +83,7 @@ const Users = ({
               type={ButtonType.SUCCESS}
               value={'Add user'}
               onClick={() => createUser()}
+              extraClassName={'buttonTable'}
             ></Button>
           </section>
           {usersStatus !== ServerStatus.FETCHING && (
@@ -101,14 +103,30 @@ const Users = ({
                     <tr key={data.id}>
                       <>
                         <td>{data.id}</td>
-                        <td>{data.name}</td>
+                        <td>
+                          <p
+                            onClick={() =>
+                              router.push(`/userSelected/${data.id}`)
+                            }
+                            style={{ cursor: 'pointer' }}
+                          >
+                            {data.name}
+                          </p>
+                        </td>
                         <td>{data.email}</td>
                         <td>{data.role}</td>
-                        <td>
+                        <td className="containerButtonTable">
                           <Button
                             type={ButtonType.ERROR}
                             value={'Delete'}
                             onClick={() => deleteUser(data.id)}
+                            extraClassName={'buttonTable'}
+                          ></Button>
+                          <Button
+                            type={ButtonType.INFORMATION}
+                            value={'Update'}
+                            onClick={() => editUser(data.id)}
+                            extraClassName={'buttonTable'}
                           ></Button>
                         </td>
                       </>

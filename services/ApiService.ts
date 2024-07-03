@@ -163,7 +163,7 @@ class ApiService {
       this.axios
         .get(`${apiUrls.users}/${id}`)
         .then((response) => {
-          const user = response.data as UserResult
+          const user = response.data.user as UserResult
           resolve(user)
         })
         .catch((e) => {

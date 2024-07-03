@@ -1,0 +1,20 @@
+
+.buttonTable {
+    padding: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    font-size: 15px;
+    gap: 5px;
+    min-width: 70px;
+}
+
+table {
+    .containerButtonTable{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-wrap: wrap;
+     gap: 5px;
+    }
+}
