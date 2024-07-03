@@ -234,15 +234,13 @@ class ApiService {
     })
   }
   async editUser(submittedData: any): Promise<{}> {
-    const { firstName, lastName, userSellerId, email, roleId, password } =
-      submittedData
+    const { name, id, email, role, password } = submittedData
     const newData = {
-      firstName,
-      lastName,
-      userSellerId,
+      name,
+      id,
       email,
-      roleId,
-      ...(password && { password }),
+      role,
+      password,
     }
     return await new Promise<{}>((resolve, reject) => {
       if (!submittedData.id) reject(new Error('invalidId'))

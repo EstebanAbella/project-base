@@ -41,7 +41,8 @@ form {
             cursor: pointer;
             z-index: utilities.z-index(double);
         }
-        input{
+        input,
+        select {
             background-color: $white;
             padding: 0px;
             padding: 5px 10px;
@@ -56,7 +57,7 @@ form {
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 22px;
+            border-radius: 7px;
             &.inputError {
                 border: 1px solid $stateError;
             }

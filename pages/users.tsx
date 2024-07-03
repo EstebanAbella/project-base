@@ -64,6 +64,7 @@ const Users = ({
   userEditStatus,
 }: UsersPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
+  const [typeModal, setTypeModal] = useState<string>('')
 
   useEffect(() => {
     getUsers()
@@ -119,11 +120,71 @@ const Users = ({
       disabled: false,
       type: 'select',
       placeholder: '-',
+      valueSelect: ['User', 'Admin'],
+    },
+  ]
+
+  const editUserObject = [
+    {
+      label: 'Id',
+      name: 'id',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'number',
+      placeholder: 'Id',
+    },
+    {
+      label: 'Nombre',
+      name: 'name',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'text',
+      placeholder: 'Escriba su nombre',
+    },
+    {
+      label: 'E-mail',
+      name: 'email',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'email',
+      placeholder: 'email@email.com',
+    },
+    {
+      label: 'Password',
+      name: 'password',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'password',
+      placeholder: 'Password',
+    },
+    {
+      label: 'Role',
+      name: 'role',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: 'select',
+      placeholder: '-',
+      valueSelect: ['User', 'Admin'],
     },
   ]
 
   const handleClickCreateUSer = (data: any) => {
     createUser(data)
+  }
+
+  const handleClickEditUSer = (data: any) => {
+    console.log(data)
+    editUser(data)
+  }
+
+  const handleClickOnModal = (typeModal: string, data?: any) => {
+    if (typeModal === 'create') {
+      setTypeModal('modal-create-user')
+      setStateModal(true)
+    } else if (typeModal === 'edit') {
+      setTypeModal('modal-edit-user')
+      setStateModal(true)
+    }
   }
 
   return (
@@ -134,7 +195,19 @@ const Users = ({
           setStateModal={setStateModal}
           dataForm={createUserObject}
           textButton={'Add user'}
+          typeButton={ButtonType.SUCCESS}
           onClick={handleClickCreateUSer}
+          isDisabled={typeModal === 'modal-create-user'}
+        />
+
+        <Modal
+          stateModal={stateModal}
+          setStateModal={setStateModal}
+          dataForm={editUserObject}
+          textButton={'Update user'}
+          typeButton={ButtonType.INFORMATION}
+          onClick={handleClickEditUSer}
+          isDisabled={typeModal === 'modal-edit-user'}
         />
         <section className="usersPage">
           <h1>Users</h1>
@@ -144,7 +217,7 @@ const Users = ({
                 <Button
                   type={ButtonType.SUCCESS}
                   value={'Add user'}
-                  onClick={() => setStateModal(true)}
+                  onClick={() => handleClickOnModal('create')}
                   extraClassName={'buttonTable'}
                 ></Button>
               </section>
@@ -186,7 +259,7 @@ const Users = ({
                             <Button
                               type={ButtonType.INFORMATION}
                               value={'Update'}
-                              onClick={() => editUser(data.id)}
+                              onClick={() => handleClickOnModal('edit')}
                               extraClassName={'buttonTable'}
                             ></Button>
                           </td>
