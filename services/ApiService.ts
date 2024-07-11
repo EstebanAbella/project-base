@@ -247,7 +247,7 @@ class ApiService {
       else {
         this.axios
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-          .put(`${apiUrls.users}/${submittedData.id}`, newData)
+          .put(`${apiUrls.users}/${submittedData.id}`, submittedData)
           .then((response) => {
             const user = response.data as UserResult
             resolve(user)
