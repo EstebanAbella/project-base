@@ -287,7 +287,6 @@ const Users = ({
 export default connect(mapStateToProps, mapDispatchToProps)(Users)
 /*
 add user: generar el id en el back
-update user: completar automaticamente los datos del modal
 
 copiar lo mismo de usuarios en clientes
 
