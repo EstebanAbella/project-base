@@ -13,6 +13,7 @@ export type ModalPropsType = {
   stateModal: boolean
   dataForm?: Array<dataFormType>
   isDisabled: boolean
+  initialData?: any
 }
 
 export type dataFormType = {
@@ -35,11 +36,20 @@ const Modal = ({
   onClick,
   dataForm,
   isDisabled,
+  initialData,
 }: ModalPropsType) => {
   const [form, setForm] = useState<any>()
+  console.log('form', form)
+  console.log('initialData', initialData)
 
   useEffect(() => {
-    if (dataForm?.length !== 0) {
+    if (initialData) {
+      setForm(initialData)
+    }
+  }, [initialData])
+
+  useEffect(() => {
+    if (dataForm?.length !== 0 && !initialData) {
       const setPropertyForm = dataForm?.reduce(
         (obj: { [key: string]: string }, item: dataFormType) => {
           obj[item.name] = ''

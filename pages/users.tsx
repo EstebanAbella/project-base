@@ -65,6 +65,7 @@ const Users = ({
 }: UsersPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>('')
+  const [dataInitialModal, setDataInitialModal] = useState()
 
   useEffect(() => {
     getUsers()
@@ -126,14 +127,6 @@ const Users = ({
 
   const editUserObject = [
     {
-      label: 'Id',
-      name: 'id',
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: 'number',
-      placeholder: 'Id',
-    },
-    {
       label: 'Nombre',
       name: 'name',
       typeTextField: TextFieldType.PRIMARY,
@@ -184,6 +177,7 @@ const Users = ({
     } else if (typeModal === 'edit') {
       setTypeModal('modal-edit-user')
       setStateModal(true)
+      setDataInitialModal(data)
     }
   }
 
@@ -208,6 +202,7 @@ const Users = ({
           typeButton={ButtonType.INFORMATION}
           onClick={handleClickEditUSer}
           isDisabled={typeModal === 'modal-edit-user'}
+          initialData={dataInitialModal}
         />
         <section className="usersPage">
           <h1>Users</h1>
@@ -259,7 +254,7 @@ const Users = ({
                             <Button
                               type={ButtonType.INFORMATION}
                               value={'Update'}
-                              onClick={() => handleClickOnModal('edit')}
+                              onClick={() => handleClickOnModal('edit', data)}
                               extraClassName={'buttonTable'}
                             ></Button>
                           </td>
@@ -292,7 +287,7 @@ const Users = ({
 export default connect(mapStateToProps, mapDispatchToProps)(Users)
 /*
 add user: generar el id en el back
-update user: que funcione y completar automaticamente los datos del modal
+update user: completar automaticamente los datos del modal
 
 copiar lo mismo de usuarios en clientes
 
