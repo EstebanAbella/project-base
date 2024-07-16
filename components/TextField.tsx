@@ -12,7 +12,7 @@ export enum TextFieldType {
 }
 
 const TextField = ({
-  value = '',
+  valueInput = '',
   label = '',
   name = '',
   typeTextField = TextFieldType.PRIMARY,
@@ -22,7 +22,7 @@ const TextField = ({
   placeholder = '',
   valueSelect = [],
 }: {
-  value?: string
+  valueInput?: string
   label?: string
   name?: string
   type?: string
@@ -39,7 +39,7 @@ const TextField = ({
         <input
           name={name}
           disabled={disabled}
-          value={value}
+          value={valueInput}
           onChange={onChange}
           type={type}
           placeholder={placeholder}
@@ -48,11 +48,9 @@ const TextField = ({
 
       {type === 'select' && (
         <select name={name} disabled={disabled} onChange={onChange}>
-          <option value={'-'} selected>
-            -
-          </option>
+          <option value={'-'}>-</option>
           {valueSelect.map((data) => (
-            <option value={data} key={data}>
+            <option value={data} key={data} selected={valueInput === data}>
               {data}
             </option>
           ))}

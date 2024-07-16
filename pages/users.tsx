@@ -121,7 +121,7 @@ const Users = ({
       disabled: false,
       type: 'select',
       placeholder: '-',
-      valueSelect: ['User', 'Admin'],
+      valueSelect: ['user', 'admin'],
     },
   ]
 
@@ -157,7 +157,7 @@ const Users = ({
       disabled: false,
       type: 'select',
       placeholder: '-',
-      valueSelect: ['User', 'Admin'],
+      valueSelect: ['user', 'admin'],
     },
   ]
 

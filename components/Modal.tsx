@@ -98,7 +98,7 @@ const Modal = ({
                         type={data.type}
                         placeholder={data.placeholder}
                         onChange={handleChange}
-                        value={form[data.name] ? form[data.name] : ''}
+                        valueInput={form[data.name] ? form[data.name] : ''}
                         valueSelect={data.valueSelect ? data.valueSelect : []}
                         key={data.name}
                       ></TextField>
