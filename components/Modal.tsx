@@ -39,8 +39,6 @@ const Modal = ({
   initialData,
 }: ModalPropsType) => {
   const [form, setForm] = useState<any>()
-  console.log('form', form)
-  console.log('initialData', initialData)
 
   useEffect(() => {
     if (initialData) {

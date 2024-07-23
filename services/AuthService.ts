@@ -38,8 +38,6 @@ class AuthService {
             return false
         }
     }
-
-
 }
 
 let authServiceSingleton

@@ -83,14 +83,6 @@ const Users = ({
 
   const createUserObject = [
     {
-      label: 'Id',
-      name: 'id',
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: 'number',
-      placeholder: 'Id',
-    },
-    {
       label: 'Nombre',
       name: 'name',
       typeTextField: TextFieldType.PRIMARY,

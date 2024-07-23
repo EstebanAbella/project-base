@@ -7,7 +7,7 @@ export enum ServerStatus {
 
 export type loggedUser = {
   name: string
-  id: string
+  id?: string
   email: string
   password: string
   role: string

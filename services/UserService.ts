@@ -1,11 +1,11 @@
 import jsonwebtoken from 'jsonwebtoken'
-
 import { loggedUser, mocked_users } from '../models/models'
 
 export type globalType = {
   userService?: UserService
 }
 
+let currentId = 1
 class UserService {
   users: loggedUser[]
 
@@ -14,6 +14,9 @@ class UserService {
       throw new Error('New instance cannot be created!!')
     } else {
       this.users = mocked_users
+      if (this.users.length > 0) {
+        currentId = Math.max(...this.users.map(user => parseInt(user.id || '0'))) + 1
+      }
     }
     ;(global as globalType).userService = this
   }
@@ -54,6 +57,8 @@ class UserService {
   }
 
   addUser(newUser: loggedUser) {
+    newUser.id = currentId.toString()
+    currentId++
     this.users.push(newUser)
     return newUser
   }
