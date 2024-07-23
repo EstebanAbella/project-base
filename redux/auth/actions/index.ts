@@ -83,23 +83,19 @@ export const getUserByToken = () => (dispatch: any) => {
   const token = LocalDataService.getToken()
 
   if (token) {
-    // ApiServiceSingleton.getUserByToken(token)
-    //   .then((response: loggedUser) => {
-    //     dispatch({
-    //       type: t.AUTH_USER_BY_TOKEN_FETCH,
-    //       payload: response,
-    //     })
-    //   })
-    //   .catch(() => {
-    //     LocalDataService.clearData()
-    //     dispatch({
-    //       type: t.AUTH_USER_BY_TOKEN_FETCH_ERROR,
-    //     })
-    //   })
-    dispatch({
-      type: t.AUTH_USER_BY_TOKEN_FETCH,
-      payload: true,
-    })
+    ApiServiceSingleton.getUserByToken(token)
+      .then((response: loggedUser) => {
+        dispatch({
+          type: t.AUTH_USER_BY_TOKEN_FETCH,
+          payload: response,
+        })
+      })
+      .catch(() => {
+        LocalDataService.clearData()
+        dispatch({
+          type: t.AUTH_USER_BY_TOKEN_FETCH_ERROR,
+        })
+      })
   } else {
     LocalDataService.clearData()
     dispatch({

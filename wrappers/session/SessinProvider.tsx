@@ -44,7 +44,7 @@ const SessionProvider = ({
   surveyCall,
 }: SessinProviderProps) => {
   useEffect(() => {
-    checkUpdater()
+    // checkUpdater()
     const token = LocalDataService.getInstance().getToken()
     if (token) {
       ApiService.setToken(token)
@@ -55,17 +55,17 @@ const SessionProvider = ({
     }
   }, [])
 
-  useEffect(() => {
-    if (loginStatus === ServerStatus.FETCH && updateNeeded) {
-      router.push('/updateApp')
-    }
-  }, [loginStatus, updaterCheckerStatus])
+  // useEffect(() => {
+  //   if (loginStatus === ServerStatus.FETCH && updateNeeded) {
+  //     router.push('/updateApp')
+  //   }
+  // }, [loginStatus, updaterCheckerStatus])
 
-  useEffect(() => {
-    if (loginStatus === ServerStatus.FETCH && !updateNeeded) {
-      surveyCall()
-    }
-  }, [loginStatus])
+  // useEffect(() => {
+  //   if (loginStatus === ServerStatus.FETCH && !updateNeeded) {
+  //     surveyCall()
+  //   }
+  // }, [loginStatus])
 
   return <>{children}</>
 }
