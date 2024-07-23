@@ -278,8 +278,6 @@ const Users = ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users)
 /*
-add user: generar el id en el back
-
 copiar lo mismo de usuarios en clientes
 
 copiar lo mismo de usuarios en items
