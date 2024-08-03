@@ -1,5 +1,6 @@
+import ClientServiceSingleton from '../../../services/apiService/client'
 import { CustomErrorType } from '../../../Utils/Types/global'
-import ApiService from '../../../services/ApiService'
+
 import * as t from '../types'
 
 export const getClients =
@@ -12,7 +13,7 @@ export const getClients =
   ) =>
   (dispatch: (v: any) => void) => {
     dispatch({ type: t.GET_CLIENTS_FETCHING })
-    ApiService.getClients(offset, limit, query, filter, order)
+    ClientServiceSingleton.getClients(offset, limit, query, filter, order)
       .then((result) => {
         dispatch({
           type: t.GET_CLIENTS_FETCH,
@@ -28,7 +29,7 @@ export const getClients =
 
 export const getClient = (id: string) => (dispatch: (v: any) => void) => {
   dispatch({ type: t.GET_CLIENT_FETCHING })
-  ApiService.getClient(id)
+  ClientServiceSingleton.getClient(id)
     .then((result) => {
       dispatch({
         type: t.GET_CLIENT_FETCH,
@@ -45,7 +46,7 @@ export const getClient = (id: string) => (dispatch: (v: any) => void) => {
 export const createClient =
   (data: { [key: string]: string }) => (dispatch: any) => {
     dispatch({ type: t.CREATE_CLIENT_FETCHING })
-    ApiService.createClient(data)
+    ClientServiceSingleton.createClient(data)
       .then(() => {
         dispatch({
           type: t.CREATE_CLIENT_FETCH,
@@ -60,7 +61,7 @@ export const createClient =
 
 export const deleteClient = (id: string) => (dispatch: any) => {
   dispatch({ type: t.DELETE_CLIENT_FETCHING })
-  ApiService.deleteClient(id)
+  ClientServiceSingleton.deleteClient(id)
     .then(() => {
       dispatch({
         type: t.DELETE_CLIENT_FETCH,
@@ -76,7 +77,7 @@ export const deleteClient = (id: string) => (dispatch: any) => {
 export const editClient =
   (data: { [key: string]: string }) => (dispatch: any) => {
     dispatch({ type: t.EDIT_CLIENT_FETCHING })
-    ApiService.editClient(data)
+    ClientServiceSingleton.editClient(data)
       .then(() => {
         dispatch({
           type: t.EDIT_CLIENT_FETCH,
@@ -91,7 +92,7 @@ export const editClient =
 
   export const getClientByUser = (id: string) => (dispatch: (v: any) => void) => {
     dispatch({ type: t.GET_CLIENT_BY_USER_FETCHING })
-    ApiService.getClientByUser(id)
+    ClientServiceSingleton.getClientByUser(id)
       .then((result) => {
         dispatch({
           type: t.GET_CLIENT_BY_USER_FETCH,

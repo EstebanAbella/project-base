@@ -259,51 +259,6 @@ class ApiService {
     })
   }
 
-  //*****SURVEY*****//
-  async getSurvey(id: number): Promise<SurveyResult> {
-    return await new Promise<SurveyResult>((resolve, reject) => {
-      this.axios
-        .get(`${apiUrls.survey}/${id}`)
-        .then((response) => {
-          const survey = response.data as SurveyResult
-          resolve(survey)
-        })
-        .catch((e) => {
-          reject(this.errorComposer(e))
-        })
-    })
-  }
-  async getSurveys(
-    offset?: number,
-    limit?: number,
-    query?: string,
-    filter?: string,
-    order?: string,
-    roles?: string
-  ): Promise<Paginator<SurveyResult>> {
-    return await new Promise<Paginator<SurveyResult>>((resolve, reject) => {
-      const params = {
-        offset,
-        limit,
-        q: query,
-        searchIn: filter,
-        sort: order,
-        roles,
-      }
-      if (!params.q) delete params.q
-      if (params.searchIn === 'id') delete params.searchIn
-
-      this.axios
-        .get(`${apiUrls.survey}`, { params })
-        .then((response) => {
-          const surveys = response.data as Paginator<SurveyResult>
-          resolve(surveys)
-        })
-        .catch((e) => {
-          reject(this.errorComposer(e))
-        })
-    })
-  }
 }
 
 let ApiServiceSingleton

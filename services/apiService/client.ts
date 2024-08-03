@@ -1,0 +1,169 @@
+import { clientListType } from '../../Utils/Types/clientType'
+import ApiServiceSingleton from './ApiService'
+
+export interface globalType {
+  ClientService?: ClientService
+}
+
+const apiUrls = {
+  /* client */
+  clients: '/v1/clientsByUser',
+}
+
+class ClientService {
+  constructor() {
+    if ((global as globalType).ClientService) {
+      throw new Error('ClientService instance already exists!')
+    }
+    ;(global as globalType).ClientService = this
+  }
+
+  getInstance(): this {
+    return this
+  }
+
+  async getClient(id: string): Promise<clientListType> {
+    return await new Promise<clientListType>((resolve, reject) => {
+      ApiServiceSingleton.axios
+        .get(`${apiUrls.clients}/${id}`)
+        .then((response) => {
+          const client = response.data.client as clientListType
+          resolve(client)
+        })
+        .catch((e) => {
+          reject(ApiServiceSingleton.errorComposer(e))
+        })
+    })
+  }
+
+  async getClients(
+    offset?: number,
+    limit?: number,
+    query?: string,
+    filter?: string,
+    order?: string,
+    roles?: string
+  ): Promise<clientListType[]> {
+    return await new Promise<clientListType[]>((resolve, reject) => {
+      const params = {
+        offset,
+        limit,
+        q: query,
+        searchIn: filter,
+        sort: order,
+        roles,
+      }
+      if (!params.q) delete params.q
+      if (params.searchIn === 'id') delete params.searchIn
+
+      ApiServiceSingleton.axios
+        .get(`${apiUrls.clients}`, { params })
+        .then((response) => {
+          const formatedItems = response.data.clients.map((u: clientListType) => {
+            return {
+              ...u,
+            }
+          })
+          resolve(formatedItems)
+        })
+        .catch((e) => {
+          reject(ApiServiceSingleton.errorComposer(e))
+        })
+    })
+  }
+  async createClient(submittedData: { [key: string]: string }): Promise<{}> {
+    return await new Promise<{}>((resolve, reject) => {
+      ApiServiceSingleton.axios
+        .post(`${apiUrls.clients}`, submittedData)
+        .then((response) => {
+          const client = response.data as clientListType
+          resolve(client)
+        })
+        .catch((e) => {
+          reject(ApiServiceSingleton.errorComposer(e))
+        })
+    })
+  }
+
+  async deleteClient(id: string): Promise<{}> {
+    return await new Promise<{}>((resolve, reject) => {
+      ApiServiceSingleton.axios
+        .delete(`${apiUrls.clients}/${id}`)
+        .then((response) => {
+          const client = response.data as clientListType
+          resolve(client)
+        })
+        .catch((e) => {
+          reject(ApiServiceSingleton.errorComposer(e))
+        })
+    })
+  }
+  async editClient(submittedData: any): Promise<{}> {
+    const { name, id, email, role, password } = submittedData
+    const newData = {
+      name,
+      id,
+      email,
+      role,
+      password,
+    }
+    return await new Promise<{}>((resolve, reject) => {
+      if (!submittedData.id) reject(new Error('invalidId'))
+      else {
+        ApiServiceSingleton.axios
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          .put(`${apiUrls.clients}/${submittedData.id}`, submittedData)
+          .then((response) => {
+            const client = response.data as clientListType
+            resolve(client)
+          })
+          .catch((e) => {
+            reject(ApiServiceSingleton.errorComposer(e))
+          })
+      }
+    })
+  }
+
+  async getClientByUser(
+    id: string,
+    offset?: number,
+    limit?: number,
+    query?: string,
+    filter?: string,
+    order?: string,
+    roles?: string
+  ): Promise<clientListType[]> {
+    return await new Promise<clientListType[]>((resolve, reject) => {
+      const params = {
+        offset,
+        limit,
+        q: query,
+        searchIn: filter,
+        sort: order,
+        roles,
+      }
+      if (!params.q) delete params.q
+      if (params.searchIn === 'id') delete params.searchIn
+
+      ApiServiceSingleton.axios
+        .get(`${apiUrls.clients}/${id}`, { params })
+        .then((response) => {
+          const formatedItems = response.data.users.map((u: clientListType) => {
+            return {
+              ...u,
+            }
+          })
+          resolve(formatedItems)
+        })
+        .catch((e) => {
+          reject(ApiServiceSingleton.errorComposer(e))
+        })
+    })
+  }
+
+}
+
+let ClientServiceSingleton
+if (!(global as globalType).ClientService) ClientServiceSingleton = new ClientService()
+else ClientServiceSingleton = (global as globalType).ClientService
+export default ClientServiceSingleton as ClientService
