@@ -278,6 +278,7 @@ const Users = ({
 export default connect(mapStateToProps, mapDispatchToProps)(Users)
 /*
 copiar lo mismo de usuarios en clientes
+Traer clientes por usuario
 
 copiar lo mismo de usuarios en items
 
@@ -288,4 +289,6 @@ proteger ruta usuarios solo para roles admin
 dar estilos sitio web
 
 eliminar lo que no es necesario
+
+restore password
 */
