@@ -1,7 +1,8 @@
 import { DispatchEmptyObject } from '../../../Utils/Types/global'
 import { loggedUser } from '../../../models/models'
-import ApiServiceSingleton from '../../../services/ApiService'
 import LocalDataService from '../../../services/LocalDataService'
+import ApiServiceSingleton from '../../../services/apiService/ApiService'
+import AuthServiceSingleton from '../../../services/apiService/auth'
 import * as t from '../types'
 
 export type loginFormType = {
@@ -14,7 +15,7 @@ export const doLogin =
   ({ email, password }: loginFormType) =>
   (dispatch: any) => {
     dispatch({ type: t.LOGIN_FETCHING })
-    ApiServiceSingleton.doLogin(email, password)
+    AuthServiceSingleton.doLogin(email, password)
       .then((res) => {
         if (res) {
           const result = res as loggedUser
@@ -48,7 +49,7 @@ export const doRestorePassword =
     dispatch({
       type: t.RESTORE_PASS_FETCHING,
     })
-    ApiServiceSingleton.doRestorePassword(data)
+    AuthServiceSingleton.doRestorePassword(data)
       .then((response) => {
         dispatch({
           type: t.RESTORE_PASS_FETCH,
@@ -64,7 +65,7 @@ export const doRestorePassword =
 export const doRestorePasswordValidated =
   (data: { newPassword: string; token: string }) => (dispatch: any) => {
     dispatch({ type: t.RESTORE_PASS_VALIDATED_FETCHING })
-    ApiServiceSingleton.doRestorePasswordValidated(data)
+    AuthServiceSingleton.doRestorePasswordValidated(data)
       .then((response) => {
         dispatch({
           type: t.RESTORE_PASS_VALIDATED_FETCH,
@@ -83,7 +84,7 @@ export const getUserByToken = () => (dispatch: any) => {
   const token = LocalDataService.getToken()
 
   if (token) {
-    ApiServiceSingleton.getUserByToken(token)
+    AuthServiceSingleton.getUserByToken(token)
       .then((response: loggedUser) => {
         dispatch({
           type: t.AUTH_USER_BY_TOKEN_FETCH,

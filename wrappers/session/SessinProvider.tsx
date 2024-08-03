@@ -2,12 +2,12 @@ import { PropsWithChildren, useEffect, useState } from 'react'
 import { RootState } from '../../redux/rootReducer'
 import LocalDataService from '../../services/LocalDataService'
 import { connect } from 'react-redux'
-import ApiService from '../../services/ApiService'
+
 import { getUserByToken } from '../../redux/auth/actions'
 import { ServerStatus } from '../../Utils/Types/global'
 import { checkUpdater } from '../../redux/updater/actions'
 import router, { useRouter } from 'next/router'
-import { surveyCall } from '../../redux/surveys/actions'
+import ApiService from '../../services/apiService/ApiService'
 
 const mapStateToProps = (state: RootState) => {
   const updaterReducer = state.updater
@@ -22,7 +22,6 @@ const mapStateToProps = (state: RootState) => {
 const mapDispatchToProps = {
   getUserByToken,
   checkUpdater,
-  surveyCall,
 }
 
 export type SessinProviderProps = PropsWithChildren<{
@@ -31,7 +30,6 @@ export type SessinProviderProps = PropsWithChildren<{
   checkUpdater: Function
   updateNeeded: boolean
   updaterCheckerStatus: ServerStatus
-  surveyCall: Function
 }>
 
 const SessionProvider = ({
@@ -41,7 +39,6 @@ const SessionProvider = ({
   checkUpdater,
   updateNeeded,
   updaterCheckerStatus,
-  surveyCall,
 }: SessinProviderProps) => {
   useEffect(() => {
     // checkUpdater()

@@ -158,7 +158,6 @@ const Users = ({
   }
 
   const handleClickEditUSer = (data: any) => {
-    console.log(data)
     editUser(data)
   }
 
