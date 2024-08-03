@@ -37,16 +37,6 @@ class ClientService {
     return this.clients
   }
 
-  getClientByID(clientId: string): clientListType | undefined {
-    const clientByID = this.clients.filter((data) => data.id === clientId)
-    return clientByID[0]
-  }
-
-  getClientsByUserID(userId: string) {
-    const clientsByUser = this.clients.filter((data) => data.userId === userId)
-    return clientsByUser
-  }
-
   updateClient(
     newClient: clientListType,
     options: { where: (client: clientListType) => boolean }
