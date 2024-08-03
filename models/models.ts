@@ -18,16 +18,7 @@ export type clientListType = {
   name: string
   address: string
   id: string
-  state: number
-  debt: number
-  bills: debtType[]
-}
-
-export type debtType = {
-  id: string
-  amount: number
-  payments: string[]
-  dueDate: number
+  userId: string
 }
 
 export type itemType = {
@@ -57,174 +48,6 @@ export type orderItemsType = {
 export type orderType = 'goalPerDay' | 'goalPerMonth' | 'suggestedItems'
 
 export type itemFullType = itemType & itemClientType
-
-export const mocked_clients: clientListType[] = [
-  {
-    name: 'Armando Esteban Quito',
-    address: '123 Main St',
-    id: '1',
-    state: 1, // debe
-    debt: 0,
-    bills: [
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-    ],
-  },
-  {
-    name: 'Maria Gonzalez',
-    address: '456 Oak St',
-    id: '2',
-    state: 1, // debe
-    debt: 500,
-    bills: [
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-    ],
-  },
-  {
-    name: 'Juan Perez',
-    address: '789 Pine St',
-    id: '3',
-    state: 1, // debe
-    debt: 1000,
-    bills: [
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-    ],
-  },
-  {
-    name: 'Laura Martinez',
-    address: '321 Maple St',
-    id: '4',
-    state: 1, // debe
-    debt: 200,
-    bills: [
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-    ],
-  },
-  {
-    name: 'Carlos Ruiz',
-    address: '654 Elm St',
-    id: '5',
-    state: 1, // debe
-    debt: 700,
-    bills: [
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '007',
-        amount: 5000,
-        payments: ['008'],
-        dueDate: 1630494000000,
-      },
-      {
-        id: '008',
-        amount: 3000,
-        payments: ['009'],
-        dueDate: 1630494000000,
-      },
-    ],
-  },
-]
 
 export const mocked_users: loggedUser[] = [
   {
@@ -284,6 +107,40 @@ export const mocked_users: loggedUser[] = [
     role: 'user',
   },
 ]
+
+export const mocked_clients: clientListType[] = [
+  {
+    name: 'Javier Roldano',
+    address: '123 Main St',
+    id: '1',
+    userId: '2'
+  },
+  {
+    name: 'Maria Gonzalez',
+    address: '456 Oak St',
+    id: '2',
+    userId: '2'
+  },
+  {
+    name: 'Juan Perez',
+    address: '789 Pine St',
+    id: '3',
+    userId: '1'
+  },
+  {
+    name: 'Laura Martinez',
+    address: '321 Maple St',
+    id: '4',
+    userId: '2'
+  },
+  {
+    name: 'Carlos Ruiz',
+    address: '654 Elm St',
+    id: '5',
+    userId: '3'
+  },
+]
+
 
 export const mocked_items: itemType[] = [
   {

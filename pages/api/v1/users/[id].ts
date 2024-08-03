@@ -19,24 +19,24 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
   const userId = req.query.id as string
 
   switch (req.method) {
-    case 'GET': {
-      if (userId) {
-        const user = UserService.getAllUsers().find(
-          (user) => user.id === req.query.id
-        )
-        if (user) {
-          res.status(200).json({
-            message: 'OK',
-            user,
-          })
-        } else {
-          res.status(404).json({
-            message: 'User not found',
-          })
-        }
-      }
-      break
-    }
+    // case 'GET': {
+    //   if (userId) {
+    //     const user = UserService.getAllUsers().find(
+    //       (user) => user.id === req.query.id
+    //     )
+    //     if (user) {
+    //       res.status(200).json({
+    //         message: 'OK',
+    //         user,
+    //       })
+    //     } else {
+    //       res.status(404).json({
+    //         message: 'User not found',
+    //       })
+    //     }
+    //   }
+    //   break
+    // }
 
     case 'PUT': {
       const valid = UserService.validateUser(req.body)

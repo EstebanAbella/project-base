@@ -79,7 +79,6 @@ class UserService {
   }
 
   deleteUser(id: string): loggedUser | undefined {
-    console.log('deleteUser', id)
     const userIndex = this.users.findIndex((user) => user.id === id)
     if (userIndex !== -1) {
       const deletedUser = this.users.splice(userIndex, 1)[0]

@@ -4,6 +4,7 @@ export type globalType = {
   clientService?: ClientService
 }
 
+let currentId = 1
 class ClientService {
   clients: clientListType[]
 
@@ -12,6 +13,9 @@ class ClientService {
       throw new Error('New instance cannot be created!!')
     } else {
       this.clients = mocked_clients
+      if (this.clients.length > 0) {
+        currentId = Math.max(...this.clients.map(client => parseInt(client.id || '0'))) + 1
+      }
     }
     ;(global as globalType).clientService = this
   }
@@ -22,8 +26,8 @@ class ClientService {
       client.name == null ||
       client.address == undefined ||
       client.address == null ||
-      client.debt == undefined ||
-      client.debt == null
+      client.userId == undefined ||
+      client.userId == null
     )
       return false
     return true
@@ -31,6 +35,16 @@ class ClientService {
 
   getAllClients() {
     return this.clients
+  }
+
+  getClientByID(clientId: string): clientListType | undefined {
+    const clientByID = this.clients.filter((data) => data.id === clientId)
+    return clientByID[0]
+  }
+
+  getClientsByUserID(userId: string) {
+    const clientsByUser = this.clients.filter((data) => data.userId === userId)
+    return clientsByUser
   }
 
   updateClient(
@@ -49,13 +63,19 @@ class ClientService {
   }
 
   addClient(newClient: clientListType) {
+    newClient.id = currentId.toString()
+    currentId++
     this.clients.push(newClient)
     return newClient
   }
 
-  deleteClient(deleteClient: string) {
-    this.clients.filter((client) => client.id !== deleteClient)
-    return deleteClient
+  deleteClient(id: string): clientListType | undefined {
+    const clientIndex = this.clients.findIndex((client) => client.id === id)
+    if (clientIndex !== -1) {
+      const deletedClient = this.clients.splice(clientIndex, 1)[0]
+      return deletedClient
+    }
+    return undefined
   }
 }
 
