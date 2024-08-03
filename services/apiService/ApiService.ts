@@ -63,7 +63,7 @@ class ApiService {
   }
 
   setToken(token: string): void {
-    this.axios.defaults.headers.common.Authorization = `${token}`
+    this.axios.defaults.headers.common.Authorization = `Bearer ${token}`
     this.token = token
   }
 }

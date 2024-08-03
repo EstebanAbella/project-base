@@ -1,5 +1,6 @@
 import { loggedUser } from '../../Utils/Types/authModel'
 import { CustomErrorType } from '../../Utils/Types/global'
+import LocalDataService from '../LocalDataService'
 import ApiServiceSingleton from './ApiService'
 
 export interface globalType {
@@ -29,18 +30,19 @@ class AuthService {
     return this
   }
 
-  async doLogin(email: string, password: string): Promise<loggedUser | CustomErrorType> {
+  async doLogin(
+    email: string,
+    password: string
+  ): Promise<loggedUser | CustomErrorType> {
     return await new Promise<loggedUser>((resolve, reject) => {
       const body = { email, password }
       ApiServiceSingleton.axios
-        .post('https://dev-oci-api.vipo.lat/v2/bo/login', body)
+        .post(apiUrls.login, body)
         .then((response) => {
-          // const user = response.data.user as loggedUser
-          const user = {
-            ...response.data.user,
-            token: response.data.token,
-          }
-          ApiServiceSingleton.setToken(response.data.token)
+          const user = response.data.user as loggedUser
+          ApiServiceSingleton.setToken(response.data.user.token)
+          LocalDataService.getInstance().saveToken(response.data.user.token)
+          LocalDataService.getInstance().saveUserId(response.data.user.id)
           resolve(user)
         })
         .catch((e) => {
@@ -68,7 +70,10 @@ class AuthService {
     })
   }
 
-  async doRestorePasswordValidated(data: { newPassword: string; token: string }): Promise<any> {
+  async doRestorePasswordValidated(data: {
+    newPassword: string
+    token: string
+  }): Promise<any> {
     return await new Promise<void>((resolve, reject) => {
       const body = data
       ApiServiceSingleton.axios

@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../../redux/rootReducer'
 import LocalDataService from '../../services/LocalDataService'
-import router from 'next/router'
-import { getUserByToken } from '../../redux/auth/actions'
 import { ServerStatus } from '../../Utils/Types/global'
-import { loggedUser } from '../../Utils/Types/authModel'
-import ApiService from '../../services/ApiService'
 import { checkUpdater } from '../../redux/updater/actions'
 
 const mapStateToProps = (state: RootState) => {

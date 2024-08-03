@@ -3,7 +3,6 @@ import {
   SurveyClientType,
   SurveySellerType,
 } from '../../../Utils/Types/surveyType'
-import ApiService from '../../../services/ApiService'
 import * as t from '../types'
 
 export const setSearchSeller =

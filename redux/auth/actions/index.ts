@@ -1,6 +1,7 @@
 import { DispatchEmptyObject } from '../../../Utils/Types/global'
 import { loggedUser } from '../../../models/models'
 import LocalDataService from '../../../services/LocalDataService'
+import ApiService from '../../../services/apiService/ApiService'
 import ApiServiceSingleton from '../../../services/apiService/ApiService'
 import AuthServiceSingleton from '../../../services/apiService/auth'
 import * as t from '../types'
@@ -19,7 +20,7 @@ export const doLogin =
       .then((res) => {
         if (res) {
           const result = res as loggedUser
-          if (result.token) ApiServiceSingleton.setToken(result.token)
+          if (result.token) ApiService.setToken(result.token)
           dispatch({ type: t.LOGIN_FETCH, payload: { ...result } })
         } else
           dispatch({ type: t.LOGIN_FETCH_ERROR, payload: 'Not User Found' })
