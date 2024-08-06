@@ -3,6 +3,7 @@ import { ServerStatus } from '../global'
 export type clientListType = {
   name: string
   address: string
+  email: string
   id: string
   userId: string
 }

@@ -26,6 +26,8 @@ class ClientService {
       client.name == null ||
       client.address == undefined ||
       client.address == null ||
+      client.email == undefined ||
+      client.email == null ||
       client.userId == undefined ||
       client.userId == null
     )

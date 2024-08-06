@@ -17,6 +17,7 @@ export type loggedUser = {
 export type clientListType = {
   name: string
   address: string
+  email: string
   id: string
   userId: string
 }
@@ -112,30 +113,35 @@ export const mocked_clients: clientListType[] = [
   {
     name: 'Javier Roldano',
     address: '123 Main St',
+    email: 'javier@gmail.com',
     id: '1',
     userId: '2'
   },
   {
     name: 'Maria Gonzalez',
     address: '456 Oak St',
+    email: 'maria@gmail.com',
     id: '2',
     userId: '2'
   },
   {
     name: 'Juan Perez',
     address: '789 Pine St',
+    email: 'juan@gmail.com',
     id: '3',
     userId: '1'
   },
   {
     name: 'Laura Martinez',
     address: '321 Maple St',
+    email: 'laura@gmail.com',
     id: '4',
     userId: '2'
   },
   {
     name: 'Carlos Ruiz',
     address: '654 Elm St',
+    email: 'carlos@gmail.com',
     id: '5',
     userId: '3'
   },
