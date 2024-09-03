@@ -18,9 +18,11 @@ import Layout from '../components/Layout'
 import router from 'next/router'
 import Modal from '../components/Modal'
 import { TextFieldType } from '../components/TextField'
+import { loggedUser } from '../Utils/Types/authModel'
 
 const mapStateToProps = (state: RootState) => {
   const clientsReducer = state.client
+  const authReducer = state.auth
   return {
     client: clientsReducer.client,
     clientStatus: clientsReducer.clientStatus,
@@ -34,6 +36,8 @@ const mapStateToProps = (state: RootState) => {
     clientCreateStatus: clientsReducer.clientCreateStatus,
     clientDeleteStatus: clientsReducer.clientDeleteStatus,
     clientEditStatus: clientsReducer.clientEditStatus,
+
+    userByToken: authReducer.userByToken,
   }
 }
 
@@ -53,6 +57,7 @@ export type ClientsPropType = {
   deleteClient: Function
   editClient: Function
   getClientByUser: Function
+  userByToken: loggedUser | undefined
 } & ClientsReducerPropsType
 
 const Clients = ({
@@ -70,7 +75,8 @@ const Clients = ({
   clientDeleteStatus,
   clientEditStatus,
   clientsByUser,
-  clientsByUserStatus
+  clientsByUserStatus,
+  userByToken
 }: ClientsPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>('')
@@ -114,6 +120,15 @@ const Clients = ({
       disabled: false,
       type: 'text',
       placeholder: 'Dirección',
+    },
+    {
+      label: 'UserId',
+      name: 'userId',
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: true,
+      type: 'text',
+      placeholder: 'UserId',
+      defaultValue: userByToken?.id
     }
   ]
 

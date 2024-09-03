@@ -24,6 +24,7 @@ export type dataFormType = {
   type: string
   placeholder: string
   valueSelect?: string[]
+  defaultValue?: any
 }
 
 const Modal = ({
@@ -50,7 +51,7 @@ const Modal = ({
     if (dataForm?.length !== 0 && !initialData) {
       const setPropertyForm = dataForm?.reduce(
         (obj: { [key: string]: string }, item: dataFormType) => {
-          obj[item.name] = ''
+          obj[item.name] = item.defaultValue ? item.defaultValue : ''
           return obj
         },
         {}
