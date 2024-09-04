@@ -1,14 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { withAuthController } from '../../../../controller/withAuthController'
 import { generateInvalidError } from '../../../../helpers/errors'
-import { clientListType } from '../../../../models/models'
+import { clientType } from '../../../../models/models'
 import ClientService from '../../../../services/ClientService'
 
 
 interface DataSuccess {
   message: String
-  clients?: clientListType[],
-  client?: clientListType
+  clients?: clientType[],
+  client?: clientType
 }
 
 interface DataError {
@@ -48,7 +48,7 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
       }
 
       const updatedClient = ClientService.updateClient(req.body, {
-        where: (client: clientListType) => client.id === req.body.id,
+        where: (client: clientType) => client.id === req.body.id,
       })
       if (updatedClient) {
         res.status(200).json({

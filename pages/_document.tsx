@@ -8,11 +8,11 @@ export default function Document() {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
-        <meta name="application-name" content="PWA Pedidos" />
+        <meta name="application-name" content="Project base" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="PWA Pedidos" />
-        <meta name="description" content="Best PWA Pedidos in the world" />
+        <meta name="apple-mobile-web-app-title" content="Project base" />
+        <meta name="description" content="Best Project base in the world" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-config" content="/icons/browserconfig.xml" />

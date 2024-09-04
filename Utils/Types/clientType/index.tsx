@@ -1,6 +1,6 @@
 import { ServerStatus } from '../global'
 
-export type clientListType = {
+export type clientType = {
   name: string
   address: string
   email: string
@@ -15,7 +15,7 @@ export type ClientsReducerPropsType = {
   clientCreateStatus: ServerStatus
   clientDeleteStatus: ServerStatus
   clientEditStatus: ServerStatus
-  client?: clientListType
-  clients?: Array<clientListType>
-  clientsByUser?: Array<clientListType>
+  client?: clientType
+  clients?: Array<clientType>
+  clientsByUser?: Array<clientType>
 }

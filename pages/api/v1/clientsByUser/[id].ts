@@ -1,14 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { withAuthController } from '../../../../controller/withAuthController'
 import { generateInvalidError } from '../../../../helpers/errors'
-import { clientListType } from '../../../../models/models'
+import { clientType } from '../../../../models/models'
 import ClientService from '../../../../services/ClientService'
 
 
 interface DataSuccess {
   message: String
-  clients?: clientListType[],
-  client?: clientListType
+  clients?: clientType[],
+  client?: clientType
 }
 
 interface DataError {

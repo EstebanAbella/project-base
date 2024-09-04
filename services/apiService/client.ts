@@ -1,4 +1,4 @@
-import { clientListType } from '../../Utils/Types/clientType'
+import { clientType } from '../../Utils/Types/clientType'
 import ApiServiceSingleton from './ApiService'
 
 export interface globalType {
@@ -23,12 +23,12 @@ class ClientService {
     return this
   }
 
-  async getClient(id: string): Promise<clientListType> {
-    return await new Promise<clientListType>((resolve, reject) => {
+  async getClient(id: string): Promise<clientType> {
+    return await new Promise<clientType>((resolve, reject) => {
       ApiServiceSingleton.axios
         .get(`${apiUrls.clients}/${id}`)
         .then((response) => {
-          const client = response.data.client as clientListType
+          const client = response.data.client as clientType
           resolve(client)
         })
         .catch((e) => {
@@ -44,8 +44,8 @@ class ClientService {
     filter?: string,
     order?: string,
     roles?: string
-  ): Promise<clientListType[]> {
-    return await new Promise<clientListType[]>((resolve, reject) => {
+  ): Promise<clientType[]> {
+    return await new Promise<clientType[]>((resolve, reject) => {
       const params = {
         offset,
         limit,
@@ -60,7 +60,7 @@ class ClientService {
       ApiServiceSingleton.axios
         .get(`${apiUrls.clients}`, { params })
         .then((response) => {
-          const formatedItems = response.data.clients.map((u: clientListType) => {
+          const formatedItems = response.data.clients.map((u: clientType) => {
             return {
               ...u,
             }
@@ -77,7 +77,7 @@ class ClientService {
       ApiServiceSingleton.axios
         .post(`${apiUrls.clients}`, submittedData)
         .then((response) => {
-          const client = response.data as clientListType
+          const client = response.data as clientType
           resolve(client)
         })
         .catch((e) => {
@@ -91,7 +91,7 @@ class ClientService {
       ApiServiceSingleton.axios
         .delete(`${apiUrls.clients}/${id}`)
         .then((response) => {
-          const client = response.data as clientListType
+          const client = response.data as clientType
           resolve(client)
         })
         .catch((e) => {
@@ -115,7 +115,7 @@ class ClientService {
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           .put(`${apiUrls.clients}/${submittedData.id}`, submittedData)
           .then((response) => {
-            const client = response.data as clientListType
+            const client = response.data as clientType
             resolve(client)
           })
           .catch((e) => {
@@ -133,8 +133,8 @@ class ClientService {
     filter?: string,
     order?: string,
     roles?: string
-  ): Promise<clientListType[]> {
-    return await new Promise<clientListType[]>((resolve, reject) => {
+  ): Promise<clientType[]> {
+    return await new Promise<clientType[]>((resolve, reject) => {
       const params = {
         offset,
         limit,
@@ -149,7 +149,7 @@ class ClientService {
       ApiServiceSingleton.axios
         .get(`${apiUrls.clientsByUser}/${id}`, { params })
         .then((response) => {
-          const formatedItems = response.data.users.map((u: clientListType) => {
+          const formatedItems = response.data.users.map((u: clientType) => {
             return {
               ...u,
             }

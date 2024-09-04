@@ -1,4 +1,4 @@
-import { clientListType, ClientsReducerPropsType } from '../../../Utils/Types/clientType';
+import { clientType, ClientsReducerPropsType } from '../../../Utils/Types/clientType';
 import { ServerStatus } from '../../../Utils/Types/global'
 import * as t from '../types'
 
@@ -13,11 +13,11 @@ const globalState: ClientsReducerPropsType = {
 
 export type PosibleActions =
   | { type: 'GET_CLIENTS_FETCHING' }
-  | { type: 'GET_CLIENTS_FETCH'; payload: clientListType[] }
+  | { type: 'GET_CLIENTS_FETCH'; payload: clientType[] }
   | { type: 'GET_CLIENTS_FETCH_ERROR' }
 
   | { type: 'GET_CLIENT_FETCHING' }
-  | { type: 'GET_CLIENT_FETCH'; payload: clientListType }
+  | { type: 'GET_CLIENT_FETCH'; payload: clientType }
   | { type: 'GET_CLIENT_FETCH_ERROR' }
 
   | { type: 'CREATE_CLIENT_FETCHING' }
@@ -33,7 +33,7 @@ export type PosibleActions =
   | { type: 'EDIT_CLIENT_FETCH_ERROR' }
 
   | { type: 'GET_CLIENT_BY_USER_FETCHING' }
-  | { type: 'GET_CLIENT_BY_USER_FETCH'; payload: clientListType[] }
+  | { type: 'GET_CLIENT_BY_USER_FETCH'; payload: clientType[] }
   | { type: 'GET_CLIENT_BY_USER_FETCH_ERROR' }
 
 const reducer = (

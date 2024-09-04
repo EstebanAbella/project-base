@@ -21,13 +21,7 @@ const Layout = ({
       style={{ paddingTop: `${isNavigation ? '17vh' : '15vh'}` }}
     >
       <div className="containerMenu">
-        <Header
-          activePointNotification={true}
-          user={{
-            firstName: 'Prueba',
-            lastName: 'Test',
-          }}
-        ></Header>
+        <Header/>
         {isNavigation && newRoute && title && (
           <Navigation newRoute={newRoute} title={title}></Navigation>
         )}

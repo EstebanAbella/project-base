@@ -1,26 +1,24 @@
 import React, { useState } from 'react'
-import { VipoLogo } from './VipoLogo'
+import { Logo } from './Logo'
 import { RootState } from '../redux/rootReducer'
 import { doLogout } from '../redux/auth/actions'
 import { connect } from 'react-redux'
 import Menu from './Menu'
 import AlertNoConnection from './AlertNoConnection'
 
-const mapStateToProps = (state: RootState) => {}
+const mapStateToProps = (state: RootState) => {
+  return {}
+}
 
 const mapDispatchToProps = {
   doLogout,
 }
 
 export type HeaderPropsType = {
-  activePointNotification: boolean
-  user: { firstName: string; lastName: string }
   doLogout: Function
 }
 
 const Header = ({
-  activePointNotification,
-  user,
   doLogout,
 }: HeaderPropsType) => {
   const [showMenu, setShowMenu] = useState(false)
@@ -28,13 +26,11 @@ const Header = ({
     <>
       <AlertNoConnection />
       <header>
-        <VipoLogo width="80px"></VipoLogo>
+        <Logo width="80px" srcLogo={''}></Logo>
 
         <div className="containerAvatar">
           <div className="avatar" onClick={() => setShowMenu(!showMenu)}>
-            {user?.firstName?.[0] + user?.lastName?.[0]}
           </div>
-          {activePointNotification && <div className="pointNotification"></div>}
         </div>
       </header>
 

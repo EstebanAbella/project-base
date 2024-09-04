@@ -10,6 +10,7 @@ const Menu = ({ doLogout, onMenu }: MenuPropsType) => {
   const handleClick = () => {
     doLogout()
   }
+
   return (
     <aside className={onMenu ? 'onMenu' : 'offMenu'}>
       <Button

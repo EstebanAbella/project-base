@@ -11,6 +11,7 @@ const Navigation = ({ newRoute, title }: NavigationPropsType) => {
   const handleClick = () => {
     router.push(newRoute)
   }
+
   return (
     <nav className={'navigation'}>
       <span onClick={handleClick} className="icon-chevronLeft"></span>

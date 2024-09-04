@@ -5,8 +5,7 @@ import { connect } from 'react-redux'
 import Button, { ButtonType } from '../components/Button'
 import { doLogin, doRestorePassword } from '../redux/auth/actions'
 import { ServerStatus } from '../Utils/Types/global'
-import { VipoLogo } from '../components/VipoLogo'
-import DialogInstalled from '../components/DialogInstalled'
+import { Logo } from '../components/Logo'
 
 const mapStateToProps = (state: RootState) => {
   const authReducer = state.auth
@@ -135,7 +134,7 @@ function Login({
       <div className="containerLoginForm">
         <form>
           <div className="logoContainer">
-            <VipoLogo width="240" />
+            <Logo width="240" srcLogo={''} />
           </div>
           {!sendEmail ? (
             <h1 className="titleLogin">Bienvenido/a.</h1>
@@ -160,7 +159,7 @@ function Login({
                   Mail no válido, prueba con otro mail.
                 </p>
               ) : (
-                <p>Escribe el correo que utilizas en VIPO</p>
+                <p>Escribe tu correo</p>
               )}
             </div>
           </div>
@@ -248,7 +247,6 @@ function Login({
             )}
           </div>
         </form>
-        <DialogInstalled />
       </div>
     </main>
   )

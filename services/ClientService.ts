@@ -1,4 +1,4 @@
-import { clientListType, mocked_clients } from '../models/models'
+import { clientType, mocked_clients } from '../models/models'
 
 export type globalType = {
   clientService?: ClientService
@@ -6,7 +6,7 @@ export type globalType = {
 
 let currentId = 1
 class ClientService {
-  clients: clientListType[]
+  clients: clientType[]
 
   constructor() {
     if ((global as globalType).clientService) {
@@ -20,7 +20,7 @@ class ClientService {
     ;(global as globalType).clientService = this
   }
 
-  validateClient(client: clientListType) {
+  validateClient(client: clientType) {
     if (
       client.name == undefined ||
       client.name == null ||
@@ -40,10 +40,10 @@ class ClientService {
   }
 
   updateClient(
-    newClient: clientListType,
-    options: { where: (client: clientListType) => boolean }
+    newClient: clientType,
+    options: { where: (client: clientType) => boolean }
   ) {
-    let returnClient: clientListType | undefined
+    let returnClient: clientType | undefined
     this.clients = this.clients.map((client) => {
       if (options.where(client)) {
         returnClient = newClient
@@ -54,14 +54,14 @@ class ClientService {
     return returnClient
   }
 
-  addClient(newClient: clientListType) {
+  addClient(newClient: clientType) {
     newClient.id = currentId.toString()
     currentId++
     this.clients.push(newClient)
     return newClient
   }
 
-  deleteClient(id: string): clientListType | undefined {
+  deleteClient(id: string): clientType | undefined {
     const clientIndex = this.clients.findIndex((client) => client.id === id)
     if (clientIndex !== -1) {
       const deletedClient = this.clients.splice(clientIndex, 1)[0]
