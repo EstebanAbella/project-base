@@ -40,18 +40,18 @@ const ClientSelected = ({ getClient, client, clientStatus }: ClientPropType) => 
       <Layout isNavigation={true} newRoute={'/clients'} title={'All clients'}>
         <>
           {clientStatus === ServerStatus.FETCH && client && (
-            <section className="userSelected">
+            <section className="clientSelected">
               <p>
-                Id: <span className="userSpan">{client.id}</span>
+                Id: <span className="clientSpan">{client.id}</span>
               </p>
               <p>
-                Nombre: <span className="userSpan">{client.name}</span>
+                Nombre: <span className="clientSpan">{client.name}</span>
               </p>
               <p>
-                E-mail: <span className="userSpan">{client.email}</span>
+                E-mail: <span className="clientSpan">{client.email}</span>
               </p>
               <p>
-                Addres: <span className="userSpan">{client.address}</span>
+                Addres: <span className="clientSpan">{client.address}</span>
               </p>
             </section>
           )}

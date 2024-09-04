@@ -63,17 +63,12 @@ export default function Document() {
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:url" content="https://yourdomain.com" />
-        <meta name="twitter:title" content="PWA App" />
-        <meta name="twitter:description" content="Best PWA App in the world" />
-        <meta
-          name="twitter:image"
-          content="https://yourdomain.com/icons/android-chrome-192x192.png"
-        />
-        <meta name="twitter:creator" content="@DavidWShadow" />
+        <meta name="twitter:title" content="Project" />
+        <meta name="twitter:description" content="Best Project in the world" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="PWA App" />
-        <meta property="og:description" content="Best PWA App in the world" />
-        <meta property="og:site_name" content="PWA App" />
+        <meta property="og:title" content="Project" />
+        <meta property="og:description" content="Best Project in the world" />
+        <meta property="og:site_name" content="Project" />
         <meta property="og:url" content="https://yourdomain.com" />
         <meta
           property="og:image"

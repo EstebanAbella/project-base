@@ -15,13 +15,14 @@
 @import "./components/Header.scss";
 @import "./components/Menu.scss";
 @import "./components/Navigation.scss";
-@import "./components/Search.scss";
-@import "./components/AlertNoConnection.scss";
 @import "./components/Table.scss";
 @import "./pages/Updater.scss";
 @import "./pages/UpdateApp.scss";
 @import "./pages/Login.scss";
 @import "./pages/Users.scss";
 @import "./pages/UserSelected.scss";
+@import "./pages/Clients.scss";
+@import "./pages/clientSelected.scss";
+@import "./components/AlertNoConnection.scss";
 @import "./icons/iconStyle";
 @import "node_modules/bootstrap/dist/css/bootstrap.min.css";
