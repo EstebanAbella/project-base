@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { RootState } from '../redux/rootReducer';
@@ -7,30 +7,37 @@ import { roleMap } from './roleMap';
 
 const mapStateToProps = (state: RootState) => ({
   userRole: state.auth.user?.role,
-  loginStatus: state.auth.loginStatus,
 })
 
 const mapDispatchToProps = {}
 
 export type WithAuthPropsType = {
   userRole?: string
-  loginStatus: ServerStatus
 };
 
 const withAuth = (WrappedComponent: React.FC) => {
-  const ComponentWithAuth = ({ userRole, loginStatus, ...props }: WithAuthPropsType) => {
+  const ComponentWithAuth = ({ userRole, ...props }: WithAuthPropsType) => {
+    const [stateUSerRole, setStateUserRole] = useState<boolean>(false)
     const router = useRouter()
     const componentName = WrappedComponent.displayName || WrappedComponent.name
     const extractedComponentName = componentName.match(/\(([^)]+)\)/)?.[1] || componentName
 
     useEffect(() => {
+      console.log('userRole', userRole)
       const requiredRole = roleMap[extractedComponentName]
-      if (userRole !== undefined && (loginStatus !== ServerStatus.FETCH || userRole !== requiredRole)) {
+      if (userRole !== undefined && userRole !== requiredRole) {
+        setStateUserRole(false)
         router.push('/notAuthorized')
+        return
       }
-    }, [loginStatus, userRole])
+      if(userRole === undefined) {
+        setStateUserRole(false)
+      } else {
+        setStateUserRole(true)
+      }
+    }, [userRole])
 
-    return <WrappedComponent {...props} />
+    return stateUSerRole ? <WrappedComponent {...props} /> : <div></div>
   }
 
   return connect(mapStateToProps, mapDispatchToProps)(ComponentWithAuth)
