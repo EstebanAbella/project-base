@@ -83,8 +83,8 @@ const Clients = ({
   const [dataInitialModal, setDataInitialModal] = useState()
 
   useEffect(() => {
-    getClientsByUserId('2')
-  }, [])
+    getClientsByUserId(user?.id)
+  }, [user])
 
   useEffect(() => {
     if (
@@ -92,7 +92,7 @@ const Clients = ({
       clientDeleteStatus === ServerStatus.FETCH ||
       clientEditStatus === ServerStatus.FETCH
     )
-    getClientsByUserId('2')
+    getClientsByUserId(user?.id)
     setStateModal(false)
   }, [clientCreateStatus, clientDeleteStatus, clientEditStatus])
 
