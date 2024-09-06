@@ -276,17 +276,12 @@ const Users = ({
   )
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Users)
 export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Users))
 
 /*
 Traer clientes por usuario
 
-proteger ruta usuarios solo para roles admin
-
 restore password
-
-variable entorno
 
 Agregar paginacion
 */
