@@ -5,7 +5,7 @@ import {
   deleteClient,
   editClient,
   getClient,
-  getClientByUser,
+  getClientsByUserId,
   getClients,
 } from '../redux/client/actions'
 import { ClientsReducerPropsType } from '../Utils/Types/clientType'
@@ -30,8 +30,8 @@ const mapStateToProps = (state: RootState) => {
     clients: clientsReducer.clients,
     clientsStatus: clientsReducer.clientsStatus,
 
-    clientsByUser: clientsReducer.clientsByUser,
-    clientsByUserStatus: clientsReducer.clientsByUserStatus,
+    clientsByUserId: clientsReducer.clientsByUserId,
+    clientsByUserIdStatus: clientsReducer.clientsByUserIdStatus,
 
     clientCreateStatus: clientsReducer.clientCreateStatus,
     clientDeleteStatus: clientsReducer.clientDeleteStatus,
@@ -47,7 +47,7 @@ const mapDispatchToProps = {
   createClient,
   deleteClient,
   editClient,
-  getClientByUser
+  getClientsByUserId
 }
 
 export type ClientsPropType = {
@@ -56,14 +56,14 @@ export type ClientsPropType = {
   createClient: Function
   deleteClient: Function
   editClient: Function
-  getClientByUser: Function
+  getClientsByUserId: Function
   user: loggedUser | undefined
 } & ClientsReducerPropsType
 
 const Clients = ({
   getClients,
   getClient,
-  getClientByUser,
+  getClientsByUserId,
   createClient,
   deleteClient,
   editClient,
@@ -74,8 +74,8 @@ const Clients = ({
   clientCreateStatus,
   clientDeleteStatus,
   clientEditStatus,
-  clientsByUser,
-  clientsByUserStatus,
+  clientsByUserId,
+  clientsByUserIdStatus,
   user
 }: ClientsPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
@@ -83,7 +83,7 @@ const Clients = ({
   const [dataInitialModal, setDataInitialModal] = useState()
 
   useEffect(() => {
-    getClients()
+    getClientsByUserId('2')
   }, [])
 
   useEffect(() => {
@@ -92,7 +92,7 @@ const Clients = ({
       clientDeleteStatus === ServerStatus.FETCH ||
       clientEditStatus === ServerStatus.FETCH
     )
-      getClients()
+    getClientsByUserId('2')
     setStateModal(false)
   }, [clientCreateStatus, clientDeleteStatus, clientEditStatus])
 
@@ -203,7 +203,7 @@ const Clients = ({
         />
         <section className="clientsPage">
           <h1>Clients</h1>
-          {clientsStatus !== ServerStatus.FETCHING && (
+          {clientsByUserIdStatus !== ServerStatus.FETCHING && (
             <>
               <section className="addClientAction">
                 <Button
@@ -224,8 +224,8 @@ const Clients = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {clients ? (
-                    clients?.map((data) => (
+                  {clientsByUserId ? (
+                    clientsByUserId?.map((data) => (
                       <tr key={data.id}>
                         <>
                           <td>{data.id}</td>
@@ -274,7 +274,7 @@ const Clients = ({
             </>
           )}
 
-          {clientsStatus === ServerStatus.FETCHING && <Loader></Loader>}
+          {clientsByUserIdStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>
     </AccessConsume>

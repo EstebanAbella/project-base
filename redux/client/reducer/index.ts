@@ -5,7 +5,7 @@ import * as t from '../types'
 const globalState: ClientsReducerPropsType = {
   clientsStatus: ServerStatus.IDLE,
   clientStatus: ServerStatus.IDLE,
-  clientsByUserStatus: ServerStatus.IDLE,
+  clientsByUserIdStatus: ServerStatus.IDLE,
   clientCreateStatus: ServerStatus.IDLE,
   clientDeleteStatus: ServerStatus.IDLE,
   clientEditStatus: ServerStatus.IDLE,
@@ -32,9 +32,9 @@ export type PosibleActions =
   | { type: 'EDIT_CLIENT_FETCH' }
   | { type: 'EDIT_CLIENT_FETCH_ERROR' }
 
-  | { type: 'GET_CLIENT_BY_USER_FETCHING' }
-  | { type: 'GET_CLIENT_BY_USER_FETCH'; payload: clientType[] }
-  | { type: 'GET_CLIENT_BY_USER_FETCH_ERROR' }
+  | { type: 'GET_CLIENTS_BY_USER_ID_FETCHING' }
+  | { type: 'GET_CLIENTS_BY_USER_ID_FETCH'; payload: clientType[] }
+  | { type: 'GET_CLIENTS_BY_USER_ID_FETCH_ERROR' }
 
 const reducer = (
   state = globalState,
@@ -138,23 +138,23 @@ const reducer = (
       }
     }
 
-    case t.GET_CLIENT_BY_USER_FETCHING: {
+    case t.GET_CLIENTS_BY_USER_ID_FETCHING: {
       return {
         ...state,
-        clientsByUserStatus: ServerStatus.FETCHING,
+        clientsByUserIdStatus: ServerStatus.FETCHING,
       }
     }
-    case t.GET_CLIENT_BY_USER_FETCH: {
+    case t.GET_CLIENTS_BY_USER_ID_FETCH: {
       return {
         ...state,
-        clientsByUserStatus: ServerStatus.FETCH,
-        clientsByUser: action.payload,
+        clientsByUserIdStatus: ServerStatus.FETCH,
+        clientsByUserId: action.payload,
       }
     }
-    case t.GET_CLIENT_BY_USER_FETCH_ERROR: {
+    case t.GET_CLIENTS_BY_USER_ID_FETCH_ERROR: {
       return {
         ...state,
-        clientsByUserStatus: ServerStatus.FETCH_ERROR,
+        clientsByUserIdStatus: ServerStatus.FETCH_ERROR,
       }
     }
 

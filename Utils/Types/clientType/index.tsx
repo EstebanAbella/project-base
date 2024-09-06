@@ -11,11 +11,11 @@ export type clientType = {
 export type ClientsReducerPropsType = {
   clientsStatus: ServerStatus
   clientStatus: ServerStatus
-  clientsByUserStatus: ServerStatus
+  clientsByUserIdStatus: ServerStatus
   clientCreateStatus: ServerStatus
   clientDeleteStatus: ServerStatus
   clientEditStatus: ServerStatus
   client?: clientType
   clients?: Array<clientType>
-  clientsByUser?: Array<clientType>
+  clientsByUserId?: Array<clientType>
 }

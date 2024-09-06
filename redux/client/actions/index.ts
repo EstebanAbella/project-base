@@ -90,18 +90,18 @@ export const editClient =
       })
   }
 
-  export const getClientByUser = (id: string) => (dispatch: (v: any) => void) => {
-    dispatch({ type: t.GET_CLIENT_BY_USER_FETCHING })
-    ClientServiceSingleton.getClientByUser(id)
+  export const getClientsByUserId = (id: string) => (dispatch: (v: any) => void) => {
+    dispatch({ type: t.GET_CLIENTS_BY_USER_ID_FETCHING })
+    ClientServiceSingleton.getClientsByUserId(id)
       .then((result) => {
         dispatch({
-          type: t.GET_CLIENT_BY_USER_FETCH,
+          type: t.GET_CLIENTS_BY_USER_ID_FETCH,
           payload: result,
         })
       })
       .catch((error: CustomErrorType) => {
         dispatch({
-          type: t.GET_CLIENT_BY_USER_FETCH_ERROR,
+          type: t.GET_CLIENTS_BY_USER_ID_FETCH_ERROR,
         })
       })
   }

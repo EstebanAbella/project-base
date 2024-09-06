@@ -8,7 +8,7 @@ export interface globalType {
 const apiUrls = {
   /* client */
   clients: '/v1/clients',
-  clientsByUser: '/v1/clientsByUser',
+  clientsByUserId: '/v1/clientsByUserId',
 }
 
 class ClientService {
@@ -125,7 +125,7 @@ class ClientService {
     })
   }
 
-  async getClientByUser(
+  async getClientsByUserId(
     id: string,
     offset?: number,
     limit?: number,
@@ -147,9 +147,9 @@ class ClientService {
       if (params.searchIn === 'id') delete params.searchIn
 
       ApiServiceSingleton.axios
-        .get(`${apiUrls.clientsByUser}/${id}`, { params })
+        .get(`${apiUrls.clientsByUserId}/${id}`, { params })
         .then((response) => {
-          const formatedItems = response.data.users.map((u: clientType) => {
+          const formatedItems = response.data.clients.map((u: clientType) => {
             return {
               ...u,
             }
