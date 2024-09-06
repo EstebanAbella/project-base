@@ -2,7 +2,7 @@ import { ServerStatus } from '../global'
 
 export type loggedUser = {
   name: string
-  id: string
+  id?: string
   email: string
   password: string
   role: string
@@ -16,5 +16,4 @@ export type AuthReducerPropsType = {
   restorePasswordStatus: ServerStatus
   restorePasswordValidatedStatus: ServerStatus
   authUserByTokenStatus: ServerStatus
-  userByToken?: loggedUser
 }

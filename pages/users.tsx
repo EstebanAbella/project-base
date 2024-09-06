@@ -17,6 +17,7 @@ import Layout from '../components/Layout'
 import router from 'next/router'
 import Modal from '../components/Modal'
 import { TextFieldType } from '../components/TextField'
+import withAuth from '../hooks/withAuth'
 
 const mapStateToProps = (state: RootState) => {
   const usersReducer = state.user
@@ -275,7 +276,8 @@ const Users = ({
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+// export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Users))
 
 /*
 Traer clientes por usuario
@@ -283,4 +285,8 @@ Traer clientes por usuario
 proteger ruta usuarios solo para roles admin
 
 restore password
+
+variable entorno
+
+Agregar paginacion
 */

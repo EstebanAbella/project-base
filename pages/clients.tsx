@@ -37,7 +37,7 @@ const mapStateToProps = (state: RootState) => {
     clientDeleteStatus: clientsReducer.clientDeleteStatus,
     clientEditStatus: clientsReducer.clientEditStatus,
 
-    userByToken: authReducer.userByToken,
+    user: authReducer.user,
   }
 }
 
@@ -57,7 +57,7 @@ export type ClientsPropType = {
   deleteClient: Function
   editClient: Function
   getClientByUser: Function
-  userByToken: loggedUser | undefined
+  user: loggedUser | undefined
 } & ClientsReducerPropsType
 
 const Clients = ({
@@ -76,7 +76,7 @@ const Clients = ({
   clientEditStatus,
   clientsByUser,
   clientsByUserStatus,
-  userByToken
+  user
 }: ClientsPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>('')
@@ -128,7 +128,7 @@ const Clients = ({
       disabled: true,
       type: 'text',
       placeholder: 'UserId',
-      defaultValue: userByToken?.id
+      defaultValue: user?.id
     }
   ]
 

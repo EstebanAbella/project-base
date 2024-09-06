@@ -50,10 +50,28 @@ export default (req: NextApiRequest, res: NextApiResponse<Data>): void => {
         })
         return
       }
-      res.status(200).json({
-        message: 'OK',
-        validatedToken,
-      })
+      //
+      if (typeof validatedToken === 'object' && 'id' in validatedToken) {
+        const userId = (validatedToken as JwtPayload).id
+        if (!userId) {
+          res.status(400).json({
+            message: 'Invalid token structure',
+          });
+          return;
+        }
+        const user = UserService.getAllUsers().find((user) => user.id === userId.toString())
+        if (!user) {
+          res.status(404).json({
+            message: 'User not found',
+          });
+          return;
+        }
+        res.status(200).json({
+          message: 'OK',
+          user,
+        })
+      }
+      //
       break
     }
 

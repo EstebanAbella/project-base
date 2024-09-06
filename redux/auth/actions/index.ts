@@ -87,6 +87,7 @@ export const getUserByToken = () => (dispatch: any) => {
   if (token) {
     AuthServiceSingleton.getUserByToken(token)
       .then((response: loggedUser) => {
+        console.log('RESPONSE', response)
         dispatch({
           type: t.AUTH_USER_BY_TOKEN_FETCH,
           payload: response,

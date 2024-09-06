@@ -93,7 +93,7 @@ class AuthService {
       ApiServiceSingleton.axios
         .get(`${apiUrls.userByToken}?token=${token}`)
         .then((response) => {
-          const user = response.data.validatedToken as loggedUser
+          const user = response.data.user as loggedUser
           resolve(user)
         })
         .catch((e) => {

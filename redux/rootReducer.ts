@@ -5,13 +5,32 @@ import updaterReducer from './updater/reducer'
 import navigationReducer from './isNavigationOnline/reducer'
 import clientReducer from './client/reducer'
 
-const rootReducer = combineReducers({
+// const rootReducer = combineReducers({
+//   auth: authReducer,
+//   user: userReducer,
+//   client: clientReducer,
+//   updater: updaterReducer,
+//   isNavigationOnOff: navigationReducer,
+// })
+
+// export type RootState = ReturnType<typeof rootReducer>
+
+// export default rootReducer
+// Define el rootReducer
+const appReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   client: clientReducer,
   updater: updaterReducer,
   isNavigationOnOff: navigationReducer,
 })
+
+const rootReducer = (state: ReturnType<typeof appReducer> | undefined, action: any) => {
+  if (action.type === 'LOGOUT') {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
 
 export type RootState = ReturnType<typeof rootReducer>
 
