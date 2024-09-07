@@ -1,4 +1,4 @@
-import { ServerStatus } from '../global'
+import { Paginator, ServerStatus } from '../global'
 
 export type clientType = {
   name: string
@@ -16,6 +16,6 @@ export type ClientsReducerPropsType = {
   clientDeleteStatus: ServerStatus
   clientEditStatus: ServerStatus
   client?: clientType
-  clients?: Array<clientType>
-  clientsByUserId?: Array<clientType>
+  clients?:  Paginator<clientType>
+  clientsByUserId?: Paginator<clientType>
 }

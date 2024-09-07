@@ -1,5 +1,5 @@
 import { clientType, ClientsReducerPropsType } from '../../../Utils/Types/clientType';
-import { ServerStatus } from '../../../Utils/Types/global'
+import { Paginator, ServerStatus } from '../../../Utils/Types/global'
 import * as t from '../types'
 
 const globalState: ClientsReducerPropsType = {
@@ -13,7 +13,7 @@ const globalState: ClientsReducerPropsType = {
 
 export type PosibleActions =
   | { type: 'GET_CLIENTS_FETCHING' }
-  | { type: 'GET_CLIENTS_FETCH'; payload: clientType[] }
+  | { type: 'GET_CLIENTS_FETCH'; payload: Paginator<clientType> }
   | { type: 'GET_CLIENTS_FETCH_ERROR' }
 
   | { type: 'GET_CLIENT_FETCHING' }
@@ -33,7 +33,7 @@ export type PosibleActions =
   | { type: 'EDIT_CLIENT_FETCH_ERROR' }
 
   | { type: 'GET_CLIENTS_BY_USER_ID_FETCHING' }
-  | { type: 'GET_CLIENTS_BY_USER_ID_FETCH'; payload: clientType[] }
+  | { type: 'GET_CLIENTS_BY_USER_ID_FETCH'; payload: Paginator<clientType> }
   | { type: 'GET_CLIENTS_BY_USER_ID_FETCH_ERROR' }
 
 const reducer = (

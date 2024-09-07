@@ -1,4 +1,5 @@
 import { clientType } from '../../Utils/Types/clientType'
+import { Paginator } from '../../Utils/Types/global'
 import ApiServiceSingleton from './ApiService'
 
 export interface globalType {
@@ -44,8 +45,8 @@ class ClientService {
     filter?: string,
     order?: string,
     roles?: string
-  ): Promise<clientType[]> {
-    return await new Promise<clientType[]>((resolve, reject) => {
+  ): Promise<Paginator<clientType>> {
+    return await new Promise<Paginator<clientType>>((resolve, reject) => {
       const params = {
         offset,
         limit,
@@ -133,8 +134,8 @@ class ClientService {
     filter?: string,
     order?: string,
     roles?: string
-  ): Promise<clientType[]> {
-    return await new Promise<clientType[]>((resolve, reject) => {
+  ): Promise<Paginator<clientType>> {
+    return await new Promise<Paginator<clientType>>((resolve, reject) => {
       const params = {
         offset,
         limit,
@@ -149,12 +150,7 @@ class ClientService {
       ApiServiceSingleton.axios
         .get(`${apiUrls.clientsByUserId}/${id}`, { params })
         .then((response) => {
-          const formatedItems = response.data.clients.map((u: clientType) => {
-            return {
-              ...u,
-            }
-          })
-          resolve(formatedItems)
+          resolve(response.data.clients)
         })
         .catch((e) => {
           reject(ApiServiceSingleton.errorComposer(e))

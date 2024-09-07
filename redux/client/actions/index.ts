@@ -90,9 +90,9 @@ export const editClient =
       })
   }
 
-  export const getClientsByUserId = (id: string) => (dispatch: (v: any) => void) => {
+  export const getClientsByUserId = (id: string, offset?: number, limit?: number,) => (dispatch: (v: any) => void) => {
     dispatch({ type: t.GET_CLIENTS_BY_USER_ID_FETCHING })
-    ClientServiceSingleton.getClientsByUserId(id)
+    ClientServiceSingleton.getClientsByUserId(id, offset, limit)
       .then((result) => {
         dispatch({
           type: t.GET_CLIENTS_BY_USER_ID_FETCH,

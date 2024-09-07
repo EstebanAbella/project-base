@@ -5,6 +5,13 @@ export enum ServerStatus {
   FETCH_ERROR,
 }
 
+export type Paginator<T> = {
+  items: T[]
+  count: number
+  actualPage: number
+  pages: number
+}
+
 export type loggedUser = {
   name: string
   id?: string

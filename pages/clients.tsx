@@ -83,7 +83,7 @@ const Clients = ({
   const [dataInitialModal, setDataInitialModal] = useState()
 
   useEffect(() => {
-    getClientsByUserId(user?.id)
+    getClientsByUserId(user?.id, 0, 10)
   }, [])
 
   useEffect(() => {
@@ -225,7 +225,7 @@ const Clients = ({
                 </thead>
                 <tbody>
                   {clientsByUserId ? (
-                    clientsByUserId?.map((data) => (
+                    clientsByUserId?.items.map((data) => (
                       <tr key={data.id}>
                         <>
                           <td>{data.id}</td>

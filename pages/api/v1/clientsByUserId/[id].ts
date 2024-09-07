@@ -1,14 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { withAuthController } from '../../../../controller/withAuthController'
 import { generateInvalidError } from '../../../../helpers/errors'
-import { clientType } from '../../../../models/models'
+import { clientType, Paginator } from '../../../../models/models'
 import ClientService from '../../../../services/ClientService'
 import UserService from '../../../../services/UserService'
 
 
 interface DataSuccess {
   message: String
-  clients?: clientType[],
+  clients?: Paginator<clientType>
   client?: clientType
 }
 
@@ -34,15 +34,37 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
           return
         }
 
-
+        //
+        const { offset = 0, limit = 10 } = req.query
+        const offsetNumber = parseInt(offset as string, 10)
+        const limitNumber = parseInt(limit as string, 10)
+        //
         if(user?.role === 'admin') {
-          const clients = ClientService.getAllClients();
+          const allClients = ClientService.getAllClients();
+          //
+          const paginatedClients = allClients.slice(offsetNumber, offsetNumber + limitNumber)
+          const totalItems = allClients.length
+          const clients: Paginator<clientType> = {
+            items: paginatedClients,
+            count: totalItems,
+            actualPage: Math.ceil(offsetNumber / limitNumber) + 1,
+            pages: Math.ceil(totalItems / limitNumber),
+        }
+          //
           res.status(200).json({
               message: 'OK',
               clients
           })
         } else {
-            const clients = ClientService.getAllClients().filter(clients => clients.userId === req.query.id)
+            const allClients = ClientService.getAllClients().filter(clients => clients.userId === req.query.id)
+            const paginatedClients = allClients.slice(offsetNumber, offsetNumber + limitNumber)
+            const totalItems = allClients.length
+            const clients: Paginator<clientType> = {
+              items: paginatedClients,
+              count: totalItems,
+              actualPage: Math.ceil(offsetNumber / limitNumber) + 1,
+              pages: Math.ceil(totalItems / limitNumber),
+          }
             if (clients) {
               res.status(200).json({
                 message: (clients) ? 'OK' : 'Clients not found',
