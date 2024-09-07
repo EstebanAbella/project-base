@@ -277,9 +277,3 @@ const Users = ({
 }
 
 export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Users))
-
-/*
-restore password
-
-Agregar paginacion
-*/

@@ -73,7 +73,7 @@ function Login({
   }, [loginStatus])
 
   useEffect(() => {
-    if (form.email !== '' && form.password !== '') {
+    if (form.email !== '' || form.password !== '') {
       setStateButton(false)
     } else {
       setStateButton(true)
