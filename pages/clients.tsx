@@ -83,7 +83,6 @@ const Clients = ({
   const [dataInitialModal, setDataInitialModal] = useState()
 
   useEffect(() => {
-    console.log('VEEEEEER', user)
     getClientsByUserId(user?.id)
   }, [])
 

@@ -23,7 +23,6 @@ const withAuth = (WrappedComponent: React.FC) => {
     const extractedComponentName = componentName.match(/\(([^)]+)\)/)?.[1] || componentName
 
     useEffect(() => {
-      console.log('userRole', userRole)
       const requiredRole = roleMap[extractedComponentName]
       if (userRole !== undefined && userRole !== requiredRole) {
         setStateUserRole(false)
