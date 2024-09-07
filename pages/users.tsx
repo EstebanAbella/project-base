@@ -279,8 +279,6 @@ const Users = ({
 export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Users))
 
 /*
-Traer clientes por usuario
-
 restore password
 
 Agregar paginacion

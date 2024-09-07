@@ -39,17 +39,35 @@ const SessionProvider = ({
   updateNeeded,
   updaterCheckerStatus,
 }: SessinProviderProps) => {
+  const [isToken, setIsToken] = useState<boolean>(false)
+
   useEffect(() => {
     // checkUpdater()
     const token = LocalDataService.getInstance().getToken()
-    if (token) {
-      ApiService.setToken(token)
-      if (getUserByToken) getUserByToken()
-    }
-    if (!token && loginStatus !== ServerStatus.FETCH) {
+    if (!token) {
+      setIsToken(true)
       router.push('/login')
     }
+    if (token) {
+      ApiService.setToken(token)
+      getUserByToken()
+      // setIsToken(true)
+    }
   }, [])
+
+  useEffect(() => {
+    if (loginStatus === ServerStatus.FETCH_ERROR) {
+      LocalDataService.clearData()
+      setIsToken(true)
+      router.push('/login')
+    }
+    if (loginStatus === ServerStatus.FETCHING) {
+      setIsToken(false)
+    }
+    if (loginStatus === ServerStatus.FETCH) {
+      setIsToken(true)
+    }
+  }, [loginStatus])
 
   // useEffect(() => {
   //   if (loginStatus === ServerStatus.FETCH && updateNeeded) {
@@ -63,7 +81,7 @@ const SessionProvider = ({
   //   }
   // }, [loginStatus])
 
-  return <>{children}</>
+  return isToken && <>{children}</>
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SessionProvider)

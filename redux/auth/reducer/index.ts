@@ -104,9 +104,9 @@ const reducer = (
     case t.AUTH_USER_BY_TOKEN_FETCH: {
       return {
         ...state,
+        user: action.payload,
         loginStatus: ServerStatus.FETCH,
         authUserByTokenStatus: ServerStatus.FETCH,
-        user: action.payload,
       }
     }
     case t.AUTH_USER_BY_TOKEN_FETCH_ERROR: {
