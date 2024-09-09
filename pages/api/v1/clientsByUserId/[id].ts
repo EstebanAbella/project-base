@@ -33,11 +33,11 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
           })
           return
         }
-
+        console.log('USER', user.role)
         //
-        const { offset = 0, limit = 10 } = req.query
-        const offsetNumber = parseInt(offset as string, 10)
-        const limitNumber = parseInt(limit as string, 10)
+        const { offset , limit } = req.query
+        const offsetNumber = parseInt(offset as string)
+        const limitNumber = parseInt(limit as string)
         //
         if(user?.role === 'admin') {
           const allClients = ClientService.getAllClients();
@@ -49,7 +49,8 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
             count: totalItems,
             actualPage: Math.ceil(offsetNumber / limitNumber) + 1,
             pages: Math.ceil(totalItems / limitNumber),
-        }
+          }
+          console.log('CLIENTS role admin', clients)
           //
           res.status(200).json({
               message: 'OK',
@@ -64,7 +65,8 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
               count: totalItems,
               actualPage: Math.ceil(offsetNumber / limitNumber) + 1,
               pages: Math.ceil(totalItems / limitNumber),
-          }
+            }
+            console.log('CLIENTS role:client', clients)
             if (clients) {
               res.status(200).json({
                 message: (clients) ? 'OK' : 'Clients not found',

@@ -19,6 +19,7 @@ import router from 'next/router'
 import Modal from '../components/Modal'
 import { TextFieldType } from '../components/TextField'
 import { loggedUser } from '../Utils/Types/authModel'
+import Pagination from '../components/Pagination'
 
 const mapStateToProps = (state: RootState) => {
   const clientsReducer = state.client
@@ -83,7 +84,7 @@ const Clients = ({
   const [dataInitialModal, setDataInitialModal] = useState()
 
   useEffect(() => {
-    getClientsByUserId(user?.id, 0, 10)
+    getClientsByUserId(user?.id, 0, 5)
   }, [])
 
   useEffect(() => {
@@ -274,6 +275,7 @@ const Clients = ({
             </>
           )}
 
+          <Pagination  fetchData={(...args: any) => getClientsByUserId(...args)}  id={user?.id} limit={5} offset={0} totalItems={clientsByUserId?.count ? clientsByUserId?.count : 0}></Pagination>
           {clientsByUserIdStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>
