@@ -1,3 +1,4 @@
+import { Paginator } from "../../Utils/Types/global"
 import { UserResult } from "../../Utils/Types/userType"
 import ApiServiceSingleton from "./ApiService"
 
@@ -44,8 +45,8 @@ async getUsers(
   filter?: string,
   order?: string,
   roles?: string
-): Promise<UserResult[]> {
-  return await new Promise<UserResult[]>((resolve, reject) => {
+): Promise<Paginator<UserResult>> {
+  return await new Promise<Paginator<UserResult>>((resolve, reject) => {
     const params = {
       offset,
       limit,
@@ -60,12 +61,7 @@ async getUsers(
     ApiServiceSingleton.axios
       .get(`${apiUrls.users}`, { params })
       .then((response) => {
-        const formatedItems = response.data.users.map((u: UserResult) => {
-          return {
-            ...u,
-          }
-        })
-        resolve(formatedItems)
+        resolve(response.data.users)
       })
       .catch((e) => {
         reject(ApiServiceSingleton.errorComposer(e))

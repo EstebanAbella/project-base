@@ -14,5 +14,5 @@ export type UsersReducerPropsTypes = {
   userDeleteStatus: ServerStatus
   userEditStatus: ServerStatus
   user?: UserResult
-  users?: Array<UserResult>
+  users?: Paginator<UserResult>
 }

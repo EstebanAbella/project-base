@@ -28,7 +28,7 @@ export type PossibleActions =
   | { type: 'GET_USER_FETCH'; payload: UserResult }
   | { type: 'GET_USER_FETCH_ERROR' }
   | { type: 'GET_USERS_FETCHING' }
-  | { type: 'GET_USERS_FETCH'; payload: Array<UserResult> }
+  | { type: 'GET_USERS_FETCH'; payload: Paginator<UserResult> }
   | { type: 'GET_USERS_FETCH_ERROR' }
   | { type: 'RESET_GLOBAL' }
 

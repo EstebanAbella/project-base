@@ -18,6 +18,7 @@ import router from 'next/router'
 import Modal from '../components/Modal'
 import { TextFieldType } from '../components/TextField'
 import withAuth from '../hooks/withAuth'
+import Pagination from '../components/Pagination'
 
 const mapStateToProps = (state: RootState) => {
   const usersReducer = state.user
@@ -69,7 +70,7 @@ const Users = ({
   const [dataInitialModal, setDataInitialModal] = useState()
 
   useEffect(() => {
-    getUsers()
+    getUsers(0, 5)
   }, [])
 
   useEffect(() => {
@@ -219,8 +220,8 @@ const Users = ({
                   </tr>
                 </thead>
                 <tbody>
-                  {users ? (
-                    users?.map((data) => (
+                  {users?.items ? (
+                    users?.items.map((data) => (
                       <tr key={data.id}>
                         <>
                           <td>{data.id}</td>
@@ -268,7 +269,7 @@ const Users = ({
               </table>
             </>
           )}
-
+          <Pagination fetchData={(...args: any) => getUsers(...args)} limit={5} offset={0} totalItems={users?.count ? users?.count : 0}></Pagination>
           {usersStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>
