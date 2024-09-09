@@ -68,6 +68,9 @@ const Users = ({
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>('')
   const [dataInitialModal, setDataInitialModal] = useState()
+  const [offsetState, setOffsetState] = useState<number>(0)
+  const limit = 5
+  const totalItems = users?.count ? users?.count : 0
 
   useEffect(() => {
     getUsers(0, 5)
@@ -79,8 +82,8 @@ const Users = ({
       userDeleteStatus === ServerStatus.FETCH ||
       userEditStatus === ServerStatus.FETCH
     )
-      getUsers()
-    setStateModal(false)
+      getUsers(offsetState, limit)
+      setStateModal(false)
   }, [userCreateStatus, userDeleteStatus, userEditStatus])
 
   const createUserObject = [
@@ -269,7 +272,12 @@ const Users = ({
               </table>
             </>
           )}
-          <Pagination fetchData={(...args: any) => getUsers(...args)} limit={5} offset={0} totalItems={users?.count ? users?.count : 0}></Pagination>
+          <Pagination
+          fetchData={(...args: any) => getUsers(...args)}
+          limit={limit}
+          offsetState={offsetState}
+          totalItems={totalItems}
+          setOffsetState={setOffsetState}/>
           {usersStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>

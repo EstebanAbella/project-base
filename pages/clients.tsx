@@ -82,9 +82,12 @@ const Clients = ({
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>('')
   const [dataInitialModal, setDataInitialModal] = useState()
+  const [offsetState, setOffsetState] = useState<number>(0)
+  const limit = 5
+  const totalItems = clientsByUserId?.count ? clientsByUserId?.count : 0
 
   useEffect(() => {
-    getClientsByUserId(user?.id, 0, 5)
+    getClientsByUserId(user?.id, 0, limit)
   }, [])
 
   useEffect(() => {
@@ -92,9 +95,10 @@ const Clients = ({
       clientCreateStatus === ServerStatus.FETCH ||
       clientDeleteStatus === ServerStatus.FETCH ||
       clientEditStatus === ServerStatus.FETCH
-    )
-    getClientsByUserId(user?.id)
-    setStateModal(false)
+    ) {
+      getClientsByUserId(user?.id, offsetState, limit)
+      setStateModal(false)
+    }
   }, [clientCreateStatus, clientDeleteStatus, clientEditStatus])
 
   const createClientObject = [
@@ -275,7 +279,13 @@ const Clients = ({
             </>
           )}
 
-          <Pagination  fetchData={(...args: any) => getClientsByUserId(...args)}  id={user?.id} limit={5} offset={0} totalItems={clientsByUserId?.count ? clientsByUserId?.count : 0}></Pagination>
+          <Pagination
+          fetchData={(...args: any) => getClientsByUserId(...args)}
+          id={user?.id}
+          limit={limit}
+          offsetState={offsetState}
+          totalItems={totalItems}
+          setOffsetState={setOffsetState}/>
           {clientsByUserIdStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>
