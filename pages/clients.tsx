@@ -20,6 +20,7 @@ import Modal from '../components/Modal'
 import { TextFieldType } from '../components/TextField'
 import { loggedUser } from '../Utils/Types/authModel'
 import Pagination from '../components/Pagination'
+import Search from '../components/Search'
 
 const mapStateToProps = (state: RootState) => {
   const clientsReducer = state.client
@@ -82,12 +83,22 @@ const Clients = ({
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>('')
   const [dataInitialModal, setDataInitialModal] = useState()
+  const [filter, setFilter] = useState<string>('')
+  const [query, setQuery] = useState<string>('')
   const [offsetState, setOffsetState] = useState<number>(0)
   const limit = 5
   const totalItems = clientsByUserId?.count ? clientsByUserId?.count : 0
+  const order = 'ASC'
 
   useEffect(() => {
-    getClientsByUserId(user?.id, 0, limit)
+    getClientsByUserId(
+      user?.id,
+      offsetState,
+      limit,
+      query ?? '',
+      filter ?? '',
+      order ?? ''
+    )
   }, [])
 
   useEffect(() => {
@@ -98,7 +109,14 @@ const Clients = ({
       if (isLastPage && anticipatedTotalItems <= offsetState && offsetState > 0) {
         setOffsetState((prevOffset) => prevOffset - limit)
       } else {
-        getClientsByUserId(user?.id, offsetState, limit)
+        getClientsByUserId(
+          user?.id,
+          offsetState,
+          limit,
+          query ?? '',
+          filter ?? '',
+          order ?? ''
+        )
       }
       setStateModal(false)
     }
@@ -106,7 +124,14 @@ const Clients = ({
 
   useEffect(() => {
     if (clientEditStatus === ServerStatus.FETCH) {
-      getClientsByUserId(user?.id, offsetState, limit)
+      getClientsByUserId(
+        user?.id,
+        offsetState,
+        limit,
+        query ?? '',
+        filter ?? '',
+        order ?? ''
+      )
       setStateModal(false)
     }
   }, [clientEditStatus])
@@ -118,7 +143,14 @@ const Clients = ({
       if (isLastPage && totalItems % limit === 0) {
         setOffsetState((prevOffset) => prevOffset + limit)
       } else {
-        getClientsByUserId(user?.id, offsetState, limit);
+        getClientsByUserId(
+          user?.id,
+          offsetState,
+          limit,
+          query ?? '',
+          filter ?? '',
+          order ?? ''
+        )
       }
       setStateModal(false)
     }
@@ -234,6 +266,7 @@ const Clients = ({
           {clientsByUserIdStatus !== ServerStatus.FETCHING && (
             <>
               <section className="addClientAction">
+                <Search filter={filter} setFilter={setFilter} offsetState={offsetState} limit={limit} searchOn={getClientsByUserId} setOffsetState={setOffsetState} id={user?.id}></Search>
                 <Button
                   type={ButtonType.SUCCESS}
                   value={'Add client'}
@@ -308,7 +341,8 @@ const Clients = ({
           limit={limit}
           offsetState={offsetState}
           totalItems={totalItems}
-          setOffsetState={setOffsetState}/>
+          setOffsetState={setOffsetState}
+          filter={filter}/>
           {clientsByUserIdStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>

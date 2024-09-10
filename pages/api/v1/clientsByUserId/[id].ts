@@ -34,12 +34,15 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
           return
         }
         //
-        const { offset = 0, limit = 10 } = req.query
+        const { offset = 0, limit = 10, q, searchIn  } = req.query
         const offsetNumber = parseInt(offset as string)
         const limitNumber = parseInt(limit as string)
+        const searchQuery = (searchIn as string).toLowerCase()
         //
         if(user?.role === 'admin') {
-          const allClients = ClientService.getAllClients()
+          const allClients = ClientService.getAllClients().filter((data) =>
+            data.name.toLowerCase().includes(searchQuery)
+          )
           //
           const paginatedClients = allClients.slice(offsetNumber, offsetNumber + limitNumber)
           const totalItems = allClients.length
@@ -55,7 +58,9 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
               clients
           })
         } else {
-            const allClients = ClientService.getAllClients().filter(clients => clients.userId === req.query.id)
+            const allClients = ClientService.getAllClients().filter(clients => clients.userId === req.query.id).filter((data) =>
+              data.name.toLowerCase().includes(searchQuery)
+            )
             const paginatedClients = allClients.slice(offsetNumber, offsetNumber + limitNumber)
             const totalItems = allClients.length
             const clients: Paginator<clientType> = {
@@ -64,7 +69,6 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
               actualPage: Math.ceil(offsetNumber / limitNumber) + 1,
               pages: Math.ceil(totalItems / limitNumber),
             }
-            console.log('CLIENTS role:client', clients)
             if (clients) {
               res.status(200).json({
                 message: (clients) ? 'OK' : 'Clients not found',

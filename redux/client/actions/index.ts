@@ -5,15 +5,16 @@ import * as t from '../types'
 
 export const getClients =
   (
-    offset: number,
+    offset?: number,
     limit?: number,
     query?: string,
     filter?: string,
-    order?: string
+    order?: string,
+    roles?: string
   ) =>
   (dispatch: (v: any) => void) => {
     dispatch({ type: t.GET_CLIENTS_FETCHING })
-    ClientServiceSingleton.getClients(offset, limit, query, filter, order)
+    ClientServiceSingleton.getClients(offset, limit, query, filter, order, roles)
       .then((result) => {
         dispatch({
           type: t.GET_CLIENTS_FETCH,
@@ -90,9 +91,17 @@ export const editClient =
       })
   }
 
-  export const getClientsByUserId = (id: string, offset?: number, limit?: number) => (dispatch: (v: any) => void) => {
+  export const getClientsByUserId = (
+    id: string,
+    offset?: number,
+    limit?: number,
+    query?: string,
+    filter?: string,
+    order?: string,
+    roles?: string
+  ) => (dispatch: (v: any) => void) => {
     dispatch({ type: t.GET_CLIENTS_BY_USER_ID_FETCHING })
-    ClientServiceSingleton.getClientsByUserId(id, offset, limit)
+    ClientServiceSingleton.getClientsByUserId(id, offset, limit, query, filter, order, roles)
       .then((result) => {
         dispatch({
           type: t.GET_CLIENTS_BY_USER_ID_FETCH,

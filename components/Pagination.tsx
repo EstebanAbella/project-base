@@ -3,15 +3,18 @@ import Button, { ButtonType } from './Button'
 
 
 interface PaginationProps {
-  fetchData: any
+  fetchData: Function
   id?: number | string
   offsetState: number
   limit: number
+  query?: string
+  filter?: string
+  order?: string
   totalItems: number
   setOffsetState: Function
 }
 
-const Pagination = ({ id, offsetState, limit, totalItems, fetchData, setOffsetState }: PaginationProps) => {
+const Pagination = ({ id, offsetState, limit, query, filter, order, totalItems, fetchData, setOffsetState }: PaginationProps) => {
   const [initialRender, setInitialRender] = useState<boolean>(true)
 
   useEffect(() => {
@@ -19,9 +22,22 @@ const Pagination = ({ id, offsetState, limit, totalItems, fetchData, setOffsetSt
       const loadData = async () => {
         try {
           if(id) {
-              await fetchData(id, offsetState, limit);
+              await fetchData(
+                id,
+                offsetState,
+                limit,
+                query ?? '',
+                filter ?? '',
+                order ?? ''
+              )
           } else {
-              await fetchData(offsetState, limit);
+              await fetchData(
+                offsetState,
+                limit,
+                query ?? '',
+                filter ?? '',
+                order ?? ''
+              )
           }
         } catch (error) {
           console.error('Error fetching data:', error);

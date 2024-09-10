@@ -19,6 +19,7 @@ import Modal from '../components/Modal'
 import { TextFieldType } from '../components/TextField'
 import withAuth from '../hooks/withAuth'
 import Pagination from '../components/Pagination'
+import Search from '../components/Search'
 
 const mapStateToProps = (state: RootState) => {
   const usersReducer = state.user
@@ -68,12 +69,21 @@ const Users = ({
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>('')
   const [dataInitialModal, setDataInitialModal] = useState()
+  const [filter, setFilter] = useState<string>('')
+  const [query, setQuery] = useState<string>('')
   const [offsetState, setOffsetState] = useState<number>(0)
   const limit = 5
   const totalItems = users?.count ? users?.count : 0
+  const order = 'ASC'
 
   useEffect(() => {
-    getUsers(0, 5)
+    getUsers(
+      offsetState,
+      limit,
+      query ?? '',
+      filter ?? '',
+      order ?? ''
+    )
   }, [])
 
   useEffect(() => {
@@ -84,7 +94,13 @@ const Users = ({
       if (isLastPage && anticipatedTotalItems <= offsetState && offsetState > 0) {
         setOffsetState((prevOffset) => prevOffset - limit)
       } else {
-        getUsers(offsetState, limit)
+        getUsers(
+          offsetState,
+          limit,
+          query ?? '',
+          filter ?? '',
+          order ?? ''
+        )
       }
       setStateModal(false)
     }
@@ -92,7 +108,13 @@ const Users = ({
 
   useEffect(() => {
     if (userEditStatus === ServerStatus.FETCH) {
-      getUsers(offsetState, limit)
+      getUsers(
+        offsetState,
+        limit,
+        query ?? '',
+        filter ?? '',
+        order ?? ''
+      )
       setStateModal(false)
     }
   }, [userEditStatus])
@@ -104,7 +126,13 @@ const Users = ({
       if (isLastPage && totalItems % limit === 0) {
         setOffsetState((prevOffset) => prevOffset + limit)
       } else {
-        getUsers(offsetState, limit);
+        getUsers(
+          offsetState,
+          limit,
+          query ?? '',
+          filter ?? '',
+          order ?? ''
+        )
       }
       setStateModal(false)
     }
@@ -229,6 +257,7 @@ const Users = ({
           {usersStatus !== ServerStatus.FETCHING && (
             <>
               <section className="addUserAction">
+                <Search filter={filter} setFilter={setFilter} offsetState={offsetState} limit={limit} searchOn={getUsers} setOffsetState={setOffsetState}></Search>
                 <Button
                   type={ButtonType.SUCCESS}
                   value={'Add user'}
@@ -301,7 +330,8 @@ const Users = ({
           limit={limit}
           offsetState={offsetState}
           totalItems={totalItems}
-          setOffsetState={setOffsetState}/>
+          setOffsetState={setOffsetState}
+          filter={filter}/>
           {usersStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>

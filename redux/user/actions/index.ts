@@ -9,11 +9,12 @@ export const getUsers =
     limit?: number,
     query?: string,
     filter?: string,
-    order?: string
+    order?: string,
+    roles?: string
   ) =>
   (dispatch: (v: any) => void) => {
     dispatch({ type: t.GET_USERS_FETCHING })
-    UserServiceSingleton.getUsers(offset, limit, query, filter, order)
+    UserServiceSingleton.getUsers(offset, limit, query, filter, order, roles)
       .then((result) => {
         dispatch({
           type: t.GET_USERS_FETCH,

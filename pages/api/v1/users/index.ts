@@ -18,12 +18,15 @@ type Data = DataSuccess | DataError
 const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
   switch (req.method) {
     case 'GET': {
-        const { offset = 0, limit = 10 } = req.query
+        const { offset = 0, limit = 10, q, searchIn } = req.query
         const offsetNumber = parseInt(offset as string)
         const limitNumber = parseInt(limit as string)
-        const allUSers = UserService.getAllUsers()
-        const paginatedUsers = allUSers.slice(offsetNumber, offsetNumber + limitNumber)
-        const totalItems = allUSers.length
+        const searchQuery = (searchIn as string).toLowerCase()
+        const allUsers = UserService.getAllUsers().filter((data) =>
+          data.name.toLowerCase().includes(searchQuery)
+        )
+        const paginatedUsers = allUsers.slice(offsetNumber, offsetNumber + limitNumber)
+        const totalItems = allUsers.length
         const users: Paginator<loggedUser> = {
           items: paginatedUsers,
           count: totalItems,

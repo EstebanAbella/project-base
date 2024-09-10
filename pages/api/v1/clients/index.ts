@@ -18,10 +18,13 @@ type Data = DataSuccess | DataError
 const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
     switch (req.method) {
         case 'GET': {
-            const { offset = 0, limit = 10 } = req.query
-            const allClients = ClientService.getAllClients()
-            const offsetNumber = parseInt(offset as string, 10)
-            const limitNumber = parseInt(limit as string, 10)
+            const { offset = 0, limit = 10, q, searchIn } = req.query
+            const offsetNumber = parseInt(offset as string)
+            const limitNumber = parseInt(limit as string)
+            const searchQuery = (searchIn as string).toLowerCase()
+            const allClients = ClientService.getAllClients().filter((data) =>
+                data.name.toLowerCase().includes(searchQuery)
+            )
             const paginatedClients = allClients.slice(offsetNumber, offsetNumber + limitNumber)
             const totalItems = allClients.length
             const clients: Paginator<clientType> = {
