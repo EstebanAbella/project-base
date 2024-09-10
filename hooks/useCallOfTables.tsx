@@ -8,10 +8,11 @@ export type CallOfTablePropsType = {
     query?: string
     filter?: string
     order?: string
+    roles?: string
     setOffsetState: Function
   }
 
-export const UseCallOfTables = ({ id, offsetState, limit, query, filter, order, action, setOffsetState }: CallOfTablePropsType) => {
+export const UseCallOfTables = ({ id, offsetState, limit, query, filter, order, roles, action, setOffsetState }: CallOfTablePropsType) => {
     const [initialRender, setInitialRender] = useState<boolean>(true)
 
     useEffect(() => {
@@ -30,7 +31,8 @@ export const UseCallOfTables = ({ id, offsetState, limit, query, filter, order, 
                   limit,
                   query ?? '',
                   filter ?? '',
-                  order ?? ''
+                  order ?? '',
+                  roles ?? ''
                 )
             } else {
                 await action(
@@ -38,7 +40,8 @@ export const UseCallOfTables = ({ id, offsetState, limit, query, filter, order, 
                   limit,
                   query ?? '',
                   filter ?? '',
-                  order ?? ''
+                  order ?? '',
+                  roles ?? ''
                 )
             }
           } catch (error) {

@@ -90,6 +90,7 @@ const Clients = ({
   const limit = 5
   const totalItems = clientsByUserId?.count ? clientsByUserId?.count : 0
   const order = 'ASC'
+  const roles = user?.role
 
   useEffect(() => {
     getClientsByUserId(
@@ -98,7 +99,8 @@ const Clients = ({
       limit,
       query ?? '',
       filter ?? '',
-      order ?? ''
+      order ?? '',
+      roles ?? ''
     )
   }, [])
 
@@ -116,7 +118,8 @@ const Clients = ({
           limit,
           query ?? '',
           filter ?? '',
-          order ?? ''
+          order ?? '',
+          roles ?? ''
         )
       }
       setStateModal(false)
@@ -131,7 +134,8 @@ const Clients = ({
         limit,
         query ?? '',
         filter ?? '',
-        order ?? ''
+        order ?? '',
+        roles ?? ''
       )
       setStateModal(false)
     }
@@ -150,7 +154,8 @@ const Clients = ({
           limit,
           query ?? '',
           filter ?? '',
-          order ?? ''
+          order ?? '',
+          roles ?? ''
         )
       }
       setStateModal(false)
@@ -164,6 +169,7 @@ const Clients = ({
     query,
     filter,
     order,
+    roles,
     action: getClientsByUserId,
     setOffsetState,
   })

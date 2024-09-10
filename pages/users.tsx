@@ -21,9 +21,11 @@ import withAuth from '../hooks/withAuth'
 import Pagination from '../components/Pagination'
 import Search from '../components/Search'
 import { UseCallOfTables } from '../hooks/useCallOfTables'
+import { loggedUser } from '../Utils/Types/authModel'
 
 const mapStateToProps = (state: RootState) => {
   const usersReducer = state.user
+  const authReducer = state.auth
   return {
     user: usersReducer.user,
     userStatus: usersReducer.userStatus,
@@ -34,6 +36,8 @@ const mapStateToProps = (state: RootState) => {
     userCreateStatus: usersReducer.userCreateStatus,
     userDeleteStatus: usersReducer.userDeleteStatus,
     userEditStatus: usersReducer.userEditStatus,
+
+    userLogged: authReducer.user,
   }
 }
 
@@ -51,6 +55,7 @@ export type UsersPropType = {
   createUser: Function
   deleteUser: Function
   editUser: Function
+  userLogged: loggedUser | undefined
 } & UsersReducerPropsTypes
 
 const Users = ({
@@ -66,6 +71,7 @@ const Users = ({
   userCreateStatus,
   userDeleteStatus,
   userEditStatus,
+  userLogged
 }: UsersPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>('')
@@ -76,6 +82,7 @@ const Users = ({
   const limit = 5
   const totalItems = users?.count ? users?.count : 0
   const order = 'ASC'
+  const roles = userLogged?.role
 
   useEffect(() => {
     getUsers(
@@ -83,7 +90,8 @@ const Users = ({
       limit,
       query ?? '',
       filter ?? '',
-      order ?? ''
+      order ?? '',
+      roles ?? ''
     )
   }, [])
 
@@ -100,7 +108,8 @@ const Users = ({
           limit,
           query ?? '',
           filter ?? '',
-          order ?? ''
+          order ?? '',
+          roles ?? ''
         )
       }
       setStateModal(false)
@@ -114,7 +123,8 @@ const Users = ({
         limit,
         query ?? '',
         filter ?? '',
-        order ?? ''
+        order ?? '',
+        roles ?? ''
       )
       setStateModal(false)
     }
@@ -132,7 +142,8 @@ const Users = ({
           limit,
           query ?? '',
           filter ?? '',
-          order ?? ''
+          order ?? '',
+          roles ?? ''
         )
       }
       setStateModal(false)
@@ -145,6 +156,7 @@ const Users = ({
     query,
     filter,
     order,
+    roles,
     action: getUsers,
     setOffsetState,
   })
