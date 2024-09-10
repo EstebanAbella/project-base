@@ -2,52 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Button, { ButtonType } from './Button'
 
 
-interface PaginationProps {
-  fetchData: Function
-  id?: number | string
+interface PaginationPropsType {
   offsetState: number
   limit: number
-  query?: string
-  filter?: string
-  order?: string
   totalItems: number
   setOffsetState: Function
 }
 
-const Pagination = ({ id, offsetState, limit, query, filter, order, totalItems, fetchData, setOffsetState }: PaginationProps) => {
-  const [initialRender, setInitialRender] = useState<boolean>(true)
-
-  useEffect(() => {
-    if(!initialRender) {
-      const loadData = async () => {
-        try {
-          if(id) {
-              await fetchData(
-                id,
-                offsetState,
-                limit,
-                query ?? '',
-                filter ?? '',
-                order ?? ''
-              )
-          } else {
-              await fetchData(
-                offsetState,
-                limit,
-                query ?? '',
-                filter ?? '',
-                order ?? ''
-              )
-          }
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      }
-      loadData()
-    }
-    setInitialRender(false)
-  }, [offsetState])
-
+const Pagination = ({  offsetState, limit,totalItems, setOffsetState }: PaginationPropsType) => {
   const handleNext = () => {
     if(offsetState  <= totalItems) {
       setOffsetState(offsetState + limit)

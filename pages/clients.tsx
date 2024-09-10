@@ -21,6 +21,7 @@ import { TextFieldType } from '../components/TextField'
 import { loggedUser } from '../Utils/Types/authModel'
 import Pagination from '../components/Pagination'
 import Search from '../components/Search'
+import { UseCallOfTables } from '../hooks/useCallOfTables'
 
 const mapStateToProps = (state: RootState) => {
   const clientsReducer = state.client
@@ -156,6 +157,17 @@ const Clients = ({
     }
   }, [clientCreateStatus])
 
+  UseCallOfTables({
+    id: user?.id,
+    offsetState,
+    limit,
+    query,
+    filter,
+    order,
+    action: getClientsByUserId,
+    setOffsetState,
+  })
+
   const createClientObject = [
     {
       label: 'Nombre',
@@ -263,10 +275,10 @@ const Clients = ({
         />
         <section className="clientsPage">
           <h1>Clients</h1>
+          <Search filter={filter} setFilter={setFilter}></Search>
           {clientsByUserIdStatus !== ServerStatus.FETCHING && (
             <>
               <section className="addClientAction">
-                <Search filter={filter} setFilter={setFilter} offsetState={offsetState} limit={limit} searchOn={getClientsByUserId} setOffsetState={setOffsetState} id={user?.id}></Search>
                 <Button
                   type={ButtonType.SUCCESS}
                   value={'Add client'}
@@ -336,13 +348,10 @@ const Clients = ({
           )}
 
           <Pagination
-          fetchData={(...args: any) => getClientsByUserId(...args)}
-          id={user?.id}
           limit={limit}
           offsetState={offsetState}
           totalItems={totalItems}
-          setOffsetState={setOffsetState}
-          filter={filter}/>
+          setOffsetState={setOffsetState}/>
           {clientsByUserIdStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>
@@ -351,3 +360,4 @@ const Clients = ({
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Clients)
+

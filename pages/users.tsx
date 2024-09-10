@@ -20,6 +20,7 @@ import { TextFieldType } from '../components/TextField'
 import withAuth from '../hooks/withAuth'
 import Pagination from '../components/Pagination'
 import Search from '../components/Search'
+import { UseCallOfTables } from '../hooks/useCallOfTables'
 
 const mapStateToProps = (state: RootState) => {
   const usersReducer = state.user
@@ -138,6 +139,16 @@ const Users = ({
     }
   }, [userCreateStatus])
 
+  UseCallOfTables({
+    offsetState,
+    limit,
+    query,
+    filter,
+    order,
+    action: getUsers,
+    setOffsetState,
+  })
+
   const createUserObject = [
     {
       label: 'Nombre',
@@ -254,10 +265,10 @@ const Users = ({
         />
         <section className="usersPage">
           <h1>Users</h1>
+          <Search filter={filter} setFilter={setFilter}></Search>
           {usersStatus !== ServerStatus.FETCHING && (
             <>
               <section className="addUserAction">
-                <Search filter={filter} setFilter={setFilter} offsetState={offsetState} limit={limit} searchOn={getUsers} setOffsetState={setOffsetState}></Search>
                 <Button
                   type={ButtonType.SUCCESS}
                   value={'Add user'}
@@ -326,12 +337,10 @@ const Users = ({
             </>
           )}
           <Pagination
-          fetchData={(...args: any) => getUsers(...args)}
           limit={limit}
           offsetState={offsetState}
           totalItems={totalItems}
-          setOffsetState={setOffsetState}
-          filter={filter}/>
+          setOffsetState={setOffsetState}/>
           {usersStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>
