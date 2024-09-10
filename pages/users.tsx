@@ -77,14 +77,38 @@ const Users = ({
   }, [])
 
   useEffect(() => {
-    if (
-      userCreateStatus === ServerStatus.FETCH ||
-      userDeleteStatus === ServerStatus.FETCH ||
-      userEditStatus === ServerStatus.FETCH
-    )
+    if (userDeleteStatus === ServerStatus.FETCH) {
+      const anticipatedTotalItems = totalItems - 1
+      const isLastPage = offsetState + limit >= anticipatedTotalItems
+
+      if (isLastPage && anticipatedTotalItems <= offsetState && offsetState > 0) {
+        setOffsetState((prevOffset) => prevOffset - limit)
+      } else {
+        getUsers(offsetState, limit)
+      }
+      setStateModal(false)
+    }
+  }, [userDeleteStatus])
+
+  useEffect(() => {
+    if (userEditStatus === ServerStatus.FETCH) {
       getUsers(offsetState, limit)
       setStateModal(false)
-  }, [userCreateStatus, userDeleteStatus, userEditStatus])
+    }
+  }, [userEditStatus])
+
+  useEffect(() => {
+    if (userCreateStatus === ServerStatus.FETCH) {
+      const anticipatedTotalItems = totalItems
+      const isLastPage = offsetState + limit >= anticipatedTotalItems
+      if (isLastPage && totalItems % limit === 0) {
+        setOffsetState((prevOffset) => prevOffset + limit)
+      } else {
+        getUsers(offsetState, limit);
+      }
+      setStateModal(false)
+    }
+  }, [userCreateStatus])
 
   const createUserObject = [
     {

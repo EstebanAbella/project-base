@@ -105,14 +105,24 @@ const Clients = ({
   }, [clientDeleteStatus])
 
   useEffect(() => {
-    if (
-      clientCreateStatus === ServerStatus.FETCH ||
-      clientEditStatus === ServerStatus.FETCH
-    ) {
+    if (clientEditStatus === ServerStatus.FETCH) {
       getClientsByUserId(user?.id, offsetState, limit)
       setStateModal(false)
     }
-  }, [clientCreateStatus, clientEditStatus])
+  }, [clientEditStatus])
+
+  useEffect(() => {
+    if (clientCreateStatus === ServerStatus.FETCH) {
+      const anticipatedTotalItems = totalItems
+      const isLastPage = offsetState + limit >= anticipatedTotalItems
+      if (isLastPage && totalItems % limit === 0) {
+        setOffsetState((prevOffset) => prevOffset + limit)
+      } else {
+        getClientsByUserId(user?.id, offsetState, limit);
+      }
+      setStateModal(false)
+    }
+  }, [clientCreateStatus])
 
   const createClientObject = [
     {
