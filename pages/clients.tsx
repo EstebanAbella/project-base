@@ -96,7 +96,14 @@ const Clients = ({
       clientDeleteStatus === ServerStatus.FETCH ||
       clientEditStatus === ServerStatus.FETCH
     ) {
-      getClientsByUserId(user?.id, offsetState, limit)
+      const anticipatedTotalItems = clientDeleteStatus === ServerStatus.FETCH ? totalItems - 1 : totalItems
+      const isLastPage = offsetState + limit >= anticipatedTotalItems
+
+      if (isLastPage && anticipatedTotalItems <= offsetState && offsetState > 0) {
+        setOffsetState((prevOffset) => prevOffset - limit)
+      } else {
+        getClientsByUserId(user?.id, offsetState, limit)
+      }
       setStateModal(false)
     }
   }, [clientCreateStatus, clientDeleteStatus, clientEditStatus])
