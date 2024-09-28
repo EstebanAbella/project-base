@@ -1,86 +1,91 @@
-@import '../utilities';
+@import "../utilities";
 
 form {
-    margin: 0px;
-    padding: 0px;
-    position: relative;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 16px;
+  .logoContainer {
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+  }
+  .messageForm {
+    width: 100%;
+    text-align: start;
+    margin-top: 8px;
+    p {
+      margin: 0px;
+      height: 24px;
+    }
+  }
+  .help {
+    margin-left: 10px;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .textField {
+    position: relative;
+    width: 100%;
+    #icon {
+      position: absolute;
+      display: block;
+      bottom: 2.5rem;
+      right: 1rem;
+      user-select: none;
+      cursor: pointer;
+      z-index: utilities.z-index(double);
+    }
+    input,
+    select,
+    textarea {
+      background-color: $white;
+      padding: 0px;
+      padding: 5px 10px;
+      position: relative;
+      z-index: utilities.z-index(double);
+      margin: 0px;
+      border: none;
+      width: 100%;
+      color: $grayDark;
+      outline: none;
+      border: 1px solid $grayDark;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 7px;
+      &.inputError {
+        border: 1px solid $stateError;
+      }
+    }
+    input.input {
+      padding-right: 2.5rem;
+    }
+    textarea {
+      @include mixins.custom_scrollbar();
+    }
+  }
+  .buttonContainerForm {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    gap: 16px;
-    .logoContainer {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .Button.Button {
+      width: 200px;
     }
-    .messageForm {
-        width: 100%;
-        text-align: start;
-        margin-top: 8px;
-        p {
-            margin: 0px;
-            height: 24px;
-        }
-    }
-    .help {
-        margin-left: 10px;
-        font-size: 12px;
-        margin-top: 4px;
-    }
-    .textField {
-        position: relative;
-        width: 100%;
-        #icon{
-            position: absolute;
-            display: block;
-            bottom: 2.5rem;
-            right: 1rem;
-            user-select: none;
-            cursor: pointer;
-            z-index: utilities.z-index(double);
-        }
-        input,
-        select {
-            background-color: $white;
-            padding: 0px;
-            padding: 5px 10px;
-            position: relative;
-            z-index: utilities.z-index(double);
-            margin: 0px;
-            border: none;
-            width: 100%;
-            color: $grayDark;
-            outline: none;
-            border: 1px solid $grayDark;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 7px;
-            &.inputError {
-                border: 1px solid $stateError;
-            }
-        }
-        input.input{
-            padding-right: 2.5rem;
-        }
-    }
-    .buttonContainerForm {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        .Button.Button {
-            width: 200px;
-        }
-    }
+  }
 
-    &.active, &.focus {
-        label {
-            top: -20px;
-            font-size: 10px;
-        }
+  &.active,
+  &.focus {
+    label {
+      top: -20px;
+      font-size: 10px;
     }
+  }
 }
