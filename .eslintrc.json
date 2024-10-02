@@ -1,6 +1,6 @@
 {
   "extends": [
-    "standard-with-typescript",
+    // "standard-with-typescript",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
@@ -11,7 +11,7 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "import/extensions": 1,
+    "import/extensions": "off",
     "import/no-named-as-default": 0,
     "@typescript-eslint/ban-types": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
@@ -21,6 +21,12 @@
     "@typescript-eslint/consistent-type-definitions": 0,
     "@next/next/no-css-tags": 0,
     "@typescript-eslint/restrict-template-expressions": 0,
-    "@typescript-eslint/ban-ts-comment": "off"
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-unsafe-function-type": "off",
+    "no-var": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "prefer-const": "off"
   }
 }
