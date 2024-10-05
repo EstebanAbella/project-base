@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { RootState } from '../redux/rootReducer'
-import { connect } from 'react-redux'
-import Button, { ButtonType } from '../components/Button'
-import { doLogin, doRestorePassword } from '../redux/auth/actions'
-import { ServerStatus } from '../Utils/Types/global'
-import { Logo } from '../components/Logo'
+import React, { useEffect, useState } from "react"
+import { useRouter } from "next/router"
+import { RootState } from "../redux/rootReducer"
+import { connect } from "react-redux"
+import Button, { ButtonType } from "../components/Button"
+import { doLogin, doRestorePassword } from "../redux/auth/actions"
+import { ServerStatus } from "../Utils/Types/global"
+import { Logo } from "../components/Logo"
 
 const mapStateToProps = (state: RootState) => {
   const authReducer = state.auth
@@ -39,8 +39,8 @@ function Login({
 }: LoginPropType) {
   const router = useRouter()
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   })
   const [stateButton, setStateButton] = useState(true)
   // Indicador de campo vacio del usuario
@@ -69,11 +69,11 @@ function Login({
 
   useEffect(() => {
     if (loginStatus === ServerStatus.FETCH && !updateNeeded)
-      router.push('/users')
+      router.push("/users")
   }, [loginStatus])
 
   useEffect(() => {
-    if (form.email !== '' || form.password !== '') {
+    if (form.email !== "" || form.password !== "") {
       setStateButton(false)
     } else {
       setStateButton(true)
@@ -131,61 +131,61 @@ function Login({
 
   return (
     <main>
-      <div className="containerLoginForm">
+      <div className='imageLogin'></div>
+      <div className='containerLoginForm'>
         <form>
-          <div className="logoContainer">
-            <Logo width="240" srcLogo={''} />
+          <div className='logoContainer'>
+            <h1>Iterabot</h1>
+            {/* <Logo width='240' srcLogo={""} /> */}
           </div>
           {!sendEmail ? (
-            <h1 className="titleLogin">Bienvenido/a.</h1>
+            <h1 className='titleLogin'>Bienvenido/a.</h1>
           ) : (
-            <h1 className="titleLogin">Recuperar contraseña.</h1>
+            <h1 className='titleLogin'>Recuperar contraseña.</h1>
           )}
-          <div className="textField">
+          <div className='textField'>
             <label>Ingresa tu correo electrónico</label>
             <input
-              name="email"
+              name='email'
               value={form.email}
-              placeholder="example@mail.com"
-              type="email"
+              placeholder='example@mail.com'
+              type='email'
               disabled={false}
               onChange={handleChange}
-              className={`${userNameEmpty ? 'inputError' : ''}`}
+              className={`${userNameEmpty ? "inputError" : ""}`}
             />
 
-            <div className="messageForm">
-              {userNameEmpty ? (
-                <p style={{ color: 'red' }}>
+            <div className='messageForm'>
+              {userNameEmpty && (
+                <p style={{ color: "red" }}>
                   Mail no válido, prueba con otro mail.
                 </p>
-              ) : (
-                <p>Escribe tu correo</p>
               )}
             </div>
           </div>
 
           {!sendEmail && (
-            <div className="textField">
+            <div className='textField'>
               <label>Contraseña</label>
               <input
-                type={showPassword ? 'text' : 'password'}
-                name="password"
+                type={showPassword ? "text" : "password"}
+                name='password'
                 value={form.password}
-                placeholder="Escribe tu contraseña"
+                placeholder='Escribe tu contraseña'
                 required
                 onChange={handleChange}
-                className={`input ${passwordEmpty ? 'inputError' : ''}`}
+                className={`input ${passwordEmpty ? "inputError" : ""}`}
               />
               <span
                 className={
-                  showPassword ? 'icon-passwordVisible' : 'icon-passwordHidden'
+                  showPassword ? "icon-passwordVisible" : "icon-passwordHidden"
                 }
-                id={'icon'}
+                id={"icon"}
                 onClick={() => setShowPassword(!showPassword)}
               ></span>
-              <div className="messageForm">
+              <div className='messageForm'>
                 {passwordEmpty ? (
-                  <p style={{ color: 'red' }}>Debes usar 8 o más caracteres</p>
+                  <p style={{ color: "red" }}>Debes usar 8 o más caracteres</p>
                 ) : (
                   <p></p>
                 )}
@@ -193,19 +193,21 @@ function Login({
             </div>
           )}
 
-          <div className="messageForm">
+          <div className='messageForm'>
             {loginStatus === ServerStatus.FETCH_ERROR && !sendEmail && (
-              <p style={{ color: 'red' }}>Las credenciales no son válidas</p>
+              <p style={{ color: "red", textAlign: "center" }}>
+                Las credenciales no son válidas
+              </p>
             )}
           </div>
 
-          <div className="buttonContainerForm">
+          <div className='buttonContainerForm'>
             {!sendEmail ? (
               <Button
                 value={
                   loginStatus === ServerStatus.FETCHING
-                    ? 'Cargando'
-                    : 'Iniciar sesión'
+                    ? "Cargando"
+                    : "Iniciar sesión"
                 }
                 type={ButtonType.PRIMARY}
                 onClick={() => handleLogin()}
@@ -213,7 +215,7 @@ function Login({
               />
             ) : (
               <Button
-                value={'Enviar E-mail'}
+                value={"Enviar E-mail"}
                 type={ButtonType.PRIMARY}
                 onClick={() => onRestorePassword()}
                 disabled={stateButton}
@@ -221,13 +223,13 @@ function Login({
             )}
 
             {!sendEmail && (
-              <div className="messageForm">
-                ¿Olvidaste tu contraseña?{' '}
+              <div className='messageForm'>
+                ¿Olvidaste tu contraseña?{" "}
                 <a
                   onClick={() => setSendEmail(restorePassword ? true : false)}
                   style={{
-                    cursor: `${restorePassword ? 'pointer' : 'default'}`,
-                    pointerEvents: `${eventsButton ? 'none' : 'auto'}`,
+                    cursor: `${restorePassword ? "pointer" : "default"}`,
+                    pointerEvents: `${eventsButton ? "none" : "auto"}`,
                   }}
                 >
                   Recuperala aquí
@@ -236,12 +238,12 @@ function Login({
             )}
 
             {restorePasswordStatus === ServerStatus.FETCH && (
-              <div className="messageForm">
+              <div className='messageForm'>
                 <p>Enviamos un e-mail a su correo electrónico, revíselo</p>
               </div>
             )}
             {restorePasswordStatus === ServerStatus.FETCH_ERROR && (
-              <div className="messageForm">
+              <div className='messageForm'>
                 <p>Error al enviar correo electrónico.</p>
               </div>
             )}

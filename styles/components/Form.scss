@@ -9,11 +9,17 @@ form {
   align-items: flex-start;
   flex-direction: column;
   gap: 16px;
+
   .logoContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    > h1 {
+      font-family: $font-family-custom;
+      margin-bottom: 36px;
+    }
   }
   .messageForm {
     width: 100%;
@@ -35,7 +41,7 @@ form {
     #icon {
       position: absolute;
       display: block;
-      bottom: 2.5rem;
+      bottom: 2.6rem;
       right: 1rem;
       user-select: none;
       cursor: pointer;
@@ -54,7 +60,7 @@ form {
       width: 100%;
       color: $grayDark;
       outline: none;
-      border: 1px solid $grayDark;
+      border: 1px solid $primaryDefault;
       display: flex;
       justify-content: center;
       align-items: center;
