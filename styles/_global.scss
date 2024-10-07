@@ -1,33 +1,49 @@
 @import "./variables";
 
 body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $graySkeleton;
-    @include mixins.custom_scrollbar();
-    #__next {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        main {
-            display: flex;
-            width: 100%;
-        }
-    }
+  &.themeDark {
+    --themeColor: #e7e8e9;
+    --themeBackgroundColor: #111b21;
+  }
+
+  &.themeLight {
+    --themeColor: #111b21;
+    --themeBackgroundColor: #e7e8e9;
+  }
 }
 
 body {
-    &.themeDark {
-        --themeColor: #F4F2EE;
-        --themeBackgroundColor: #000;
-    }
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--themeBackgroundColor);
+  @include mixins.custom_scrollbar();
 
-    &.themeLight {
-        --themeColor: #000;
-        --themeBackgroundColor: #F4F2EE;
+  #__next {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    main {
+      display: flex;
+      width: 100%;
     }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol,
+  a,
+  .table > :not(caption) > * > *,
+  td {
+    color: var(--themeColor);
+  }
 }

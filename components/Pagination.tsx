@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Button, { ButtonType } from './Button'
-
+import React, { useEffect, useState } from "react"
+import Button, { ButtonType } from "./Button"
 
 interface PaginationPropsType {
   offsetState: number
@@ -9,9 +8,14 @@ interface PaginationPropsType {
   setOffsetState: Function
 }
 
-const Pagination = ({  offsetState, limit,totalItems, setOffsetState }: PaginationPropsType) => {
+const Pagination = ({
+  offsetState,
+  limit,
+  totalItems,
+  setOffsetState,
+}: PaginationPropsType) => {
   const handleNext = () => {
-    if(offsetState  <= totalItems) {
+    if (offsetState <= totalItems) {
       setOffsetState(offsetState + limit)
     }
   }
@@ -23,19 +27,31 @@ const Pagination = ({  offsetState, limit,totalItems, setOffsetState }: Paginati
   }
 
   return (
-    <section className={'container'}>
-      <div className={'paginationControls'}>
+    <section className={"container"}>
+      <div className={"paginationControls"}>
         <Button
           type={offsetState === 0 ? ButtonType.SECONDARY : ButtonType.PRIMARY}
-          value="<" onClick={handlePrevious}
+          value='<'
+          onClick={handlePrevious}
           disabled={offsetState === 0}
         />
-        {<p className={`${offsetState === 0 ? 'nonePoint' : ''}`}>...</p>}
-        <p className={'pageInfo'}>{`${offsetState / limit + 1}`}</p>
-        {<p className={`${offsetState + limit >= totalItems || totalItems < limit ? 'nonePoint' : ''}`}>...</p>}
+        {<p className={`${offsetState === 0 ? "nonePoint" : ""}`}>...</p>}
+        <p className={"pageInfo"}>{`${offsetState / limit + 1}`}</p>
+        {
+          <p
+            className={`${offsetState + limit >= totalItems || totalItems < limit ? "nonePoint" : ""}`}
+          >
+            ...
+          </p>
+        }
         <Button
-          type={offsetState + limit >= totalItems || totalItems < limit ? ButtonType.SECONDARY : ButtonType.PRIMARY}
-          value=">" onClick={handleNext}
+          type={
+            offsetState + limit >= totalItems || totalItems < limit
+              ? ButtonType.SECONDARY
+              : ButtonType.PRIMARY
+          }
+          value='>'
+          onClick={handleNext}
           disabled={offsetState + limit >= totalItems || totalItems < limit}
         />
       </div>

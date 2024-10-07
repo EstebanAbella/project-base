@@ -177,9 +177,7 @@ function Login({
                 className={`input ${passwordEmpty ? "inputError" : ""}`}
               />
               <span
-                className={
-                  showPassword ? "icon-passwordVisible" : "icon-passwordHidden"
-                }
+                className={showPassword ? "icon-eye" : "icon-eye-off"}
                 id={"icon"}
                 onClick={() => setShowPassword(!showPassword)}
               ></span>

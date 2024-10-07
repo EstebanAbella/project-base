@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import Header from './Header'
-import Navigation from './Navigation'
+import React, { useEffect, useState } from "react"
+import Navigation from "./Navigation"
+import Menu from "./Menu"
 
 type LayoutPropsType = {
   children: JSX.Element | JSX.Element[]
@@ -16,17 +16,14 @@ const Layout = ({
   isNavigation,
 }: LayoutPropsType): JSX.Element => {
   return (
-    <section
-      className={'layout'}
-      style={{ paddingTop: `${isNavigation ? '17vh' : '15vh'}` }}
-    >
-      <div className="containerMenu">
-        <Header/>
-        {isNavigation && newRoute && title && (
+    <section className={"layout"}>
+      <Menu />
+      <div className='containerLayout'>
+        {/* {isNavigation && newRoute && title && (
           <Navigation newRoute={newRoute} title={title}></Navigation>
-        )}
+        )} */}
+        <section className='children'>{children}</section>
       </div>
-      <section className="children">{children}</section>
     </section>
   )
 }
