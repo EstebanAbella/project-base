@@ -8,23 +8,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-left: 120px;
 
-  > div {
-    position: relative;
-    width: 100%;
+  .children {
+    min-width: 80%;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 
-    .children {
-      min-width: 80%;
-      min-height: 100vh;
-
-      @media #{media-queries.$max-sm} {
-        min-width: 95%;
-      }
+    @media #{media-queries.$max-sm} {
+      min-width: 95%;
     }
   }
 }
