@@ -4,6 +4,7 @@ import { doLogout } from "../redux/auth/actions"
 import { connect } from "react-redux"
 import Button, { ButtonType } from "./Button"
 import ChangeTheme from "./ChangeTheme"
+import router from "next/router"
 
 const mapStateToProps = (state: RootState) => {
   return {}
@@ -24,6 +25,7 @@ const Menu = ({ doLogout }: MenuPropsType) => {
         value={"Training"}
         type={ButtonType.TERTIARY}
         icon={"icon-dumbbell-training"}
+        onClick={() => router.push("/botTraining")}
       ></Button>
 
       <Button
