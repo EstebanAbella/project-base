@@ -8,6 +8,7 @@ import { ServerStatus } from "../../Utils/Types/global"
 import Loader from "../../components/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import Layout from "../../components/Layout"
+import Navigation from "../../components/Navigation"
 
 const mapStateToProps = (state: RootState) => {
   const botTrainingsReducer = state.botTraining
@@ -40,25 +41,30 @@ const BotTrainingSelected = ({
   }, [param])
   return (
     <AccessConsume>
-      <Layout
-        isNavigation={true}
-        newRoute={"/botTrainings"}
-        title={"All botTrainings"}
-      >
-        <>
-          {botTrainingStatus === ServerStatus.FETCH && botTraining && (
-            <section className='botTrainingSelected'>
-              <p>
-                Id: <span className='botTrainingSpan'>{botTraining.id}</span>
-              </p>
-              <p>
-                Nombre:{" "}
-                <span className='botTrainingSpan'>{botTraining.name}</span>
-              </p>
-            </section>
-          )}
-          {botTrainingStatus === ServerStatus.FETCHING && <Loader></Loader>}
-        </>
+      <Layout>
+        <section className='botTrainingSelected'>
+          <Navigation
+            newRoute={"/botTraining"}
+            title={"All botTrainings"}
+          ></Navigation>
+          <section className='botTrainingSelectedContainer'>
+            <>
+              {botTrainingStatus === ServerStatus.FETCH && botTraining && (
+                <div className='botTrainingSelectedContainerData'>
+                  <p>
+                    Id:{" "}
+                    <span className='botTrainingSpan'>{botTraining.id}</span>
+                  </p>
+                  <p>
+                    Nombre:{" "}
+                    <span className='botTrainingSpan'>{botTraining.name}</span>
+                  </p>
+                </div>
+              )}
+              {botTrainingStatus === ServerStatus.FETCHING && <Loader></Loader>}
+            </>
+          </section>
+        </section>
       </Layout>
     </AccessConsume>
   )

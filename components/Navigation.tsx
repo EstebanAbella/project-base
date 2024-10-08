@@ -1,6 +1,6 @@
-import React from 'react'
-import Button, { ButtonType } from './Button'
-import router from 'next/router'
+import React from "react"
+import Button, { ButtonType } from "./Button"
+import router from "next/router"
 
 export type NavigationPropsType = {
   newRoute: string
@@ -13,9 +13,9 @@ const Navigation = ({ newRoute, title }: NavigationPropsType) => {
   }
 
   return (
-    <nav className={'navigation'}>
-      <span onClick={handleClick} className="icon-chevronLeft"></span>
-      <h2>{title}</h2>
+    <nav className={"navigation"} onClick={handleClick}>
+      <span className='icon-chevronLeft'></span>
+      <h5>{title}</h5>
     </nav>
   )
 }
