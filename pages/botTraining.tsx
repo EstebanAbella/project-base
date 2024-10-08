@@ -280,18 +280,19 @@ const BotTrainings = ({
           initialData={dataInitialModal}
         />
         <section className='botTrainingsPage'>
-          <h1>BotTrainings</h1>
-          <Search filter={filter} setFilter={setFilter}></Search>
-          {botTrainingsStatus !== ServerStatus.FETCHING && (
-            <>
-              <section className='addBotTrainingAction'>
-                <Button
-                  type={ButtonType.SUCCESS}
-                  value={"Add botTraining"}
-                  onClick={() => handleClickOnModal("create")}
-                  extraClassName={"buttonTable"}
-                ></Button>
-              </section>
+          <h3>BotTrainings</h3>
+          <section className='addBotTrainingAction'>
+            <Search filter={filter} setFilter={setFilter}></Search>
+
+            <Button
+              type={ButtonType.SUCCESS}
+              value={"Add botTraining"}
+              onClick={() => handleClickOnModal("create")}
+              extraClassName={"buttonTable"}
+            ></Button>
+          </section>
+          <section className='containerTable'>
+            {botTrainingsStatus !== ServerStatus.FETCHING && (
               <table className='table table-striped custom-bg'>
                 <thead className='table-dark tableThead'>
                   <tr>
@@ -348,8 +349,8 @@ const BotTrainings = ({
                   )}
                 </tbody>
               </table>
-            </>
-          )}
+            )}
+          </section>
           <Pagination
             limit={limit}
             offsetState={offsetState}

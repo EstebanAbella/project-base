@@ -284,19 +284,20 @@ const Clients = ({
           initialData={dataInitialModal}
         />
         <section className='clientsPage'>
-          <h1>Clients</h1>
-          <Search filter={filter} setFilter={setFilter}></Search>
-          {clientsByUserIdStatus !== ServerStatus.FETCHING && (
-            <>
-              <section className='addClientAction'>
-                <Button
-                  type={ButtonType.SUCCESS}
-                  value={"Add client"}
-                  onClick={() => handleClickOnModal("create")}
-                  extraClassName={"buttonTable"}
-                ></Button>
-              </section>
-              <table className='table table-striped table-bordered custom-bg'>
+          <h3>Clients</h3>
+          <section className='addClientAction'>
+            <Search filter={filter} setFilter={setFilter}></Search>
+
+            <Button
+              type={ButtonType.SUCCESS}
+              value={"Add client"}
+              onClick={() => handleClickOnModal("create")}
+              extraClassName={"buttonTable"}
+            ></Button>
+          </section>
+          <section className='containerTable'>
+            {clientsByUserIdStatus !== ServerStatus.FETCHING && (
+              <table className='table table-striped custom-bg'>
                 <thead className='table-dark tableThead'>
                   <tr>
                     <th scope='col'>Id</th>
@@ -356,8 +357,8 @@ const Clients = ({
                   )}
                 </tbody>
               </table>
-            </>
-          )}
+            )}
+          </section>
 
           <Pagination
             limit={limit}

@@ -1,0 +1,18 @@
+.search {
+  input {
+    background-color: $white;
+    padding: 5px;
+    position: relative;
+    z-index: utilities.z-index(double);
+    margin: 0px;
+    border: none;
+    width: 100%;
+    color: $grayDark;
+    outline: none;
+    border: 1px solid $primaryDefault;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+  }
+}

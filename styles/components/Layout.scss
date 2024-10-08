@@ -20,6 +20,7 @@
 
     .children {
       min-width: 80%;
+      min-height: 100vh;
 
       @media #{media-queries.$max-sm} {
         min-width: 95%;

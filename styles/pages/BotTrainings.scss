@@ -1,10 +1,19 @@
 .botTrainingsPage {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 20vh;
+
   .addBotTrainingAction {
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+  }
+
+  .containerTable {
+    min-height: 352px;
+    margin-bottom: 20px;
   }
 }

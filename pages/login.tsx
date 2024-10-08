@@ -222,16 +222,18 @@ function Login({
 
             {!sendEmail && (
               <div className='messageForm'>
-                ¿Olvidaste tu contraseña?{" "}
-                <a
-                  onClick={() => setSendEmail(restorePassword ? true : false)}
-                  style={{
-                    cursor: `${restorePassword ? "pointer" : "default"}`,
-                    pointerEvents: `${eventsButton ? "none" : "auto"}`,
-                  }}
-                >
-                  Recuperala aquí
-                </a>
+                <p>
+                  ¿Olvidaste tu contraseña?{" "}
+                  <a
+                    onClick={() => setSendEmail(restorePassword ? true : false)}
+                    style={{
+                      cursor: `${restorePassword ? "pointer" : "default"}`,
+                      pointerEvents: `${eventsButton ? "none" : "auto"}`,
+                    }}
+                  >
+                    Recuperala aquí
+                  </a>
+                </p>
               </div>
             )}
 

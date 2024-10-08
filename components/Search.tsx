@@ -12,7 +12,7 @@ const Search = ({ filter, setFilter }: SearchPropsType) => {
   }
 
   return (
-    <section>
+    <section className='search'>
       <div>
         <input
           type='text'
