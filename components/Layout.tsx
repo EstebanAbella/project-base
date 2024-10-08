@@ -19,9 +19,9 @@ const Layout = ({
     <section className={"layout"}>
       <Menu />
       <div className='containerLayout'>
-        {/* {isNavigation && newRoute && title && (
+        {isNavigation && newRoute && title && (
           <Navigation newRoute={newRoute} title={title}></Navigation>
-        )} */}
+        )}
         <section className='children'>{children}</section>
       </div>
     </section>

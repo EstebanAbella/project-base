@@ -69,7 +69,7 @@ function Login({
 
   useEffect(() => {
     if (loginStatus === ServerStatus.FETCH && !updateNeeded)
-      router.push("/users")
+      router.push("/botTraining")
   }, [loginStatus])
 
   useEffect(() => {
