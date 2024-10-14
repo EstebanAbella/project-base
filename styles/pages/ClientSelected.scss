@@ -1,26 +1,27 @@
 .clientSelected {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 15vh;
+
+  .clientSelectedContainer {
     position: relative;
     width: 100%;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
-    padding: 16px;
-    gap: 16px;
-    background-color: $white;
-    border-radius: 20px;
-    p {
-        margin:  0;
-        font-size: 16px;
-        font-weight: utilities.font-weight(semibold);
-        &::first-letter {
-            text-transform: uppercase;
-        }
-        .clientSpan {
-           font-weight: utilities.font-weight(regular);
-           &::first-letter {
-            text-transform: uppercase;
-        }
-       }
+
+    .clientSelectedContainerData {
+      position: relative;
+      width: 100%;
+      min-height: 80vh;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      padding-top: 10vh;
     }
+  }
 }
