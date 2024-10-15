@@ -22,6 +22,7 @@ import { loggedUser } from "../Utils/Types/authModel"
 import Pagination from "../components/Pagination"
 import Search from "../components/Search"
 import { UseCallOfTables } from "../hooks/useCallOfTables"
+import withAuth from "../hooks/withAuth"
 
 const mapStateToProps = (state: RootState) => {
   const clientsReducer = state.client
@@ -375,4 +376,4 @@ const Clients = ({
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Clients)
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Clients))
