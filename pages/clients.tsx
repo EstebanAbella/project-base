@@ -93,6 +93,8 @@ const Clients = ({
   const roles = user?.role
 
   useEffect(() => {
+    if (!user?.id) return
+
     getClientsByUserId(
       user?.id,
       offsetState,
@@ -102,7 +104,7 @@ const Clients = ({
       order ?? "",
       roles ?? ""
     )
-  }, [])
+  }, [user?.id])
 
   useEffect(() => {
     if (clientDeleteStatus === ServerStatus.FETCH) {
