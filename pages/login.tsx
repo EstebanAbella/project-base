@@ -86,6 +86,17 @@ function Login({
     }
   }, [form])
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && !sendEmail) {
+      event.preventDefault()
+      handleLogin()
+    }
+    if (event.key === "Enter" && sendEmail) {
+      event.preventDefault()
+      onRestorePassword()
+    }
+  }
+
   const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
     const name = (e.target as HTMLInputElement).name
     const value = (e.target as HTMLInputElement).value
@@ -152,6 +163,7 @@ function Login({
               type='email'
               disabled={false}
               onChange={handleChange}
+              onKeyDown={(e) => handleKeyPress(e)}
               className={`${userNameEmpty ? "inputError" : ""}`}
             />
 
@@ -174,6 +186,7 @@ function Login({
                 placeholder='Escribe tu contraseña'
                 required
                 onChange={handleChange}
+                onKeyDown={(e) => handleKeyPress(e)}
                 className={`input ${passwordEmpty ? "inputError" : ""}`}
               />
               <span
@@ -208,7 +221,9 @@ function Login({
                     : "Iniciar sesión"
                 }
                 type={ButtonType.PRIMARY}
-                onClick={() => handleLogin()}
+                onClick={(e) => {
+                  e.preventDefault(), handleLogin()
+                }}
                 disabled={stateButton}
               />
             ) : (
