@@ -146,7 +146,7 @@ function Login({
       <div className='containerLoginForm'>
         <form>
           <div className='logoContainer'>
-            <h1>Iterabot</h1>
+            <h1>Rosbot</h1>
             {/* <Logo width='240' srcLogo={""} /> */}
           </div>
           {!sendEmail ? (

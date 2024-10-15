@@ -48,6 +48,10 @@
       height: 100%;
       padding: 15px;
 
+      label {
+        color: $black;
+      }
+
       .textModal {
         text-align: center;
         color: $black;
