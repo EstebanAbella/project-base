@@ -51,7 +51,7 @@ const SessionProvider = ({
     if (token) {
       ApiService.setToken(token)
       getUserByToken()
-      setIsToken(true)
+      // setIsToken(true)
     }
   }, [])
 
