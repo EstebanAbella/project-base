@@ -36,6 +36,10 @@ const ChangeTheme = () => {
     setStateCheck(!stateCheck)
   }
 
+  const handleCheckboxChange = () => {
+    handleChangeTheme()
+  }
+
   return (
     <>
       {loading && (
@@ -47,7 +51,7 @@ const ChangeTheme = () => {
             autoComplete={"off"}
             name={"checkList"}
             id={"checkList"}
-            onClick={handleChangeTheme}
+            onChange={handleCheckboxChange}
             checked={stateCheck}
           />
           <label className={"checkboxLabel"} tabIndex={0} htmlFor={"checkList"}>
