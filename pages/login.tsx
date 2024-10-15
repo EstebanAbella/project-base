@@ -237,7 +237,7 @@ function Login({
 
             {!sendEmail && (
               <div className='messageForm'>
-                <p>
+                <p style={{ width: "100%", textAlign: "center" }}>
                   ¿Olvidaste tu contraseña?{" "}
                   <a
                     onClick={() => setSendEmail(restorePassword ? true : false)}
