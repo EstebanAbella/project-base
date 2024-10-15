@@ -1,12 +1,12 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
-import { RootState } from '../../redux/rootReducer'
-import LocalDataService from '../../services/LocalDataService'
-import { connect } from 'react-redux'
-import { getUserByToken } from '../../redux/auth/actions'
-import { ServerStatus } from '../../Utils/Types/global'
-import { checkUpdater } from '../../redux/updater/actions'
-import router, { useRouter } from 'next/router'
-import ApiService from '../../services/apiService/ApiService'
+import { PropsWithChildren, useEffect, useState } from "react"
+import { RootState } from "../../redux/rootReducer"
+import LocalDataService from "../../services/LocalDataService"
+import { connect } from "react-redux"
+import { getUserByToken } from "../../redux/auth/actions"
+import { ServerStatus } from "../../Utils/Types/global"
+import { checkUpdater } from "../../redux/updater/actions"
+import router, { useRouter } from "next/router"
+import ApiService from "../../services/apiService/ApiService"
 
 const mapStateToProps = (state: RootState) => {
   const updaterReducer = state.updater
@@ -46,12 +46,12 @@ const SessionProvider = ({
     const token = LocalDataService.getInstance().getToken()
     if (!token) {
       setIsToken(true)
-      router.push('/login')
+      router.push("/login")
     }
     if (token) {
       ApiService.setToken(token)
       getUserByToken()
-      // setIsToken(true)
+      setIsToken(true)
     }
   }, [])
 
@@ -59,7 +59,7 @@ const SessionProvider = ({
     if (loginStatus === ServerStatus.FETCH_ERROR) {
       LocalDataService.clearData()
       setIsToken(true)
-      router.push('/login')
+      router.push("/login")
     }
     if (loginStatus === ServerStatus.FETCHING) {
       setIsToken(false)

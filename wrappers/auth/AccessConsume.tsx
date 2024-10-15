@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { RootState } from '../../redux/rootReducer'
-import LocalDataService from '../../services/LocalDataService'
-import { ServerStatus } from '../../Utils/Types/global'
-import { checkUpdater } from '../../redux/updater/actions'
+import React, { useEffect, useState } from "react"
+import { connect } from "react-redux"
+import { RootState } from "../../redux/rootReducer"
+import LocalDataService from "../../services/LocalDataService"
+import { ServerStatus } from "../../Utils/Types/global"
+import { checkUpdater } from "../../redux/updater/actions"
 
 const mapStateToProps = (state: RootState) => {
   const authReducer = state.auth
@@ -25,21 +25,21 @@ const AccessConsume = ({
   children,
   loginStatus,
 }: AccessConsumePropsType): any => {
-  // const [canAccess, setCanAccess] = useState(false)
-  const [canAccess, setCanAccess] = useState(true)
-  // useEffect(() => {
-  //   if (loginStatus === ServerStatus.FETCH_ERROR) {
-  //     setCanAccess(false)
-  //     LocalDataService.clearData()
-  //     window.location.href = '/login'
-  //   }
-  //   if (loginStatus === ServerStatus.FETCHING) {
-  //     setCanAccess(false)
-  //   }
-  //   if (loginStatus === ServerStatus.FETCH) {
-  //     setCanAccess(true)
-  //   }
-  // }, [loginStatus])
+  const [canAccess, setCanAccess] = useState(false)
+
+  useEffect(() => {
+    if (loginStatus === ServerStatus.FETCH_ERROR) {
+      setCanAccess(false)
+      LocalDataService.clearData()
+      window.location.href = "/login"
+    }
+    if (loginStatus === ServerStatus.FETCHING) {
+      setCanAccess(false)
+    }
+    if (loginStatus === ServerStatus.FETCH) {
+      setCanAccess(true)
+    }
+  }, [loginStatus])
 
   return canAccess ? children : <div></div>
 }
