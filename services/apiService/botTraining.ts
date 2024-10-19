@@ -51,13 +51,13 @@ class BotTrainingService {
       const params = {
         offset,
         limit,
-        q: query,
+        query,
         searchIn: filter,
         // sort: order,
         // roles,
       }
-      if (!params.q) delete params.q
-      if (params.searchIn === "id") delete params.searchIn
+      if (!params.query) delete params.query
+      // if (params.searchIn === "id") delete params.searchIn
       // const response = await ApiServiceSingleton.axios.get(
       //   `${apiUrls.botTraining}`,
       //   { params }

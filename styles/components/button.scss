@@ -1,93 +1,94 @@
-@import '../utilities';
+@import "../utilities";
 
 .Button {
-    color: $white;
-    padding: 6px;
-    padding-left: 25px;
-    padding-right: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 22px;
-    border-color: transparent;
-    outline: none;
-    box-shadow: none;
-    appearance: auto;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    &.Button.primary {
-        background-color: $primaryDefault;
-        border-color: 1px solid $primaryDefault;
-        color: $white;
-        &:hover {
-            background-color: $hover;
-        }
-        &.disabled {
-            background-color: $grayLight;
-            border-color: 1px solid $grayLight;
-        }
-    }
-    &.Button.secondary {
-        background-color: $white;
-        border-color: 1px solid $primaryDefault;
-        color: $primaryDefault;
-        &:hover {
-            border-color: 1px solid $grayMid;
-            color: $grayMid;
-        }
-        &.disabled {
-            border-color: 1px solid $grayLight;
-            color: $grayLight;
-        }
-    }
-    &.Button.tertiary {
-        border-color: none;
-        color: $primaryDefault;
-        background-color: transparent;
-        &.disabled {
-            color: $grayLight;
-        }
-        &::first-letter {
-            text-transform: uppercase;
-        }
-   }
-   &.Button.success {
-        background-color: $stateSuccess;
-        border-color: 1px solid $stateSuccess;
-        color: $white;
-        &:hover {
-            opacity: 0.8;
-        }
-        &.disabled {
-            background-color: $grayLight;
-            border-color: 1px solid $grayLight;
-        }
-    }
-    &.Button.error {
-        background-color: $stateError;
-        border-color: 1px solid $stateError;
-        color: $white;
-        &:hover {
-            opacity: 0.8;
-        }
-        &.disabled {
-            background-color: $grayLight;
-            border-color: 1px solid $grayLight;
-        }
-    }
-    &.Button.information {
-        background-color: $stateInformation;
-        border-color: 1px solid $stateInformation;
-        color: $white;
-        &:hover {
-            opacity: 0.8;
-        }
-        &.disabled {
-            background-color: $grayLight;
-            border-color: 1px solid $grayLight;
-        }
-    }
-}
+  color: $white;
+  padding: 6px;
+  padding-left: 25px;
+  padding-right: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 22px;
+  border-color: transparent;
+  outline: none;
+  box-shadow: none;
+  appearance: auto;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  transition: 0.5s all;
 
+  &.Button.primary {
+    background-color: $primaryDefault;
+    border-color: 1px solid $primaryDefault;
+    color: $white;
+    &:hover {
+      background-color: $hover;
+    }
+    &.disabled {
+      background-color: $grayLight;
+      border-color: 1px solid $grayLight;
+    }
+  }
+  &.Button.secondary {
+    background-color: $white;
+    border-color: 1px solid $primaryDefault;
+    color: $primaryDefault;
+    &:hover {
+      border-color: 1px solid $grayMid;
+      color: $grayMid;
+    }
+    &.disabled {
+      border-color: 1px solid $grayLight;
+      color: $grayLight;
+    }
+  }
+  &.Button.tertiary {
+    border-color: none;
+    color: $primaryDefault;
+    background-color: transparent;
+    &.disabled {
+      color: $grayLight;
+    }
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+  &.Button.success {
+    background-color: $stateSuccess;
+    border-color: 1px solid $stateSuccess;
+    color: $white;
+    &:hover {
+      opacity: 0.8;
+    }
+    &.disabled {
+      background-color: $grayLight;
+      border-color: 1px solid $grayLight;
+    }
+  }
+  &.Button.error {
+    background-color: $stateError;
+    border-color: 1px solid $stateError;
+    color: $white;
+    &:hover {
+      opacity: 0.8;
+    }
+    &.disabled {
+      background-color: $grayLight;
+      border-color: 1px solid $grayLight;
+    }
+  }
+  &.Button.information {
+    background-color: $stateInformation;
+    border-color: 1px solid $stateInformation;
+    color: $white;
+    &:hover {
+      opacity: 0.8;
+    }
+    &.disabled {
+      background-color: $grayLight;
+      border-color: 1px solid $grayLight;
+    }
+  }
+}
