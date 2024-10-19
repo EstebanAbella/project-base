@@ -20,6 +20,7 @@ const Search = ({ query, setQuery }: SearchPropsType) => {
           name='dataSearch'
           value={query}
           onChange={handleChange}
+          placeholder='Search'
         />
       </div>
     </section>

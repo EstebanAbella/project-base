@@ -11,6 +11,13 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+
+    .addBotTrainingActionSearch {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 15px;
+    }
   }
 
   .containerTable {

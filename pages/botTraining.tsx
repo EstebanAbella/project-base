@@ -295,11 +295,13 @@ const BotTrainings = ({
           <h3>BotTrainings</h3>
 
           <section className='addBotTrainingAction'>
-            <Search query={query} setQuery={setQuery}></Search>
-            <FilterSearchIn
-              filterOptions={filterOptions()}
-              setFilter={setFilter}
-            ></FilterSearchIn>
+            <div className='addBotTrainingActionSearch'>
+              <Search query={query} setQuery={setQuery}></Search>
+              <FilterSearchIn
+                filterOptions={filterOptions()}
+                setFilter={setFilter}
+              ></FilterSearchIn>
+            </div>
             <Button
               type={ButtonType.SUCCESS}
               value={"Add botTraining"}
