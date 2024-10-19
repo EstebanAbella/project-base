@@ -51,14 +51,127 @@ const BotTrainingSelected = ({
             <>
               {botTrainingStatus === ServerStatus.FETCH && botTraining && (
                 <div className='botTrainingSelectedContainerData'>
-                  <p>
-                    Id:{" "}
-                    <span className='botTrainingSpan'>{botTraining.id}</span>
-                  </p>
-                  <p>
-                    Nombre:{" "}
-                    <span className='botTrainingSpan'>{botTraining.name}</span>
-                  </p>
+                  <div className='optionsTrainingSingle'>
+                    <p>Id: </p>
+                    <p className='botTrainingSpan'>{botTraining.id}</p>
+                  </div>
+
+                  {botTraining.body ? (
+                    <div className='optionsTrainingSingle'>
+                      <p>Body: </p>
+                      <p className='botTrainingSpan'>{botTraining.body}</p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {botTraining.footer ? (
+                    <div className='optionsTrainingSingle'>
+                      <p>Footer: </p>
+                      <p className='botTrainingSpan'>{botTraining.footer}</p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {botTraining.seed ? (
+                    <div className='optionsTrainingSingle'>
+                      <p>Seed: </p>
+                      <p className='botTrainingSpan'>{botTraining.seed}</p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {botTraining.trigger ? (
+                    <div className='optionsTrainingSingle'>
+                      <p>Trigger: </p>
+                      <p className='botTrainingSpan'>{botTraining.trigger}</p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {botTraining.type ? (
+                    <div className='optionsTrainingSingle'>
+                      <p>Type: </p>
+                      <p className='botTrainingSpan'>{botTraining.type}</p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {botTraining.options.length ? (
+                    <div className='optionsTraining'>
+                      <p>Options: </p>
+                      <div className='optionsTrainingContainer'>
+                        {botTraining.options.map((data: string, index) => (
+                          <p
+                            className='botTrainingSpan'
+                            key={`${index} ${data}`}
+                          >
+                            {data}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {botTraining.additional_actions.length ? (
+                    <div className='optionsTraining'>
+                      <p>Additional actions: </p>
+                      <div className='optionsTrainingContainer'>
+                        {botTraining.additional_actions.map((data, index) => (
+                          <div className='optionsTrainingContainerItems'>
+                            {data.reaction ? (
+                              <p
+                                className='botTrainingSpan'
+                                key={`${index} ${data.reaction}`}
+                              >
+                                Reaction: {data.reaction}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                            {data.type ? (
+                              <p
+                                className='botTrainingSpan'
+                                key={`${index} ${data.type}`}
+                              >
+                                Type: {data.type}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                            {data.sticker_name ? (
+                              <p
+                                className='botTrainingSpan'
+                                key={`${index} ${data.sticker_name}`}
+                              >
+                                Sticker name: {data.sticker_name}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                            {data.delay ? (
+                              <p
+                                className='botTrainingSpan'
+                                key={`${index} ${data.delay}`}
+                              >
+                                Delay: {data.delay}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               )}
               {botTrainingStatus === ServerStatus.FETCHING && <Loader></Loader>}

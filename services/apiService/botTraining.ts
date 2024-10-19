@@ -26,10 +26,13 @@ class BotTrainingService {
 
   async getBotTraining(id: string): Promise<BotTrainingResult> {
     try {
-      const response = await ApiServiceSingleton.axios.get(
-        `${apiUrls.botTraining}/${id}`
+      // const response = await ApiServiceSingleton.axios.get(
+      //   `${apiUrls.botTraining}/${id}`
+      // )
+      const response = await axios.get(
+        `https://classy-veil-seashore.glitch.me/templates/${id}`
       )
-      const data = response.data.user as BotTrainingResult
+      const data = response.data as BotTrainingResult
       return data
     } catch (e) {
       throw ApiServiceSingleton.errorComposer(e)

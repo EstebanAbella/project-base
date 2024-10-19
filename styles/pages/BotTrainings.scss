@@ -15,5 +15,19 @@
   .containerTable {
     min-height: 352px;
     margin-bottom: 20px;
+
+    .additionalActionsTable {
+      display: flex;
+      flex-direction: column;
+
+      .additionalActionsContainer {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 5px;
+      }
+    }
   }
 }

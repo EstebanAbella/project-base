@@ -1,14 +1,19 @@
 import { Paginator, ServerStatus } from "../global"
 
 export type BotTrainingResult = {
-  additional_actions: { reaction: string; type: "" }
+  id: number
   body: string
   footer: string
-  id: number
-  options: string[]
   seed: string
   trigger: string
   type: string
+  options: string[]
+  additional_actions: Array<{
+    type: string
+    reaction?: string
+    sticker_name?: string
+    delay?: number
+  }>
 }
 
 export type BotTrainingsReducerPropsTypes = {
