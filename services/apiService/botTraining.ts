@@ -1,6 +1,7 @@
 import { BotTrainingResult } from "../../Utils/Types/botTrainingType"
 import { Paginator } from "../../Utils/Types/global"
 import ApiServiceSingleton from "./ApiService"
+import axios, { AxiosInstance } from "axios"
 
 export interface globalType {
   BotTrainingService?: BotTrainingService
@@ -8,7 +9,7 @@ export interface globalType {
 
 const apiUrls = {
   /* bot training */
-  botTraining: "/v1/users",
+  botTraining: "/templates",
 }
 
 class BotTrainingService {
@@ -23,19 +24,6 @@ class BotTrainingService {
     return this
   }
 
-  // async getBotTraining(id: string): Promise<BotTrainingResult> {
-  //   return await new Promise<BotTrainingResult>((resolve, reject) => {
-  //     ApiServiceSingleton.axios
-  //       .get(`${apiUrls.botTraining}/${id}`)
-  //       .then((response) => {
-  //         const data = response.data.user as BotTrainingResult
-  //         resolve(data)
-  //       })
-  //       .catch((e) => {
-  //         reject(ApiServiceSingleton.errorComposer(e))
-  //       })
-  //   })
-  // }
   async getBotTraining(id: string): Promise<BotTrainingResult> {
     try {
       const response = await ApiServiceSingleton.axios.get(
@@ -48,38 +36,6 @@ class BotTrainingService {
     }
   }
 
-  // async getBotTrainings(
-  //   offset?: number,
-  //   limit?: number,
-  //   query?: string,
-  //   filter?: string,
-  //   order?: string,
-  //   roles?: string
-  // ): Promise<Paginator<BotTrainingResult>> {
-  //   return await new Promise<Paginator<BotTrainingResult>>(
-  //     (resolve, reject) => {
-  //       const params = {
-  //         offset,
-  //         limit,
-  //         q: query,
-  //         searchIn: filter,
-  //         sort: order,
-  //         roles,
-  //       }
-  //       if (!params.q) delete params.q
-  //       if (params.searchIn === "id") delete params.searchIn
-
-  //       ApiServiceSingleton.axios
-  //         .get(`${apiUrls.botTraining}`, { params })
-  //         .then((response) => {
-  //           resolve(response.data.users)
-  //         })
-  //         .catch((e) => {
-  //           reject(ApiServiceSingleton.errorComposer(e))
-  //         })
-  //     }
-  //   )
-  // }
   async getBotTrainings(
     offset?: number,
     limit?: number,
@@ -94,36 +50,30 @@ class BotTrainingService {
         limit,
         q: query,
         searchIn: filter,
-        sort: order,
-        roles,
+        // sort: order,
+        // roles,
       }
       if (!params.q) delete params.q
       if (params.searchIn === "id") delete params.searchIn
-      const response = await ApiServiceSingleton.axios.get(
-        `${apiUrls.botTraining}`,
+      // const response = await ApiServiceSingleton.axios.get(
+      //   `${apiUrls.botTraining}`,
+      //   { params }
+      // )
+      const response = await axios.get(
+        `https://classy-veil-seashore.glitch.me/templates`,
         { params }
+        // {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // }
       )
-      return response.data.users as Paginator<BotTrainingResult>
+      return response.data as Paginator<BotTrainingResult>
     } catch (e) {
       throw ApiServiceSingleton.errorComposer(e)
     }
   }
 
-  // async createBotTraining(submittedData: {
-  //   [key: string]: string
-  // }): Promise<{}> {
-  //   return await new Promise<{}>((resolve, reject) => {
-  //     ApiServiceSingleton.axios
-  //       .post(`${apiUrls.botTraining}`, submittedData)
-  //       .then((response) => {
-  //         const data = response.data as BotTrainingResult
-  //         resolve(data)
-  //       })
-  //       .catch((e) => {
-  //         reject(ApiServiceSingleton.errorComposer(e))
-  //       })
-  //   })
-  // }
   async createBotTraining(submittedData: {
     [key: string]: string
   }): Promise<{}> {
@@ -139,19 +89,6 @@ class BotTrainingService {
     }
   }
 
-  // async deleteBotTraining(id: string): Promise<{}> {
-  //   return await new Promise<{}>((resolve, reject) => {
-  //     ApiServiceSingleton.axios
-  //       .delete(`${apiUrls.botTraining}/${id}`)
-  //       .then((response) => {
-  //         const data = response.data as BotTrainingResult
-  //         resolve(data)
-  //       })
-  //       .catch((e) => {
-  //         reject(ApiServiceSingleton.errorComposer(e))
-  //       })
-  //   })
-  // }
   async deleteBotTraining(id: string): Promise<{}> {
     try {
       const response = await ApiServiceSingleton.axios.delete(
@@ -164,31 +101,6 @@ class BotTrainingService {
     }
   }
 
-  // async editBotTraining(submittedData: any): Promise<{}> {
-  //   const { name, id, email, role, password } = submittedData
-  //   const newData = {
-  //     name,
-  //     id,
-  //     email,
-  //     role,
-  //     password,
-  //   }
-  //   return await new Promise<{}>((resolve, reject) => {
-  //     if (!submittedData.id) reject(new Error("invalidId"))
-  //     else {
-  //       ApiServiceSingleton.axios
-  //         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  //         .put(`${apiUrls.botTraining}/${submittedData.id}`, submittedData)
-  //         .then((response) => {
-  //           const data = response.data as BotTrainingResult
-  //           resolve(data)
-  //         })
-  //         .catch((e) => {
-  //           reject(ApiServiceSingleton.errorComposer(e))
-  //         })
-  //     }
-  //   })
-  // }
   async editBotTraining(submittedData: any): Promise<{}> {
     try {
       const { name, id, email, role, password } = submittedData

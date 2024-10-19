@@ -289,7 +289,7 @@ const Clients = ({
         <section className='clientsPage'>
           <h3>Clients</h3>
           <section className='addClientAction'>
-            <Search filter={filter} setFilter={setFilter}></Search>
+            <Search query={query} setQuery={setQuery}></Search>
 
             <Button
               type={ButtonType.SUCCESS}

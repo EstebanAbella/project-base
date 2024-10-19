@@ -1,6 +1,6 @@
-import { clientType } from '../../Utils/Types/clientType'
-import { Paginator } from '../../Utils/Types/global'
-import ApiServiceSingleton from './ApiService'
+import { clientType } from "../../Utils/Types/clientType"
+import { Paginator } from "../../Utils/Types/global"
+import ApiServiceSingleton from "./ApiService"
 
 export interface globalType {
   ClientService?: ClientService
@@ -8,14 +8,14 @@ export interface globalType {
 
 const apiUrls = {
   /* client */
-  clients: '/v1/clients',
-  clientsByUserId: '/v1/clientsByUserId',
+  clients: "/v1/clients",
+  clientsByUserId: "/v1/clientsByUserId",
 }
 
 class ClientService {
   constructor() {
     if ((global as globalType).ClientService) {
-      throw new Error('ClientService instance already exists!')
+      throw new Error("ClientService instance already exists!")
     }
     ;(global as globalType).ClientService = this
   }
@@ -56,7 +56,7 @@ class ClientService {
         roles,
       }
       if (!params.q) delete params.q
-      if (params.searchIn === 'id') delete params.searchIn
+      if (params.searchIn === "id") delete params.searchIn
 
       ApiServiceSingleton.axios
         .get(`${apiUrls.clients}`, { params })
@@ -110,7 +110,7 @@ class ClientService {
       password,
     }
     return await new Promise<{}>((resolve, reject) => {
-      if (!submittedData.id) reject(new Error('invalidId'))
+      if (!submittedData.id) reject(new Error("invalidId"))
       else {
         ApiServiceSingleton.axios
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -145,7 +145,7 @@ class ClientService {
         roles,
       }
       if (!params.q) delete params.q
-      if (params.searchIn === 'id') delete params.searchIn
+      if (params.searchIn === "id") delete params.searchIn
 
       ApiServiceSingleton.axios
         .get(`${apiUrls.clientsByUserId}/${id}`, { params })
@@ -157,10 +157,10 @@ class ClientService {
         })
     })
   }
-
 }
 
 let ClientServiceSingleton
-if (!(global as globalType).ClientService) ClientServiceSingleton = new ClientService()
+if (!(global as globalType).ClientService)
+  ClientServiceSingleton = new ClientService()
 else ClientServiceSingleton = (global as globalType).ClientService
 export default ClientServiceSingleton as ClientService

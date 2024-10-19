@@ -1,7 +1,7 @@
-import ClientServiceSingleton from '../../../services/apiService/client'
-import { CustomErrorType } from '../../../Utils/Types/global'
+import ClientServiceSingleton from "../../../services/apiService/client"
+import { CustomErrorType } from "../../../Utils/Types/global"
 
-import * as t from '../types'
+import * as t from "../types"
 
 export const getClients =
   (
@@ -14,7 +14,14 @@ export const getClients =
   ) =>
   (dispatch: (v: any) => void) => {
     dispatch({ type: t.GET_CLIENTS_FETCHING })
-    ClientServiceSingleton.getClients(offset, limit, query, filter, order, roles)
+    ClientServiceSingleton.getClients(
+      offset,
+      limit,
+      query,
+      filter,
+      order,
+      roles
+    )
       .then((result) => {
         dispatch({
           type: t.GET_CLIENTS_FETCH,
@@ -91,7 +98,8 @@ export const editClient =
       })
   }
 
-  export const getClientsByUserId = (
+export const getClientsByUserId =
+  (
     id: string,
     offset?: number,
     limit?: number,
@@ -99,9 +107,18 @@ export const editClient =
     filter?: string,
     order?: string,
     roles?: string
-  ) => (dispatch: (v: any) => void) => {
+  ) =>
+  (dispatch: (v: any) => void) => {
     dispatch({ type: t.GET_CLIENTS_BY_USER_ID_FETCHING })
-    ClientServiceSingleton.getClientsByUserId(id, offset, limit, query, filter, order, roles)
+    ClientServiceSingleton.getClientsByUserId(
+      id,
+      offset,
+      limit,
+      query,
+      filter,
+      order,
+      roles
+    )
       .then((result) => {
         dispatch({
           type: t.GET_CLIENTS_BY_USER_ID_FETCH,

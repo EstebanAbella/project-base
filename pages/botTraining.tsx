@@ -282,7 +282,7 @@ const BotTrainings = ({
         <section className='botTrainingsPage'>
           <h3>BotTrainings</h3>
           <section className='addBotTrainingAction'>
-            <Search filter={filter} setFilter={setFilter}></Search>
+            <Search query={query} setQuery={setQuery}></Search>
 
             <Button
               type={ButtonType.SUCCESS}
@@ -297,7 +297,7 @@ const BotTrainings = ({
                 <thead className='table-dark tableThead'>
                   <tr>
                     <th scope='col'>Id</th>
-                    <th scope='col'>Name</th>
+                    <th scope='col'>Body</th>
                     <th scope='col'>Actions</th>
                   </tr>
                 </thead>
@@ -314,7 +314,7 @@ const BotTrainings = ({
                               }
                               style={{ cursor: "pointer" }}
                             >
-                              {data.name}
+                              {data.body}
                             </p>
                           </td>
                           <td>

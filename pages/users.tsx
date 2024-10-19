@@ -282,7 +282,7 @@ const Users = ({
         <section className='usersPage'>
           <h3>Users</h3>
           <section className='addUserAction'>
-            <Search filter={filter} setFilter={setFilter}></Search>
+            <Search query={query} setQuery={setQuery}></Search>
 
             <Button
               type={ButtonType.SUCCESS}

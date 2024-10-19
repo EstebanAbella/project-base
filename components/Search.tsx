@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react"
 
 export type SearchPropsType = {
-  filter: string
-  setFilter: Function
+  query: string
+  setQuery: Function
 }
 
-const Search = ({ filter, setFilter }: SearchPropsType) => {
+const Search = ({ query, setQuery }: SearchPropsType) => {
   const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
     const value = (e.target as HTMLInputElement).value
-    setFilter(value)
+    setQuery(value)
   }
 
   return (
@@ -18,7 +18,7 @@ const Search = ({ filter, setFilter }: SearchPropsType) => {
           type='text'
           id='text'
           name='dataSearch'
-          value={filter}
+          value={query}
           onChange={handleChange}
         />
       </div>
