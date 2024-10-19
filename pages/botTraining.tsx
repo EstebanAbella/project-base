@@ -312,8 +312,8 @@ const BotTrainings = ({
                     </tr>
                   </thead>
                   <tbody className='tableBody'>
-                    {botTrainings ? (
-                      botTrainings?.map((data: BotTrainingResult) => (
+                    {botTrainings?.items ? (
+                      botTrainings?.items?.map((data: BotTrainingResult) => (
                         <tr key={data.id}>
                           <>
                             <td>{data.id}</td>
