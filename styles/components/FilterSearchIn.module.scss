@@ -1,0 +1,112 @@
+@use "../variables";
+
+.customSelect {
+  position: relative;
+  width: 250px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    margin: 0;
+  }
+
+  .selectInput {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    padding: 5px;
+    border: 1px solid variables.$primaryDefault;
+    border-radius: 7px;
+    cursor: pointer;
+    background-color: variables.$white;
+
+    input {
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+      margin: 0px;
+      border: none;
+      width: 100%;
+      color: #656565;
+      outline: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 7px;
+    }
+
+    .arrow {
+      margin-left: 8px;
+      transition: 0.5s all;
+    }
+    .topTriangle {
+      transform: rotate(180deg);
+    }
+    .buttonTriangle {
+      transform: rotate(360deg);
+    }
+  }
+
+  .optionsList {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: variables.$white;
+    border: 1px solid variables.$primaryDefault;
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0 0;
+    max-height: 150px;
+    overflow-y: auto;
+    border-radius: 7px;
+
+    .option {
+      padding: 8px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      color: variables.$black;
+      font-size: 14px;
+      transition: 0.5s all;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+
+      &.selected {
+        font-weight: bold;
+        background-color: #e0e0e0;
+      }
+
+      .check {
+        color: green;
+        font-size: 16px;
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .containerSelectedLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    .selectedLabel {
+      margin-top: 8px;
+      font-size: 14px;
+      cursor: default;
+    }
+
+    > span {
+      color: variables.$red;
+      margin-bottom: -6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+  }
+}

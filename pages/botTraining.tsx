@@ -25,6 +25,7 @@ import Pagination from "../components/Pagination"
 import Search from "../components/Search"
 import { UseCallOfTables } from "../hooks/useCallOfTables"
 import { loggedUser } from "../Utils/Types/authModel"
+import FilterSearchIn from "../components/FilterSearchIn"
 
 const mapStateToProps = (state: RootState) => {
   const botTrainingsReducer = state.botTraining
@@ -259,6 +260,14 @@ const BotTrainings = ({
     }
   }
 
+  const filterOptions = () => {
+    return [
+      { id: 1, name: "id" },
+      { id: 2, name: "body" },
+      { id: 3, name: "footer" },
+    ]
+  }
+
   return (
     <AccessConsume>
       <Layout isNavigation={false}>
@@ -287,7 +296,10 @@ const BotTrainings = ({
 
           <section className='addBotTrainingAction'>
             <Search query={query} setQuery={setQuery}></Search>
-
+            <FilterSearchIn
+              filterOptions={filterOptions()}
+              setFilter={setFilter}
+            ></FilterSearchIn>
             <Button
               type={ButtonType.SUCCESS}
               value={"Add botTraining"}
