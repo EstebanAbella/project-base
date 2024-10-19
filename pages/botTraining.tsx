@@ -284,117 +284,118 @@ const BotTrainings = ({
         />
         <section className='botTrainingsPage'>
           <h3>BotTrainings</h3>
-          {botTrainingsStatus !== ServerStatus.FETCHING && (
-            <>
-              <section className='addBotTrainingAction'>
-                <Search query={query} setQuery={setQuery}></Search>
 
-                <Button
-                  type={ButtonType.SUCCESS}
-                  value={"Add botTraining"}
-                  onClick={() => handleClickOnModal("create")}
-                  extraClassName={"buttonTable"}
-                ></Button>
-              </section>
-              <section className='containerTable'>
-                <table className='table table-striped custom-bg table-bordered align-middle'>
-                  <thead className='table-dark tableThead'>
-                    <tr>
-                      <th scope='col'>Id</th>
-                      <th scope='col'>Body</th>
-                      <th scope='col'>Footer</th>
-                      <th scope='col'>Seed</th>
-                      <th scope='col'>Trigger</th>
-                      <th scope='col'>Type</th>
-                      <th scope='col'>Options</th>
-                      <th scope='col'>Addit. Act.</th>
-                      <th scope='col'>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody className='tableBody'>
-                    {botTrainings?.items ? (
-                      botTrainings?.items?.map((data: BotTrainingResult) => (
-                        <tr key={data.id}>
-                          <>
-                            <td>{data.id}</td>
-                            <td>
-                              <p
-                                onClick={() =>
-                                  router.push(`/botTrainingSelected/${data.id}`)
-                                }
-                                style={{ cursor: "pointer" }}
-                              >
-                                {data.body}
-                              </p>
-                            </td>
-                            <td>{data.footer}</td>
-                            <td>{data.seed}</td>
-                            <td>{data.trigger}</td>
-                            <td>{data.type}</td>
-                            <td>
-                              {data.options.map((data: string) => (
-                                <p>{data}</p>
-                              ))}
-                            </td>
-                            <td>
-                              <div className='additionalActionsTable'>
-                                {data.additional_actions.map((data: any) => (
-                                  <div className='additionalActionsContainer'>
-                                    {data.reaction && (
-                                      <td>Reaction: {data.reaction}</td>
-                                    )}
-                                    {data.sticker_name && (
-                                      <td>Sticker: {data.sticker_name}</td>
-                                    )}
-                                    {data.delay && <td>Delay: {data.delay}</td>}
-                                    <td>Type: {data.type}</td>
-                                  </div>
-                                ))}
-                              </div>
-                            </td>
-                            <td>
-                              <div className='containerButtonTable'>
-                                <Button
-                                  type={ButtonType.ERROR}
-                                  value={"Delete"}
-                                  onClick={() => deleteBotTraining(data.id)}
-                                  extraClassName={"buttonTable"}
-                                ></Button>
-                                <Button
-                                  type={ButtonType.INFORMATION}
-                                  value={"Update"}
-                                  onClick={() =>
-                                    handleClickOnModal("edit", data)
-                                  }
-                                  extraClassName={"buttonTable"}
-                                ></Button>
-                              </div>
-                            </td>
-                          </>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
+          <section className='addBotTrainingAction'>
+            <Search query={query} setQuery={setQuery}></Search>
+
+            <Button
+              type={ButtonType.SUCCESS}
+              value={"Add botTraining"}
+              onClick={() => handleClickOnModal("create")}
+              extraClassName={"buttonTable"}
+            ></Button>
+          </section>
+          {botTrainingsStatus !== ServerStatus.FETCHING && (
+            <section className='containerTable'>
+              <table className='table table-striped custom-bg table-bordered align-middle'>
+                <thead className='table-dark tableThead'>
+                  <tr>
+                    <th scope='col'>Id</th>
+                    <th scope='col'>Body</th>
+                    <th scope='col'>Footer</th>
+                    <th scope='col'>Seed</th>
+                    <th scope='col'>Trigger</th>
+                    <th scope='col'>Type</th>
+                    <th scope='col'>Options</th>
+                    <th scope='col'>Addit. Act.</th>
+                    <th scope='col'>Actions</th>
+                  </tr>
+                </thead>
+                <tbody className='tableBody'>
+                  {botTrainings?.items ? (
+                    botTrainings?.items?.map((data: BotTrainingResult) => (
+                      <tr key={data.id}>
                         <>
-                          <td>{"-"}</td>
-                          <td>{"-"}</td>
-                          <td>{"-"}</td>
-                          <td>{"-"}</td>
-                          <td>{"-"}</td>
+                          <td>{data.id}</td>
+                          <td>
+                            <p
+                              onClick={() =>
+                                router.push(`/botTrainingSelected/${data.id}`)
+                              }
+                              style={{ cursor: "pointer" }}
+                            >
+                              {data.body}
+                            </p>
+                          </td>
+                          <td>{data.footer}</td>
+                          <td>{data.seed}</td>
+                          <td>{data.trigger}</td>
+                          <td>{data.type}</td>
+                          <td>
+                            {data.options.map((data: string) => (
+                              <p>{data}</p>
+                            ))}
+                          </td>
+                          <td>
+                            <div className='additionalActionsTable'>
+                              {data.additional_actions.map((data: any) => (
+                                <div className='additionalActionsContainer'>
+                                  {data.reaction && (
+                                    <td>Reaction: {data.reaction}</td>
+                                  )}
+                                  {data.sticker_name && (
+                                    <td>Sticker: {data.sticker_name}</td>
+                                  )}
+                                  {data.delay && <td>Delay: {data.delay}</td>}
+                                  <td>Type: {data.type}</td>
+                                </div>
+                              ))}
+                            </div>
+                          </td>
+                          <td>
+                            <div className='containerButtonTable'>
+                              <Button
+                                type={ButtonType.ERROR}
+                                value={"Delete"}
+                                onClick={() => deleteBotTraining(data.id)}
+                                extraClassName={"buttonTable"}
+                              ></Button>
+                              <Button
+                                type={ButtonType.INFORMATION}
+                                value={"Update"}
+                                onClick={() => handleClickOnModal("edit", data)}
+                                extraClassName={"buttonTable"}
+                              ></Button>
+                            </div>
+                          </td>
                         </>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
-              </section>
-              <Pagination
-                limit={limit}
-                offsetState={offsetState}
-                totalItems={totalItems}
-                setOffsetState={setOffsetState}
-              />
-            </>
+                    ))
+                  ) : (
+                    <tr>
+                      <>
+                        <td>{"-"}</td>
+                        <td>{"-"}</td>
+                        <td>{"-"}</td>
+                        <td>{"-"}</td>
+                        <td>{"-"}</td>
+                      </>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </section>
           )}
+
+          {botTrainingsStatus === ServerStatus.FETCH && (
+            <Pagination
+              limit={limit}
+              offsetState={offsetState}
+              totalItems={totalItems}
+              setOffsetState={setOffsetState}
+            />
+          )}
+
           {botTrainingsStatus === ServerStatus.FETCHING && <Loader></Loader>}
         </section>
       </Layout>
