@@ -205,7 +205,7 @@ function Login({
           )}
 
           <div className='messageForm'>
-            {loginStatus === ServerStatus.FETCH_ERROR && !sendEmail && (
+            {loginStatus === ServerStatus.FETCH_ERROR && !sendEmail && form.email !== '' && (
               <p style={{ color: "red", textAlign: "center" }}>
                 Las credenciales no son válidas
               </p>

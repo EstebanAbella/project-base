@@ -346,8 +346,8 @@ const BotTrainings = ({
                           <td>{data.trigger}</td>
                           <td>{data.type}</td>
                           <td>
-                            {data.options.map((data: string) => (
-                              <p>{data}</p>
+                            {data.options.map((data: string, index) => (
+                              <p key={`${data} ${index}`}>{data}</p>
                             ))}
                           </td>
                           <td>
