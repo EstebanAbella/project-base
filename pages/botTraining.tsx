@@ -262,9 +262,10 @@ const BotTrainings = ({
 
   const filterOptions = () => {
     return [
-      { id: 1, name: "id" },
-      { id: 2, name: "body" },
-      { id: 3, name: "footer" },
+      { id: 1, name: "body" },
+      { id: 2, name: "footer" },
+      { id: 3, name: "trigger" },
+      { id: 4, name: "type" },
     ]
   }
 
@@ -314,7 +315,6 @@ const BotTrainings = ({
               <table className='table table-striped custom-bg table-bordered align-middle'>
                 <thead className='table-dark tableThead'>
                   <tr>
-                    <th scope='col'>Id</th>
                     <th scope='col'>Body</th>
                     <th scope='col'>Footer</th>
                     <th scope='col'>Seed</th>
@@ -330,7 +330,6 @@ const BotTrainings = ({
                     botTrainings?.items?.map((data: BotTrainingResult) => (
                       <tr key={data.id}>
                         <>
-                          <td>{data.id}</td>
                           <td>
                             <p
                               onClick={() =>

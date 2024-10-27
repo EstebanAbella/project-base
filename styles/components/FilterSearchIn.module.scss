@@ -1,4 +1,5 @@
 @use "../variables";
+@use "../mixins";
 
 .customSelect {
   position: relative;
@@ -63,6 +64,7 @@
     max-height: 150px;
     overflow-y: auto;
     border-radius: 7px;
+    @include mixins.custom_scrollbar();
 
     .option {
       padding: 8px;
