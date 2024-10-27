@@ -57,7 +57,7 @@ class BotTrainingService {
         // roles,
       }
       if (!params.query) delete params.query
-      // if (params.searchIn === "id") delete params.searchIn
+      if (params.searchIn === "id") delete params.searchIn
       // const response = await ApiServiceSingleton.axios.get(
       //   `${apiUrls.botTraining}`,
       //   { params }
