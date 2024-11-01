@@ -55,6 +55,8 @@ function Login({
   const [eventsButton, setEventsButton] = useState(false)
   // Enviar email
   const [sendEmail, setSendEmail] = useState(false)
+  // Try login
+  const [tryLogin, setTryLogin] = useState(false)
   const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/
   const validPassword = /^(?=.*[a-z])([a-z]|[^ ]){4,15}$/
 
@@ -127,6 +129,7 @@ function Login({
     if (validateForm() && !sendEmail) {
       doLogin(form)
     }
+    setSendEmail(true)
   }
 
   const onRestorePassword = () => {
@@ -205,11 +208,13 @@ function Login({
           )}
 
           <div className='messageForm'>
-            {loginStatus === ServerStatus.FETCH_ERROR && !sendEmail && form.email !== '' && (
-              <p style={{ color: "red", textAlign: "center" }}>
-                Las credenciales no son válidas
-              </p>
-            )}
+            {loginStatus === ServerStatus.FETCH_ERROR &&
+              !sendEmail &&
+              tryLogin && (
+                <p style={{ color: "red", textAlign: "center" }}>
+                  Las credenciales no son válidas
+                </p>
+              )}
           </div>
 
           <div className='buttonContainerForm'>
