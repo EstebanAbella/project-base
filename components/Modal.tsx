@@ -27,6 +27,14 @@ export type dataFormType = {
   defaultValue?: any
 }
 
+const componentByChoice = {
+  tagInput: (props: any) => <TagInput {...props} />,
+  text: (props: any) => <TextFieldModalCrud {...props} />,
+  number: (props: any) => <TextFieldModalCrud {...props} />,
+  select: (props: any) => <TextFieldModalCrud {...props} />,
+  textarea: (props: any) => <TextFieldModalCrud {...props} />,
+}
+
 const Modal = ({
   img,
   text,
@@ -52,6 +60,67 @@ const Modal = ({
     console.log("form", form)
   }
 
+  const propsByType = (data: any) => {
+    const value = {
+      tagInput: {
+        name: data.name,
+        disabled: data.disabled,
+        value: form[data.name] ? form[data.name] : [],
+        onChange: handleChange,
+        placeholder: data.placeholder,
+      },
+      text: {
+        label: data.label,
+        name: data.name,
+        typeTextField: data.typeTextField,
+        disabled: data.disabled,
+        type: data.type,
+        placeholder: data.placeholder,
+        onChange: handleChange,
+        valueInput: form[data.name] ? form[data.name] : "",
+        valueSelect: data.valueSelect ? data.valueSelect : [],
+        key: data.name,
+      },
+      number: {
+        label: data.label,
+        name: data.name,
+        typeTextField: data.typeTextField,
+        disabled: data.disabled,
+        type: data.type,
+        placeholder: data.placeholder,
+        onChange: handleChange,
+        valueInput: form[data.name] ? form[data.name] : "",
+        valueSelect: data.valueSelect ? data.valueSelect : [],
+        key: data.name,
+      },
+      select: {
+        label: data.label,
+        name: data.name,
+        typeTextField: data.typeTextField,
+        disabled: data.disabled,
+        type: data.type,
+        placeholder: data.placeholder,
+        onChange: handleChange,
+        valueInput: form[data.name] ? form[data.name] : "",
+        valueSelect: data.valueSelect ? data.valueSelect : [],
+        key: data.name,
+      },
+      textarea: {
+        label: data.label,
+        name: data.name,
+        typeTextField: data.typeTextField,
+        disabled: data.disabled,
+        type: data.type,
+        placeholder: data.placeholder,
+        onChange: handleChange,
+        valueInput: form[data.name] ? form[data.name] : "",
+        valueSelect: data.valueSelect ? data.valueSelect : [],
+        key: data.name,
+      },
+    }
+    return componentByChoice[data.type](value[data.type])
+  }
+
   return (
     <>
       {isDisabled ? (
@@ -73,32 +142,7 @@ const Modal = ({
               {dataForm?.length !== 0 &&
                 form &&
                 Object.keys(form).length !== 0 && (
-                  <form>
-                    {dataForm?.map((data) =>
-                      data.type === "tagInput" ? (
-                        <TagInput
-                          name={data.name}
-                          disabled={data.disabled}
-                          value={form[data.name] ? form[data.name] : []}
-                          onChange={handleChange}
-                          placeholder={data.placeholder}
-                        ></TagInput>
-                      ) : (
-                        <TextFieldModalCrud
-                          label={data.label}
-                          name={data.name}
-                          typeTextField={data.typeTextField}
-                          disabled={data.disabled}
-                          type={data.type}
-                          placeholder={data.placeholder}
-                          onChange={handleChange}
-                          valueInput={form[data.name] ? form[data.name] : ""}
-                          valueSelect={data.valueSelect ? data.valueSelect : []}
-                          key={data.name}
-                        ></TextFieldModalCrud>
-                      )
-                    )}
-                  </form>
+                  <form>{dataForm?.map((data) => propsByType(data))}</form>
                 )}
               {textButton && onClick && (
                 <section className={"containerButtonModalCreate"}>
