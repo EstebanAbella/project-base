@@ -69,6 +69,7 @@ const Modal = ({
   const handleChange = (fieldValue: {
     [key: string]: string | number | []
   }) => {
+    console.log("ver que llega", fieldValue)
     setForm((prevForm: any) => ({ ...prevForm, ...fieldValue }))
   }
 
@@ -133,6 +134,12 @@ const Modal = ({
       additional_actions: {
         valueSelect: data.valueSelect ? data.valueSelect : [],
         onChange: handleChange,
+        label: data.label,
+        name: data.name,
+        disabled: data.disabled,
+        type: data.type,
+        placeholder: data.placeholder,
+        key: data.name,
       },
     }
     return componentByChoice[data.type](value[data.type])

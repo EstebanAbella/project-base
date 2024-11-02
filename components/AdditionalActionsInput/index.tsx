@@ -6,12 +6,20 @@ export type AdditionalAction = {
 
 export type AdditionalActionsInputProps = {
   valueSelect: string[]
-  onChange: (actions: AdditionalAction[]) => void
+  onChange: (e: any) => void
+  label?: string
+  name: string
+  type?: string
+  disabled?: boolean
 }
 
 const AdditionalActionsInput = ({
   valueSelect,
   onChange,
+  name,
+  label,
+  type,
+  disabled,
 }: AdditionalActionsInputProps) => {
   const [additionalActions, setAdditionalActions] = useState<
     AdditionalAction[]
@@ -55,7 +63,7 @@ const AdditionalActionsInput = ({
         updatedSets[index].inputValue = ""
         return updatedSets
       })
-      onChange(updatedActions)
+      onChange({ [name]: updatedActions })
     }
   }
 
