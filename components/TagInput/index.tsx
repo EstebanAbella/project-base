@@ -1,37 +1,42 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./TagInput.module.scss"
 
 export type TagInputPropsType = {
   name: string
   disabled?: boolean
-  value: string
-  onChange?: (name: string, tags: string[]) => void
+  value: string[]
+  onChange: (e: any) => void
   placeholder?: string
 }
 
 const TagInput = ({
   name,
   disabled = false,
-  value = "",
+  value = [],
   onChange,
   placeholder = "",
 }: TagInputPropsType) => {
   const [inputValue, setInputValue] = useState<string>("")
-  const [tags, setTags] = useState<string[]>(Array.isArray(value) ? value : [])
+  const [tags, setTags] = useState<string[]>(value)
+
+  useEffect(() => {
+    setTags(value || [])
+  }, [value])
 
   const handleAddTag = () => {
     if (inputValue.trim()) {
       const updatedTags = [...tags, inputValue.trim()]
       setTags(updatedTags)
       setInputValue("")
-      onChange && onChange(name, updatedTags)
+      onChange({ [name]: updatedTags })
     }
   }
 
-  const handleRemoveTag = (index: number) => {
+  const handleRemoveTag = (index: number) => (e: React.MouseEvent) => {
+    e.preventDefault()
     const updatedTags = tags.filter((_, i) => i !== index)
     setTags(updatedTags)
-    onChange && onChange(name, updatedTags)
+    onChange({ [name]: updatedTags })
   }
 
   return (
@@ -57,7 +62,7 @@ const TagInput = ({
           <div key={index} className={styles.tagItem}>
             {tag}
             <button
-              onClick={() => handleRemoveTag(index)}
+              onClick={handleRemoveTag(index)}
               className={styles.removeButton}
             >
               ✕

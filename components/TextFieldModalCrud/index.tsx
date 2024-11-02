@@ -1,4 +1,4 @@
-import TagInput from "../TagInput"
+import { useEffect, useState } from "react"
 import styles from "./TextFieldModalCrud.module.scss"
 
 export enum TextFieldType {
@@ -15,7 +15,6 @@ export enum TextFieldType {
 }
 
 const TextFieldModalCrud = ({
-  valueInput = "",
   label = "",
   name = "",
   typeTextField = TextFieldType.PRIMARY,
@@ -25,18 +24,36 @@ const TextFieldModalCrud = ({
   placeholder = "",
   valueSelect = [],
   rows = 2,
+  valueInput,
 }: {
-  valueInput?: string
+  valueInput?: string | number
   label?: string
   name?: string
   type?: string
   typeTextField?: TextFieldType
   disabled?: boolean
-  onChange?: (name: string, value: string | string[]) => void
+  onChange?: (e: any) => void
   placeholder?: string
   valueSelect?: string[]
   rows?: number
 }) => {
+  const [inputValue, setInputValue] = useState<any>(valueInput || "")
+
+  useEffect(() => {
+    setInputValue(valueInput || "")
+  }, [valueInput])
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target
+    setInputValue(value)
+
+    onChange({ [name]: value })
+  }
+
   return (
     <div className={`${styles.textField} ${styles.typeTextField}`}>
       <label>{label}</label>
@@ -44,22 +61,18 @@ const TextFieldModalCrud = ({
         <input
           name={name}
           disabled={disabled}
-          value={valueInput}
-          onChange={(e) => onChange(name, e.target.value)}
+          value={inputValue}
+          onChange={handleChange}
           type={type}
           placeholder={placeholder}
         />
       )}
 
       {type === "select" && (
-        <select
-          name={name}
-          disabled={disabled}
-          onChange={(e) => onChange(name, e.target.value)}
-        >
+        <select name={name} disabled={disabled} onChange={handleChange}>
           <option value={"-"}>-</option>
           {valueSelect.map((data) => (
-            <option value={data} key={data} selected={valueInput === data}>
+            <option value={data} key={data} selected={inputValue === data}>
               {data}
             </option>
           ))}
@@ -70,21 +83,11 @@ const TextFieldModalCrud = ({
         <textarea
           name={name}
           disabled={disabled}
-          value={valueInput}
-          onChange={(e) => onChange(name, e.target.value)}
+          value={inputValue}
+          onChange={handleChange}
           placeholder={placeholder}
           rows={rows}
         />
-      )}
-
-      {type === "tagInput" && (
-        <TagInput
-          name={name}
-          disabled={disabled}
-          value={valueInput}
-          onChange={onChange}
-          placeholder={placeholder}
-        ></TagInput>
       )}
     </div>
   )

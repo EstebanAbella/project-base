@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Button, { ButtonType } from "./Button"
 import TextFieldModalCrud, { TextFieldType } from "./TextFieldModalCrud"
+import TagInput from "./TagInput"
 
 export type ModalPropsType = {
   img?: string
@@ -46,29 +47,9 @@ const Modal = ({
     }
   }, [initialData])
 
-  useEffect(() => {
-    if (dataForm?.length !== 0 && !initialData) {
-      const setPropertyForm = dataForm?.reduce(
-        (obj: { [key: string]: string | string[] }, item: dataFormType) => {
-          obj[item.name] = item.defaultValue ? item.defaultValue : ""
-          return obj
-        },
-        {}
-      )
-      setForm(setPropertyForm)
-    }
-  }, [dataForm])
-
-  // const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
-  //   const name = (e.target as HTMLInputElement).name
-  //   const value = (e.target as HTMLInputElement).value
-  //   setForm({ ...form, [name]: value })
-  //   console.log(form)
-  // }
-
-  const handleChange = (name: string, value: string | string[]) => {
-    setForm({ ...form, [name]: value })
-    console.log(form)
+  const handleChange = (fieldValue: { [key: string]: string | number }) => {
+    setForm((prevForm: any) => ({ ...prevForm, ...fieldValue }))
+    console.log("form", form)
   }
 
   return (
@@ -93,20 +74,30 @@ const Modal = ({
                 form &&
                 Object.keys(form).length !== 0 && (
                   <form>
-                    {dataForm?.map((data) => (
-                      <TextFieldModalCrud
-                        label={data.label}
-                        name={data.name}
-                        typeTextField={data.typeTextField}
-                        disabled={data.disabled}
-                        type={data.type}
-                        placeholder={data.placeholder}
-                        onChange={handleChange}
-                        valueInput={form[data.name] ? form[data.name] : ""}
-                        valueSelect={data.valueSelect ? data.valueSelect : []}
-                        key={data.name}
-                      ></TextFieldModalCrud>
-                    ))}
+                    {dataForm?.map((data) =>
+                      data.type === "tagInput" ? (
+                        <TagInput
+                          name={data.name}
+                          disabled={data.disabled}
+                          value={form[data.name] ? form[data.name] : []}
+                          onChange={handleChange}
+                          placeholder={data.placeholder}
+                        ></TagInput>
+                      ) : (
+                        <TextFieldModalCrud
+                          label={data.label}
+                          name={data.name}
+                          typeTextField={data.typeTextField}
+                          disabled={data.disabled}
+                          type={data.type}
+                          placeholder={data.placeholder}
+                          onChange={handleChange}
+                          valueInput={form[data.name] ? form[data.name] : ""}
+                          valueSelect={data.valueSelect ? data.valueSelect : []}
+                          key={data.name}
+                        ></TextFieldModalCrud>
+                      )
+                    )}
                   </form>
                 )}
               {textButton && onClick && (
