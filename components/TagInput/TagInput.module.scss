@@ -1,61 +1,69 @@
+@use "../../styles/variables";
+
 .tagInput {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 
-.inputContainer {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 4px;
-
-  input {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    padding: 4px;
+  label {
+    display: block;
+    margin-bottom: 8px;
   }
 
-  .addButton {
-    background: #4caf50;
-    border: none;
-    color: #fff;
-    padding: 4px 8px;
-    cursor: pointer;
-    border-radius: 4px;
-
-    &:hover {
-      background: #45a049;
-    }
-  }
-}
-
-.tagList {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-
-  .tagItem {
+  .inputContainer {
     display: flex;
     align-items: center;
-    background: #f1f1f1;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 14px;
+    border: 1px solid variables.$borderForm;
+    border-radius: 7px;
+    padding: 4px;
 
-    .removeButton {
-      background: #e53935;
+    input {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      padding: 4px;
+    }
+
+    .addButton {
+      background: variables.$stateSuccess;
       border: none;
       color: #fff;
-      margin-left: 8px;
-      padding: 2px 6px;
-      border-radius: 50%;
+      padding: 4px 8px;
       cursor: pointer;
+      border-radius: 4px;
 
       &:hover {
-        background: #d32f2f;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 10px;
+
+    .tagItem {
+      display: flex;
+      align-items: center;
+      background-color: variables.$borderForm;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+
+      .close {
+        color: variables.$stateError;
+        margin-left: 8px;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
   }

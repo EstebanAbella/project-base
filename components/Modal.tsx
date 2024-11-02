@@ -11,7 +11,7 @@ export type ModalPropsType = {
   onClick?: (e: any) => void
   setStateModal: (e: any) => void | undefined
   stateModal: boolean
-  dataForm?: Array<dataFormType>
+  dataForm: Array<dataFormType>
   isDisabled: boolean
   initialData?: any
 }
@@ -52,8 +52,13 @@ const Modal = ({
   useEffect(() => {
     if (initialData) {
       setForm(initialData)
+    } else {
+      const emptyForm = Object.fromEntries(
+        dataForm.map((item: any) => [item.name, ""])
+      )
+      setForm(emptyForm)
     }
-  }, [initialData])
+  }, [initialData, dataForm])
 
   const handleChange = (fieldValue: { [key: string]: string | number }) => {
     setForm((prevForm: any) => ({ ...prevForm, ...fieldValue }))
@@ -61,8 +66,10 @@ const Modal = ({
   }
 
   const propsByType = (data: any) => {
+    console.log("AAA", data)
     const value = {
       tagInput: {
+        label: data.label,
         name: data.name,
         disabled: data.disabled,
         value: form[data.name] ? form[data.name] : [],

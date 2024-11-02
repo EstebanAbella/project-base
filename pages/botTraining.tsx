@@ -218,15 +218,6 @@ const BotTrainings = ({
       type: "tagInput",
       placeholder: "-",
     },
-    // {
-    //   label: "Trigger",
-    //   name: "trigger",
-    //   typeTextField: TextFieldType.PRIMARY,
-    //   disabled: false,
-    //   type: "select",
-    //   placeholder: "-",
-    //   valueSelect: ["botTraining", "admin"],
-    // },
   ]
 
   const editBotTrainingObject = [

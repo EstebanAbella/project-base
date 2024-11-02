@@ -7,6 +7,7 @@ export type TagInputPropsType = {
   value: string[]
   onChange: (e: any) => void
   placeholder?: string
+  label?: string
 }
 
 const TagInput = ({
@@ -15,6 +16,7 @@ const TagInput = ({
   value = [],
   onChange,
   placeholder = "",
+  label = "",
 }: TagInputPropsType) => {
   const [inputValue, setInputValue] = useState<string>("")
   const [tags, setTags] = useState<string[]>(value)
@@ -41,6 +43,7 @@ const TagInput = ({
 
   return (
     <div className={styles.tagInput}>
+      <label>{label}</label>
       <div className={styles.inputContainer}>
         <input
           name={name}
@@ -61,12 +64,11 @@ const TagInput = ({
         {tags.map((tag, index) => (
           <div key={index} className={styles.tagItem}>
             {tag}
-            <button
+            <span
+              className={`icon-close ${styles.close}`}
               onClick={handleRemoveTag(index)}
-              className={styles.removeButton}
-            >
-              ✕
-            </button>
+              tabIndex={0}
+            ></span>
           </div>
         ))}
       </div>
