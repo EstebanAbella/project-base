@@ -1,0 +1,125 @@
+import React, { useState } from "react"
+
+export type AdditionalAction = {
+  [key: string]: string | number
+}
+
+export type AdditionalActionsInputProps = {
+  valueSelect: string[]
+  onChange: (actions: AdditionalAction[]) => void
+}
+
+const AdditionalActionsInput = ({
+  valueSelect,
+  onChange,
+}: AdditionalActionsInputProps) => {
+  const [additionalActions, setAdditionalActions] = useState<
+    AdditionalAction[]
+  >([])
+  const [actionSets, setActionSets] = useState<
+    { selectedOption: string | null; inputValue: string | number }[]
+  >([])
+
+  const handleAddActionSet = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setActionSets([...actionSets, { selectedOption: null, inputValue: "" }])
+  }
+
+  const handleSelectChange = (index: number, value: string) => {
+    const updatedActionSets = [...actionSets]
+    updatedActionSets[index].selectedOption = value
+    setActionSets(updatedActionSets)
+  }
+
+  const handleInputChange = (index: number, value: string) => {
+    const updatedActionSets = [...actionSets]
+    updatedActionSets[index].inputValue = value
+    setActionSets(updatedActionSets)
+  }
+
+  const handleSaveAction = (e: React.MouseEvent, index: number) => {
+    e.preventDefault()
+    const { selectedOption, inputValue } = actionSets[index]
+    if (selectedOption && inputValue !== "") {
+      const updatedActions = [...additionalActions]
+      if (!updatedActions[index]) {
+        updatedActions[index] = {}
+      }
+      updatedActions[index][selectedOption] = isNaN(Number(inputValue))
+        ? inputValue
+        : Number(inputValue)
+      setAdditionalActions(updatedActions)
+      setActionSets((prevSets) => {
+        const updatedSets = [...prevSets]
+        updatedSets[index].selectedOption = null
+        updatedSets[index].inputValue = ""
+        return updatedSets
+      })
+      onChange(updatedActions)
+    }
+  }
+
+  const getDisabledOptions = (index: number) => {
+    const usedOptions = Object.keys(additionalActions[index] || {})
+    return usedOptions
+  }
+
+  return (
+    <div>
+      <button onClick={handleAddActionSet}>Agregar acción</button>
+
+      {actionSets.map((actionSet, index) => (
+        <div key={index} style={{ marginTop: "10px" }}>
+          <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+            <select
+              value={actionSet.selectedOption || ""}
+              onChange={(e) => handleSelectChange(index, e.target.value)}
+            >
+              <option value=''>Seleccione una opción</option>
+              {valueSelect.map((option) => (
+                <option
+                  key={option}
+                  value={option}
+                  disabled={getDisabledOptions(index).includes(option)}
+                >
+                  {option}
+                </option>
+              ))}
+            </select>
+
+            <input
+              type='text'
+              value={actionSet.inputValue}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+              placeholder='Ingrese un valor'
+              disabled={!actionSet.selectedOption}
+            />
+
+            <button
+              onClick={(e) => handleSaveAction(e, index)}
+              disabled={
+                !actionSet.selectedOption || actionSet.inputValue === ""
+              }
+            >
+              Guardar
+            </button>
+          </div>
+
+          <div>
+            <h4>Acciones adicionales {index + 1}</h4>
+            <ul>
+              {additionalActions[index] &&
+                Object.entries(additionalActions[index]).map(([key, value]) => (
+                  <li key={key}>
+                    {key}: {value}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default AdditionalActionsInput

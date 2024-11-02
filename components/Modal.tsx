@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Button, { ButtonType } from "./Button"
 import TextFieldModalCrud, { TextFieldType } from "./TextFieldModalCrud"
 import TagInput from "./TagInput"
+import AdditionalActionsInput from "./AdditionalActionsInput"
 
 export type ModalPropsType = {
   img?: string
@@ -33,6 +34,7 @@ const componentByChoice = {
   number: (props: any) => <TextFieldModalCrud {...props} />,
   select: (props: any) => <TextFieldModalCrud {...props} />,
   textarea: (props: any) => <TextFieldModalCrud {...props} />,
+  additional_actions: (props: any) => <AdditionalActionsInput {...props} />,
 }
 
 const Modal = ({
@@ -60,13 +62,17 @@ const Modal = ({
     }
   }, [initialData, dataForm])
 
-  const handleChange = (fieldValue: { [key: string]: string | number }) => {
+  useEffect(() => {
+    console.log("AAA", form)
+  }, [form])
+
+  const handleChange = (fieldValue: {
+    [key: string]: string | number | []
+  }) => {
     setForm((prevForm: any) => ({ ...prevForm, ...fieldValue }))
-    console.log("form", form)
   }
 
   const propsByType = (data: any) => {
-    console.log("AAA", data)
     const value = {
       tagInput: {
         label: data.label,
@@ -123,6 +129,10 @@ const Modal = ({
         valueInput: form[data.name] ? form[data.name] : "",
         valueSelect: data.valueSelect ? data.valueSelect : [],
         key: data.name,
+      },
+      additional_actions: {
+        valueSelect: data.valueSelect ? data.valueSelect : [],
+        onChange: handleChange,
       },
     }
     return componentByChoice[data.type](value[data.type])
