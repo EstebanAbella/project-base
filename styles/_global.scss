@@ -50,3 +50,32 @@ body {
     color: var(--themeColor);
   }
 }
+
+input,
+select,
+textarea {
+  background-color: $white;
+  padding: 0px;
+  padding: 5px 10px;
+  position: relative;
+  z-index: utilities.z-index(double);
+  margin: 0px;
+  border: none;
+  width: 100%;
+  color: $grayDark;
+  outline: none;
+  border: 1px solid $borderForm;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  &.inputError {
+    border: 1px solid $stateError;
+  }
+}
+input.input {
+  padding-right: 2.5rem;
+}
+textarea {
+  @include mixins.custom_scrollbar();
+}

@@ -60,7 +60,7 @@ form {
       width: 100%;
       color: $grayDark;
       outline: none;
-      border: 1px solid $primaryDefault;
+      border: 1px solid $borderForm;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -83,7 +83,7 @@ form {
     align-items: center;
     flex-direction: column;
     .Button.Button {
-      width: 200px;
+      width: 160px;
     }
   }
 

@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import styles from "../styles/components/FilterSearchIn.module.scss"
+import useFocusTrap from "../hooks/useFocusTrap"
 
 interface FilterSearchInPropsType {
   filterOptions: { id: number; name: string }[]
@@ -12,6 +13,14 @@ const FilterSearchIn = ({
 }: FilterSearchInPropsType) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const navBarRef = useRef<HTMLHeadingElement>(null)
+
+  useFocusTrap(
+    navBarRef,
+    `a[href], button:not([disabled]), input, .${styles.option}`,
+    !isOpen,
+    selectedOption
+  )
 
   const handleSelect = (option: string) => {
     setSelectedOption(option)
@@ -25,7 +34,12 @@ const FilterSearchIn = ({
 
   return (
     <div className={styles.customSelect}>
-      <div className={styles.selectInput} onClick={() => setIsOpen(!isOpen)}>
+      <div
+        className={styles.selectInput}
+        onClick={() => setIsOpen(!isOpen)}
+        tabIndex={0}
+        ref={navBarRef}
+      >
         <input
           type='text'
           placeholder='Filter'
@@ -46,6 +60,7 @@ const FilterSearchIn = ({
               key={option.id}
               className={`${styles.option} ${selectedOption === option.name ? styles.selected : ""}`}
               onClick={() => handleSelect(option.name)}
+              tabIndex={0}
             >
               {option.name}
               {selectedOption === option.name && (

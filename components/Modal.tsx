@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import Button, { ButtonType } from './Button'
-import { StaticImageData } from 'next/image'
-import TextField, { TextFieldType } from './TextField'
+import React, { useEffect, useState } from "react"
+import Button, { ButtonType } from "./Button"
+import TextFieldModalCrud, { TextFieldType } from "./TextFieldModalCrud"
 
 export type ModalPropsType = {
   img?: string
@@ -50,8 +49,8 @@ const Modal = ({
   useEffect(() => {
     if (dataForm?.length !== 0 && !initialData) {
       const setPropertyForm = dataForm?.reduce(
-        (obj: { [key: string]: string }, item: dataFormType) => {
-          obj[item.name] = item.defaultValue ? item.defaultValue : ''
+        (obj: { [key: string]: string | string[] }, item: dataFormType) => {
+          obj[item.name] = item.defaultValue ? item.defaultValue : ""
           return obj
         },
         {}
@@ -60,25 +59,31 @@ const Modal = ({
     }
   }, [dataForm])
 
-  const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
-    const name = (e.target as HTMLInputElement).name
-    const value = (e.target as HTMLInputElement).value
+  // const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
+  //   const name = (e.target as HTMLInputElement).name
+  //   const value = (e.target as HTMLInputElement).value
+  //   setForm({ ...form, [name]: value })
+  //   console.log(form)
+  // }
+
+  const handleChange = (name: string, value: string | string[]) => {
     setForm({ ...form, [name]: value })
+    console.log(form)
   }
 
   return (
     <>
       {isDisabled ? (
-        <section className={`modal ${stateModal ? 'open' : 'close'}`}>
-          <div className="modalContainer">
+        <section className={`modal ${stateModal ? "open" : "close"}`}>
+          <div className='modalContainer'>
             <span
-              className="icon-close close"
+              className='icon-close close'
               onClick={() => setStateModal(false)}
             ></span>
-            <div className="modalContent">
+            <div className='modalContent'>
               {img && <img src={img}></img>}
               {text && (
-                <div className="textModal">
+                <div className='textModal'>
                   {text.map((data) => (
                     <p>{data}</p>
                   ))}
@@ -89,7 +94,7 @@ const Modal = ({
                 Object.keys(form).length !== 0 && (
                   <form>
                     {dataForm?.map((data) => (
-                      <TextField
+                      <TextFieldModalCrud
                         label={data.label}
                         name={data.name}
                         typeTextField={data.typeTextField}
@@ -97,25 +102,27 @@ const Modal = ({
                         type={data.type}
                         placeholder={data.placeholder}
                         onChange={handleChange}
-                        valueInput={form[data.name] ? form[data.name] : ''}
+                        valueInput={form[data.name] ? form[data.name] : ""}
                         valueSelect={data.valueSelect ? data.valueSelect : []}
                         key={data.name}
-                      ></TextField>
+                      ></TextFieldModalCrud>
                     ))}
                   </form>
                 )}
               {textButton && onClick && (
-                <Button
-                  value={textButton}
-                  onClick={() => onClick(form)}
-                  type={typeButton}
-                ></Button>
+                <section className={"containerButtonModalCreate"}>
+                  <Button
+                    value={textButton}
+                    onClick={() => onClick(form)}
+                    type={typeButton}
+                  ></Button>
+                </section>
               )}
             </div>
           </div>
         </section>
       ) : (
-        ''
+        ""
       )}
     </>
   )

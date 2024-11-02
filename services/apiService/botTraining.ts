@@ -81,9 +81,13 @@ class BotTrainingService {
     [key: string]: string
   }): Promise<{}> {
     try {
-      const response = await ApiServiceSingleton.axios.post(
-        `${apiUrls.botTraining}`,
-        submittedData
+      // const response = await ApiServiceSingleton.axios.post(
+      //   `${apiUrls.botTraining}`,
+      //   submittedData
+      // )
+      const response = await axios.post(
+        `https://classy-veil-seashore.glitch.me/templates`,
+        { submittedData }
       )
       const data = response.data as BotTrainingResult
       return data

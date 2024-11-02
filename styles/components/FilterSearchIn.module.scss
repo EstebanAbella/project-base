@@ -18,8 +18,8 @@
     justify-content: space-between;
     align-items: center;
     width: 150px;
-    padding: 4px;
-    border: 1px solid variables.$primaryDefault;
+    padding: 1px;
+    border: 1px solid variables.$borderForm;
     border-radius: 7px;
     cursor: pointer;
     background-color: variables.$white;
@@ -57,7 +57,7 @@
     left: 0;
     width: 100%;
     background-color: variables.$white;
-    border: 1px solid variables.$primaryDefault;
+    border: 1px solid variables.$borderForm;
     list-style: none;
     padding: 0;
     margin: 4px 0 0 0;

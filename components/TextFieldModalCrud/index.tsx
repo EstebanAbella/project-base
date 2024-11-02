@@ -1,3 +1,6 @@
+import TagInput from "../TagInput"
+import styles from "./TextFieldModalCrud.module.scss"
+
 export enum TextFieldType {
   PRIMARY = "primary",
   SECONDARY = "secondary",
@@ -11,7 +14,7 @@ export enum TextFieldType {
   LINK = "link",
 }
 
-const TextField = ({
+const TextFieldModalCrud = ({
   valueInput = "",
   label = "",
   name = "",
@@ -29,27 +32,31 @@ const TextField = ({
   type?: string
   typeTextField?: TextFieldType
   disabled?: boolean
-  onChange?: (e: any) => void
+  onChange?: (name: string, value: string | string[]) => void
   placeholder?: string
   valueSelect?: string[]
   rows?: number
 }) => {
   return (
-    <div className={`textField ${typeTextField}`}>
+    <div className={`${styles.textField} ${styles.typeTextField}`}>
       <label>{label}</label>
       {(type === "text" || type === "number") && (
         <input
           name={name}
           disabled={disabled}
           value={valueInput}
-          onChange={onChange}
+          onChange={(e) => onChange(name, e.target.value)}
           type={type}
           placeholder={placeholder}
         />
       )}
 
       {type === "select" && (
-        <select name={name} disabled={disabled} onChange={onChange}>
+        <select
+          name={name}
+          disabled={disabled}
+          onChange={(e) => onChange(name, e.target.value)}
+        >
           <option value={"-"}>-</option>
           {valueSelect.map((data) => (
             <option value={data} key={data} selected={valueInput === data}>
@@ -64,13 +71,23 @@ const TextField = ({
           name={name}
           disabled={disabled}
           value={valueInput}
-          onChange={onChange}
+          onChange={(e) => onChange(name, e.target.value)}
           placeholder={placeholder}
           rows={rows}
         />
+      )}
+
+      {type === "tagInput" && (
+        <TagInput
+          name={name}
+          disabled={disabled}
+          value={valueInput}
+          onChange={onChange}
+          placeholder={placeholder}
+        ></TagInput>
       )}
     </div>
   )
 }
 
-export default TextField
+export default TextFieldModalCrud

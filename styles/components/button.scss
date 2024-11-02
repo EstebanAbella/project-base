@@ -2,9 +2,7 @@
 
 .Button {
   color: $white;
-  padding: 6px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 6px 16px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 22px;
@@ -12,7 +10,7 @@
   outline: none;
   box-shadow: none;
   appearance: auto;
-  font-size: 18px;
+  font-size: 14px;
   display: flex;
   justify-content: center;
   align-items: center;
