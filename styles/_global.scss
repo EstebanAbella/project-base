@@ -69,8 +69,18 @@ textarea {
   justify-content: center;
   align-items: center;
   border-radius: 7px;
+  transition: 0.5s all;
+
   &.inputError {
     border: 1px solid $stateError;
+  }
+
+  &:focus {
+    border: 1px solid $focusInput;
+
+    &:not(:focus-visible) {
+      border: 1px solid $borderForm !important;
+    }
   }
 }
 input.input {

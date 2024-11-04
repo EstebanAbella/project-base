@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import styles from "./AdditionalActionsInput.module.scss"
 
 export type AdditionalAction = {
   [key: string]: string | number
@@ -74,16 +75,21 @@ const AdditionalActionsInput = ({
 
   return (
     <div>
-      <button onClick={handleAddActionSet}>Agregar acción</button>
+      <button
+        onClick={handleAddActionSet}
+        className={`${styles.buttonAdditionalActions}`}
+      >
+        + Add action
+      </button>
 
       {actionSets.map((actionSet, index) => (
-        <div key={index} style={{ marginTop: "10px" }}>
-          <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+        <div className={`${styles.containerActions}`} key={index}>
+          <div className={`${styles.containerSelectors}`}>
             <select
               value={actionSet.selectedOption || ""}
               onChange={(e) => handleSelectChange(index, e.target.value)}
             >
-              <option value=''>Seleccione una opción</option>
+              <option value=''>Ingrese tipo</option>
               {valueSelect.map((option) => (
                 <option
                   key={option}
@@ -104,17 +110,18 @@ const AdditionalActionsInput = ({
             />
 
             <button
+              className={`${styles.buttonAdditionalActions}`}
               onClick={(e) => handleSaveAction(e, index)}
               disabled={
                 !actionSet.selectedOption || actionSet.inputValue === ""
               }
             >
-              Guardar
+              Save
             </button>
           </div>
 
-          <div>
-            <h4>Acciones adicionales {index + 1}</h4>
+          <div className={`${styles.resultActionsContainer}`}>
+            <h5>Acciones adicionales {index + 1}</h5>
             <ul>
               {additionalActions[index] &&
                 Object.entries(additionalActions[index]).map(([key, value]) => (

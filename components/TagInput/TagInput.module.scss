@@ -20,6 +20,11 @@
     border: 1px solid variables.$borderForm;
     border-radius: 7px;
     padding: 4px;
+    transition: 0.5s all;
+
+    &:focus-within {
+      border: 1px solid variables.$focusInput;
+    }
 
     input {
       flex-grow: 1;
