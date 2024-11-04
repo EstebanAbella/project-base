@@ -132,6 +132,7 @@ const Modal = ({
         key: data.name,
       },
       additional_actions: {
+        valueInput: form[data.name] ? form[data.name] : "",
         valueSelect: data.valueSelect ? data.valueSelect : [],
         onChange: handleChange,
         label: data.label,

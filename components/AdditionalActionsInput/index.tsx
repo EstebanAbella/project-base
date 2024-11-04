@@ -12,6 +12,7 @@ export type AdditionalActionsInputProps = {
   name: string
   type?: string
   disabled?: boolean
+  valueInput?: string | number
 }
 
 const AdditionalActionsInput = ({
@@ -21,7 +22,9 @@ const AdditionalActionsInput = ({
   label,
   type,
   disabled,
+  valueInput,
 }: AdditionalActionsInputProps) => {
+  console.log("valueInput", valueInput)
   const [additionalActions, setAdditionalActions] = useState<
     AdditionalAction[]
   >([])
