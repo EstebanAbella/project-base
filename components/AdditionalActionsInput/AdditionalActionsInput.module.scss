@@ -1,49 +1,84 @@
 @use "../../styles/variables";
 @use "../../styles/utilities";
 
-.buttonAdditionalActions {
-  outline: none;
-  border: 1px solid variables.$borderForm;
-  border-radius: 7px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.5s all;
+.containerAdditionalActions {
+  padding: 8px;
 
-  &:hover {
-    background-color: variables.$borderForm;
-  }
+  .buttonAdditionalActions {
+    outline: none;
+    border: 1px solid variables.$borderForm;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.5s all;
 
-  &:focus {
-    background-color: variables.$borderForm;
-    &:not(:focus-visible) {
+    &:hover {
+      background-color: variables.$borderForm;
+    }
+
+    &:focus {
+      background-color: variables.$borderForm;
+      &:not(:focus-visible) {
+        background-color: variables.$white;
+      }
+    }
+
+    &:disabled {
       background-color: variables.$white;
+      cursor: default;
     }
   }
 
-  &:disabled {
-    background-color: variables.$white;
-    cursor: default;
-  }
-}
+  .containerActions {
+    margin-top: 8px;
 
-.containerActions {
-  margin-top: 8px;
-
-  .containerSelectors {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .resultActionsContainer {
-    > h5 {
-      font-weight: utilities.font-weight(regular) !important;
+    .containerSelectors {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
     }
-    > h5,
-    li {
-      color: variables.$black;
+
+    .resultActionsContainer {
+      > h5 {
+        font-weight: utilities.font-weight(regular) !important;
+      }
+
+      > h5,
+      li {
+        color: variables.$black;
+      }
+
+      > ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 4px;
+        list-style-type: none;
+        padding: 0;
+
+        .tagItem {
+          display: flex;
+          align-items: center;
+          background-color: variables.$borderForm;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-size: 14px;
+          width: auto;
+          list-style-type: none;
+
+          .close {
+            color: variables.$stateError;
+            margin-left: 8px;
+            cursor: pointer;
+
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -68,13 +68,22 @@ const AdditionalActionsInput = ({
     }
   }
 
+  const handleDeleteAction = (index: number, key: string) => {
+    const updatedActions = [...additionalActions]
+    if (updatedActions[index]) {
+      delete updatedActions[index][key]
+      setAdditionalActions(updatedActions)
+      onChange({ [name]: updatedActions })
+    }
+  }
+
   const getDisabledOptions = (index: number) => {
     const usedOptions = Object.keys(additionalActions[index] || {})
     return usedOptions
   }
 
   return (
-    <div>
+    <div className={`${styles.containerAdditionalActions}`}>
       <button
         onClick={handleAddActionSet}
         className={`${styles.buttonAdditionalActions}`}
@@ -125,8 +134,13 @@ const AdditionalActionsInput = ({
             <ul>
               {additionalActions[index] &&
                 Object.entries(additionalActions[index]).map(([key, value]) => (
-                  <li key={key}>
+                  <li key={key} className={styles.tagItem}>
                     {key}: {value}
+                    <span
+                      className={`icon-close ${styles.close}`}
+                      onClick={() => handleDeleteAction(index, key)}
+                      tabIndex={0}
+                    ></span>
                   </li>
                 ))}
             </ul>
