@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./AdditionalActionsInput.module.scss"
 
 export type AdditionalAction = {
@@ -12,7 +12,7 @@ export type AdditionalActionsInputProps = {
   name: string
   type?: string
   disabled?: boolean
-  valueInput?: string | number
+  valueInput?: AdditionalAction[]
 }
 
 const AdditionalActionsInput = ({
@@ -22,15 +22,29 @@ const AdditionalActionsInput = ({
   label,
   type,
   disabled,
-  valueInput,
+  valueInput = [],
 }: AdditionalActionsInputProps) => {
-  console.log("valueInput", valueInput)
   const [additionalActions, setAdditionalActions] = useState<
     AdditionalAction[]
   >([])
   const [actionSets, setActionSets] = useState<
     { selectedOption: string | null; inputValue: string | number }[]
   >([])
+
+  useEffect(() => {
+    if (!valueInput) return
+    setAdditionalActions(valueInput)
+
+    // setActionSets(
+    //   valueInput?.map((action) => {
+    //     const key = Object.keys(action)[0]
+    //     return { selectedOption: key, inputValue: action[key] }
+    //   })
+    // )
+    setActionSets(
+      valueInput.map(() => ({ selectedOption: null, inputValue: "" }))
+    )
+  }, [valueInput])
 
   const handleAddActionSet = (e: React.MouseEvent) => {
     e.preventDefault()

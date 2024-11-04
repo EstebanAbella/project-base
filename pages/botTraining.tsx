@@ -285,7 +285,15 @@ const BotTrainings = ({
       disabled: false,
       type: "additional_actions",
       placeholder: "-",
-      valueSelect: ["reaction", "type", "sticker_name", "delay"],
+      valueSelect: [
+        "reaction",
+        "type",
+        "sticker_name",
+        "delay",
+        "document_name",
+        "text",
+        "url",
+      ],
     },
   ]
 
