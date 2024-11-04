@@ -218,6 +218,15 @@ const BotTrainings = ({
       type: "tagInput",
       placeholder: "-",
     },
+    {
+      label: "Additional Actions",
+      name: "additional_actions",
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: "additional_actions",
+      placeholder: "-",
+      valueSelect: ["reaction", "type", "sticker_name", "delay"],
+    },
   ]
 
   const editBotTrainingObject = [
