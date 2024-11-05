@@ -362,7 +362,8 @@ const BotTrainings = ({
             <Button
               type={ButtonType.SUCCESS}
               value={"Add botTraining"}
-              onClick={() => handleClickOnModal("create")}
+              // onClick={() => handleClickOnModal("create")}
+              onClick={() => router.push(`/botTrainingSelected/create`)}
               extraClassName={"buttonTable"}
             ></Button>
           </section>
@@ -387,14 +388,7 @@ const BotTrainings = ({
                       <tr key={data.id}>
                         <>
                           <td>
-                            <p
-                              onClick={() =>
-                                router.push(`/botTrainingSelected/${data.id}`)
-                              }
-                              style={{ cursor: "pointer" }}
-                            >
-                              {data.body}
-                            </p>
+                            <p>{data.body}</p>
                           </td>
                           <td>{data.footer}</td>
                           <td>{data.seed}</td>
@@ -407,18 +401,26 @@ const BotTrainings = ({
                           </td>
                           <td>
                             <div className='additionalActionsTable'>
-                              {data.additional_actions.map((data: any) => (
-                                <div className='additionalActionsContainer'>
-                                  {data.reaction && (
-                                    <td>Reaction: {data.reaction}</td>
-                                  )}
-                                  {data.sticker_name && (
-                                    <td>Sticker: {data.sticker_name}</td>
-                                  )}
-                                  {data.delay && <td>Delay: {data.delay}</td>}
-                                  <td>Type: {data.type}</td>
-                                </div>
-                              ))}
+                              {data.additional_actions &&
+                                data.additional_actions?.map(
+                                  (data: any, index: number) => (
+                                    <div
+                                      className='additionalActionsContainer'
+                                      key={index}
+                                    >
+                                      {data.reaction && (
+                                        <td>Reaction: {data.reaction}</td>
+                                      )}
+                                      {data.sticker_name && (
+                                        <td>Sticker: {data.sticker_name}</td>
+                                      )}
+                                      {data.delay && (
+                                        <td>Delay: {data.delay}</td>
+                                      )}
+                                      <td>Type: {data.type}</td>
+                                    </div>
+                                  )
+                                )}
                             </div>
                           </td>
                           <td>
@@ -432,7 +434,12 @@ const BotTrainings = ({
                               <Button
                                 type={ButtonType.INFORMATION}
                                 value={"Update"}
-                                onClick={() => handleClickOnModal("edit", data)}
+                                // onClick={() => handleClickOnModal("edit", data)}
+                                onClick={() =>
+                                  router.push(
+                                    `/botTrainingSelected/update/${data.id}`
+                                  )
+                                }
                                 extraClassName={"buttonTable"}
                               ></Button>
                             </div>

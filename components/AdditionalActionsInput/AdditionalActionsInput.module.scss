@@ -3,6 +3,7 @@
 
 .containerAdditionalActions {
   padding: 8px;
+  width: 100%;
 
   .buttonAdditionalActions {
     outline: none;
@@ -24,13 +25,15 @@
     }
 
     &:disabled {
-      background-color: variables.$white;
+      background-color: variables.$borderForm;
       cursor: default;
     }
   }
 
   .containerActions {
-    margin-top: 8px;
+    width: 100%;
+    padding: 22px 0;
+    border-bottom: 1px solid variables.$borderForm;
 
     .containerSelectors {
       display: flex;

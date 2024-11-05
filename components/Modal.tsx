@@ -62,14 +62,9 @@ const Modal = ({
     }
   }, [initialData, dataForm])
 
-  useEffect(() => {
-    console.log("AAA", form)
-  }, [form])
-
   const handleChange = (fieldValue: {
     [key: string]: string | number | []
   }) => {
-    console.log("ver que llega", fieldValue)
     setForm((prevForm: any) => ({ ...prevForm, ...fieldValue }))
   }
 

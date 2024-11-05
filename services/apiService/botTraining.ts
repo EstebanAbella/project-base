@@ -87,7 +87,7 @@ class BotTrainingService {
       // )
       const response = await axios.post(
         `https://classy-veil-seashore.glitch.me/templates`,
-        { submittedData }
+        submittedData
       )
       const data = response.data as BotTrainingResult
       return data
@@ -98,8 +98,11 @@ class BotTrainingService {
 
   async deleteBotTraining(id: string): Promise<{}> {
     try {
-      const response = await ApiServiceSingleton.axios.delete(
-        `${apiUrls.botTraining}/${id}`
+      // const response = await ApiServiceSingleton.axios.delete(
+      //   `${apiUrls.botTraining}/${id}`
+      // )
+      const response = await axios.delete(
+        `https://classy-veil-seashore.glitch.me/templates/${id}`
       )
       const data = response.data as BotTrainingResult
       return data
@@ -110,12 +113,16 @@ class BotTrainingService {
 
   async editBotTraining(submittedData: any): Promise<{}> {
     try {
-      const { name, id, email, role, password } = submittedData
+      const { id } = submittedData
       if (!id) {
         throw new Error("invalidId")
       }
-      const response = await ApiServiceSingleton.axios.put(
-        `${apiUrls.botTraining}/${id}`,
+      // const response = await ApiServiceSingleton.axios.put(
+      //   `${apiUrls.botTraining}/${id}`,
+      //   submittedData
+      // )
+      const response = await axios.put(
+        `https://classy-veil-seashore.glitch.me/templates/${id}`,
         submittedData
       )
       const data = response.data as BotTrainingResult
