@@ -1,4 +1,5 @@
-@use "../utilities";
+@use "../../styles/utilities";
+@use "../../styles/variables";
 
 .modal {
   position: fixed;
@@ -21,19 +22,22 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%;
+    width: 50%;
     min-height: 45%;
-    max-width: 1000px;
+    max-width: 600px;
     max-height: 1200px;
     padding: 5px;
-    background-color: $white;
+    background-color: variables.$white;
     border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     .close {
       position: absolute;
       top: 14px;
       right: 14px;
-      color: $black;
+      color: variables.$black;
       font-size: 16px;
       cursor: pointer;
     }
@@ -49,14 +53,20 @@
       padding: 32px;
 
       label {
-        color: $black;
+        color: variables.$black;
       }
 
       .textModal {
+        width: 100%;
         text-align: center;
-        color: $black;
+        color: variables.$black;
         font-weight: utilities.font-weight(semibold);
         font-size: 20px;
+
+        p,
+        h5 {
+          color: variables.$colorApp;
+        }
       }
 
       form {
@@ -76,6 +86,11 @@
         justify-content: center;
         align-items: center;
         margin-top: 22px;
+        gap: 12px;
+
+        > button {
+          min-width: 126px;
+        }
       }
     }
   }

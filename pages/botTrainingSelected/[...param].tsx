@@ -1,11 +1,6 @@
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { RootState } from "../../redux/rootReducer"
-import {
-  createBotTraining,
-  editBotTraining,
-  getBotTraining,
-} from "../../redux/botTraining/actions"
 import { BotTrainingsReducerPropsTypes } from "../../Utils/Types/botTrainingType"
 import { connect } from "react-redux"
 import { ServerStatus } from "../../Utils/Types/global"
@@ -20,29 +15,12 @@ import TextFieldModalCrud, {
 import AdditionalActionsInput from "../../components/AdditionalActionsInput"
 import Button, { ButtonType } from "../../components/Button"
 import styles from "./BotTrainingSelected.module.scss"
-
-const mapStateToProps = (state: RootState) => {
-  const botTrainingsReducer = state.botTraining
-  return {
-    botTraining: botTrainingsReducer.botTraining,
-    botTrainingStatus: botTrainingsReducer.botTrainingStatus,
-
-    botTrainingCreateStatus: botTrainingsReducer.botTrainingCreateStatus,
-    botTrainingEditStatus: botTrainingsReducer.botTrainingEditStatus,
-  }
-}
-
-const mapDispatchToProps = {
-  getBotTraining,
-  createBotTraining,
-  editBotTraining,
-}
-
-export type BotTrainingPropType = {
-  getBotTraining: Function
-  createBotTraining: Function
-  editBotTraining: Function
-} & BotTrainingsReducerPropsTypes
+import Modal from "../../components/Modal"
+import {
+  useCreateBotTraining,
+  useEditBotTraining,
+  useGetBotTraining,
+} from "./useBotTrainingSelected"
 
 export type dataFormType = {
   label: string
@@ -83,35 +61,46 @@ const componentByChoice = {
   ),
 }
 
-const BotTrainingSelected = ({
-  getBotTraining,
-  botTraining,
-  botTrainingStatus,
-  createBotTraining,
-  editBotTraining,
-  botTrainingCreateStatus,
-  botTrainingEditStatus,
-}: BotTrainingPropType) => {
+const BotTrainingSelected = ({}) => {
   const [form, setForm] = useState<any>()
+  const [stateModal, setStateModal] = useState<boolean>(false)
+  const [typeModal, setTypeModal] = useState<string>("")
   const router = useRouter()
   const { param } = router.query
+  const { useCreateBotTrainingHandler, useCreateBotTrainingStatus } =
+    useCreateBotTraining()
+
+  const { useEditBotTrainingHandler, useEditBotTrainingStatus } =
+    useEditBotTraining()
+
+  const { useGetBotTrainingHandler, useGetBotTrainingData } =
+    useGetBotTraining()
 
   useEffect(() => {
     if (param && param[0] === "update" && param[1]) {
-      getBotTraining(param[1])
+      useGetBotTrainingHandler(param[1])
     }
   }, [param])
 
   useEffect(() => {
-    if (botTraining && param && param[0] === "update" && param[1]) {
-      setForm(botTraining)
+    if (useGetBotTrainingData && param && param[0] === "update" && param[1]) {
+      setForm(useGetBotTrainingData)
     } else {
       const emptyForm = Object.fromEntries(
         createBotTrainingObject.map((item: any) => [item.name, ""])
       )
       setForm(emptyForm)
     }
-  }, [botTraining])
+  }, [useGetBotTrainingData])
+
+  useEffect(() => {
+    if (useCreateBotTrainingStatus === ServerStatus.FETCH) {
+      router.push("/botTraining")
+    }
+    if (useEditBotTrainingStatus === ServerStatus.FETCH) {
+      router.push("/botTraining")
+    }
+  }, [useCreateBotTrainingStatus, useEditBotTrainingStatus])
 
   const handleChange = (fieldValue: {
     [key: string]: string | number | []
@@ -119,15 +108,13 @@ const BotTrainingSelected = ({
     setForm((prevForm: any) => ({ ...prevForm, ...fieldValue }))
   }
 
-  const handleClick = (data: any) => {
+  const handleClick = () => {
     if (param && param[0] === TypeAction.CREATE) {
-      createBotTraining(data)
+      useCreateBotTrainingHandler(form)
     } else {
-      editBotTraining(data)
+      useEditBotTrainingHandler(form)
     }
   }
-
-  const handleClickCancel = () => {}
 
   const propsByType = (data: any) => {
     const baseType = typeMap[data.type] || data.type
@@ -235,9 +222,56 @@ const BotTrainingSelected = ({
     },
   ]
 
+  const handleClickOnModal = (typeModal: string, data?: any) => {
+    if (typeModal === "create") {
+      setTypeModal("modal-create-botTraining")
+      setStateModal(true)
+    } else if (typeModal === "edit") {
+      setTypeModal("modal-edit-botTraining")
+      setStateModal(true)
+    } else if (typeModal === "cancel") {
+      setTypeModal("modal-cancel-botTraining")
+      setStateModal(true)
+    }
+  }
+
   return (
     <AccessConsume>
       <Layout>
+        <Modal
+          stateModal={stateModal}
+          setStateModal={setStateModal}
+          title={"Do you want to create a template?"}
+          textButton={"Create"}
+          typeButton={ButtonType.PRIMARY}
+          onClick={handleClick}
+          isDisabled={typeModal === "modal-create-botTraining"}
+          buttonCloseModal={true}
+        />
+
+        <Modal
+          stateModal={stateModal}
+          setStateModal={setStateModal}
+          title={"Do you want to update a template?"}
+          textButton={"Update"}
+          typeButton={ButtonType.PRIMARY}
+          onClick={handleClick}
+          isDisabled={typeModal === "modal-edit-botTraining"}
+          buttonCloseModal={true}
+        />
+
+        <Modal
+          title={"Do you want to leave?"}
+          text={["Your progress will be lost"]}
+          stateModal={stateModal}
+          setStateModal={setStateModal}
+          textButton={"Yes"}
+          typeButton={ButtonType.PRIMARY}
+          onClick={() => router.push("/botTraining")}
+          isDisabled={typeModal === "modal-cancel-botTraining"}
+          buttonCloseModal={true}
+        />
+
         <section className={`${styles.botTrainingSelected}`}>
           <Navigation
             newRoute={"/botTraining"}
@@ -257,7 +291,7 @@ const BotTrainingSelected = ({
                       <section className={`${styles.containerButtonActions}`}>
                         <Button
                           value={"Cancel"}
-                          onClick={() => handleClickCancel()}
+                          onClick={() => handleClickOnModal("cancel")}
                           type={ButtonType.SECONDARY}
                         ></Button>
                         <Button
@@ -266,7 +300,14 @@ const BotTrainingSelected = ({
                               ? "Create"
                               : "Update"
                           }
-                          onClick={() => handleClick(form)}
+                          // onClick={() => handleClick(form)}
+                          onClick={() =>
+                            handleClickOnModal(
+                              param && param[0] === TypeAction.CREATE
+                                ? "create"
+                                : "edit"
+                            )
+                          }
                           type={ButtonType.PRIMARY}
                         ></Button>
                       </section>
@@ -283,4 +324,4 @@ const BotTrainingSelected = ({
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BotTrainingSelected)
+export default BotTrainingSelected

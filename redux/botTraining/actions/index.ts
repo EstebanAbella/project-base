@@ -35,37 +35,37 @@ export const getBotTrainings =
       })
   }
 
-export const getBotTraining = (id: string) => (dispatch: (v: any) => void) => {
-  dispatch({ type: t.GET_BOT_TRAINING_FETCHING })
-  BotTrainingServiceSingleton.getBotTraining(id)
-    .then((result) => {
-      dispatch({
-        type: t.GET_BOT_TRAINING_FETCH,
-        payload: result,
-      })
-    })
-    .catch((error: CustomErrorType) => {
-      dispatch({
-        type: t.GET_BOT_TRAINING_FETCH_ERROR,
-      })
-    })
-}
+// export const getBotTraining = (id: string) => (dispatch: (v: any) => void) => {
+//   dispatch({ type: t.GET_BOT_TRAINING_FETCHING })
+//   BotTrainingServiceSingleton.getBotTraining(id)
+//     .then((result) => {
+//       dispatch({
+//         type: t.GET_BOT_TRAINING_FETCH,
+//         payload: result,
+//       })
+//     })
+//     .catch((error: CustomErrorType) => {
+//       dispatch({
+//         type: t.GET_BOT_TRAINING_FETCH_ERROR,
+//       })
+//     })
+// }
 
-export const createBotTraining =
-  (data: { [key: string]: string }) => (dispatch: any) => {
-    dispatch({ type: t.CREATE_BOT_TRAINING_FETCHING })
-    BotTrainingServiceSingleton.createBotTraining(data)
-      .then(() => {
-        dispatch({
-          type: t.CREATE_BOT_TRAINING_FETCH,
-        })
-      })
-      .catch((error: CustomErrorType) => {
-        dispatch({
-          type: t.CREATE_BOT_TRAINING_FETCH_ERROR,
-        })
-      })
-  }
+// export const createBotTraining =
+//   (data: { [key: string]: string }) => (dispatch: any) => {
+//     dispatch({ type: t.CREATE_BOT_TRAINING_FETCHING })
+//     BotTrainingServiceSingleton.createBotTraining(data)
+//       .then(() => {
+//         dispatch({
+//           type: t.CREATE_BOT_TRAINING_FETCH,
+//         })
+//       })
+//       .catch((error: CustomErrorType) => {
+//         dispatch({
+//           type: t.CREATE_BOT_TRAINING_FETCH_ERROR,
+//         })
+//       })
+//   }
 
 export const deleteBotTraining = (id: string) => (dispatch: any) => {
   dispatch({ type: t.DELETE_BOT_TRAINING_FETCHING })
@@ -82,18 +82,18 @@ export const deleteBotTraining = (id: string) => (dispatch: any) => {
     })
 }
 
-export const editBotTraining =
-  (data: { [key: string]: string }) => (dispatch: any) => {
-    dispatch({ type: t.EDIT_BOT_TRAINING_FETCHING })
-    BotTrainingServiceSingleton.editBotTraining(data)
-      .then(() => {
-        dispatch({
-          type: t.EDIT_BOT_TRAINING_FETCH,
-        })
-      })
-      .catch((error: CustomErrorType) => {
-        dispatch({
-          type: t.EDIT_BOT_TRAINING_FETCH_ERROR,
-        })
-      })
-  }
+// export const editBotTraining =
+//   (data: { [key: string]: string }) => (dispatch: any) => {
+//     dispatch({ type: t.EDIT_BOT_TRAINING_FETCHING })
+//     BotTrainingServiceSingleton.editBotTraining(data)
+//       .then(() => {
+//         dispatch({
+//           type: t.EDIT_BOT_TRAINING_FETCH,
+//         })
+//       })
+//       .catch((error: CustomErrorType) => {
+//         dispatch({
+//           type: t.EDIT_BOT_TRAINING_FETCH_ERROR,
+//         })
+//       })
+//   }
