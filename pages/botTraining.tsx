@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { RootState } from "../redux/rootReducer"
 import {
-  createBotTraining,
-  deleteBotTraining,
-  editBotTraining,
-  getBotTraining,
-  getBotTrainings,
-} from "../redux/botTraining/actions"
-import {
   BotTrainingResult,
   BotTrainingsReducerPropsTypes,
 } from "../Utils/Types/botTrainingType"
@@ -26,70 +19,53 @@ import Search from "../components/Search"
 import { UseCallOfTables } from "../hooks/useCallOfTables"
 import { loggedUser } from "../Utils/Types/authModel"
 import FilterSearchIn from "../components/FilterSearchIn"
+import {
+  useDeleteBotTraining,
+  useGetBotTrainings,
+} from "./botTrainingSelected/useBotTrainingSelected"
 
 const mapStateToProps = (state: RootState) => {
-  const botTrainingsReducer = state.botTraining
   const authReducer = state.auth
   return {
-    botTraining: botTrainingsReducer.botTraining,
-    botTrainingStatus: botTrainingsReducer.botTrainingStatus,
-
-    botTrainings: botTrainingsReducer.botTrainings,
-    botTrainingsStatus: botTrainingsReducer.botTrainingsStatus,
-
-    botTrainingCreateStatus: botTrainingsReducer.botTrainingCreateStatus,
-    botTrainingDeleteStatus: botTrainingsReducer.botTrainingDeleteStatus,
-    botTrainingEditStatus: botTrainingsReducer.botTrainingEditStatus,
-
     userLogged: authReducer.user,
   }
 }
 
-const mapDispatchToProps = {
-  getBotTrainings,
-  getBotTraining,
-  createBotTraining,
-  deleteBotTraining,
-  editBotTraining,
-}
+const mapDispatchToProps = {}
 
 export type BotTrainingsPropType = {
-  getBotTrainings: Function
-  getBotTraining: Function
-  createBotTraining: Function
-  deleteBotTraining: Function
-  editBotTraining: Function
   userLogged: loggedUser | undefined
-} & BotTrainingsReducerPropsTypes
+}
 
-const BotTrainings = ({
-  getBotTrainings,
-  getBotTraining,
-  createBotTraining,
-  deleteBotTraining,
-  editBotTraining,
-  botTraining,
-  botTrainingStatus,
-  botTrainings,
-  botTrainingsStatus,
-  botTrainingCreateStatus,
-  botTrainingDeleteStatus,
-  botTrainingEditStatus,
-  userLogged,
-}: BotTrainingsPropType) => {
+const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>("")
   const [dataInitialModal, setDataInitialModal] = useState()
   const [filter, setFilter] = useState<string>("")
   const [query, setQuery] = useState<string>("")
   const [offsetState, setOffsetState] = useState<number>(0)
+
+  const {
+    useGetBotTrainingsHandler,
+    useGetBotTrainingsData,
+    useGetBotTrainingsStatus,
+  } = useGetBotTrainings()
+
+  const {
+    useDeleteBotTrainingHandler,
+    useDeleteBotTrainingData,
+    useDeleteBotTrainingStatus,
+  } = useDeleteBotTraining()
+
   const limit = 5
-  const totalItems = botTrainings?.count ? botTrainings?.count : 0
+  const totalItems = useGetBotTrainingsData?.count
+    ? useGetBotTrainingsData?.count
+    : 0
   const order = "ASC"
   const roles = userLogged?.role
 
   useEffect(() => {
-    getBotTrainings(
+    useGetBotTrainingsHandler(
       offsetState,
       limit,
       query ?? "",
@@ -100,7 +76,7 @@ const BotTrainings = ({
   }, [])
 
   useEffect(() => {
-    if (botTrainingDeleteStatus === ServerStatus.FETCH) {
+    if (useDeleteBotTrainingStatus === ServerStatus.FETCH) {
       const anticipatedTotalItems = totalItems - 1
       const isLastPage = offsetState + limit >= anticipatedTotalItems
 
@@ -111,7 +87,7 @@ const BotTrainings = ({
       ) {
         setOffsetState((prevOffset) => prevOffset - limit)
       } else {
-        getBotTrainings(
+        useGetBotTrainingsHandler(
           offsetState,
           limit,
           query ?? "",
@@ -122,41 +98,7 @@ const BotTrainings = ({
       }
       setStateModal(false)
     }
-  }, [botTrainingDeleteStatus])
-
-  useEffect(() => {
-    if (botTrainingEditStatus === ServerStatus.FETCH) {
-      getBotTrainings(
-        offsetState,
-        limit,
-        query ?? "",
-        filter ?? "",
-        order ?? "",
-        roles ?? ""
-      )
-      setStateModal(false)
-    }
-  }, [botTrainingEditStatus])
-
-  useEffect(() => {
-    if (botTrainingCreateStatus === ServerStatus.FETCH) {
-      const anticipatedTotalItems = totalItems
-      const isLastPage = offsetState + limit >= anticipatedTotalItems
-      if (isLastPage && totalItems % limit === 0) {
-        setOffsetState((prevOffset) => prevOffset + limit)
-      } else {
-        getBotTrainings(
-          offsetState,
-          limit,
-          query ?? "",
-          filter ?? "",
-          order ?? "",
-          roles ?? ""
-        )
-      }
-      setStateModal(false)
-    }
-  }, [botTrainingCreateStatus])
+  }, [useDeleteBotTrainingStatus])
 
   UseCallOfTables({
     offsetState,
@@ -165,7 +107,7 @@ const BotTrainings = ({
     filter,
     order,
     roles,
-    action: getBotTrainings,
+    action: useGetBotTrainingsHandler,
     setOffsetState,
   })
 
@@ -297,14 +239,6 @@ const BotTrainings = ({
     },
   ]
 
-  const handleClickCreateUSer = (data: any) => {
-    createBotTraining(data)
-  }
-
-  const handleClickEditUSer = (data: any) => {
-    editBotTraining(data)
-  }
-
   const handleClickOnModal = (typeModal: string, data?: any) => {
     if (typeModal === "create") {
       setTypeModal("modal-create-botTraining")
@@ -328,7 +262,7 @@ const BotTrainings = ({
   return (
     <AccessConsume>
       <Layout isNavigation={false}>
-        <Modal
+        {/* <Modal
           stateModal={stateModal}
           setStateModal={setStateModal}
           dataForm={createBotTrainingObject}
@@ -336,18 +270,7 @@ const BotTrainings = ({
           typeButton={ButtonType.SUCCESS}
           onClick={handleClickCreateUSer}
           isDisabled={typeModal === "modal-create-botTraining"}
-        />
-
-        <Modal
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          dataForm={editBotTrainingObject}
-          textButton={"Update botTraining"}
-          typeButton={ButtonType.INFORMATION}
-          onClick={handleClickEditUSer}
-          isDisabled={typeModal === "modal-edit-botTraining"}
-          initialData={dataInitialModal}
-        />
+        /> */}
         <section className='botTrainingsPage'>
           <h3>BotTrainings</h3>
 
@@ -362,12 +285,11 @@ const BotTrainings = ({
             <Button
               type={ButtonType.SUCCESS}
               value={"Add botTraining"}
-              // onClick={() => handleClickOnModal("create")}
               onClick={() => router.push(`/botTrainingSelected/create`)}
               extraClassName={"buttonTable"}
             ></Button>
           </section>
-          {botTrainingsStatus !== ServerStatus.FETCHING && (
+          {useGetBotTrainingsStatus !== ServerStatus.FETCHING && (
             <section className='containerTable'>
               <table className='table table-striped custom-bg table-bordered align-middle'>
                 <thead className='table-dark tableThead'>
@@ -383,70 +305,75 @@ const BotTrainings = ({
                   </tr>
                 </thead>
                 <tbody className='tableBody'>
-                  {botTrainings?.items ? (
-                    botTrainings?.items?.map((data: BotTrainingResult) => (
-                      <tr key={data.id}>
-                        <>
-                          <td>
-                            <p>{data.body}</p>
-                          </td>
-                          <td>{data.footer}</td>
-                          <td>{data.seed}</td>
-                          <td>{data.trigger}</td>
-                          <td>{data.type}</td>
-                          <td>
-                            {data.options.map((data: string, index) => (
-                              <p key={`${data} ${index}`}>{data}</p>
-                            ))}
-                          </td>
-                          <td>
-                            <div className='additionalActionsTable'>
-                              {data.additional_actions &&
-                                data.additional_actions?.map(
-                                  (data: any, index: number) => (
-                                    <div
-                                      className='additionalActionsContainer'
-                                      key={index}
-                                    >
-                                      {data.reaction && (
-                                        <td>Reaction: {data.reaction}</td>
-                                      )}
-                                      {data.sticker_name && (
-                                        <td>Sticker: {data.sticker_name}</td>
-                                      )}
-                                      {data.delay && (
-                                        <td>Delay: {data.delay}</td>
-                                      )}
-                                      <td>Type: {data.type}</td>
-                                    </div>
-                                  )
-                                )}
-                            </div>
-                          </td>
-                          <td>
-                            <div className='containerButtonTable'>
-                              <Button
-                                type={ButtonType.ERROR}
-                                value={"Delete"}
-                                onClick={() => deleteBotTraining(data.id)}
-                                extraClassName={"buttonTable"}
-                              ></Button>
-                              <Button
-                                type={ButtonType.INFORMATION}
-                                value={"Update"}
-                                // onClick={() => handleClickOnModal("edit", data)}
-                                onClick={() =>
-                                  router.push(
-                                    `/botTrainingSelected/update/${data.id}`
-                                  )
-                                }
-                                extraClassName={"buttonTable"}
-                              ></Button>
-                            </div>
-                          </td>
-                        </>
-                      </tr>
-                    ))
+                  {useGetBotTrainingsData?.items ? (
+                    useGetBotTrainingsData?.items?.map(
+                      (data: BotTrainingResult) => (
+                        <tr key={data.id}>
+                          <>
+                            <td>
+                              <p>{data.body}</p>
+                            </td>
+                            <td>{data.footer}</td>
+                            <td>{data.seed}</td>
+                            <td>{data.trigger}</td>
+                            <td>{data.type}</td>
+                            <td>
+                              {data.options.map((data: string, index) => (
+                                <p key={`${data} ${index}`}>{data}</p>
+                              ))}
+                            </td>
+                            <td>
+                              <div className='additionalActionsTable'>
+                                {data.additional_actions &&
+                                  data.additional_actions?.map(
+                                    (data: any, index: number) => (
+                                      <div
+                                        className='additionalActionsContainer'
+                                        key={index}
+                                      >
+                                        {data.reaction && (
+                                          <td>Reaction: {data.reaction}</td>
+                                        )}
+                                        {data.sticker_name && (
+                                          <td>Sticker: {data.sticker_name}</td>
+                                        )}
+                                        {data.delay && (
+                                          <td>Delay: {data.delay}</td>
+                                        )}
+                                        <td>Type: {data.type}</td>
+                                      </div>
+                                    )
+                                  )}
+                              </div>
+                            </td>
+                            <td>
+                              <div className='containerButtonTable'>
+                                <Button
+                                  type={ButtonType.ERROR}
+                                  value={"Delete"}
+                                  onClick={() =>
+                                    useDeleteBotTrainingHandler(
+                                      data.id.toString()
+                                    )
+                                  }
+                                  extraClassName={"buttonTable"}
+                                ></Button>
+                                <Button
+                                  type={ButtonType.INFORMATION}
+                                  value={"Update"}
+                                  onClick={() =>
+                                    router.push(
+                                      `/botTrainingSelected/update/${data.id}`
+                                    )
+                                  }
+                                  extraClassName={"buttonTable"}
+                                ></Button>
+                              </div>
+                            </td>
+                          </>
+                        </tr>
+                      )
+                    )
                   ) : (
                     <tr>
                       <>
@@ -463,7 +390,7 @@ const BotTrainings = ({
             </section>
           )}
 
-          {botTrainingsStatus === ServerStatus.FETCH && (
+          {useGetBotTrainingsStatus === ServerStatus.FETCH && (
             <Pagination
               limit={limit}
               offsetState={offsetState}
@@ -472,7 +399,9 @@ const BotTrainings = ({
             />
           )}
 
-          {botTrainingsStatus === ServerStatus.FETCHING && <Loader></Loader>}
+          {useGetBotTrainingsStatus === ServerStatus.FETCHING && (
+            <Loader></Loader>
+          )}
         </section>
       </Layout>
     </AccessConsume>
