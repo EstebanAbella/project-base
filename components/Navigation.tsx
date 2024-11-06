@@ -16,7 +16,7 @@ const Navigation = ({ newRoute, title }: NavigationPropsType) => {
     <nav className={"navigation"} onClick={handleClick}>
       <div className={"containerNavigation"} onClick={handleClick}>
         <span className='icon-arrow-left'></span>
-        <h5>{title}</h5>
+        <h6>{title}</h6>
       </div>
     </nav>
   )

@@ -52,6 +52,7 @@ const TagInput = ({
           onChange={(e) => setInputValue(e.target.value)}
           placeholder={placeholder}
           disabled={disabled}
+          className={styles.inputTag}
         />
         {inputValue && (
           <button onClick={handleAddTag} className={styles.addButton}>

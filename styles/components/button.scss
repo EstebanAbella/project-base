@@ -2,7 +2,7 @@
 
 .Button {
   color: $white;
-  padding: 6px 16px;
+  padding: 4px 26px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 22px;
@@ -18,23 +18,23 @@
   transition: 0.5s all;
 
   &.Button.primary {
-    background-color: $primaryDefault;
-    border-color: 1px solid $primaryDefault;
+    background-color: $colorApp;
+    border: 1px solid $colorApp;
     color: $white;
     &:hover {
-      background-color: $hover;
+      background-color: $colorAppHover;
     }
     &.disabled {
       background-color: $grayLight;
-      border-color: 1px solid $grayLight;
+      border: 1px solid $grayLight;
     }
   }
   &.Button.secondary {
     background-color: $white;
-    border-color: 1px solid $primaryDefault;
-    color: $primaryDefault;
+    border: 1px solid $colorApp;
+    color: $colorApp;
     &:hover {
-      border-color: 1px solid $grayMid;
+      border: 1px solid $grayMid;
       color: $grayMid;
     }
     &.disabled {
@@ -44,7 +44,7 @@
   }
   &.Button.tertiary {
     border-color: none;
-    color: $primaryDefault;
+    color: $colorApp;
     background-color: transparent;
     &.disabled {
       color: $grayLight;
@@ -83,6 +83,18 @@
     color: $white;
     &:hover {
       opacity: 0.8;
+    }
+    &.disabled {
+      background-color: $grayLight;
+      border-color: 1px solid $grayLight;
+    }
+  }
+  &.Button.login {
+    background-color: $greenApp;
+    border-color: 1px solid $greenApp;
+    color: $white;
+    &:hover {
+      background-color: $hoverGreenApp;
     }
     &.disabled {
       background-color: $grayLight;

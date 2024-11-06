@@ -13,7 +13,7 @@
     margin-bottom: 8px;
   }
   .textField.primary {
-    border-color: variables.$primaryDefault;
+    border-color: variables.$greenApp;
     &:focus {
       border-color: variables.$primaryDeactivated;
     }
@@ -25,7 +25,7 @@
     }
   }
   .textField.tertiary {
-    border-color: variables.$primaryDefault;
+    border-color: variables.$greenApp;
     &:focus {
       border-color: variables.$primaryDeactivated;
     }

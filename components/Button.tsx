@@ -1,20 +1,21 @@
 export enum ButtonType {
-  PRIMARY = 'primary',
-  SECONDARY = 'secondary',
-  TERTIARY = 'tertiary',
-  ERROR = 'error',
-  SUCCESS = 'success',
-  INFORMATION = 'information',
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+  TERTIARY = "tertiary",
+  ERROR = "error",
+  SUCCESS = "success",
+  INFORMATION = "information",
+  LOGIN = "login",
 }
 
 const Button = ({
-  value = '',
+  value = "",
   type = ButtonType.PRIMARY,
   disabled = false,
   onClick = () => {},
   isSubmit = false,
-  icon = '',
-  extraClassName = '',
+  icon = "",
+  extraClassName = "",
   ariaLabel,
 }: {
   value?: string | JSX.Element
@@ -30,7 +31,7 @@ const Button = ({
     <button
       disabled={disabled}
       onClick={onClick}
-      type={isSubmit ? 'submit' : 'button'}
+      type={isSubmit ? "submit" : "button"}
       className={`Button ${type} ${extraClassName}`}
       aria-label={ariaLabel}
     >

@@ -19,6 +19,7 @@
     align-items: center;
     border: 1px solid variables.$borderForm;
     border-radius: 7px;
+    background-color: variables.$white;
     padding: 4px;
     transition: 0.5s all;
 
@@ -26,17 +27,18 @@
       border: 1px solid variables.$focusInput;
     }
 
-    input {
+    .inputTag {
       flex-grow: 1;
       border: none;
       outline: none;
       padding: 4px;
+      background-color: variables.$white;
     }
 
     .addButton {
       background: variables.$stateSuccess;
       border: none;
-      color: #fff;
+      color: variables.$white;
       padding: 4px 8px;
       cursor: pointer;
       border-radius: 4px;

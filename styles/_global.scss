@@ -2,15 +2,15 @@
 
 body {
   &.themeDark {
-    --themeColor: #e7e8e9;
+    --themeColor: #ffff;
     --themeBackgroundColor: #111b21;
-    --invertedThemeColor: #111b21;
+    --invertedThemeColor: #202c33;
   }
 
   &.themeLight {
-    --themeColor: #111b21;
+    --themeColor: #202c33;
     --themeBackgroundColor: #e7e8e9;
-    --invertedThemeColor: #e7e8e9;
+    --invertedThemeColor: #ffff;
   }
 }
 

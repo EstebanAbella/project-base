@@ -225,7 +225,7 @@ function Login({
                     ? "Cargando"
                     : "Iniciar sesión"
                 }
-                type={ButtonType.PRIMARY}
+                type={ButtonType.LOGIN}
                 onClick={(e) => {
                   e.preventDefault(), handleLogin()
                 }}
@@ -234,7 +234,7 @@ function Login({
             ) : (
               <Button
                 value={"Enviar E-mail"}
-                type={ButtonType.PRIMARY}
+                type={ButtonType.LOGIN}
                 onClick={() => onRestorePassword()}
                 disabled={stateButton}
               />

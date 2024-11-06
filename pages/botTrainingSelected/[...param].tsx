@@ -19,6 +19,7 @@ import TextFieldModalCrud, {
 } from "../../components/TextFieldModalCrud"
 import AdditionalActionsInput from "../../components/AdditionalActionsInput"
 import Button, { ButtonType } from "../../components/Button"
+import styles from "./BotTrainingSelected.module.scss"
 
 const mapStateToProps = (state: RootState) => {
   const botTrainingsReducer = state.botTraining
@@ -125,6 +126,8 @@ const BotTrainingSelected = ({
       editBotTraining(data)
     }
   }
+
+  const handleClickCancel = () => {}
 
   const propsByType = (data: any) => {
     const baseType = typeMap[data.type] || data.type
@@ -235,15 +238,15 @@ const BotTrainingSelected = ({
   return (
     <AccessConsume>
       <Layout>
-        <section className='botTrainingSelected'>
+        <section className={`${styles.botTrainingSelected}`}>
           <Navigation
             newRoute={"/botTraining"}
             title={"All botTrainings"}
           ></Navigation>
-          <section className='botTrainingSelectedContainer'>
+          <section className={`${styles.botTrainingSelectedContainer}`}>
             <>
               {/* {botTrainingStatus === ServerStatus.FETCH && botTraining && ( */}
-              <div className='botTrainingSelectedContainerData'>
+              <div className={`${styles.botTrainingSelectedContainerData}`}>
                 {createBotTrainingObject?.length !== 0 &&
                   form &&
                   Object.keys(form).length !== 0 && (
@@ -251,24 +254,25 @@ const BotTrainingSelected = ({
                       {createBotTrainingObject?.map((data) =>
                         propsByType(data)
                       )}
+                      <section className={`${styles.containerButtonActions}`}>
+                        <Button
+                          value={"Cancel"}
+                          onClick={() => handleClickCancel()}
+                          type={ButtonType.SECONDARY}
+                        ></Button>
+                        <Button
+                          value={
+                            param && param[0] === TypeAction.CREATE
+                              ? "Create"
+                              : "Update"
+                          }
+                          onClick={() => handleClick(form)}
+                          type={ButtonType.PRIMARY}
+                        ></Button>
+                      </section>
                     </form>
                   )}
               </div>
-              <section className={"containerButtonModalCreate"}>
-                <Button
-                  value={
-                    param && param[0] === TypeAction.CREATE
-                      ? "Create"
-                      : "Update"
-                  }
-                  onClick={() => handleClick(form)}
-                  type={
-                    param && param[0] === TypeAction.CREATE
-                      ? ButtonType.SUCCESS
-                      : ButtonType.INFORMATION
-                  }
-                ></Button>
-              </section>
               {/* )} */}
               {/* {botTrainingStatus === ServerStatus.FETCHING && <Loader></Loader>} */}
             </>

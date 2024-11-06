@@ -1,76 +1,75 @@
-@import '../utilities';
+@import "../utilities";
 
 .TextField {
-    padding: 8px;
-    font-size: 16px;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    .TextField label {
-        display: block;
-        margin-bottom: 8px;
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  .TextField label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .TextField.primary {
+    border-color: $greenApp;
+    &:focus {
+      border-color: $primaryDeactivated;
     }
-    .TextField.primary {
-        border-color: $primaryDefault;
-        &:focus {
-            border-color: $primaryDeactivated;
-        }
+  }
+  .TextField.secondary {
+    border-color: $details;
+    &:focus {
+      border-color: $details;
     }
-    .TextField.secondary {
-        border-color: $details;
-        &:focus {
-            border-color: $details;
-        }
+  }
+  .TextField.tertiary {
+    border-color: $greenApp;
+    &:focus {
+      border-color: $primaryDeactivated;
     }
-    .TextField.tertiary {
-        border-color: $primaryDefault;
-        &:focus {
-            border-color: $primaryDeactivated;
-        }
+  }
+  .TextField.danger {
+    border-color: $stateError;
+    &:focus {
+      border-color: $stateError;
     }
-    .TextField.danger {
-        border-color: $stateError;
-        &:focus {
-            border-color: $stateError;
-        }
+  }
+  .TextField.warning {
+    border-color: $stateError;
+    &:focus {
+      border-color: $stateError;
     }
-    .TextField.warning {
-        border-color: $stateError;
-        &:focus {
-            border-color: $stateError;
-        }
+  }
+  .TextField.success {
+    border-color: $stateSuccess;
+    &:focus {
+      border-color: $stateSuccess;
     }
-    .TextField.success {
-        border-color: $stateSuccess;
-        &:focus {
-            border-color: $stateSuccess;
-        }
+  }
+  .TextField.info {
+    border-color: $details;
+    &:focus {
+      border-color: $details;
     }
-    .TextField.info {
-        border-color: $details;
-        &:focus {
-            border-color: $details;
-        }
+  }
+  .TextField.light {
+    border-color: $white;
+    &:focus {
+      border-color: $white;
     }
-    .TextField.light {
-        border-color: $white;
-        &:focus {
-            border-color: $white;
-        }
+  }
+  .TextField.dark {
+    border-color: $black;
+    &:focus {
+      border-color: $black;
     }
-    .TextField.dark {
-        border-color: $black;
-        &:focus {
-            border-color: $black;
-        }
+  }
+  .TextField.link {
+    border-color: transparent;
+    &:focus {
+      border-color: transparent;
     }
-    .TextField.link {
-        border-color: transparent;
-        &:focus {
-            border-color: transparent;
-        }
-    }
-
+  }
 }
