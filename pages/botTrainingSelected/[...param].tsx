@@ -4,7 +4,6 @@ import { ServerStatus } from "../../Utils/Types/global"
 import Loader from "../../components/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import Layout from "../../components/Layout"
-import Navigation from "../../components/Navigation"
 import TagInput from "../../components/TagInput"
 import TextFieldModalCrud, {
   TextFieldType,
@@ -18,6 +17,7 @@ import {
   useEditBotTraining,
   useGetBotTraining,
 } from "./useBotTrainingSelected"
+import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 
 export type dataFormType = {
   label: string
@@ -250,117 +250,115 @@ const BotTrainingSelected = ({}) => {
   return (
     <AccessConsume>
       <Layout>
-        <Modal
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          title={"Do you want to create a template?"}
-          textButton={"Create"}
-          typeButton={ButtonType.PRIMARY}
-          onClick={handleClick}
-          isDisabled={typeModal === "modal-create-botTraining"}
-          buttonCloseModal={true}
-        />
+        <BreadcrumbWrapper>
+          <Modal
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            title={"Do you want to create a template?"}
+            textButton={"Create"}
+            typeButton={ButtonType.PRIMARY}
+            onClick={handleClick}
+            isDisabled={typeModal === "modal-create-botTraining"}
+            buttonCloseModal={true}
+          />
 
-        <Modal
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          title={"Successful process"}
-          textButton={"Return"}
-          typeButton={ButtonType.PRIMARY}
-          onClick={() => router.push("/botTraining")}
-          isDisabled={typeModal === "modal-feedback-success-botTraining"}
-          buttonCloseModal={false}
-        />
+          <Modal
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            title={"Successful process"}
+            textButton={"Return"}
+            typeButton={ButtonType.PRIMARY}
+            onClick={() => router.push("/botTraining")}
+            isDisabled={typeModal === "modal-feedback-success-botTraining"}
+            buttonCloseModal={false}
+          />
 
-        <Modal
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          title={"Error in the process"}
-          textButton={"Return"}
-          typeButton={ButtonType.PRIMARY}
-          onClick={() => setStateModal(false)}
-          isDisabled={typeModal === "modal-feedback-error-botTraining"}
-          buttonCloseModal={false}
-        />
+          <Modal
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            title={"Error in the process"}
+            textButton={"Return"}
+            typeButton={ButtonType.PRIMARY}
+            onClick={() => setStateModal(false)}
+            isDisabled={typeModal === "modal-feedback-error-botTraining"}
+            buttonCloseModal={false}
+          />
 
-        <Modal
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          title={"Loading"}
-          loader={true}
-          isDisabled={typeModal === "modal-loading-botTraining"}
-        />
+          <Modal
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            title={"Loading"}
+            loader={true}
+            isDisabled={typeModal === "modal-loading-botTraining"}
+          />
 
-        <Modal
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          title={"Do you want to update a template?"}
-          textButton={"Update"}
-          typeButton={ButtonType.PRIMARY}
-          onClick={handleClick}
-          isDisabled={typeModal === "modal-edit-botTraining"}
-          buttonCloseModal={true}
-        />
+          <Modal
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            title={"Do you want to update a template?"}
+            textButton={"Update"}
+            typeButton={ButtonType.PRIMARY}
+            onClick={handleClick}
+            isDisabled={typeModal === "modal-edit-botTraining"}
+            buttonCloseModal={true}
+          />
 
-        <Modal
-          title={"Do you want to leave?"}
-          text={["Your progress will be lost"]}
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          textButton={"Yes"}
-          typeButton={ButtonType.PRIMARY}
-          onClick={() => router.push("/botTraining")}
-          isDisabled={typeModal === "modal-cancel-botTraining"}
-          buttonCloseModal={true}
-        />
+          <Modal
+            title={"Do you want to leave?"}
+            text={["Your progress will be lost"]}
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            textButton={"Yes"}
+            typeButton={ButtonType.PRIMARY}
+            onClick={() => router.push("/botTraining")}
+            isDisabled={typeModal === "modal-cancel-botTraining"}
+            buttonCloseModal={true}
+          />
 
-        <section className={`${styles.botTrainingSelected}`}>
-          <Navigation
-            newRoute={"/botTraining"}
-            title={"All botTrainings"}
-          ></Navigation>
-          <section className={`${styles.botTrainingSelectedContainer}`}>
-            <>
-              {/* {botTrainingStatus === ServerStatus.FETCH && botTraining && ( */}
-              <div className={`${styles.botTrainingSelectedContainerData}`}>
-                {createBotTrainingObject?.length !== 0 &&
-                  form &&
-                  Object.keys(form).length !== 0 && (
-                    <form>
-                      {createBotTrainingObject?.map((data) =>
-                        propsByType(data)
-                      )}
-                      <section className={`${styles.containerButtonActions}`}>
-                        <Button
-                          value={"Cancel"}
-                          onClick={() => handleClickOnModal("cancel")}
-                          type={ButtonType.SECONDARY}
-                        ></Button>
-                        <Button
-                          value={
-                            param && param[0] === TypeAction.CREATE
-                              ? "Create"
-                              : "Update"
-                          }
-                          // onClick={() => handleClick(form)}
-                          onClick={() =>
-                            handleClickOnModal(
+          <section className={`${styles.botTrainingSelected}`}>
+            <section className={`${styles.botTrainingSelectedContainer}`}>
+              <>
+                {/* {botTrainingStatus === ServerStatus.FETCH && botTraining && ( */}
+                <div className={`${styles.botTrainingSelectedContainerData}`}>
+                  {createBotTrainingObject?.length !== 0 &&
+                    form &&
+                    Object.keys(form).length !== 0 && (
+                      <form>
+                        {createBotTrainingObject?.map((data) =>
+                          propsByType(data)
+                        )}
+                        <section className={`${styles.containerButtonActions}`}>
+                          <Button
+                            value={"Cancel"}
+                            onClick={() => handleClickOnModal("cancel")}
+                            type={ButtonType.SECONDARY}
+                          ></Button>
+                          <Button
+                            value={
                               param && param[0] === TypeAction.CREATE
-                                ? "create"
-                                : "edit"
-                            )
-                          }
-                          type={ButtonType.PRIMARY}
-                        ></Button>
-                      </section>
-                    </form>
-                  )}
-              </div>
-              {/* )} */}
-              {/* {botTrainingStatus === ServerStatus.FETCHING && <Loader></Loader>} */}
-            </>
+                                ? "Create"
+                                : "Update"
+                            }
+                            // onClick={() => handleClick(form)}
+                            onClick={() =>
+                              handleClickOnModal(
+                                param && param[0] === TypeAction.CREATE
+                                  ? "create"
+                                  : "edit"
+                              )
+                            }
+                            type={ButtonType.PRIMARY}
+                          ></Button>
+                        </section>
+                      </form>
+                    )}
+                </div>
+                {/* )} */}
+                {/* {botTrainingStatus === ServerStatus.FETCHING && <Loader></Loader>} */}
+              </>
+            </section>
           </section>
-        </section>
+        </BreadcrumbWrapper>
       </Layout>
     </AccessConsume>
   )

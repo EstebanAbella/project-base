@@ -261,7 +261,7 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
 
   return (
     <AccessConsume>
-      <Layout isNavigation={false}>
+      <Layout>
         {/* <Modal
           stateModal={stateModal}
           setStateModal={setStateModal}

@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from "react"
-import Navigation from "./Navigation"
+import React from "react"
+import Navigation from "./UserData"
 import Menu from "./Menu"
 
 type LayoutPropsType = {
   children: JSX.Element | JSX.Element[]
-  isNavigation?: boolean
-  title?: string
-  newRoute?: string
 }
 
-const Layout = ({
-  children,
-  newRoute,
-  title,
-  isNavigation,
-}: LayoutPropsType): JSX.Element => {
+const Layout = ({ children }: LayoutPropsType): JSX.Element => {
   return (
     <section className={"layout"}>
       <Menu />
-      {/* {isNavigation && newRoute && title && (
-          <Navigation newRoute={newRoute} title={title}></Navigation>
-        )} */}
-      <section className='children'>{children}</section>
+      <div className='children'>
+        <Navigation></Navigation>
+        <section>{children}</section>
+      </div>
     </section>
   )
 }

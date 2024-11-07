@@ -58,6 +58,27 @@
 .icon-lock:before {
   content: "\e907";
 }
+.icon-checkmark:before {
+  content: "\e914";
+}
+.icon-tick:before {
+  content: "\e914";
+}
+.icon-correct:before {
+  content: "\e914";
+}
+.icon-accept:before {
+  content: "\e914";
+}
+.icon-ok:before {
+  content: "\e914";
+}
+.icon-home:before {
+  content: "\e915";
+}
+.icon-house:before {
+  content: "\e915";
+}
 .icon-close:before {
   content: "\e913";
 }

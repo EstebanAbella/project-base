@@ -1,7 +1,7 @@
 // eslint-disable
 /** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa')({
-  dest: 'public',
+const withPWA = require("next-pwa")({
+  dest: "public",
 })
 
 const nextConfig = withPWA({
@@ -10,8 +10,23 @@ const nextConfig = withPWA({
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/login',
+        source: "/",
+        destination: "/login",
+        permanent: false,
+      },
+      {
+        source: "/botTrainingSelected",
+        destination: "/botTraining/",
+        permanent: false,
+      },
+      {
+        source: "/botTrainingSelected/create",
+        destination: "/botTraining",
+        permanent: false,
+      },
+      {
+        source: "/botTrainingSelected/update",
+        destination: "/botTraining",
         permanent: false,
       },
     ]
@@ -19,7 +34,7 @@ const nextConfig = withPWA({
   typescript: {
     ignoreBuildErrors: true,
     compilerOptions: {
-      target: 'es2015',
+      target: "es2015",
     },
   },
   // eslint: {

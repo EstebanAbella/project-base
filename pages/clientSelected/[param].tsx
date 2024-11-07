@@ -8,7 +8,7 @@ import Loader from "../../components/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import Layout from "../../components/Layout"
 import { ClientsReducerPropsType } from "../../Utils/Types/clientType"
-import Navigation from "../../components/Navigation"
+import Navigation from "../../components/UserData"
 
 const mapStateToProps = (state: RootState) => {
   const clientsReducer = state.client
