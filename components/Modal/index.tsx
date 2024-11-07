@@ -1,6 +1,7 @@
 import React from "react"
 import Button, { ButtonType } from "../Button"
 import styles from "./Modal.module.scss"
+import Loader from "../Loader"
 
 export type ModalPropsType = {
   img?: string
@@ -15,6 +16,7 @@ export type ModalPropsType = {
   dataForm?: any
   initialData?: any
   buttonCloseModal?: boolean
+  loader?: boolean
 }
 
 const Modal = ({
@@ -29,7 +31,8 @@ const Modal = ({
   dataForm,
   initialData,
   title,
-  buttonCloseModal,
+  buttonCloseModal = false,
+  loader = false,
 }: ModalPropsType) => {
   return (
     <>
@@ -50,6 +53,7 @@ const Modal = ({
                 </div>
               )}
               {img && <img src={img}></img>}
+              {loader && <Loader></Loader>}
               {onClick && (
                 <section className={`${styles.containerButtonModalCreate}`}>
                   {buttonCloseModal && (

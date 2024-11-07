@@ -43,6 +43,11 @@
       margin-bottom: 10px;
     }
 
+    .disabledOption {
+      color: variables.$borderForm;
+      cursor: not-allowed;
+    }
+
     .resultActionsContainer {
       > h5 {
         font-weight: utilities.font-weight(regular) !important;

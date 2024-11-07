@@ -1,8 +1,5 @@
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
-import { RootState } from "../../redux/rootReducer"
-import { BotTrainingsReducerPropsTypes } from "../../Utils/Types/botTrainingType"
-import { connect } from "react-redux"
 import { ServerStatus } from "../../Utils/Types/global"
 import Loader from "../../components/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
@@ -94,11 +91,26 @@ const BotTrainingSelected = ({}) => {
   }, [useGetBotTrainingData])
 
   useEffect(() => {
-    if (useCreateBotTrainingStatus === ServerStatus.FETCH) {
-      router.push("/botTraining")
+    if (
+      useCreateBotTrainingStatus === ServerStatus.FETCH ||
+      useEditBotTrainingStatus === ServerStatus.FETCH
+    ) {
+      setTypeModal("modal-feedback-success-botTraining")
+      setStateModal(true)
     }
-    if (useEditBotTrainingStatus === ServerStatus.FETCH) {
-      router.push("/botTraining")
+    if (
+      useCreateBotTrainingStatus === ServerStatus.FETCH_ERROR ||
+      useEditBotTrainingStatus === ServerStatus.FETCH_ERROR
+    ) {
+      setTypeModal("modal-feedback-error-botTraining")
+      setStateModal(true)
+    }
+    if (
+      useCreateBotTrainingStatus === ServerStatus.FETCHING ||
+      useEditBotTrainingStatus === ServerStatus.FETCHING
+    ) {
+      setTypeModal("modal-loading-botTraining")
+      setStateModal(true)
     }
   }, [useCreateBotTrainingStatus, useEditBotTrainingStatus])
 
@@ -247,6 +259,36 @@ const BotTrainingSelected = ({}) => {
           onClick={handleClick}
           isDisabled={typeModal === "modal-create-botTraining"}
           buttonCloseModal={true}
+        />
+
+        <Modal
+          stateModal={stateModal}
+          setStateModal={setStateModal}
+          title={"Successful process"}
+          textButton={"Return"}
+          typeButton={ButtonType.PRIMARY}
+          onClick={() => router.push("/botTraining")}
+          isDisabled={typeModal === "modal-feedback-success-botTraining"}
+          buttonCloseModal={false}
+        />
+
+        <Modal
+          stateModal={stateModal}
+          setStateModal={setStateModal}
+          title={"Error in the process"}
+          textButton={"Return"}
+          typeButton={ButtonType.PRIMARY}
+          onClick={() => setStateModal(false)}
+          isDisabled={typeModal === "modal-feedback-error-botTraining"}
+          buttonCloseModal={false}
+        />
+
+        <Modal
+          stateModal={stateModal}
+          setStateModal={setStateModal}
+          title={"Loading"}
+          loader={true}
+          isDisabled={typeModal === "modal-loading-botTraining"}
         />
 
         <Modal

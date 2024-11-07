@@ -121,6 +121,11 @@ const AdditionalActionsInput = ({
                   key={option}
                   value={option}
                   disabled={getDisabledOptions(index).includes(option)}
+                  className={
+                    getDisabledOptions(index).includes(option)
+                      ? styles.disabledOption
+                      : ""
+                  }
                 >
                   {option}
                 </option>
