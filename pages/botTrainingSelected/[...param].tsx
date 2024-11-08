@@ -184,14 +184,6 @@ const BotTrainingSelected = ({}) => {
       placeholder: "Escriba pie del mensaje",
     },
     {
-      label: "Seed",
-      name: "seed",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "-",
-    },
-    {
       label: "Trigger",
       name: "trigger",
       typeTextField: TextFieldType.PRIMARY,
@@ -271,6 +263,7 @@ const BotTrainingSelected = ({}) => {
             onClick={() => router.push("/botTraining")}
             isDisabled={typeModal === "modal-feedback-success-botTraining"}
             buttonCloseModal={false}
+            spanAlert={"check"}
           />
 
           <Modal
@@ -282,6 +275,7 @@ const BotTrainingSelected = ({}) => {
             onClick={() => setStateModal(false)}
             isDisabled={typeModal === "modal-feedback-error-botTraining"}
             buttonCloseModal={false}
+            spanAlert={"error"}
           />
 
           <Modal
@@ -301,6 +295,7 @@ const BotTrainingSelected = ({}) => {
             onClick={handleClick}
             isDisabled={typeModal === "modal-edit-botTraining"}
             buttonCloseModal={true}
+            spanAlert={"alert"}
           />
 
           <Modal
@@ -313,6 +308,7 @@ const BotTrainingSelected = ({}) => {
             onClick={() => router.push("/botTraining")}
             isDisabled={typeModal === "modal-cancel-botTraining"}
             buttonCloseModal={true}
+            spanAlert={"alert"}
           />
 
           <section className={`${styles.botTrainingSelected}`}>

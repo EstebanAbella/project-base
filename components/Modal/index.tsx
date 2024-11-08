@@ -17,6 +17,7 @@ export type ModalPropsType = {
   initialData?: any
   buttonCloseModal?: boolean
   loader?: boolean
+  spanAlert?: string
 }
 
 const Modal = ({
@@ -33,6 +34,7 @@ const Modal = ({
   title,
   buttonCloseModal = false,
   loader = false,
+  spanAlert,
 }: ModalPropsType) => {
   return (
     <>
@@ -50,6 +52,13 @@ const Modal = ({
                 <div className={`${styles.textModal}`}>
                   {title && <h5>{title}</h5>}
                   {text && text.map((data) => <p>{data}</p>)}
+                </div>
+              )}
+              {spanAlert && (
+                <div className={`${styles.containerSpan}`}>
+                  <span
+                    className={`icon-${spanAlert} ${styles[spanAlert]}`}
+                  ></span>
                 </div>
               )}
               {img && <img src={img}></img>}

@@ -25,6 +25,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-alert:before {
+  content: "\e916";
+}
+.icon-check:before {
+  content: "\e917";
+}
+.icon-error:before {
+  content: "\e918";
+}
 .icon-dark-mode-svgrepo-com:before {
   content: "\e910";
 }

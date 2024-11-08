@@ -92,6 +92,27 @@
           min-width: 126px;
         }
       }
+
+      .containerSpan {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          font-size: 76px;
+
+          &.alert {
+            color: variables.$statePending;
+          }
+          &.check {
+            color: variables.$stateSuccess;
+          }
+          &.error {
+            color: variables.$stateError;
+          }
+        }
+      }
     }
   }
 }
