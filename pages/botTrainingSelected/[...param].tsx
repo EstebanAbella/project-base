@@ -212,9 +212,10 @@ const BotTrainingSelected = ({}) => {
       name: "type",
       typeTextField: TextFieldType.PRIMARY,
       disabled: false,
-      type: "text",
+      type: "select",
       placeholder: "-",
       isRequired: true,
+      valueSelect: ["List", "Text"],
     },
     {
       label: "Options",

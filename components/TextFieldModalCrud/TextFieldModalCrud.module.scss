@@ -8,6 +8,16 @@
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
+
+  select {
+    appearance: none;
+    option {
+      appearance: none;
+      &:hover {
+        background-color: #d3d3d3 !important;
+      }
+    }
+  }
   .textField label {
     display: block;
     margin-bottom: 8px;
