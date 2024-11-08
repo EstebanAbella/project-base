@@ -14,17 +14,18 @@
     transition: 0.5s all;
 
     &:hover {
-      background-color: variables.$borderForm;
+      background-color: variables.$selectedOptions;
+      border: 1px solid variables.$selectedOptions;
     }
-
     &:focus {
-      background-color: variables.$borderForm;
+      background-color: variables.$selectedOptions;
       &:not(:focus-visible) {
         background-color: variables.$white;
       }
     }
 
     &:disabled {
+      border: 1px solid variables.$borderForm;
       background-color: variables.$borderForm;
       cursor: default;
     }

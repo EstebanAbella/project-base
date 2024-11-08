@@ -15,19 +15,19 @@
   .TextField.primary {
     border-color: $greenApp;
     &:focus {
-      border-color: $primaryDeactivated;
+      border-color: $grayMid;
     }
   }
   .TextField.secondary {
-    border-color: $details;
+    border-color: $stateInformation;
     &:focus {
-      border-color: $details;
+      border-color: $stateInformation;
     }
   }
   .TextField.tertiary {
     border-color: $greenApp;
     &:focus {
-      border-color: $primaryDeactivated;
+      border-color: $grayMid;
     }
   }
   .TextField.danger {
@@ -49,9 +49,9 @@
     }
   }
   .TextField.info {
-    border-color: $details;
+    border-color: $stateInformation;
     &:focus {
-      border-color: $details;
+      border-color: $stateInformation;
     }
   }
   .TextField.light {
