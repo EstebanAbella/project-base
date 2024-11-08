@@ -14,5 +14,10 @@
     justify-content: center;
     align-items: center;
     border-radius: 7px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $focusInput;
+    }
   }
 }

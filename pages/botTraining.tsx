@@ -18,7 +18,7 @@ import Pagination from "../components/Pagination"
 import Search from "../components/Search"
 import { UseCallOfTables } from "../hooks/useCallOfTables"
 import { loggedUser } from "../Utils/Types/authModel"
-import FilterSearchIn from "../components/FilterSearchIn"
+import FilterSearchIn from "../components/FilterSearchIn/FilterSearchIn"
 import {
   useDeleteBotTraining,
   useGetBotTrainings,
@@ -41,6 +41,7 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>("")
   const [dataInitialModal, setDataInitialModal] = useState()
+  const [dataIdDeleteModal, setDataIdDeleteModal] = useState<string>("")
   const [filter, setFilter] = useState<string>("")
   const [query, setQuery] = useState<string>("")
   const [offsetState, setOffsetState] = useState<number>(0)
@@ -111,142 +112,11 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
     setOffsetState,
   })
 
-  const createBotTrainingObject = [
-    {
-      label: "Body",
-      name: "body",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "textarea",
-      placeholder: "Escriba cuerpo del mensaje",
-    },
-    {
-      label: "Footer",
-      name: "footer",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "Escriba pie del mensaje",
-    },
-    {
-      label: "Seed",
-      name: "seed",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "-",
-    },
-    {
-      label: "Trigger",
-      name: "trigger",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "-",
-    },
-    {
-      label: "Type",
-      name: "type",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "-",
-    },
-    {
-      label: "Options",
-      name: "options",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "tagInput",
-      placeholder: "-",
-    },
-    {
-      label: "Additional Actions",
-      name: "additional_actions",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "additional_actions",
-      placeholder: "-",
-      valueSelect: ["reaction", "type", "sticker_name", "delay"],
-    },
-  ]
-
-  const editBotTrainingObject = [
-    {
-      label: "Body",
-      name: "body",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "textarea",
-      placeholder: "Escriba cuerpo del mensaje",
-    },
-    {
-      label: "Footer",
-      name: "footer",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "Escriba pie del mensaje",
-    },
-    {
-      label: "Seed",
-      name: "seed",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "-",
-    },
-    {
-      label: "Trigger",
-      name: "trigger",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "-",
-    },
-    {
-      label: "Type",
-      name: "type",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "-",
-    },
-    {
-      label: "Options",
-      name: "options",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "tagInput",
-      placeholder: "-",
-    },
-    {
-      label: "Additional Actions",
-      name: "additional_actions",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "additional_actions",
-      placeholder: "-",
-      valueSelect: [
-        "reaction",
-        "type",
-        "sticker_name",
-        "delay",
-        "document_name",
-        "text",
-        "url",
-      ],
-    },
-  ]
-
   const handleClickOnModal = (typeModal: string, data?: any) => {
-    if (typeModal === "create") {
-      setTypeModal("modal-create-botTraining")
+    if (typeModal === "delete") {
+      setTypeModal("modal-delete-botTraining")
       setStateModal(true)
-    } else if (typeModal === "edit") {
-      setTypeModal("modal-edit-botTraining")
-      setStateModal(true)
-      setDataInitialModal(data)
+      setDataIdDeleteModal(data)
     }
   }
 
@@ -262,15 +132,17 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
   return (
     <AccessConsume>
       <Layout>
-        {/* <Modal
+        <Modal
           stateModal={stateModal}
           setStateModal={setStateModal}
-          dataForm={createBotTrainingObject}
-          textButton={"Add botTraining"}
-          typeButton={ButtonType.SUCCESS}
-          onClick={handleClickCreateUSer}
-          isDisabled={typeModal === "modal-create-botTraining"}
-        /> */}
+          title={"Do you want to delete a template?"}
+          textButton={"Delete"}
+          typeButton={ButtonType.PRIMARY}
+          onClick={() => useDeleteBotTrainingHandler(dataIdDeleteModal)}
+          isDisabled={typeModal === "modal-delete-botTraining"}
+          buttonCloseModal={true}
+          spanAlert={"alert"}
+        />
         <section className='botTrainingsPage'>
           <h3>BotTrainings</h3>
 
@@ -352,7 +224,8 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
                                   type={ButtonType.ERROR}
                                   value={"Delete"}
                                   onClick={() =>
-                                    useDeleteBotTrainingHandler(
+                                    handleClickOnModal(
+                                      "delete",
                                       data.id.toString()
                                     )
                                   }

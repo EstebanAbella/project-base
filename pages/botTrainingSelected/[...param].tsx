@@ -184,6 +184,14 @@ const BotTrainingSelected = ({}) => {
       placeholder: "Escriba pie del mensaje",
     },
     {
+      label: "Seed",
+      name: "seed",
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: "text",
+      placeholder: "-",
+    },
+    {
       label: "Trigger",
       name: "trigger",
       typeTextField: TextFieldType.PRIMARY,

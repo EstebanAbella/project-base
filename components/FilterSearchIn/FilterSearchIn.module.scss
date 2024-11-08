@@ -1,5 +1,5 @@
-@use "../variables";
-@use "../mixins";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
 .customSelect {
   position: relative;
@@ -23,6 +23,11 @@
     border-radius: 7px;
     cursor: pointer;
     background-color: variables.$white;
+
+    &:focus {
+      outline: none;
+      border: 1px solid variables.$focusInput;
+    }
 
     input {
       cursor: pointer;
@@ -61,7 +66,7 @@
     list-style: none;
     padding: 0;
     margin: 4px 0 0 0;
-    max-height: 150px;
+    max-height: 160px;
     overflow-y: auto;
     border-radius: 7px;
     @include mixins.custom_scrollbar();
@@ -76,12 +81,17 @@
       transition: 0.5s all;
 
       &:hover {
-        background-color: #e0e0e0;
+        background-color: variables.$selectedOptions;
       }
 
       &.selected {
         font-weight: bold;
-        background-color: #e0e0e0;
+        background-color: variables.$selectedOptions;
+      }
+
+      &:focus-visible {
+        background-color: variables.$selectedOptions;
+        outline: none;
       }
 
       .check {
@@ -102,6 +112,7 @@
       margin-top: 8px;
       font-size: 14px;
       cursor: default;
+      margin-top: 4px;
     }
 
     > span {
@@ -109,6 +120,10 @@
       margin-bottom: -6px;
       font-size: 12px;
       cursor: pointer;
+
+      &:focus-visible {
+        outline: 2px solid variables.$red;
+      }
     }
   }
 }
