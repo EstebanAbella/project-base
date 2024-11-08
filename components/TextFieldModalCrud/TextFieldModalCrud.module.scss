@@ -12,6 +12,9 @@
     display: block;
     margin-bottom: 8px;
   }
+  .isRequiredIcon {
+    color: variables.$red;
+  }
   .textField.primary {
     border-color: variables.$greenApp;
     &:focus {

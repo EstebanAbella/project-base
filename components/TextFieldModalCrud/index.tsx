@@ -15,6 +15,7 @@ export enum TextFieldType {
 }
 
 const TextFieldModalCrud = ({
+  isRequired,
   label = "",
   name = "",
   typeTextField = TextFieldType.PRIMARY,
@@ -36,6 +37,7 @@ const TextFieldModalCrud = ({
   placeholder?: string
   valueSelect?: string[]
   rows?: number
+  isRequired?: boolean
 }) => {
   const [inputValue, setInputValue] = useState<any>(valueInput || "")
 
@@ -56,7 +58,10 @@ const TextFieldModalCrud = ({
 
   return (
     <div className={`${styles.textField} ${styles.typeTextField}`}>
-      <label>{label}</label>
+      <label>
+        {label}{" "}
+        {isRequired && <span className={`${styles.isRequiredIcon}`}>*</span>}
+      </label>
       {(type === "text" || type === "number") && (
         <input
           name={name}

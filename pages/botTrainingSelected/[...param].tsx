@@ -28,6 +28,7 @@ export type dataFormType = {
   placeholder: string
   valueSelect?: string[]
   defaultValue?: any
+  isRequired?: boolean
 }
 
 export enum TypeAction {
@@ -138,6 +139,7 @@ const BotTrainingSelected = ({}) => {
         value: form[data.name] ? form[data.name] : [],
         onChange: handleChange,
         placeholder: data.placeholder,
+        isRequired: data.isRequired,
       },
       label_input: {
         label: data.label,
@@ -150,6 +152,7 @@ const BotTrainingSelected = ({}) => {
         valueInput: form[data.name] ? form[data.name] : "",
         valueSelect: data.valueSelect ? data.valueSelect : [],
         key: data.name,
+        isRequired: data.isRequired,
       },
       additional_actions: {
         valueInput: form[data.name] ? form[data.name] : "",
@@ -161,6 +164,7 @@ const BotTrainingSelected = ({}) => {
         type: data.type,
         placeholder: data.placeholder,
         key: data.name,
+        isRequired: data.isRequired,
       },
     }
     return componentByChoice[baseType](value[baseType])
@@ -174,6 +178,7 @@ const BotTrainingSelected = ({}) => {
       disabled: false,
       type: "textarea",
       placeholder: "Escriba cuerpo del mensaje",
+      isRequired: true,
     },
     {
       label: "Footer",
@@ -182,6 +187,7 @@ const BotTrainingSelected = ({}) => {
       disabled: false,
       type: "text",
       placeholder: "Escriba pie del mensaje",
+      isRequired: false,
     },
     {
       label: "Seed",
@@ -190,6 +196,7 @@ const BotTrainingSelected = ({}) => {
       disabled: false,
       type: "text",
       placeholder: "-",
+      isRequired: true,
     },
     {
       label: "Trigger",
@@ -198,6 +205,7 @@ const BotTrainingSelected = ({}) => {
       disabled: false,
       type: "text",
       placeholder: "-",
+      isRequired: true,
     },
     {
       label: "Type",
@@ -206,6 +214,7 @@ const BotTrainingSelected = ({}) => {
       disabled: false,
       type: "text",
       placeholder: "-",
+      isRequired: true,
     },
     {
       label: "Options",
@@ -214,6 +223,7 @@ const BotTrainingSelected = ({}) => {
       disabled: false,
       type: "tagInput",
       placeholder: "-",
+      isRequired: false,
     },
     {
       label: "Additional Actions",
@@ -222,6 +232,7 @@ const BotTrainingSelected = ({}) => {
       disabled: false,
       type: "additional_actions",
       placeholder: "-",
+      isRequired: false,
       valueSelect: [
         "reaction",
         "type",
