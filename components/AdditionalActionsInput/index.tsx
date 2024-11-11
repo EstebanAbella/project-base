@@ -13,6 +13,7 @@ export type AdditionalActionsInputProps = {
   type?: string
   disabled?: boolean
   valueInput?: AdditionalAction[]
+  title?: string
 }
 
 const AdditionalActionsInput = ({
@@ -23,6 +24,7 @@ const AdditionalActionsInput = ({
   type,
   disabled,
   valueInput = [],
+  title,
 }: AdditionalActionsInputProps) => {
   const [additionalActions, setAdditionalActions] = useState<
     AdditionalAction[]
@@ -101,6 +103,7 @@ const AdditionalActionsInput = ({
 
   return (
     <div className={`${styles.containerAdditionalActions}`}>
+      <label title={title || ""}>{label}</label>
       <button
         onClick={handleAddActionSet}
         className={`${styles.buttonAdditionalActions}`}

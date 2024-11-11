@@ -9,6 +9,7 @@ export type TagInputPropsType = {
   placeholder?: string
   label?: string
   isRequired: boolean
+  title?: string
 }
 
 const TagInput = ({
@@ -19,6 +20,7 @@ const TagInput = ({
   placeholder = "",
   label = "",
   isRequired = false,
+  title,
 }: TagInputPropsType) => {
   const [inputValue, setInputValue] = useState<string>("")
   const [tags, setTags] = useState<string[]>(value)
@@ -45,7 +47,7 @@ const TagInput = ({
 
   return (
     <div className={styles.tagInput}>
-      <label>
+      <label title={title || ""}>
         {label}{" "}
         {isRequired && <span className={`${styles.isRequiredIcon}`}>*</span>}
       </label>

@@ -26,6 +26,8 @@ const TextFieldModalCrud = ({
   valueSelect = [],
   rows = 2,
   valueInput,
+  title,
+  itIsVisible = true,
 }: {
   valueInput?: string | number
   label?: string
@@ -38,6 +40,8 @@ const TextFieldModalCrud = ({
   valueSelect?: string[]
   rows?: number
   isRequired?: boolean
+  title?: string
+  itIsVisible?: boolean
 }) => {
   const [inputValue, setInputValue] = useState<any>(valueInput || "")
 
@@ -57,8 +61,10 @@ const TextFieldModalCrud = ({
   }
 
   return (
-    <div className={`${styles.textField} ${styles.typeTextField}`}>
-      <label>
+    <div
+      className={`${styles.textField} ${styles.typeTextField} ${!itIsVisible ? styles.itIsVisible : ""}`}
+    >
+      <label title={title || ""}>
         {label}{" "}
         {isRequired && <span className={`${styles.isRequiredIcon}`}>*</span>}
       </label>
@@ -75,7 +81,7 @@ const TextFieldModalCrud = ({
 
       {type === "select" && (
         <select name={name} disabled={disabled} onChange={handleChange}>
-          <option value={"-"}>-</option>
+          <option value={""}>-</option>
           {valueSelect.map((data) => (
             <option value={data} key={data} selected={inputValue === data}>
               {data}

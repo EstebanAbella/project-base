@@ -18,6 +18,7 @@ import {
   useGetBotTraining,
 } from "./useBotTrainingSelected"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
+import { title } from "process"
 
 export type dataFormType = {
   label: string
@@ -151,6 +152,7 @@ const BotTrainingSelected = ({}) => {
         onChange: handleChange,
         placeholder: data.placeholder,
         isRequired: data.isRequired,
+        title: data.title,
       },
       label_input: {
         label: data.label,
@@ -164,6 +166,8 @@ const BotTrainingSelected = ({}) => {
         valueSelect: data.valueSelect ? data.valueSelect : [],
         key: data.name,
         isRequired: data.isRequired,
+        title: data.title,
+        itIsVisible: data.itIsVisible,
       },
       additional_actions: {
         valueInput: form[data.name] ? form[data.name] : "",
@@ -176,6 +180,7 @@ const BotTrainingSelected = ({}) => {
         placeholder: data.placeholder,
         key: data.name,
         isRequired: data.isRequired,
+        title: data.title,
       },
     }
     return componentByChoice[baseType](value[baseType])
@@ -190,6 +195,7 @@ const BotTrainingSelected = ({}) => {
       type: "textarea",
       placeholder: "Escriba cuerpo del mensaje",
       isRequired: true,
+      title: "Message body",
     },
     {
       label: "Footer",
@@ -199,6 +205,7 @@ const BotTrainingSelected = ({}) => {
       type: "text",
       placeholder: "Escriba pie del mensaje",
       isRequired: false,
+      title: "Message footer",
     },
     {
       label: "Seed",
@@ -207,7 +214,8 @@ const BotTrainingSelected = ({}) => {
       disabled: false,
       type: "text",
       placeholder: "-",
-      isRequired: true,
+      isRequired: false,
+      itIsVisible: false,
     },
     {
       label: "Trigger",
@@ -217,6 +225,7 @@ const BotTrainingSelected = ({}) => {
       type: "text",
       placeholder: "-",
       isRequired: true,
+      title: "Word that executes this template",
     },
     {
       label: "Type",
@@ -226,7 +235,8 @@ const BotTrainingSelected = ({}) => {
       type: "select",
       placeholder: "-",
       isRequired: true,
-      valueSelect: ["List", "Text"],
+      valueSelect: ["list", "text"],
+      title: "Response type, text: one message, list: multiple options",
     },
     {
       label: "Options",
@@ -236,6 +246,7 @@ const BotTrainingSelected = ({}) => {
       type: "tagInput",
       placeholder: "-",
       isRequired: false,
+      title: "Message or multiple options as a response to the trigger",
     },
     {
       label: "Additional Actions",
@@ -254,6 +265,7 @@ const BotTrainingSelected = ({}) => {
         "text",
         "url",
       ],
+      title: "Additional actions in response to the trigger",
     },
   ]
 
