@@ -10,10 +10,8 @@ const ModalTable: React.FC<ModalTableProps> = ({ onClose, children }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <button onClick={onClose} className={styles.closeButton}>
-          Cerrar
-        </button>
-        <h2>Configuración de Columnas</h2>
+        <span className={`icon-close ${styles.close}`} onClick={onClose}></span>
+        <h4>Column configuration</h4>
         {children}
       </div>
     </div>

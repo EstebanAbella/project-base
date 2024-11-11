@@ -1,3 +1,5 @@
+@use "../../styles//variables";
+
 .tableContainer {
   width: 100%;
 
@@ -5,12 +7,32 @@
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
+    cursor: default;
+    border: none;
+
+    tr {
+      border-top: none;
+    }
+
     th,
     td {
       padding: 10px;
       text-align: left;
-      border: 1px solid #ddd;
+      border: none;
       overflow: hidden;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .columnSmall {
+      width: 80px;
+
+      .columnSmallIcon {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     .containerButtonTable {
@@ -19,8 +41,13 @@
       align-items: center;
       width: 100%;
       gap: 10px;
+
+      .iconActions {
+        cursor: pointer;
+      }
     }
   }
+
   .columnList {
     list-style: none;
     padding: 0;
@@ -31,17 +58,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 8px;
-    border: 1px solid #ddd;
-    margin-bottom: 4px;
-    background-color: #f9f9f9;
+    border: 1px solid variables.$borderForm;
+    border-radius: 7px;
+    margin-bottom: 6px;
+    background-color: variables.$white;
     cursor: grab;
-  }
-  .icon-eye {
-    color: green;
-    cursor: pointer;
-  }
-  .icon-eye-off {
-    color: red;
-    cursor: pointer;
+
+    > span {
+      cursor: pointer;
+    }
   }
 }

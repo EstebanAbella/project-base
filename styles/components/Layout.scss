@@ -11,14 +11,14 @@
   padding-left: 120px;
 
   .children {
-    min-width: 80%;
-    max-width: 80%;
+    min-width: 88%;
+    max-width: 88%;
     min-height: 100vh;
     flex-direction: column;
 
     @media #{media-queries.$max-sm} {
-      min-width: 95%;
-      max-width: 95%;
+      min-width: 96%;
+      max-width: 96%;
     }
   }
 }

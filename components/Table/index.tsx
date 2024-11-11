@@ -56,14 +56,16 @@ const Table: React.FC<TableProps> = ({ columns, data, handleClickOnModal }) => {
               (col) =>
                 columnVisibility[col.id] && <th key={col.id}>{col.name}</th>
             )}
-            <th>Actions</th>
-            <th>
-              <span
-                className='icon-config'
-                onClick={handleOpenModal}
-                role='button'
-                aria-label='Configure columns'
-              ></span>
+            <th className={`${styles.columnSmall}`}>Actions</th>
+            <th className={`${styles.columnSmall}`}>
+              <div className={`${styles.columnSmallIcon}`}>
+                <span
+                  className='icon-config'
+                  onClick={handleOpenModal}
+                  role='button'
+                  aria-label='Configure columns'
+                ></span>
+              </div>
             </th>
           </tr>
         </thead>
@@ -97,15 +99,15 @@ const Table: React.FC<TableProps> = ({ columns, data, handleClickOnModal }) => {
               <td>
                 <div className={`${styles.containerButtonTable}`}>
                   <span
-                    className='icon-bin'
+                    className={`icon-pencil ${styles.iconActions}`}
                     onClick={() =>
-                      handleClickOnModal("delete", row.id.toString())
+                      router.push(`/botTrainingSelected/update/${row.id}`)
                     }
                   ></span>
                   <span
-                    className='icon-pencil'
+                    className={`icon-bin ${styles.iconActions}`}
                     onClick={() =>
-                      router.push(`/botTrainingSelected/update/${row.id}`)
+                      handleClickOnModal("delete", row.id.toString())
                     }
                   ></span>
                 </div>

@@ -25,6 +25,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-plus-circle:before {
+  content: "\e91c";
+}
+.icon-plus:before {
+  content: "\e91b";
+}
 .icon-alert:before {
   content: "\e916";
 }

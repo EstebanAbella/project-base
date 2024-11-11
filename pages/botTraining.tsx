@@ -145,7 +145,7 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
           spanAlert={"alert"}
         />
         <section className='botTrainingsPage'>
-          <h3>BotTrainings</h3>
+          <h4>BotTrainings</h4>
 
           <section className='addBotTrainingAction'>
             <div className='addBotTrainingActionSearch'>
@@ -155,12 +155,16 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
                 setFilter={setFilter}
               ></FilterSearchIn>
             </div>
-            <Button
+            {/* <Button
               type={ButtonType.SUCCESS}
               value={"Add botTraining"}
               onClick={() => router.push(`/botTrainingSelected/create`)}
               extraClassName={"buttonTable"}
-            ></Button>
+            ></Button> */}
+            <span
+              className={`icon-plus-circle iconPlus`}
+              onClick={() => router.push(`/botTrainingSelected/create`)}
+            ></span>
           </section>
           {useGetBotTrainingsStatus !== ServerStatus.FETCHING && (
             <section className='containerTable'>
