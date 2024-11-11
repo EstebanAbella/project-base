@@ -32,7 +32,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
       type={isSubmit ? "submit" : "button"}
-      className={`Button ${type} ${extraClassName}`}
+      className={`Button ${type} ${extraClassName} ${disabled ? "disabled" : ""}`}
       aria-label={ariaLabel}
     >
       {value}

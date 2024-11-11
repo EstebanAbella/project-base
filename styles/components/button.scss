@@ -17,6 +17,10 @@
   gap: 5px;
   transition: 0.5s all;
 
+  &.disabled {
+    cursor: default;
+  }
+
   &.Button.primary {
     background-color: $colorApp;
     border: 1px solid $colorApp;

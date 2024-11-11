@@ -63,6 +63,7 @@ const BotTrainingSelected = ({}) => {
   const [form, setForm] = useState<any>()
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>("")
+  const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(true)
   const router = useRouter()
   const { param } = router.query
   const { useCreateBotTrainingHandler, useCreateBotTrainingStatus } =
@@ -114,6 +115,16 @@ const BotTrainingSelected = ({}) => {
       setStateModal(true)
     }
   }, [useCreateBotTrainingStatus, useEditBotTrainingStatus])
+
+  useEffect(() => {
+    if (form) {
+      const allRequiredFieldsFilled = createBotTrainingObject
+        .filter((field) => field.isRequired)
+        .every((field) => form[field.name] !== "" && form[field.name] !== null)
+
+      setButtonIsDisabled(!allRequiredFieldsFilled)
+    }
+  }, [form])
 
   const handleChange = (fieldValue: {
     [key: string]: string | number | []
@@ -355,7 +366,7 @@ const BotTrainingSelected = ({}) => {
                                 ? "Create"
                                 : "Update"
                             }
-                            // onClick={() => handleClick(form)}
+                            disabled={buttonIsDisabled}
                             onClick={() =>
                               handleClickOnModal(
                                 param && param[0] === TypeAction.CREATE
