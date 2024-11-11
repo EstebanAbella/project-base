@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { RootState } from "../redux/rootReducer"
-import {
-  BotTrainingResult,
-  BotTrainingsReducerPropsTypes,
-} from "../Utils/Types/botTrainingType"
 import { connect } from "react-redux"
-import Button, { ButtonType } from "../components/Button"
+import { ButtonType } from "../components/Button"
 import { ServerStatus } from "../Utils/Types/global"
 import Loader from "../components/Loader"
 import AccessConsume from "../wrappers/auth/AccessConsume"
 import Layout from "../components/Layout"
 import router from "next/router"
 import Modal from "../components/Modal"
-import { TextFieldType } from "../components/TextField"
 import withAuth from "../hooks/withAuth"
 import Pagination from "../components/Pagination"
 import Search from "../components/Search"
@@ -41,7 +36,6 @@ export type BotTrainingsPropType = {
 const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>("")
-  const [dataInitialModal, setDataInitialModal] = useState()
   const [dataIdDeleteModal, setDataIdDeleteModal] = useState<string>("")
   const [filter, setFilter] = useState<string>("")
   const [query, setQuery] = useState<string>("")
@@ -53,11 +47,8 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
     useGetBotTrainingsStatus,
   } = useGetBotTrainings()
 
-  const {
-    useDeleteBotTrainingHandler,
-    useDeleteBotTrainingData,
-    useDeleteBotTrainingStatus,
-  } = useDeleteBotTraining()
+  const { useDeleteBotTrainingHandler, useDeleteBotTrainingStatus } =
+    useDeleteBotTraining()
 
   const limit = 5
   const totalItems = useGetBotTrainingsData?.count
@@ -155,12 +146,6 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
                 setFilter={setFilter}
               ></FilterSearchIn>
             </div>
-            {/* <Button
-              type={ButtonType.SUCCESS}
-              value={"Add botTraining"}
-              onClick={() => router.push(`/botTrainingSelected/create`)}
-              extraClassName={"buttonTable"}
-            ></Button> */}
             <span
               className={`icon-plus-circle iconPlus`}
               onClick={() => router.push(`/botTrainingSelected/create`)}
