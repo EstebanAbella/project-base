@@ -67,6 +67,12 @@
 .icon-lock:before {
   content: "\e907";
 }
+.icon-bin:before {
+  content: "\e91a";
+}
+.icon-pencil:before {
+  content: "\e919";
+}
 .icon-checkmark:before {
   content: "\e914";
 }

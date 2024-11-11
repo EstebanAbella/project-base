@@ -1,0 +1,47 @@
+.tableContainer {
+  width: 100%;
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+      overflow: hidden;
+    }
+
+    .containerButtonTable {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+    }
+  }
+  .columnList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .columnListItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 4px;
+    background-color: #f9f9f9;
+    cursor: grab;
+  }
+  .icon-eye {
+    color: green;
+    cursor: pointer;
+  }
+  .icon-eye-off {
+    color: red;
+    cursor: pointer;
+  }
+}

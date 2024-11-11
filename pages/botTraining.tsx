@@ -23,6 +23,7 @@ import {
   useDeleteBotTraining,
   useGetBotTrainings,
 } from "./botTrainingSelected/useBotTrainingSelected"
+import Table from "../components/Table"
 
 const mapStateToProps = (state: RootState) => {
   const authReducer = state.auth
@@ -163,103 +164,18 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
           </section>
           {useGetBotTrainingsStatus !== ServerStatus.FETCHING && (
             <section className='containerTable'>
-              <table className='table table-striped custom-bg table-bordered align-middle'>
-                <thead className='table-dark tableThead'>
-                  <tr>
-                    <th scope='col'>Body</th>
-                    <th scope='col'>Footer</th>
-                    <th scope='col'>Seed</th>
-                    <th scope='col'>Trigger</th>
-                    <th scope='col'>Type</th>
-                    <th scope='col'>Options</th>
-                    <th scope='col'>Addit. Act.</th>
-                    <th scope='col'>Actions</th>
-                  </tr>
-                </thead>
-                <tbody className='tableBody'>
-                  {useGetBotTrainingsData?.items ? (
-                    useGetBotTrainingsData?.items?.map(
-                      (data: BotTrainingResult) => (
-                        <tr key={data.id}>
-                          <>
-                            <td>
-                              <p>{data.body}</p>
-                            </td>
-                            <td>{data.footer}</td>
-                            <td>{data.seed}</td>
-                            <td>{data.trigger}</td>
-                            <td>{data.type}</td>
-                            <td>
-                              {data?.options?.map((data: string, index) => (
-                                <p key={`${data} ${index}`}>{data}</p>
-                              ))}
-                            </td>
-                            <td>
-                              <div className='additionalActionsTable'>
-                                {data.additional_actions &&
-                                  data.additional_actions?.map(
-                                    (data: any, index: number) => (
-                                      <div
-                                        className='additionalActionsContainer'
-                                        key={index}
-                                      >
-                                        {data.reaction && (
-                                          <td>Reaction: {data.reaction}</td>
-                                        )}
-                                        {data.sticker_name && (
-                                          <td>Sticker: {data.sticker_name}</td>
-                                        )}
-                                        {data.delay && (
-                                          <td>Delay: {data.delay}</td>
-                                        )}
-                                        <td>Type: {data.type}</td>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            </td>
-                            <td>
-                              <div className='containerButtonTable'>
-                                <Button
-                                  type={ButtonType.ERROR}
-                                  value={"Delete"}
-                                  onClick={() =>
-                                    handleClickOnModal(
-                                      "delete",
-                                      data.id.toString()
-                                    )
-                                  }
-                                  extraClassName={"buttonTable"}
-                                ></Button>
-                                <Button
-                                  type={ButtonType.INFORMATION}
-                                  value={"Update"}
-                                  onClick={() =>
-                                    router.push(
-                                      `/botTrainingSelected/update/${data.id}`
-                                    )
-                                  }
-                                  extraClassName={"buttonTable"}
-                                ></Button>
-                              </div>
-                            </td>
-                          </>
-                        </tr>
-                      )
-                    )
-                  ) : (
-                    <tr>
-                      <>
-                        <td>{"-"}</td>
-                        <td>{"-"}</td>
-                        <td>{"-"}</td>
-                        <td>{"-"}</td>
-                        <td>{"-"}</td>
-                      </>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+              <Table
+                columns={[
+                  { name: "Body", id: "body" },
+                  { name: "Footer", id: "footer" },
+                  { name: "Trigger", id: "trigger" },
+                  { name: "Type", id: "type" },
+                  { name: "Options", id: "options" },
+                  { name: "Addit. Act.", id: "additional_actions" },
+                ]}
+                data={useGetBotTrainingsData?.items || []}
+                handleClickOnModal={handleClickOnModal}
+              />
             </section>
           )}
 
