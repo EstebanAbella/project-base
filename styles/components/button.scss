@@ -42,7 +42,8 @@
       color: $grayMid;
     }
     &.disabled {
-      border-color: 1px solid $grayLight;
+      border-color: $grayLight;
+      border: 1px solid $grayLight;
       color: $grayLight;
     }
   }

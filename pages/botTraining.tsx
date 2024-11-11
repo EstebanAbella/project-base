@@ -174,7 +174,6 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
               />
             </section>
           )}
-
           {useGetBotTrainingsStatus === ServerStatus.FETCH && (
             <Pagination
               limit={limit}
