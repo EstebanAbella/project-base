@@ -47,6 +47,26 @@ const Table: React.FC<TableProps> = ({ columns, data, handleClickOnModal }) => {
     setVisibleColumns(reorderedColumns)
   }
 
+  const mapContentTd = (row: any, col: any) => {
+    const content = Array.isArray(row[col.id])
+      ? row[col.id].every((item: any) => typeof item === "string")
+        ? row[col.id].join(", ")
+        : row[col.id]
+            .map((item: any) =>
+              typeof item === "object"
+                ? Object.entries(item)
+                    .map(([key, value]) => `${key}: ${value}`)
+                    .join(", ")
+                : item
+            )
+            .join(", ")
+      : typeof row[col.id] === "object"
+        ? JSON.stringify(row[col.id], null, 2)
+        : row[col.id]
+
+    return content
+  }
+
   return (
     <div className={styles.tableContainer}>
       <table className={`${styles.table}`}>
@@ -64,6 +84,12 @@ const Table: React.FC<TableProps> = ({ columns, data, handleClickOnModal }) => {
                   onClick={handleOpenModal}
                   role='button'
                   aria-label='Configure columns'
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleOpenModal()
+                    }
+                  }}
                 ></span>
               </div>
             </th>
@@ -76,23 +102,12 @@ const Table: React.FC<TableProps> = ({ columns, data, handleClickOnModal }) => {
                 (col) =>
                   columnVisibility[col.id] && (
                     <td key={col.id}>
-                      {Array.isArray(row[col.id])
-                        ? row[col.id].every(
-                            (item: any) => typeof item === "string"
-                          )
-                          ? row[col.id].join(", ")
-                          : row[col.id]
-                              .map((item: any) =>
-                                typeof item === "object"
-                                  ? Object.entries(item)
-                                      .map(([key, value]) => `${key}: ${value}`)
-                                      .join(", ")
-                                  : item
-                              )
-                              .join(", ")
-                        : typeof row[col.id] === "object"
-                          ? JSON.stringify(row[col.id], null, 2)
-                          : row[col.id]}{" "}
+                      <div
+                        className={`${styles.tdContent}`}
+                        title={mapContentTd(row, col)}
+                      >
+                        {mapContentTd(row, col)}
+                      </div>
                     </td>
                   )
               )}
@@ -103,12 +118,26 @@ const Table: React.FC<TableProps> = ({ columns, data, handleClickOnModal }) => {
                     onClick={() =>
                       router.push(`/botTrainingSelected/update/${row.id}`)
                     }
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        router.push(`/botTrainingSelected/update/${row.id}`)
+                      }
+                    }}
+                    aria-label='Update'
                   ></span>
                   <span
                     className={`icon-bin ${styles.iconActions}`}
                     onClick={() =>
                       handleClickOnModal("delete", row.id.toString())
                     }
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleClickOnModal("delete", row.id.toString())
+                      }
+                    }}
+                    aria-label='Delete'
                   ></span>
                 </div>
               </td>
@@ -147,6 +176,7 @@ const Table: React.FC<TableProps> = ({ columns, data, handleClickOnModal }) => {
                             onClick={() => handleToggleColumnVisibility(col.id)}
                             role='button'
                             aria-label='Toggle column visibility'
+                            tabIndex={0}
                           ></span>
                         </li>
                       )}

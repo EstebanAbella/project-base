@@ -149,6 +149,13 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
             <span
               className={`icon-plus-circle iconPlus`}
               onClick={() => router.push(`/botTrainingSelected/create`)}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  router.push(`/botTrainingSelected/create`)
+                }
+              }}
+              aria-label='Create'
             ></span>
           </section>
           {useGetBotTrainingsStatus !== ServerStatus.FETCHING && (
