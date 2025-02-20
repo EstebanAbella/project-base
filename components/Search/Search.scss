@@ -1,0 +1,26 @@
+@use "../../styles/variables";
+@use "../../styles/utilities";
+
+.search {
+  input {
+    background-color: variables.$white;
+    padding: 5px 10px;
+    position: relative;
+    z-index: utilities.z-index(double);
+    margin: 0px;
+    border: none;
+    width: 100%;
+    color: variables.$grayDark;
+    outline: none;
+    border: 1px solid variables.$borderForm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid variables.$focusInput;
+    }
+  }
+}

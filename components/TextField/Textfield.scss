@@ -1,0 +1,75 @@
+@use "../../styles/variables";
+
+.TextField {
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  .TextField label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .TextField.primary {
+    border-color: variables.$greenApp;
+    &:focus {
+      border-color: variables.$grayMid;
+    }
+  }
+  .TextField.secondary {
+    border-color: variables.$stateInformation;
+    &:focus {
+      border-color: variables.$stateInformation;
+    }
+  }
+  .TextField.tertiary {
+    border-color: variables.$greenApp;
+    &:focus {
+      border-color: variables.$grayMid;
+    }
+  }
+  .TextField.danger {
+    border-color: variables.$stateError;
+    &:focus {
+      border-color: variables.$stateError;
+    }
+  }
+  .TextField.warning {
+    border-color: variables.$stateError;
+    &:focus {
+      border-color: variables.$stateError;
+    }
+  }
+  .TextField.success {
+    border-color: variables.$stateSuccess;
+    &:focus {
+      border-color: variables.$stateSuccess;
+    }
+  }
+  .TextField.info {
+    border-color: variables.$stateInformation;
+    &:focus {
+      border-color: variables.$stateInformation;
+    }
+  }
+  .TextField.light {
+    border-color: variables.$white;
+    &:focus {
+      border-color: variables.$white;
+    }
+  }
+  .TextField.dark {
+    border-color: variables.$black;
+    &:focus {
+      border-color: variables.$black;
+    }
+  }
+  .TextField.link {
+    border-color: transparent;
+    &:focus {
+      border-color: transparent;
+    }
+  }
+}

@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react"
 import { RootState } from "../redux/rootReducer"
 import { connect } from "react-redux"
-import { ButtonType } from "../components/Button"
+import { ButtonType } from "../components/Button/Button"
 import { ServerStatus } from "../Utils/Types/global"
-import Loader from "../components/Loader"
+import { Loader } from "../components/Loader/Loader"
 import AccessConsume from "../wrappers/auth/AccessConsume"
-import Layout from "../components/Layout"
+import { Layout } from "../wrappers/Layout/Layout"
 import router from "next/router"
-import Modal from "../components/Modal"
 import withAuth from "../hooks/withAuth"
-import Pagination from "../components/Pagination"
-import Search from "../components/Search"
+import { Pagination } from "../components/Pagination/Pagination"
+import { Search } from "../components/Search/Search"
 import { UseCallOfTables } from "../hooks/useCallOfTables"
 import { loggedUser } from "../Utils/Types/authModel"
-import FilterSearchIn from "../components/FilterSearchIn/FilterSearchIn"
+
 import {
   useDeleteBotTraining,
   useGetBotTrainings,
 } from "./botTrainingSelected/useBotTrainingSelected"
-import Table from "../components/Table"
+import { Table } from "../components/Table/Table"
+import { FilterSearchIn } from "../components/FilterSearchIn"
+import { Modal } from "../components/Modal"
 
 const mapStateToProps = (state: RootState) => {
   const authReducer = state.auth

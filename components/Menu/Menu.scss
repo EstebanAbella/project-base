@@ -1,0 +1,48 @@
+@use "../../styles/utilities";
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 100vh;
+  background-color: #202c33;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .changeThemeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 6px;
+
+    > span {
+      font-size: 24px;
+    }
+  }
+
+  .Button {
+    font-size: 16px;
+    padding-left: 10px;
+    justify-content: flex-start;
+    width: 100%;
+
+    &.Button.tertiary {
+      font-weight: utilities.font-weight(semibold);
+      color: $white !important;
+    }
+
+    > span {
+      font-size: 24px;
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 0.6;
+    }
+  }
+}

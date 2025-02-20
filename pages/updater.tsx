@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect, useState } from "react"
+import { connect } from "react-redux"
 // import Moment from 'moment'
-import { RootState } from '../redux/rootReducer'
-import { doLogout } from '../redux/auth/actions'
-import { Frontend } from '../Utils/Constants'
-import Step from '../components/Step'
-import { resetGlobal } from '../redux/updater/actions'
-import LocalDataService from '../services/LocalDataService'
-import AccessConsume from '../wrappers/auth/AccessConsume'
-import router from 'next/router'
+import { RootState } from "../redux/rootReducer"
+import { doLogout } from "../redux/auth/actions"
+import { Frontend } from "../Utils/Constants"
+import { Step } from "../components/Step/Step"
+import { resetGlobal } from "../redux/updater/actions"
+import LocalDataService from "../services/LocalDataService"
+import AccessConsume from "../wrappers/auth/AccessConsume"
+import router from "next/router"
 
 const mapStateToProps = (store: RootState) => {
   const updaterReducer = store.updater
@@ -34,7 +34,7 @@ const Updater = ({ doLogout, resetGlobal, updateNeeded }: UpdaterPropTypes) => {
 
   useEffect(() => {
     if (!updateNeeded) {
-      router.push('/home')
+      router.push("/home")
     }
   }, [])
 
@@ -50,8 +50,8 @@ const Updater = ({ doLogout, resetGlobal, updateNeeded }: UpdaterPropTypes) => {
     setCurrentStep(5)
     setTimeout(() => {
       const appVersion = LocalDataService.getVersion()
-      localStorage.setItem('appVersion', appVersion)
-      localStorage.setItem('updated', today.toISOString())
+      localStorage.setItem("appVersion", appVersion)
+      localStorage.setItem("updated", today.toISOString())
       doLogout()
       resetGlobal()
     }, 1000)
@@ -70,7 +70,7 @@ const Updater = ({ doLogout, resetGlobal, updateNeeded }: UpdaterPropTypes) => {
             const objectStoreNames = Array.from(database.objectStoreNames)
             let total = objectStoreNames.length
             objectStoreNames.forEach((storeName) => {
-              const transaction = database.transaction(storeName, 'readwrite')
+              const transaction = database.transaction(storeName, "readwrite")
               const objectStore = transaction.objectStore(storeName)
               const clearRequest = objectStore.clear()
 
@@ -169,11 +169,11 @@ const Updater = ({ doLogout, resetGlobal, updateNeeded }: UpdaterPropTypes) => {
 
   const clearLocalAndSessionStorage = async () => {
     try {
-      const lastUpdated = localStorage.getItem('updated')
+      const lastUpdated = localStorage.getItem("updated")
 
       window.localStorage.clear()
       window.sessionStorage.clear()
-      window.localStorage.setItem('updated', lastUpdated ? lastUpdated : '')
+      window.localStorage.setItem("updated", lastUpdated ? lastUpdated : "")
 
       setCurrentStep(1)
       clearCache()
@@ -192,41 +192,41 @@ const Updater = ({ doLogout, resetGlobal, updateNeeded }: UpdaterPropTypes) => {
 
   return (
     <AccessConsume>
-      <section className="updaterContainer">
-        <div className="wizard">
+      <section className='updaterContainer'>
+        <div className='wizard'>
           <Step
-            title="Limpiando cookies"
+            title='Limpiando cookies'
             active={currentStep === 1}
-            percentage={'20'}
-            type="cookies"
+            percentage={"20"}
+            type='cookies'
           />
 
           <Step
-            title="Limpiando Cache"
+            title='Limpiando Cache'
             active={currentStep === 2}
-            percentage={'40'}
-            type="cache"
+            percentage={"40"}
+            type='cache'
           />
 
           <Step
-            title="Limpiando Servicios"
+            title='Limpiando Servicios'
             active={currentStep === 3}
-            percentage={'60'}
-            type="serviceWorker"
+            percentage={"60"}
+            type='serviceWorker'
           />
 
           <Step
-            title="Actualizando base de datos"
+            title='Actualizando base de datos'
             active={currentStep === 4}
-            percentage={'80'}
-            type="dexieDB"
+            percentage={"80"}
+            type='dexieDB'
           />
 
           <Step
-            title="Limpiando Informacion Innecesaria"
+            title='Limpiando Informacion Innecesaria'
             active={currentStep === 5}
-            percentage={'85'}
-            type="redux"
+            percentage={"85"}
+            type='redux'
           />
         </div>
       </section>

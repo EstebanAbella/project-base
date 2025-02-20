@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { RootState } from "../redux/rootReducer"
 import { connect } from "react-redux"
-import Button, { ButtonType } from "../components/Button"
 import { doLogin, doRestorePassword } from "../redux/auth/actions"
 import { ServerStatus } from "../Utils/Types/global"
-import { Logo } from "../components/Logo"
+import { Logo } from "../components/Logo/Logo"
+import { Button } from "../components/Button"
+import { ButtonType } from "../components/Button/Button"
 
 const mapStateToProps = (state: RootState) => {
   const authReducer = state.auth

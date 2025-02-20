@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react"
-import styles from "./FilterSearchIn.module.scss"
 import useFocusTrap from "../../hooks/useFocusTrap"
 import useDropdownDirection from "./useDropdownDirection"
 
@@ -8,7 +7,7 @@ interface FilterSearchInPropsType {
   setFilter: Function
 }
 
-const FilterSearchIn = ({
+export const FilterSearchIn = ({
   filterOptions,
   setFilter,
 }: FilterSearchInPropsType) => {
@@ -19,7 +18,7 @@ const FilterSearchIn = ({
 
   useFocusTrap(
     containerRef,
-    `a[href], button:not([disabled]), input, .${styles.list}`,
+    `a[href], button:not([disabled]), input, .list}`,
     !isOpen,
     selectedOption
   )
@@ -44,7 +43,7 @@ const FilterSearchIn = ({
 
   useEffect(() => {
     if (isOpen) {
-      const firstOption = containerRef.current?.querySelector(`.${styles.list}`)
+      const firstOption = containerRef.current?.querySelector(`.list}`)
       firstOption?.focus()
     }
   }, [isOpen])
@@ -69,9 +68,9 @@ const FilterSearchIn = ({
   }
 
   return (
-    <div className={styles.customSelect} ref={containerRef}>
+    <div className='customSelect' ref={containerRef}>
       <div
-        className={styles.selectInput}
+        className='selectInput'
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={(e) => {
           handleEnterKey(e)
@@ -85,21 +84,17 @@ const FilterSearchIn = ({
           value={selectedOption || ""}
           tabIndex={-1}
         />
-        <span
-          className={`${styles.arrow} ${isOpen ? `${styles.topTriangle}` : `${styles.buttonTriangle}`}`}
-        >
+        <span className={`arrow ${isOpen ? `topTriangle` : `buttonTriangle`}`}>
           {"▲"}
         </span>
       </div>
 
       {isOpen && (
-        <ul
-          className={`${styles.optionsList} ${openUpwards ? "top" : "bottom"}`}
-        >
+        <ul className={`optionsList ${openUpwards ? "top" : "bottom"}`}>
           {filterOptions.map((option) => (
             <li
               key={option.id}
-              className={`${styles.option} ${selectedOption === option.name ? styles.selected : ""} ${styles.list}`}
+              className={`option ${selectedOption === option.name ? "selected" : ""} list`}
               onClick={() => handleSelect(option.name)}
               tabIndex={0}
               onKeyDown={(e) => {
@@ -113,7 +108,7 @@ const FilterSearchIn = ({
             >
               {option.name}
               {selectedOption === option.name && (
-                <span className={styles.check}>✓</span>
+                <span className='check'>✓</span>
               )}
             </li>
           ))}
@@ -121,8 +116,8 @@ const FilterSearchIn = ({
       )}
 
       {selectedOption && (
-        <div className={styles.containerSelectedLabel}>
-          <p className={styles.selectedLabel}>{selectedOption}</p>
+        <div className='containerSelectedLabel'>
+          <p className='selectedLabel'>{selectedOption}</p>
           <span
             className='icon-close close'
             onClick={handleClick}
@@ -138,5 +133,3 @@ const FilterSearchIn = ({
     </div>
   )
 }
-
-export default FilterSearchIn

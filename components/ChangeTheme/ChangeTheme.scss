@@ -1,0 +1,107 @@
+@use "../../styles/variables";
+
+.checkboxInput {
+  z-index: 2;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 0px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkboxInput:checked + .checkboxLabel {
+  justify-content: right;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+  width: 40px;
+  height: 12px;
+  padding: 0px;
+  border-radius: 20px;
+  outline: transparent;
+  transition: 0.3s ease;
+  border: 1px solid transparent;
+  background-color: variables.$grayLight;
+  overflow: visible;
+
+  > span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    background-color: variables.$greenApp;
+    border-color: transparent;
+    border-width: 6px;
+    border-style: solid;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: variables.$grayDark;
+  }
+
+  &:disabled {
+    background-color: rgb(200, 198, 196);
+    cursor: default;
+
+    > span {
+      background-color: rgb(243, 242, 241);
+    }
+  }
+}
+
+.checkboxLabel {
+  justify-content: left;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+  width: 40px;
+  height: 12px;
+  padding: 0px;
+  border-radius: 20px;
+  outline: transparent;
+  transition: 0.3s ease;
+  border: 1px solid rgb(96, 94, 92);
+  background-color: #fff;
+  overflow: visible;
+
+  > span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: 0.3s ease;
+    background-color: variables.$grayLight;
+    border-color: transparent;
+    border-width: 6px;
+    border-style: solid;
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px solid variables.$grayDark;
+
+    > span {
+      background-color: variables.$grayDark;
+    }
+  }
+
+  &:disabled {
+    border: 1px solid rgb(200, 198, 196);
+    cursor: default;
+
+    > span {
+      background-color: rgb(200, 198, 196);
+    }
+  }
+}
+//end checkbox

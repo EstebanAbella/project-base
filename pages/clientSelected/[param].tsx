@@ -4,11 +4,11 @@ import { RootState } from "../../redux/rootReducer"
 import { getClient } from "../../redux/client/actions"
 import { connect } from "react-redux"
 import { ServerStatus } from "../../Utils/Types/global"
-import Loader from "../../components/Loader"
+import Loader from "../../components/Loader/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
-import Layout from "../../components/Layout"
+import Layout from "../../wrappers/Layout/Layout"
 import { ClientsReducerPropsType } from "../../Utils/Types/clientType"
-import Navigation from "../../components/UserData"
+import Navigation from "../../components/Navigation/Navigation"
 
 const mapStateToProps = (state: RootState) => {
   const clientsReducer = state.client

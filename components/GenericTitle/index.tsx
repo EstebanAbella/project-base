@@ -1,0 +1,1 @@
+export { GenericTitle } from "./GenericTitle"

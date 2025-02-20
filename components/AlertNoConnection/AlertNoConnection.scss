@@ -1,0 +1,26 @@
+@use "../../styles/utilities";
+@use "../../styles/variables";
+
+.alertConnection {
+  // position: relative;
+  width: 100%;
+  // height: 2.5vh;
+  background-color: variables.$stateError;
+  color: variables.$white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: utilities.z-index(quadruple);
+  transition:
+    max-height 0.5s ease-in-out,
+    transform 0.5s ease-in-out;
+}
+
+.noConnection {
+  transform: translateY(0px);
+  max-height: 2.5vh;
+}
+.connection {
+  transform: translateY(-50px);
+  max-height: 0vh;
+}

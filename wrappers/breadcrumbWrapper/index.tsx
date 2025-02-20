@@ -1,9 +1,8 @@
 import { useRouter } from "next/router"
 import { PropsWithChildren } from "react"
-import Breadcrumb from "../../components/breadcrumb/Breadcrumb"
-import { BreadcrumbItem } from "../../components/breadcrumb/BreadcrumbItem"
-import { useBreadcrumb } from "../../components/breadcrumb/useBreadcrumb"
-import styles from "../../components/breadcrumb/Breadcrumb.module.scss"
+import { BreadcrumbItem } from "../../components/Breadcrumb/BreadcrumbItem"
+import { useBreadcrumb } from "../../components/Breadcrumb/useBreadcrumb"
+import { Breadcrumb } from "../../components/Breadcrumb/Breadcrumb"
 
 type BreadcrumbWrapperProps = PropsWithChildren<{}>
 
@@ -15,7 +14,7 @@ export const BreadcrumbWrapper = ({ children }: BreadcrumbWrapperProps) => {
     <div>
       <Breadcrumb>
         <BreadcrumbItem isCurrent={router.pathname === "/"} href='/botTraining'>
-          <span className={`icon-home ${styles.breadHomeIcon}`} />
+          <span className='icon-home breadHomeIcon' />
         </BreadcrumbItem>
         {breadcrumbs &&
           breadcrumbs.map((breadcrumb) => (

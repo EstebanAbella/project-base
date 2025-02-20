@@ -1,17 +1,16 @@
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { ServerStatus } from "../../Utils/Types/global"
-import Loader from "../../components/Loader"
+import Loader from "../../components/Loader/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
-import Layout from "../../components/Layout"
-import TagInput from "../../components/TagInput"
-import TextFieldModalCrud, {
+import { Layout } from "../../wrappers/Layout/Layout"
+import { TagInput } from "../../components/TagInput/TagInput"
+import {
+  TextFieldModalCrud,
   TextFieldType,
-} from "../../components/TextFieldModalCrud"
-import AdditionalActionsInput from "../../components/AdditionalActionsInput"
-import Button, { ButtonType } from "../../components/Button"
+} from "../../components/TextFieldModalCrud/TextFieldModalCrud"
+
 import styles from "./BotTrainingSelected.module.scss"
-import Modal from "../../components/Modal"
 import {
   useCreateBotTraining,
   useEditBotTraining,
@@ -19,6 +18,9 @@ import {
 } from "./useBotTrainingSelected"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 import { title } from "process"
+import { AdditionalActionsInput } from "../../components/AdditionalActionsInput"
+import { Button, ButtonType } from "../../components/Button/Button"
+import { Modal } from "../../components/Modal"
 
 export type dataFormType = {
   label: string

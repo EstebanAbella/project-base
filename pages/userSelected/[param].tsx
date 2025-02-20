@@ -5,10 +5,10 @@ import { getUser } from "../../redux/user/actions"
 import { UsersReducerPropsTypes } from "../../Utils/Types/userType"
 import { connect } from "react-redux"
 import { ServerStatus } from "../../Utils/Types/global"
-import Loader from "../../components/Loader"
+import Loader from "../../components/Loader/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
-import Layout from "../../components/Layout"
-import Navigation from "../../components/UserData"
+import Layout from "../../wrappers/Layout/Layout"
+import Navigation from "../../components/Navigation/Navigation"
 
 const mapStateToProps = (state: RootState) => {
   const usersReducer = state.user
