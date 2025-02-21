@@ -23,18 +23,19 @@
 @import "../components/Pagination/Pagination.scss";
 @import "../components/Search/Search.scss";
 @import "../components/Step/Step.scss";
+@import "../components/TextField/Textfield.scss";
+@import "../view/botTrainingSelected/BotTrainingSelected.scss";
+@import "../view/ClientSelected/ClientSelected.scss";
+@import "../view/UserSelected/UserSelected.scss";
+@import "../view/BotTraining/BotTrainings.scss";
 
-@import "./components/Textfield.scss";
 @import "./components/Form.scss";
 @import "./components/Table.scss";
 @import "./pages/Updater.scss";
 @import "./pages/UpdateApp.scss";
 @import "./pages/Login.scss";
-@import "./pages/BotTrainings.scss";
 @import "./pages/Users.scss";
-@import "./pages/UserSelected.scss";
 @import "./pages/Clients.scss";
-@import "./pages/clientSelected.scss";
 @import "./pages/NotAuthorized.scss";
 @import "./icons/iconStyle";
 // @import "node_modules/bootstrap/dist/css/bootstrap.min.css";

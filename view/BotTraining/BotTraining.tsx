@@ -1,46 +1,31 @@
 import React, { useEffect, useState } from "react"
-import { RootState } from "../redux/rootReducer"
-import { connect } from "react-redux"
-import { ButtonType } from "../components/Button/Button"
-import { ServerStatus } from "../Utils/Types/global"
-import { Loader } from "../components/Loader/Loader"
-import AccessConsume from "../wrappers/auth/AccessConsume"
-import { Layout } from "../wrappers/Layout/Layout"
+import { RootState } from "../../redux/rootReducer"
+import { useSelector } from "react-redux"
+import { ButtonType } from "../../components/Button/Button"
+import { ServerStatus } from "../../Utils/Types/global"
+import { Loader } from "../../components/Loader/Loader"
+import AccessConsume from "../../wrappers/auth/AccessConsume"
+import { Layout } from "../../wrappers/Layout/Layout"
 import router from "next/router"
-import withAuth from "../hooks/withAuth"
-import { Pagination } from "../components/Pagination/Pagination"
-import { Search } from "../components/Search/Search"
-import { UseCallOfTables } from "../hooks/useCallOfTables"
-import { loggedUser } from "../Utils/Types/authModel"
-
+import { Pagination } from "../../components/Pagination/Pagination"
+import { Search } from "../../components/Search/Search"
+import { UseCallOfTables } from "../../hooks/useCallOfTables"
+import { Table } from "../../components/Table/Table"
+import { FilterSearchIn } from "../../components/FilterSearchIn"
+import { Modal } from "../../components/Modal"
 import {
   useDeleteBotTraining,
   useGetBotTrainings,
-} from "./botTrainingSelected/useBotTrainingSelected"
-import { Table } from "../components/Table/Table"
-import { FilterSearchIn } from "../components/FilterSearchIn"
-import { Modal } from "../components/Modal"
+} from "../BotTrainingSelected/useBotTrainingSelected"
 
-const mapStateToProps = (state: RootState) => {
-  const authReducer = state.auth
-  return {
-    userLogged: authReducer.user,
-  }
-}
-
-const mapDispatchToProps = {}
-
-export type BotTrainingsPropType = {
-  userLogged: loggedUser | undefined
-}
-
-const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
+export const BotTrainings = () => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>("")
   const [dataIdDeleteModal, setDataIdDeleteModal] = useState<string>("")
   const [filter, setFilter] = useState<string>("")
   const [query, setQuery] = useState<string>("")
   const [offsetState, setOffsetState] = useState<number>(0)
+  const userLogged = useSelector((state: RootState) => state.auth.user)
 
   const {
     useGetBotTrainingsHandler,
@@ -192,7 +177,3 @@ const BotTrainings = ({ userLogged }: BotTrainingsPropType) => {
     </AccessConsume>
   )
 }
-
-export default withAuth(
-  connect(mapStateToProps, mapDispatchToProps)(BotTrainings)
-)

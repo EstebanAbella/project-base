@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import BotTrainingServiceSingleton from "../../services/apiService/botTraining"
 import { ServerStatus } from "../../Utils/Types/global"
 
