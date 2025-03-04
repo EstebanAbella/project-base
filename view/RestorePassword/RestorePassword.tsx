@@ -1,31 +1,19 @@
 import React, { useEffect, useState } from "react"
-import { connect } from "react-redux"
-import { RootState } from "../redux/rootReducer"
-import { ServerStatus } from "../Utils/Types/global"
-import { doRestorePasswordValidated } from "../redux/auth/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../redux/rootReducer"
+import { ServerStatus } from "../../Utils/Types/global"
+import { doRestorePasswordValidated } from "../../redux/auth/actions"
 import { useRouter } from "next/router"
-import Loader from "../components/Loader/Loader"
-import { Button } from "../components/Button"
-import { ButtonType } from "../components/Button/Button"
+import { Loader } from "../../components/Loader/Loader"
+import { Button } from "../../components/Button"
+import { ButtonType } from "../../components/Button/Button"
+import { AppDispatch } from "../../redux/store"
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    restorePasswordValidatedStatus: state.auth.restorePasswordValidatedStatus,
-  }
-}
-const mapDispatchToProps = {
-  doRestorePasswordValidated,
-}
-
-export type RestorePasswordPropsType = {
-  doRestorePasswordValidated: Function
-  restorePasswordValidatedStatus: ServerStatus
-}
-
-const RestorePassword = ({
-  restorePasswordValidatedStatus,
-  doRestorePasswordValidated,
-}: RestorePasswordPropsType) => {
+export const RestorePassword = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const restorePasswordValidatedStatus = useSelector(
+    (state: RootState) => state.auth.restorePasswordValidatedStatus
+  )
   // Datos de la contraseña
   const [password, setPassword] = useState("")
   // Visibilidad Contraseña
@@ -70,10 +58,12 @@ const RestorePassword = ({
 
   const handleClick = () => {
     if (validateForm() && tokenParams !== "") {
-      doRestorePasswordValidated({
-        newPassword: password,
-        token: tokenParams,
-      })
+      dispatch(
+        doRestorePasswordValidated({
+          newPassword: password,
+          token: tokenParams,
+        })
+      )
     }
   }
 
@@ -183,5 +173,3 @@ const RestorePassword = ({
     </form>
   )
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(RestorePassword)

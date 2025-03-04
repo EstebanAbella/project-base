@@ -1,8 +1,8 @@
 import React from "react"
-import Button, { ButtonType } from "../components/Button/Button"
 import router from "next/router"
+import { Button, ButtonType } from "../../components/Button/Button"
 
-const notAuthorized = () => {
+export const NotAuthorized = () => {
   const handleClick = () => {
     router.push("/clients")
   }
@@ -18,5 +18,3 @@ const notAuthorized = () => {
     </div>
   )
 }
-
-export default notAuthorized

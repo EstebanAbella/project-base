@@ -1,5 +1,5 @@
 import React from "react"
-import { Login } from "../../view/login/login"
+import { Login } from "../../view/Login/Login"
 
 const LoginPage = () => {
   return <Login />
