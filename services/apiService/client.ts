@@ -127,7 +127,7 @@ class ClientService {
   }
 
   async getClientsByUserId(
-    id: string,
+    id?: string,
     offset?: number,
     limit?: number,
     query?: string,

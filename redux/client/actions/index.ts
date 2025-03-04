@@ -100,7 +100,7 @@ export const editClient =
 
 export const getClientsByUserId =
   (
-    id: string,
+    id?: string,
     offset?: number,
     limit?: number,
     query?: string,

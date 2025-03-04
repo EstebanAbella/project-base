@@ -1,43 +1,22 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { RootState } from "../redux/rootReducer"
-import { connect } from "react-redux"
-import { doLogin, doRestorePassword } from "../redux/auth/actions"
-import { ServerStatus } from "../Utils/Types/global"
-import { Logo } from "../components/Logo/Logo"
-import { Button } from "../components/Button"
-import { ButtonType } from "../components/Button/Button"
+import { RootState } from "../../redux/rootReducer"
+import { useDispatch, useSelector } from "react-redux"
+import { doLogin, doRestorePassword } from "../../redux/auth/actions"
+import { ServerStatus } from "../../Utils/Types/global"
+import { Logo } from "../../components/Logo/Logo"
+import { Button } from "../../components/Button"
+import { ButtonType } from "../../components/Button/Button"
+import { AppDispatch } from "../../redux/store"
 
-const mapStateToProps = (state: RootState) => {
-  const authReducer = state.auth
-  const updaterReducer = state.updater
-  return {
-    loginStatus: authReducer.loginStatus,
-    restorePasswordStatus: authReducer.restorePasswordStatus,
-    updateNeeded: updaterReducer.updateNeeded,
-  }
-}
-
-const mapDispatchToProps = {
-  doLogin,
-  doRestorePassword,
-}
-
-export type LoginPropType = {
-  doLogin: Function
-  loginStatus: ServerStatus
-  doRestorePassword: Function
-  restorePasswordStatus: ServerStatus
-  updateNeeded: boolean
-}
-
-function Login({
-  doLogin,
-  loginStatus,
-  restorePasswordStatus,
-  doRestorePassword,
-  updateNeeded,
-}: LoginPropType) {
+export const Login = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const { loginStatus, restorePasswordStatus } = useSelector(
+    (state: RootState) => state.auth
+  )
+  const updateNeeded = useSelector(
+    (state: RootState) => state.updater.updateNeeded
+  )
   const router = useRouter()
   const [form, setForm] = useState({
     email: "",
@@ -71,6 +50,7 @@ function Login({
   }, [restorePasswordStatus])
 
   useEffect(() => {
+    console.log("AAA", loginStatus, sendEmail, tryLogin)
     if (loginStatus === ServerStatus.FETCH && !updateNeeded)
       router.push("/botTraining")
   }, [loginStatus])
@@ -128,19 +108,21 @@ function Login({
 
   const handleLogin = () => {
     if (validateForm() && !sendEmail) {
-      doLogin(form)
+      setTryLogin(true)
+      dispatch(doLogin(form))
     }
-    setSendEmail(true)
   }
 
   const onRestorePassword = () => {
     if (validEmail.test(form.email)) {
       setEventsButton(true)
-      doRestorePassword({
-        email: form.email,
-        location: `${window.location.origin}`,
-        backoffice: false,
-      })
+      dispatch(
+        doRestorePassword({
+          email: form.email,
+          location: `${window.location.origin}`,
+          backoffice: false,
+        })
+      )
     }
   }
 
@@ -209,13 +191,11 @@ function Login({
           )}
 
           <div className='messageForm'>
-            {loginStatus === ServerStatus.FETCH_ERROR &&
-              !sendEmail &&
-              tryLogin && (
-                <p style={{ color: "red", textAlign: "center" }}>
-                  Las credenciales no son válidas
-                </p>
-              )}
+            {loginStatus === ServerStatus.FETCH_ERROR && !sendEmail && (
+              <p style={{ color: "red", textAlign: "center" }}>
+                Las credenciales no son válidas
+              </p>
+            )}
           </div>
 
           <div className='buttonContainerForm'>
@@ -265,7 +245,9 @@ function Login({
             )}
             {restorePasswordStatus === ServerStatus.FETCH_ERROR && (
               <div className='messageForm'>
-                <p>Error al enviar correo electrónico.</p>
+                <p style={{ color: "red", textAlign: "center" }}>
+                  Error al enviar correo electrónico.
+                </p>
               </div>
             )}
           </div>
@@ -274,5 +256,3 @@ function Login({
     </main>
   )
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)

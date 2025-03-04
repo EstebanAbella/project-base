@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { RootState } from "../redux/rootReducer"
+import { RootState } from "../../redux/rootReducer"
 import {
   createClient,
   deleteClient,
@@ -7,81 +7,39 @@ import {
   getClient,
   getClientsByUserId,
   getClients,
-} from "../redux/client/actions"
-import { ClientsReducerPropsType } from "../Utils/Types/clientType"
-import { connect } from "react-redux"
-import Button, { ButtonType } from "../components/Button/Button"
-import { ServerStatus } from "../Utils/Types/global"
-import Loader from "../components/Loader/Loader"
-import AccessConsume from "../wrappers/auth/AccessConsume"
-import Layout from "../wrappers/Layout/Layout"
+} from "../../redux/client/actions"
+import { ClientsReducerPropsType } from "../../Utils/Types/clientType"
+import { connect, useDispatch, useSelector } from "react-redux"
+import { Button, ButtonType } from "../../components/Button/Button"
+import { ServerStatus } from "../../Utils/Types/global"
+import AccessConsume from "../../wrappers/auth/AccessConsume"
 import router from "next/router"
-import Modal from "../components/Modal/Modal"
-import { TextFieldType } from "../components/TextField/TextField"
-import { loggedUser } from "../Utils/Types/authModel"
-import Pagination from "../components/Pagination/Pagination"
-import Search from "../components/Search/Search"
-import { UseCallOfTables } from "../hooks/useCallOfTables"
-import withAuth from "../hooks/withAuth"
+import { TextFieldType } from "../../components/TextField/TextField"
+import { loggedUser } from "../../Utils/Types/authModel"
+import { UseCallOfTables } from "../../hooks/useCallOfTables"
+import withAuth from "../../hooks/withAuth"
+import { Layout } from "../../wrappers/Layout"
+import { Modal } from "../../components/Modal"
+import { Search } from "../../components/Search"
+import { Loader } from "../../components/Loader"
+import { Pagination } from "../../components/Pagination"
+import { AppDispatch } from "../../redux/store"
 
-const mapStateToProps = (state: RootState) => {
-  const clientsReducer = state.client
-  const authReducer = state.auth
-  return {
-    client: clientsReducer.client,
-    clientStatus: clientsReducer.clientStatus,
+export const Clients = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const {
+    client,
+    clientStatus,
+    clients,
+    clientsStatus,
+    clientCreateStatus,
+    clientDeleteStatus,
+    clientEditStatus,
+    clientsByUserId,
+    clientsByUserIdStatus,
+  } = useSelector((state: RootState) => state.client)
+  const user = useSelector((state: RootState) => state.auth.user)
 
-    clients: clientsReducer.clients,
-    clientsStatus: clientsReducer.clientsStatus,
-
-    clientsByUserId: clientsReducer.clientsByUserId,
-    clientsByUserIdStatus: clientsReducer.clientsByUserIdStatus,
-
-    clientCreateStatus: clientsReducer.clientCreateStatus,
-    clientDeleteStatus: clientsReducer.clientDeleteStatus,
-    clientEditStatus: clientsReducer.clientEditStatus,
-
-    user: authReducer.user,
-  }
-}
-
-const mapDispatchToProps = {
-  getClients,
-  getClient,
-  createClient,
-  deleteClient,
-  editClient,
-  getClientsByUserId,
-}
-
-export type ClientsPropType = {
-  getClients: Function
-  getClient: Function
-  createClient: Function
-  deleteClient: Function
-  editClient: Function
-  getClientsByUserId: Function
-  user: loggedUser | undefined
-} & ClientsReducerPropsType
-
-const Clients = ({
-  getClients,
-  getClient,
-  getClientsByUserId,
-  createClient,
-  deleteClient,
-  editClient,
-  client,
-  clientStatus,
-  clients,
-  clientsStatus,
-  clientCreateStatus,
-  clientDeleteStatus,
-  clientEditStatus,
-  clientsByUserId,
-  clientsByUserIdStatus,
-  user,
-}: ClientsPropType) => {
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>("")
   const [dataInitialModal, setDataInitialModal] = useState()
@@ -96,14 +54,16 @@ const Clients = ({
   useEffect(() => {
     if (!user?.id) return
 
-    getClientsByUserId(
-      user?.id,
-      offsetState,
-      limit,
-      query ?? "",
-      filter ?? "",
-      order ?? "",
-      roles ?? ""
+    dispatch(
+      getClientsByUserId(
+        user?.id,
+        offsetState,
+        limit,
+        query ?? "",
+        filter ?? "",
+        order ?? "",
+        roles ?? ""
+      )
     )
   }, [user?.id])
 
@@ -119,6 +79,25 @@ const Clients = ({
       ) {
         setOffsetState((prevOffset) => prevOffset - limit)
       } else {
+        dispatch(
+          getClientsByUserId(
+            user?.id,
+            offsetState,
+            limit,
+            query ?? "",
+            filter ?? "",
+            order ?? "",
+            roles ?? ""
+          )
+        )
+      }
+      setStateModal(false)
+    }
+  }, [clientDeleteStatus])
+
+  useEffect(() => {
+    if (clientEditStatus === ServerStatus.FETCH) {
+      dispatch(
         getClientsByUserId(
           user?.id,
           offsetState,
@@ -128,21 +107,6 @@ const Clients = ({
           order ?? "",
           roles ?? ""
         )
-      }
-      setStateModal(false)
-    }
-  }, [clientDeleteStatus])
-
-  useEffect(() => {
-    if (clientEditStatus === ServerStatus.FETCH) {
-      getClientsByUserId(
-        user?.id,
-        offsetState,
-        limit,
-        query ?? "",
-        filter ?? "",
-        order ?? "",
-        roles ?? ""
       )
       setStateModal(false)
     }
@@ -155,14 +119,16 @@ const Clients = ({
       if (isLastPage && totalItems % limit === 0) {
         setOffsetState((prevOffset) => prevOffset + limit)
       } else {
-        getClientsByUserId(
-          user?.id,
-          offsetState,
-          limit,
-          query ?? "",
-          filter ?? "",
-          order ?? "",
-          roles ?? ""
+        dispatch(
+          getClientsByUserId(
+            user?.id,
+            offsetState,
+            limit,
+            query ?? "",
+            filter ?? "",
+            order ?? "",
+            roles ?? ""
+          )
         )
       }
       setStateModal(false)
@@ -177,7 +143,7 @@ const Clients = ({
     filter,
     order,
     roles,
-    action: getClientsByUserId,
+    action: dispatch(getClientsByUserId),
     setOffsetState,
   })
 
@@ -245,11 +211,11 @@ const Clients = ({
   ]
 
   const handleClickCreateUSer = (data: any) => {
-    createClient(data)
+    dispatch(createClient(data))
   }
 
   const handleClickEditUSer = (data: any) => {
-    editClient(data)
+    dispatch(editClient(data))
   }
 
   const handleClickOnModal = (typeModal: string, data?: any) => {
@@ -265,7 +231,7 @@ const Clients = ({
 
   return (
     <AccessConsume>
-      <Layout isNavigation={false}>
+      <Layout>
         <Modal
           stateModal={stateModal}
           setStateModal={setStateModal}
@@ -333,7 +299,7 @@ const Clients = ({
                               <Button
                                 type={ButtonType.ERROR}
                                 value={"Delete"}
-                                onClick={() => deleteClient(data.id)}
+                                onClick={() => dispatch(deleteClient(data.id))}
                                 extraClassName={"buttonTable"}
                               ></Button>
                               <Button
@@ -375,5 +341,3 @@ const Clients = ({
     </AccessConsume>
   )
 }
-
-export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Clients))
