@@ -1,6 +1,5 @@
-import axios, { AxiosInstance } from 'axios'
-import { CustomErrorType } from '../../Utils/Types/global'
-
+import axios, { AxiosInstance } from "axios"
+import { CustomErrorType } from "../../interface/global"
 
 export interface globalType {
   apiInstance?: ApiService
@@ -27,14 +26,14 @@ class ApiService {
 
   constructor() {
     if ((global as globalType).apiInstance) {
-      throw new Error('ApiService instance cannot be created!!')
+      throw new Error("ApiService instance cannot be created!!")
     } else {
       this.axios = axios.create({
         baseURL: envVars.apiUrl,
         timeout: 50000,
-        timeoutErrorMessage: 'Tiempo de respuesta excedido',
+        timeoutErrorMessage: "Tiempo de respuesta excedido",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       })
     }
@@ -47,18 +46,18 @@ class ApiService {
 
   errorComposer(error: any): CustomErrorType {
     try {
-      if (error.code === 'ECONNABORTED') {
+      if (error.code === "ECONNABORTED") {
         return { statusCode: 501, statusMessage: error.message }
       } else {
         const statusCode = error.response?.status ? error.response.status : null
         const statusMessage = error.response?.data.error
           ? error.response?.data.error
-          : 'Generic Error'
+          : "Generic Error"
         if (statusCode) return { statusCode, statusMessage }
         return { statusCode: 501, statusMessage }
       }
     } catch (e: unknown) {
-      return { statusCode: 501, statusMessage: 'Generic Error' }
+      return { statusCode: 501, statusMessage: "Generic Error" }
     }
   }
 

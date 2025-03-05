@@ -1,7 +1,7 @@
-import { AuthReducerPropsType } from '../../../Utils/Types/authModel'
-import { ServerStatus } from '../../../Utils/Types/global'
-import { loggedUser } from '../../../models/models'
-import * as t from '../types'
+import { AuthReducerPropsType } from "../../../view/Login/authModel.interface"
+import { ServerStatus } from "../../../interface/global"
+import { loggedUser } from "../../../models/models"
+import * as t from "../types"
 
 export type UpdaterReducerType = {
   updaterStatus: ServerStatus
@@ -16,13 +16,13 @@ const globalState: UpdaterReducerType = {
 }
 
 export type PosibleActions =
-  | { type: 'DO_UPDATE_FETCHING' }
-  | { type: 'DO_UPDATE_FETCH' }
-  | { type: 'DO_UPDATE_FETCH_ERROR' }
-  | { type: 'CHECKER_UPDATE_FETCHING' }
-  | { type: 'CHECKER_UPDATE_FETCH'; payload: boolean }
-  | { type: 'CHECKER_UPDATE_FETCH_ERROR'; payload: boolean }
-  | { type: 'RESET_GLOBAL' }
+  | { type: "DO_UPDATE_FETCHING" }
+  | { type: "DO_UPDATE_FETCH" }
+  | { type: "DO_UPDATE_FETCH_ERROR" }
+  | { type: "CHECKER_UPDATE_FETCHING" }
+  | { type: "CHECKER_UPDATE_FETCH"; payload: boolean }
+  | { type: "CHECKER_UPDATE_FETCH_ERROR"; payload: boolean }
+  | { type: "RESET_GLOBAL" }
 
 const reducer = (
   state = globalState,

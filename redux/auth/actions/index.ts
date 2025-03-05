@@ -1,10 +1,10 @@
-import { DispatchEmptyObject } from '../../../Utils/Types/global'
-import { loggedUser } from '../../../models/models'
-import LocalDataService from '../../../services/LocalDataService'
-import ApiService from '../../../services/apiService/ApiService'
-import ApiServiceSingleton from '../../../services/apiService/ApiService'
-import AuthServiceSingleton from '../../../services/apiService/auth'
-import * as t from '../types'
+import { DispatchEmptyObject } from "../../../interface/global"
+import { loggedUser } from "../../../models/models"
+import LocalDataService from "../../../services/LocalDataService"
+import ApiService from "../../../services/apiService/ApiService"
+import ApiServiceSingleton from "../../../services/apiService/ApiService"
+import AuthServiceSingleton from "../../../services/apiService/auth"
+import * as t from "../types"
 
 export type loginFormType = {
   email: string
@@ -23,7 +23,7 @@ export const doLogin =
           if (result.token) ApiService.setToken(result.token)
           dispatch({ type: t.LOGIN_FETCH, payload: { ...result } })
         } else
-          dispatch({ type: t.LOGIN_FETCH_ERROR, payload: 'Not User Found' })
+          dispatch({ type: t.LOGIN_FETCH_ERROR, payload: "Not User Found" })
       })
       .catch((err) => {
         dispatch({ type: t.LOGIN_FETCH_ERROR, payload: err.message })
@@ -40,7 +40,7 @@ export const doLogout = () => (dispatch: DispatchEmptyObject) => {
 
 const redirectAndClearData = (): void => {
   LocalDataService.clearData()
-  window.location.href = '/login'
+  window.location.href = "/login"
 }
 
 // RESTORE PASSWORD

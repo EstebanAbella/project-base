@@ -1,7 +1,7 @@
-import UserServiceSingleton from '../../../services/apiService/user'
-import { CustomErrorType } from '../../../Utils/Types/global'
+import UserServiceSingleton from "../../../services/apiService/user"
+import { CustomErrorType } from "../../../interface/global"
 
-import * as t from '../types'
+import * as t from "../types"
 
 export const getUsers =
   (

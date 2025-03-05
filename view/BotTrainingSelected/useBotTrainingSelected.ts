@@ -1,6 +1,6 @@
 import { useState } from "react"
 import BotTrainingServiceSingleton from "../../services/apiService/botTraining"
-import { ServerStatus } from "../../Utils/Types/global"
+import { ServerStatus } from "../../interface/global"
 
 export const useGetBotTrainings = () => {
   const [data, setData] = useState<any>()

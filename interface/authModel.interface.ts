@@ -1,4 +1,4 @@
-import { ServerStatus } from '../global'
+import { ServerStatus } from "./global"
 
 export type loggedUser = {
   name: string

@@ -1,78 +1,37 @@
 import React, { useEffect, useState } from "react"
-import { RootState } from "../redux/rootReducer"
+import { useDispatch, useSelector } from "react-redux"
+import router from "next/router"
+import { AppDispatch } from "../../redux/store"
 import {
   createUser,
   deleteUser,
   editUser,
   getUser,
   getUsers,
-} from "../redux/user/actions"
-import { UsersReducerPropsTypes } from "../Utils/Types/userType"
-import { connect } from "react-redux"
-import Button, { ButtonType } from "../components/Button/Button"
-import { ServerStatus } from "../Utils/Types/global"
-import Loader from "../components/Loader/Loader"
-import AccessConsume from "../wrappers/auth/AccessConsume"
-import Layout from "../wrappers/Layout/Layout"
-import router from "next/router"
-import Modal from "../components/Modal/Modal"
-import { TextFieldType } from "../components/TextField/TextField"
-import withAuth from "../hooks/withAuth"
-import Pagination from "../components/Pagination/Pagination"
-import Search from "../components/Search/Search"
-import { UseCallOfTables } from "../hooks/useCallOfTables"
-import { loggedUser } from "../Utils/Types/authModel"
+} from "../../redux/user/actions"
+import { RootState } from "../../redux/rootReducer"
+import { ServerStatus } from "../../interface/global"
+import { UseCallOfTables } from "../../hooks/useCallOfTables"
+import { TextFieldType } from "../../components/TextFieldModalCrud/TextFieldModalCrud"
+import AccessConsume from "../../wrappers/auth/AccessConsume"
+import { Layout } from "../../wrappers/Layout/Layout"
+import { Modal } from "../../components/Modal"
+import { Button, ButtonType } from "../../components/Button/Button"
+import { Search } from "../../components/Search/Search"
+import { Pagination } from "../../components/Pagination/Pagination"
+import { Loader } from "../../components/Loader/Loader"
 
-const mapStateToProps = (state: RootState) => {
-  const usersReducer = state.user
-  const authReducer = state.auth
-  return {
-    user: usersReducer.user,
-    userStatus: usersReducer.userStatus,
-
-    users: usersReducer.users,
-    usersStatus: usersReducer.usersStatus,
-
-    userCreateStatus: usersReducer.userCreateStatus,
-    userDeleteStatus: usersReducer.userDeleteStatus,
-    userEditStatus: usersReducer.userEditStatus,
-
-    userLogged: authReducer.user,
-  }
-}
-
-const mapDispatchToProps = {
-  getUsers,
-  getUser,
-  createUser,
-  deleteUser,
-  editUser,
-}
-
-export type UsersPropType = {
-  getUsers: Function
-  getUser: Function
-  createUser: Function
-  deleteUser: Function
-  editUser: Function
-  userLogged: loggedUser | undefined
-} & UsersReducerPropsTypes
-
-const Users = ({
-  getUsers,
-  getUser,
-  createUser,
-  deleteUser,
-  editUser,
-  user,
-  userStatus,
-  users,
-  usersStatus,
-  userCreateStatus,
-  userDeleteStatus,
-  userEditStatus,
-  userLogged,
-}: UsersPropType) => {
+export const Users = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const { user } = useSelector((state: RootState) => state.auth)
+  const {
+    userStatus,
+    users,
+    usersStatus,
+    userCreateStatus,
+    userDeleteStatus,
+    userEditStatus,
+  } = useSelector((state: RootState) => state.user)
   const [stateModal, setStateModal] = useState<boolean>(false)
   const [typeModal, setTypeModal] = useState<string>("")
   const [dataInitialModal, setDataInitialModal] = useState()
@@ -82,16 +41,18 @@ const Users = ({
   const limit = 5
   const totalItems = users?.count ? users?.count : 0
   const order = "ASC"
-  const roles = userLogged?.role
+  const roles = user?.role
 
   useEffect(() => {
-    getUsers(
-      offsetState,
-      limit,
-      query ?? "",
-      filter ?? "",
-      order ?? "",
-      roles ?? ""
+    dispatch(
+      getUsers(
+        offsetState,
+        limit,
+        query ?? "",
+        filter ?? "",
+        order ?? "",
+        roles ?? ""
+      )
     )
   }, [])
 
@@ -107,13 +68,15 @@ const Users = ({
       ) {
         setOffsetState((prevOffset) => prevOffset - limit)
       } else {
-        getUsers(
-          offsetState,
-          limit,
-          query ?? "",
-          filter ?? "",
-          order ?? "",
-          roles ?? ""
+        dispatch(
+          getUsers(
+            offsetState,
+            limit,
+            query ?? "",
+            filter ?? "",
+            order ?? "",
+            roles ?? ""
+          )
         )
       }
       setStateModal(false)
@@ -122,13 +85,15 @@ const Users = ({
 
   useEffect(() => {
     if (userEditStatus === ServerStatus.FETCH) {
-      getUsers(
-        offsetState,
-        limit,
-        query ?? "",
-        filter ?? "",
-        order ?? "",
-        roles ?? ""
+      dispatch(
+        getUsers(
+          offsetState,
+          limit,
+          query ?? "",
+          filter ?? "",
+          order ?? "",
+          roles ?? ""
+        )
       )
       setStateModal(false)
     }
@@ -141,13 +106,15 @@ const Users = ({
       if (isLastPage && totalItems % limit === 0) {
         setOffsetState((prevOffset) => prevOffset + limit)
       } else {
-        getUsers(
-          offsetState,
-          limit,
-          query ?? "",
-          filter ?? "",
-          order ?? "",
-          roles ?? ""
+        dispatch(
+          getUsers(
+            offsetState,
+            limit,
+            query ?? "",
+            filter ?? "",
+            order ?? "",
+            roles ?? ""
+          )
         )
       }
       setStateModal(false)
@@ -161,7 +128,7 @@ const Users = ({
     filter,
     order,
     roles,
-    action: getUsers,
+    action: dispatch(getUsers),
     setOffsetState,
   })
 
@@ -238,11 +205,11 @@ const Users = ({
   ]
 
   const handleClickCreateUSer = (data: any) => {
-    createUser(data)
+    dispatch(createUser(data))
   }
 
   const handleClickEditUSer = (data: any) => {
-    editUser(data)
+    dispatch(editUser(data))
   }
 
   const handleClickOnModal = (typeModal: string, data?: any) => {
@@ -258,7 +225,7 @@ const Users = ({
 
   return (
     <AccessConsume>
-      <Layout isNavigation={false}>
+      <Layout>
         <Modal
           stateModal={stateModal}
           setStateModal={setStateModal}
@@ -326,7 +293,7 @@ const Users = ({
                               <Button
                                 type={ButtonType.ERROR}
                                 value={"Delete"}
-                                onClick={() => deleteUser(data.id)}
+                                onClick={() => dispatch(deleteUser(data.id))}
                                 extraClassName={"buttonTable"}
                               ></Button>
                               <Button
@@ -367,5 +334,3 @@ const Users = ({
     </AccessConsume>
   )
 }
-
-export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Users))

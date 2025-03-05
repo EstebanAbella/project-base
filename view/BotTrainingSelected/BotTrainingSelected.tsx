@@ -5,7 +5,7 @@ import { TagInput } from "../../components/TagInput"
 import { TextFieldModalCrud } from "../../components/TextFieldModalCrud"
 import { AdditionalActionsInput } from "../../components/AdditionalActionsInput"
 
-import { ServerStatus } from "../../Utils/Types/global"
+import { ServerStatus } from "../../interface/global"
 import { Modal } from "../../components/Modal"
 import { Button, ButtonType } from "../../components/Button/Button"
 import AccessConsume from "../../wrappers/auth/AccessConsume"

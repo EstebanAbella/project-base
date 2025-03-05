@@ -1,5 +1,5 @@
-import { BotTrainingResult } from "../../Utils/Types/botTrainingType"
-import { Paginator } from "../../Utils/Types/global"
+import { BotTrainingResult } from "../../view/BotTraining/botTraining.interface"
+import { Paginator } from "../../interface/global"
 import ApiServiceSingleton from "./ApiService"
 import axios, { AxiosInstance } from "axios"
 

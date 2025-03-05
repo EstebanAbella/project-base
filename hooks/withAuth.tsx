@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { connect } from "react-redux"
 import { RootState } from "../redux/rootReducer"
-import { ServerStatus } from "../Utils/Types/global"
+import { ServerStatus } from "../interface/global"
 import { roleMap, RoleType } from "./roleMap"
 
 const mapStateToProps = (state: RootState) => ({

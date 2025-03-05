@@ -1,10 +1,10 @@
-import { Paginator, ServerStatus } from '../../../Utils/Types/global'
+import { Paginator, ServerStatus } from "../../../interface/global"
 import {
   UserResult,
   UsersReducerPropsTypes,
-} from '../../../Utils/Types/userType'
-import * as t from '../types'
-import * as _t from '../../updater/types'
+} from "../../../view/Users/user.interface"
+import * as t from "../types"
+import * as _t from "../../updater/types"
 
 const userState: UsersReducerPropsTypes = {
   usersStatus: ServerStatus.IDLE,
@@ -15,22 +15,22 @@ const userState: UsersReducerPropsTypes = {
 }
 
 export type PossibleActions =
-  | { type: 'CREATE_USER_FETCHING' }
-  | { type: 'CREATE_USER_FETCH' }
-  | { type: 'CREATE_USER_FETCH_ERROR' }
-  | { type: 'DELETE_USER_FETCHING' }
-  | { type: 'DELETE_USER_FETCH' }
-  | { type: 'DELETE_USER_FETCH_ERROR' }
-  | { type: 'EDIT_USER_FETCHING' }
-  | { type: 'EDIT_USER_FETCH' }
-  | { type: 'EDIT_USER_FETCH_ERROR' }
-  | { type: 'GET_USER_FETCHING' }
-  | { type: 'GET_USER_FETCH'; payload: UserResult }
-  | { type: 'GET_USER_FETCH_ERROR' }
-  | { type: 'GET_USERS_FETCHING' }
-  | { type: 'GET_USERS_FETCH'; payload: Paginator<UserResult> }
-  | { type: 'GET_USERS_FETCH_ERROR' }
-  | { type: 'RESET_GLOBAL' }
+  | { type: "CREATE_USER_FETCHING" }
+  | { type: "CREATE_USER_FETCH" }
+  | { type: "CREATE_USER_FETCH_ERROR" }
+  | { type: "DELETE_USER_FETCHING" }
+  | { type: "DELETE_USER_FETCH" }
+  | { type: "DELETE_USER_FETCH_ERROR" }
+  | { type: "EDIT_USER_FETCHING" }
+  | { type: "EDIT_USER_FETCH" }
+  | { type: "EDIT_USER_FETCH_ERROR" }
+  | { type: "GET_USER_FETCHING" }
+  | { type: "GET_USER_FETCH"; payload: UserResult }
+  | { type: "GET_USER_FETCH_ERROR" }
+  | { type: "GET_USERS_FETCHING" }
+  | { type: "GET_USERS_FETCH"; payload: Paginator<UserResult> }
+  | { type: "GET_USERS_FETCH_ERROR" }
+  | { type: "RESET_GLOBAL" }
 
 const reducer = (
   state = userState,

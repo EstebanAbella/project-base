@@ -1,6 +1,6 @@
 import React from "react"
 import { RootState } from "../../redux/rootReducer"
-import { loggedUser } from "../../Utils/Types/authModel"
+import { loggedUser } from "../../view/Login/authModel.interface"
 import { connect } from "react-redux"
 
 const mapStateToProps = (state: RootState) => {

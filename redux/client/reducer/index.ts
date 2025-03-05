@@ -1,6 +1,9 @@
-import { clientType, ClientsReducerPropsType } from '../../../Utils/Types/clientType';
-import { Paginator, ServerStatus } from '../../../Utils/Types/global'
-import * as t from '../types'
+import {
+  clientType,
+  ClientsReducerPropsType,
+} from "../../../view/Clients/clientType/client.interface"
+import { Paginator, ServerStatus } from "../../../interface/global"
+import * as t from "../types"
 
 const globalState: ClientsReducerPropsType = {
   clientsStatus: ServerStatus.IDLE,
@@ -12,29 +15,24 @@ const globalState: ClientsReducerPropsType = {
 }
 
 export type PosibleActions =
-  | { type: 'GET_CLIENTS_FETCHING' }
-  | { type: 'GET_CLIENTS_FETCH'; payload: Paginator<clientType> }
-  | { type: 'GET_CLIENTS_FETCH_ERROR' }
-
-  | { type: 'GET_CLIENT_FETCHING' }
-  | { type: 'GET_CLIENT_FETCH'; payload: clientType }
-  | { type: 'GET_CLIENT_FETCH_ERROR' }
-
-  | { type: 'CREATE_CLIENT_FETCHING' }
-  | { type: 'CREATE_CLIENT_FETCH'}
-  | { type: 'CREATE_CLIENT_FETCH_ERROR' }
-
-  | { type: 'DELETE_CLIENT_FETCHING' }
-  | { type: 'DELETE_CLIENT_FETCH' }
-  | { type: 'DELETE_CLIENT_FETCH_ERROR' }
-
-  | { type: 'EDIT_CLIENT_FETCHING' }
-  | { type: 'EDIT_CLIENT_FETCH' }
-  | { type: 'EDIT_CLIENT_FETCH_ERROR' }
-
-  | { type: 'GET_CLIENTS_BY_USER_ID_FETCHING' }
-  | { type: 'GET_CLIENTS_BY_USER_ID_FETCH'; payload: Paginator<clientType> }
-  | { type: 'GET_CLIENTS_BY_USER_ID_FETCH_ERROR' }
+  | { type: "GET_CLIENTS_FETCHING" }
+  | { type: "GET_CLIENTS_FETCH"; payload: Paginator<clientType> }
+  | { type: "GET_CLIENTS_FETCH_ERROR" }
+  | { type: "GET_CLIENT_FETCHING" }
+  | { type: "GET_CLIENT_FETCH"; payload: clientType }
+  | { type: "GET_CLIENT_FETCH_ERROR" }
+  | { type: "CREATE_CLIENT_FETCHING" }
+  | { type: "CREATE_CLIENT_FETCH" }
+  | { type: "CREATE_CLIENT_FETCH_ERROR" }
+  | { type: "DELETE_CLIENT_FETCHING" }
+  | { type: "DELETE_CLIENT_FETCH" }
+  | { type: "DELETE_CLIENT_FETCH_ERROR" }
+  | { type: "EDIT_CLIENT_FETCHING" }
+  | { type: "EDIT_CLIENT_FETCH" }
+  | { type: "EDIT_CLIENT_FETCH_ERROR" }
+  | { type: "GET_CLIENTS_BY_USER_ID_FETCHING" }
+  | { type: "GET_CLIENTS_BY_USER_ID_FETCH"; payload: Paginator<clientType> }
+  | { type: "GET_CLIENTS_BY_USER_ID_FETCH_ERROR" }
 
 const reducer = (
   state = globalState,

@@ -1,5 +1,5 @@
-import { ServerStatus } from '../../../Utils/Types/global'
-import * as t from '../../isNavigationOnline/types'
+import { ServerStatus } from "../../../interface/global"
+import * as t from "../../isNavigationOnline/types"
 
 export type isNavigationOnlineReducerPropsTypes = {
   isNavigationOnlineStatus: ServerStatus
@@ -11,7 +11,7 @@ const isNavigationOnlineState: isNavigationOnlineReducerPropsTypes = {
 }
 
 export type PossibleActions = {
-  type: 'IS_NAVIGATION_ONLINE_FETCH'
+  type: "IS_NAVIGATION_ONLINE_FETCH"
   payload: boolean
 }
 

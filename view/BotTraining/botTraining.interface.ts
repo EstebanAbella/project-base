@@ -1,4 +1,4 @@
-import { Paginator, ServerStatus } from "../global"
+import { Paginator, ServerStatus } from "../../interface/global"
 
 export type BotTrainingResult = {
   id: number

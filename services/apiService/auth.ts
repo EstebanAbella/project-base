@@ -1,7 +1,7 @@
-import { loggedUser } from '../../Utils/Types/authModel'
-import { CustomErrorType } from '../../Utils/Types/global'
-import LocalDataService from '../LocalDataService'
-import ApiServiceSingleton from './ApiService'
+import { loggedUser } from "../../view/Login/authModel.interface"
+import { CustomErrorType } from "../../interface/global"
+import LocalDataService from "../LocalDataService"
+import ApiServiceSingleton from "./ApiService"
 
 export interface globalType {
   AuthService?: AuthService
@@ -9,19 +9,19 @@ export interface globalType {
 
 const apiUrls = {
   /* login */
-  login: '/v1/auth/login',
+  login: "/v1/auth/login",
   /* doRestorePassword */
-  doRestorePassword: 'v1/users/createToken',
+  doRestorePassword: "v1/users/createToken",
   /* doRestorePasswordValidated */
-  doRestorePasswordValidated: 'v1/users/resetPassword',
+  doRestorePasswordValidated: "v1/users/resetPassword",
   /*User by Token */
-  userByToken: '/v1/auth/login',
+  userByToken: "/v1/auth/login",
 }
 
 class AuthService {
   constructor() {
     if ((global as globalType).AuthService) {
-      throw new Error('AuthService instance already exists!')
+      throw new Error("AuthService instance already exists!")
     }
     ;(global as globalType).AuthService = this
   }
@@ -104,6 +104,7 @@ class AuthService {
 }
 
 let AuthServiceSingleton
-if (!(global as globalType).AuthService) AuthServiceSingleton = new AuthService()
+if (!(global as globalType).AuthService)
+  AuthServiceSingleton = new AuthService()
 else AuthServiceSingleton = (global as globalType).AuthService
 export default AuthServiceSingleton as AuthService

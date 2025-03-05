@@ -1,5 +1,5 @@
 import ClientServiceSingleton from "../../../services/apiService/client"
-import { CustomErrorType } from "../../../Utils/Types/global"
+import { CustomErrorType } from "../../../interface/global"
 
 import * as t from "../types"
 

@@ -5,6 +5,7 @@
 @import "./fonts";
 @import "./_variables";
 @import "./global";
+@import "./icons/iconStyle";
 @import "../components/AdditionalActionsInput/AdditionalActionsInput.scss";
 @import "../components/AlertNoConnection/AlertNoConnection.scss";
 @import "../components/breadcrumb/Breadcrumb.scss";
@@ -32,10 +33,8 @@
 @import "../view/login/Login.scss";
 @import "../view//notAuthorized/NotAuthorized.scss";
 @import "../view/UpdateApp/UpdateApp.scss";
-
+@import "../view/Updater/Updater.scss";
+@import "../view/Users/Users.scss";
 @import "./components/Form.scss";
 @import "./components/Table.scss";
-@import "./pages/Updater.scss";
-@import "./pages/Users.scss";
-@import "./icons/iconStyle";
 // @import "node_modules/bootstrap/dist/css/bootstrap.min.css";

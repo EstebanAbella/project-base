@@ -8,14 +8,14 @@ import {
   getClientsByUserId,
   getClients,
 } from "../../redux/client/actions"
-import { ClientsReducerPropsType } from "../../Utils/Types/clientType"
+import { ClientsReducerPropsType } from "./clientType/client.interface"
 import { connect, useDispatch, useSelector } from "react-redux"
 import { Button, ButtonType } from "../../components/Button/Button"
-import { ServerStatus } from "../../Utils/Types/global"
+import { ServerStatus } from "../../interface/global"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import router from "next/router"
 import { TextFieldType } from "../../components/TextField/TextField"
-import { loggedUser } from "../../Utils/Types/authModel"
+import { loggedUser } from "../Login/authModel.interface"
 import { UseCallOfTables } from "../../hooks/useCallOfTables"
 import withAuth from "../../hooks/withAuth"
 import { Layout } from "../../wrappers/Layout"

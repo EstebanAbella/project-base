@@ -1,10 +1,10 @@
-import { Paginator, ServerStatus } from "../../../Utils/Types/global"
+import { Paginator, ServerStatus } from "../../../interface/global"
 import * as t from "../types"
 import * as _t from "../../updater/types"
 import {
   BotTrainingResult,
   BotTrainingsReducerPropsTypes,
-} from "../../../Utils/Types/botTrainingType"
+} from "../../../view/BotTraining/botTraining.interface"
 
 const botTrainingState: BotTrainingsReducerPropsTypes = {
   botTrainingsStatus: ServerStatus.IDLE,

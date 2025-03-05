@@ -1,34 +1,20 @@
 import React, { useEffect, useState } from "react"
-import { connect } from "react-redux"
-// import Moment from 'moment'
-import { RootState } from "../redux/rootReducer"
-import { doLogout } from "../redux/auth/actions"
-import { Frontend } from "../Utils/Constants"
-import { Step } from "../components/Step/Step"
-import { resetGlobal } from "../redux/updater/actions"
-import LocalDataService from "../services/LocalDataService"
-import AccessConsume from "../wrappers/auth/AccessConsume"
+import { useDispatch, useSelector } from "react-redux"
 import router from "next/router"
+import { AppDispatch } from "../../redux/store"
+import { RootState } from "../../redux/rootReducer"
+import LocalDataService from "../../services/LocalDataService"
+import { doLogout } from "../../redux/auth/actions"
+import { resetGlobal } from "../../redux/updater/actions"
+import AccessConsume from "../../wrappers/auth/AccessConsume"
+import { Step } from "../../components/Step"
+// import Moment from 'moment'
 
-const mapStateToProps = (store: RootState) => {
-  const updaterReducer = store.updater
-  return {
-    updateNeeded: updaterReducer.updateNeeded,
-  }
-}
-
-const mapDispatchToProps = {
-  doLogout,
-  resetGlobal,
-}
-
-export type UpdaterPropTypes = {
-  doLogout: Function
-  resetGlobal: Function
-  updateNeeded: boolean
-}
-
-const Updater = ({ doLogout, resetGlobal, updateNeeded }: UpdaterPropTypes) => {
+export const Updater = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const updateNeeded = useSelector(
+    (state: RootState) => state.updater.updateNeeded
+  )
   const [currentStep, setCurrentStep] = useState(0)
   var today = new Date()
 
@@ -52,8 +38,8 @@ const Updater = ({ doLogout, resetGlobal, updateNeeded }: UpdaterPropTypes) => {
       const appVersion = LocalDataService.getVersion()
       localStorage.setItem("appVersion", appVersion)
       localStorage.setItem("updated", today.toISOString())
-      doLogout()
-      resetGlobal()
+      dispatch(doLogout())
+      dispatch(resetGlobal())
     }, 1000)
   }
 
@@ -233,5 +219,3 @@ const Updater = ({ doLogout, resetGlobal, updateNeeded }: UpdaterPropTypes) => {
     </AccessConsume>
   )
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Updater)
