@@ -1,6 +1,6 @@
 import React from "react"
-import { Navigation } from "../../components/Navigation/Navigation"
-import { Menu } from "../../components/Menu/Menu"
+import { MenuComponent } from "../../components/Menu"
+import { NavigationComponent } from "../../components/Navigation"
 
 type LayoutPropsType = {
   children: JSX.Element | JSX.Element[]
@@ -9,9 +9,9 @@ type LayoutPropsType = {
 export const Layout = ({ children }: LayoutPropsType): JSX.Element => {
   return (
     <section className={"layout"}>
-      <Menu />
+      <MenuComponent />
       <div className='children'>
-        <Navigation></Navigation>
+        <NavigationComponent />
         <section>{children}</section>
       </div>
     </section>
