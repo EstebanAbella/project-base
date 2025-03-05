@@ -3,6 +3,8 @@ import { useState, useEffect } from "react"
 
 const pathMappings: { [key: string]: string } = {
   clients: "Clientes",
+  clientSelected: "Clientes",
+  userSelected: "Usuarios",
   users: "Usuarios",
   reports: "Reportes",
   permissions: "Permisos",
