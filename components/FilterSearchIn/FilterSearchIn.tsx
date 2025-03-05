@@ -18,7 +18,7 @@ export const FilterSearchIn = ({
 
   useFocusTrap(
     containerRef,
-    `a[href], button:not([disabled]), input, .list}`,
+    `a[href], button:not([disabled]), input, .list`,
     !isOpen,
     selectedOption
   )
@@ -43,7 +43,7 @@ export const FilterSearchIn = ({
 
   useEffect(() => {
     if (isOpen) {
-      const firstOption = containerRef.current?.querySelector(`.list}`)
+      const firstOption = containerRef.current?.querySelector(`.list`)
       firstOption?.focus()
     }
   }, [isOpen])
