@@ -1,7 +1,8 @@
 import React from "react"
-import Loader from "../Loader/Loader"
+
 import { Button } from "../Button"
 import { ButtonType } from "../Button/Button"
+import { Loader } from "../Loader/Loader"
 
 export type ModalPropsType = {
   img?: string

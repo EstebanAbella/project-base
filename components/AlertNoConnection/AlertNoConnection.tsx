@@ -1,31 +1,15 @@
 import React, { useEffect } from "react"
-import { RootState } from "../../redux/rootReducer"
-import { connect } from "react-redux"
-import { isNavigationOnlineReducerPropsTypes } from "../../redux/isNavigationOnline/reducer"
+import { useDispatch, useSelector } from "react-redux"
 import { useIsNavigationOnline } from "../../hooks/useIsNavigationOnline"
 import { isNavigationOnline } from "../../redux/isNavigationOnline/actions"
+import { AppDispatch } from "../../redux/store"
 
-const mapStateToProps = (state: RootState) => {
-  const isNavigationReducer = state.isNavigationOnOff
-  return {
-    isNavigationOnline: isNavigationReducer.isNavigationOnline,
-    isNavigationOnlineStatus: isNavigationReducer.isNavigationOnlineStatus,
-  }
-}
+export const AlertNoConnectionComponent = () => {
+  const dispatch = useDispatch<AppDispatch>()
 
-const mapDispatchToProps = {
-  isNavigationOnline,
-}
-export type AlertNoConnectionPropsType = {
-  isNavigationOnline: Function
-} & isNavigationOnlineReducerPropsTypes
-
-const AlertNoConnectionComponent = ({
-  isNavigationOnline,
-}: AlertNoConnectionPropsType) => {
   const isOnline = useIsNavigationOnline()
   useEffect(() => {
-    isNavigationOnline(isOnline)
+    dispatch(isNavigationOnline(isOnline))
   }, [isOnline])
   return (
     <section
@@ -37,8 +21,3 @@ const AlertNoConnectionComponent = ({
     </section>
   )
 }
-
-export const AlertNoConnection = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AlertNoConnectionComponent)

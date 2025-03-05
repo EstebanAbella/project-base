@@ -1,25 +1,14 @@
 import React from "react"
-import { RootState } from "../../redux/rootReducer"
 import { doLogout } from "../../redux/auth/actions"
-import { connect } from "react-redux"
+import { useDispatch } from "react-redux"
 import { ChangeTheme } from "../ChangeTheme/ChangeTheme"
 import router from "next/router"
 import { Button } from "../Button"
 import { ButtonType } from "../Button/Button"
+import { AppDispatch } from "../../redux/store"
 
-const mapStateToProps = (state: RootState) => {
-  return {}
-}
-
-const mapDispatchToProps = {
-  doLogout,
-}
-
-export type MenuPropsType = {
-  doLogout: Function
-}
-
-const MenuComponent = ({ doLogout }: MenuPropsType) => {
+export const MenuComponent = () => {
+  const dispatch = useDispatch<AppDispatch>()
   return (
     <header>
       <Button
@@ -33,7 +22,7 @@ const MenuComponent = ({ doLogout }: MenuPropsType) => {
         value={"Logout"}
         type={ButtonType.TERTIARY}
         icon={"icon-log-in"}
-        onClick={() => doLogout()}
+        onClick={() => dispatch(doLogout())}
       ></Button>
 
       <div className='changeThemeContainer'>
@@ -43,5 +32,3 @@ const MenuComponent = ({ doLogout }: MenuPropsType) => {
     </header>
   )
 }
-
-export const Menu = connect(mapStateToProps, mapDispatchToProps)(MenuComponent)
