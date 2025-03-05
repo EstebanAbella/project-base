@@ -29,6 +29,16 @@ const nextConfig = withPWA({
         destination: "/botTraining",
         permanent: false,
       },
+      {
+        source: "/clientSelected",
+        destination: "/clients",
+        permanent: false,
+      },
+      {
+        source: "/userSelected",
+        destination: "/users",
+        permanent: false,
+      },
     ]
   },
   typescript: {

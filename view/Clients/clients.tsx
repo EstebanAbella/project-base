@@ -23,6 +23,7 @@ import { Pagination } from "../../components/Pagination"
 import { AppDispatch } from "../../redux/store"
 import { clientType } from "./client.interface"
 import { ModalCrud } from "../../components/ModalCrud"
+import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 
 const Clients = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -242,111 +243,119 @@ const Clients = () => {
   return (
     <AccessConsume>
       <Layout>
-        <ModalCrud
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          dataForm={createClientObject}
-          textButton={"Add client"}
-          typeButton={ButtonType.SUCCESS}
-          onClick={handleClickCreateUSer}
-          isDisabled={typeModal === "modal-create-client"}
-        />
+        <BreadcrumbWrapper>
+          <ModalCrud
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            dataForm={createClientObject}
+            textButton={"Add client"}
+            typeButton={ButtonType.SUCCESS}
+            onClick={handleClickCreateUSer}
+            isDisabled={typeModal === "modal-create-client"}
+          />
 
-        <ModalCrud
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          dataForm={editClientObject}
-          textButton={"Update client"}
-          typeButton={ButtonType.INFORMATION}
-          onClick={handleClickEditUSer}
-          isDisabled={typeModal === "modal-edit-client"}
-          initialData={dataInitialModal}
-        />
-        <section className='clientsPage'>
-          <h3>Clients</h3>
-          <section className='addClientAction'>
-            <Search query={query} setQuery={setQuery}></Search>
+          <ModalCrud
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            dataForm={editClientObject}
+            textButton={"Update client"}
+            typeButton={ButtonType.INFORMATION}
+            onClick={handleClickEditUSer}
+            isDisabled={typeModal === "modal-edit-client"}
+            initialData={dataInitialModal}
+          />
+          <section className='clientsPage'>
+            <h3>Clients</h3>
+            <section className='addClientAction'>
+              <Search query={query} setQuery={setQuery}></Search>
 
-            <Button
-              type={ButtonType.SUCCESS}
-              value={"Add client"}
-              onClick={() => handleClickOnModal("create")}
-              extraClassName={"buttonTable"}
-            ></Button>
-          </section>
-          <section className='containerTable'>
-            {clientsByUserIdStatus !== ServerStatus.FETCHING && (
-              <table className='table table-striped custom-bg'>
-                <thead className='table-dark tableThead'>
-                  <tr>
-                    <th scope='col'>Id</th>
-                    <th scope='col'>Name</th>
-                    <th scope='col'>E-mail</th>
-                    <th scope='col'>Address</th>
-                    <th scope='col'>Actions</th>
-                  </tr>
-                </thead>
-                <tbody className='tableBody'>
-                  {clientsByUserId ? (
-                    clientsByUserId?.items.map((data: clientType) => (
-                      <tr key={data.id}>
+              <Button
+                type={ButtonType.SUCCESS}
+                value={"Add client"}
+                onClick={() => handleClickOnModal("create")}
+                extraClassName={"buttonTable"}
+              ></Button>
+            </section>
+            <section className='containerTable'>
+              {clientsByUserIdStatus !== ServerStatus.FETCHING && (
+                <table className='table table-striped custom-bg'>
+                  <thead className='table-dark tableThead'>
+                    <tr>
+                      <th scope='col'>Id</th>
+                      <th scope='col'>Name</th>
+                      <th scope='col'>E-mail</th>
+                      <th scope='col'>Address</th>
+                      <th scope='col'>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className='tableBody'>
+                    {clientsByUserId ? (
+                      clientsByUserId?.items.map((data: clientType) => (
+                        <tr key={data.id}>
+                          <>
+                            <td>{data.id}</td>
+                            <td>
+                              <p
+                                onClick={() =>
+                                  router.push(`/clientSelected/${data.id}`)
+                                }
+                                style={{ cursor: "pointer" }}
+                              >
+                                {data.name}
+                              </p>
+                            </td>
+                            <td>{data.email}</td>
+                            <td>{data.address}</td>
+                            <td>
+                              <div className='containerButtonTable'>
+                                <Button
+                                  type={ButtonType.ERROR}
+                                  value={"Delete"}
+                                  onClick={() =>
+                                    dispatch(deleteClient(data.id))
+                                  }
+                                  extraClassName={"buttonTable"}
+                                ></Button>
+                                <Button
+                                  type={ButtonType.INFORMATION}
+                                  value={"Update"}
+                                  onClick={() =>
+                                    handleClickOnModal("edit", data)
+                                  }
+                                  extraClassName={"buttonTable"}
+                                ></Button>
+                              </div>
+                            </td>
+                          </>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
                         <>
-                          <td>{data.id}</td>
-                          <td>
-                            <p
-                              onClick={() =>
-                                router.push(`/clientSelected/${data.id}`)
-                              }
-                              style={{ cursor: "pointer" }}
-                            >
-                              {data.name}
-                            </p>
-                          </td>
-                          <td>{data.email}</td>
-                          <td>{data.address}</td>
-                          <td>
-                            <div className='containerButtonTable'>
-                              <Button
-                                type={ButtonType.ERROR}
-                                value={"Delete"}
-                                onClick={() => dispatch(deleteClient(data.id))}
-                                extraClassName={"buttonTable"}
-                              ></Button>
-                              <Button
-                                type={ButtonType.INFORMATION}
-                                value={"Update"}
-                                onClick={() => handleClickOnModal("edit", data)}
-                                extraClassName={"buttonTable"}
-                              ></Button>
-                            </div>
-                          </td>
+                          <td>{"-"}</td>
+                          <td>{"-"}</td>
+                          <td>{"-"}</td>
+                          <td>{"-"}</td>
+                          <td>{"-"}</td>
                         </>
                       </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <>
-                        <td>{"-"}</td>
-                        <td>{"-"}</td>
-                        <td>{"-"}</td>
-                        <td>{"-"}</td>
-                        <td>{"-"}</td>
-                      </>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+                    )}
+                  </tbody>
+                </table>
+              )}
+            </section>
+
+            <Pagination
+              limit={limit}
+              offsetState={offsetState}
+              totalItems={totalItems}
+              setOffsetState={setOffsetState}
+            />
+            {clientsByUserIdStatus === ServerStatus.FETCHING && (
+              <Loader></Loader>
             )}
           </section>
-
-          <Pagination
-            limit={limit}
-            offsetState={offsetState}
-            totalItems={totalItems}
-            setOffsetState={setOffsetState}
-          />
-          {clientsByUserIdStatus === ServerStatus.FETCHING && <Loader></Loader>}
-        </section>
+        </BreadcrumbWrapper>
       </Layout>
     </AccessConsume>
   )

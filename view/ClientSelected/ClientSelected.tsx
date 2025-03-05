@@ -8,6 +8,7 @@ import { Loader } from "../../components/Loader/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import { Layout } from "../../wrappers/Layout/Layout"
 import { AppDispatch } from "../../redux/store"
+import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 
 export const ClientSelected = () => {
   const router = useRouter()
@@ -27,29 +28,32 @@ export const ClientSelected = () => {
   return (
     <AccessConsume>
       <Layout>
-        <section className='clientSelected'>
-          <section className='clientSelectedContainer'>
-            <>
-              {clientStatus === ServerStatus.FETCH && client && (
-                <div className='clientSelectedContainerData'>
-                  <p>
-                    Id: <span className='clientSpan'>{client.id}</span>
-                  </p>
-                  <p>
-                    Nombre: <span className='clientSpan'>{client.name}</span>
-                  </p>
-                  <p>
-                    E-mail: <span className='clientSpan'>{client.email}</span>
-                  </p>
-                  <p>
-                    Addres: <span className='clientSpan'>{client.address}</span>
-                  </p>
-                </div>
-              )}
-              {clientStatus === ServerStatus.FETCHING && <Loader></Loader>}
-            </>
+        <BreadcrumbWrapper>
+          <section className='clientSelected'>
+            <section className='clientSelectedContainer'>
+              <>
+                {clientStatus === ServerStatus.FETCH && client && (
+                  <div className='clientSelectedContainerData'>
+                    <p>
+                      Id: <span className='clientSpan'>{client.id}</span>
+                    </p>
+                    <p>
+                      Nombre: <span className='clientSpan'>{client.name}</span>
+                    </p>
+                    <p>
+                      E-mail: <span className='clientSpan'>{client.email}</span>
+                    </p>
+                    <p>
+                      Addres:{" "}
+                      <span className='clientSpan'>{client.address}</span>
+                    </p>
+                  </div>
+                )}
+                {clientStatus === ServerStatus.FETCHING && <Loader></Loader>}
+              </>
+            </section>
           </section>
-        </section>
+        </BreadcrumbWrapper>
       </Layout>
     </AccessConsume>
   )
