@@ -53,9 +53,6 @@ class UserService {
         sort: order,
         roles,
       }
-      if (!params.q) delete params.q
-      if (params.searchIn === "id") delete params.searchIn
-
       ApiServiceSingleton.axios
         .get(`${apiUrls.users}`, { params })
         .then((response) => {

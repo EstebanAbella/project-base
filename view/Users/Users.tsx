@@ -15,13 +15,14 @@ import { UseCallOfTables } from "../../hooks/useCallOfTables"
 import { TextFieldType } from "../../components/TextFieldModalCrud/TextFieldModalCrud"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import { Layout } from "../../wrappers/Layout/Layout"
-import { Modal } from "../../components/Modal"
 import { Button, ButtonType } from "../../components/Button/Button"
 import { Search } from "../../components/Search/Search"
 import { Pagination } from "../../components/Pagination/Pagination"
 import { Loader } from "../../components/Loader/Loader"
+import { ModalCrud } from "../../components/ModalCrud"
+import withAuth from "../../hooks/withAuth"
 
-export const Users = () => {
+const Users = () => {
   const dispatch = useDispatch<AppDispatch>()
   const { user } = useSelector((state: RootState) => state.auth)
   const {
@@ -128,7 +129,14 @@ export const Users = () => {
     filter,
     order,
     roles,
-    action: dispatch(getUsers),
+    action: (
+      offset: number,
+      limit?: number,
+      query?: string,
+      filter?: string,
+      order?: string,
+      roles?: string
+    ) => dispatch(getUsers(offset, limit, query, filter, order, roles)),
     setOffsetState,
   })
 
@@ -226,7 +234,7 @@ export const Users = () => {
   return (
     <AccessConsume>
       <Layout>
-        <Modal
+        <ModalCrud
           stateModal={stateModal}
           setStateModal={setStateModal}
           dataForm={createUserObject}
@@ -236,7 +244,7 @@ export const Users = () => {
           isDisabled={typeModal === "modal-create-user"}
         />
 
-        <Modal
+        <ModalCrud
           stateModal={stateModal}
           setStateModal={setStateModal}
           dataForm={editUserObject}
@@ -334,3 +342,5 @@ export const Users = () => {
     </AccessConsume>
   )
 }
+
+export default withAuth(Users)

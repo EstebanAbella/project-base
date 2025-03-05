@@ -1,5 +1,5 @@
-import { clientType } from "../../view/Clients/clientType/client.interface"
 import { Paginator } from "../../interface/global"
+import { clientType } from "../../view/Clients/client.interface"
 import ApiServiceSingleton from "./ApiService"
 
 export interface globalType {
@@ -55,9 +55,6 @@ class ClientService {
         sort: order,
         roles,
       }
-      if (!params.q) delete params.q
-      if (params.searchIn === "id") delete params.searchIn
-
       ApiServiceSingleton.axios
         .get(`${apiUrls.clients}`, { params })
         .then((response) => {
@@ -144,9 +141,6 @@ class ClientService {
         sort: order,
         roles,
       }
-      if (!params.q) delete params.q
-      if (params.searchIn === "id") delete params.searchIn
-
       ApiServiceSingleton.axios
         .get(`${apiUrls.clientsByUserId}/${id}`, { params })
         .then((response) => {

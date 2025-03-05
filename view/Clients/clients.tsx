@@ -8,24 +8,23 @@ import {
   getClientsByUserId,
   getClients,
 } from "../../redux/client/actions"
-import { ClientsReducerPropsType } from "./clientType/client.interface"
-import { connect, useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Button, ButtonType } from "../../components/Button/Button"
 import { ServerStatus } from "../../interface/global"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import router from "next/router"
 import { TextFieldType } from "../../components/TextField/TextField"
-import { loggedUser } from "../Login/authModel.interface"
 import { UseCallOfTables } from "../../hooks/useCallOfTables"
 import withAuth from "../../hooks/withAuth"
 import { Layout } from "../../wrappers/Layout"
-import { Modal } from "../../components/Modal"
 import { Search } from "../../components/Search"
 import { Loader } from "../../components/Loader"
 import { Pagination } from "../../components/Pagination"
 import { AppDispatch } from "../../redux/store"
+import { clientType } from "./client.interface"
+import { ModalCrud } from "../../components/ModalCrud"
 
-export const Clients = () => {
+const Clients = () => {
   const dispatch = useDispatch<AppDispatch>()
   const {
     client,
@@ -143,7 +142,18 @@ export const Clients = () => {
     filter,
     order,
     roles,
-    action: dispatch(getClientsByUserId),
+    action: (
+      id?: string,
+      offset?: number,
+      limit?: number,
+      query?: string,
+      filter?: string,
+      order?: string,
+      roles?: string
+    ) =>
+      dispatch(
+        getClientsByUserId(id, offset, limit, query, filter, order, roles)
+      ),
     setOffsetState,
   })
 
@@ -232,7 +242,7 @@ export const Clients = () => {
   return (
     <AccessConsume>
       <Layout>
-        <Modal
+        <ModalCrud
           stateModal={stateModal}
           setStateModal={setStateModal}
           dataForm={createClientObject}
@@ -242,7 +252,7 @@ export const Clients = () => {
           isDisabled={typeModal === "modal-create-client"}
         />
 
-        <Modal
+        <ModalCrud
           stateModal={stateModal}
           setStateModal={setStateModal}
           dataForm={editClientObject}
@@ -278,7 +288,7 @@ export const Clients = () => {
                 </thead>
                 <tbody className='tableBody'>
                   {clientsByUserId ? (
-                    clientsByUserId?.items.map((data) => (
+                    clientsByUserId?.items.map((data: clientType) => (
                       <tr key={data.id}>
                         <>
                           <td>{data.id}</td>
@@ -341,3 +351,5 @@ export const Clients = () => {
     </AccessConsume>
   )
 }
+
+export default withAuth(Clients)

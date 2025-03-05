@@ -37,7 +37,10 @@ export const TextField = ({
   return (
     <div className={`textField ${typeTextField}`}>
       <label>{label}</label>
-      {(type === "text" || type === "number") && (
+      {(type === "text" ||
+        type === "number" ||
+        type === "email" ||
+        type === "password") && (
         <input
           name={name}
           disabled={disabled}

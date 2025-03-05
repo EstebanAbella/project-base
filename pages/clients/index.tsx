@@ -1,5 +1,5 @@
 import React from "react"
-import { Clients } from "../../view/Clients/clients"
+import Clients from "../../view/Clients/Clients"
 
 const ClientsPage = () => {
   return <Clients />

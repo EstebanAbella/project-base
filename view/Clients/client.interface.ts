@@ -1,4 +1,4 @@
-import { Paginator, ServerStatus } from "../../../Utils/Types/global"
+import { Paginator, ServerStatus } from "../../interface/global"
 
 export type clientType = {
   name: string
