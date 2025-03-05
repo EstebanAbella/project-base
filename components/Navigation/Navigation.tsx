@@ -6,7 +6,7 @@ export const NavigationComponent = () => {
   const { user } = useSelector((state: RootState) => state.auth)
 
   return (
-    <nav className='navigation'>
+    <nav className='navigationComponent'>
       <div className='containerInfoUser'>
         <div className='infoUser'>
           <p>{user?.name}</p>
