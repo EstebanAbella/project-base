@@ -8,7 +8,6 @@ import { ServerStatus } from "../../interface/global"
 import { Loader } from "../../components/Loader/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import { Layout } from "../../wrappers/Layout/Layout"
-import { Navigation } from "../../components/Navigation/Navigation"
 import { AppDispatch } from "../../redux/store"
 
 export const UserSelected = () => {
@@ -28,7 +27,6 @@ export const UserSelected = () => {
     <AccessConsume>
       <Layout>
         <section className='userSelected'>
-          <Navigation></Navigation>
           <section className='userSelectedContainer'>
             <>
               {userStatus === ServerStatus.FETCH && user && (
