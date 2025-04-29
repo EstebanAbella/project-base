@@ -22,6 +22,7 @@ export const TextField = ({
   placeholder = "",
   valueSelect = [],
   rows = 2,
+  isShown = true,
 }: {
   valueInput?: string
   label?: string
@@ -33,23 +34,25 @@ export const TextField = ({
   placeholder?: string
   valueSelect?: string[]
   rows?: number
+  isShown?: boolean
 }) => {
   return (
     <div className={`textField ${typeTextField}`}>
-      <label>{label}</label>
+      {isShown && <label>{label}</label>}
       {(type === "text" ||
         type === "number" ||
         type === "email" ||
-        type === "password") && (
-        <input
-          name={name}
-          disabled={disabled}
-          value={valueInput}
-          onChange={onChange}
-          type={type}
-          placeholder={placeholder}
-        />
-      )}
+        type === "password") &&
+        isShown && (
+          <input
+            name={name}
+            disabled={disabled}
+            value={valueInput}
+            onChange={onChange}
+            type={type}
+            placeholder={placeholder}
+          />
+        )}
 
       {type === "select" && (
         <select name={name} disabled={disabled} onChange={onChange}>

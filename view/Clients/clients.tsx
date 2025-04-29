@@ -24,6 +24,7 @@ import { AppDispatch } from "../../redux/store"
 import { clientType } from "./client.interface"
 import { ModalCrud } from "../../components/ModalCrud"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
+import { Modal } from "../../components/Modal"
 
 const Clients = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -191,6 +192,7 @@ const Clients = () => {
       type: "text",
       placeholder: "UserId",
       defaultValue: user?.id,
+      isShown: false,
     },
   ]
 
@@ -237,6 +239,10 @@ const Clients = () => {
       setTypeModal("modal-edit-client")
       setStateModal(true)
       setDataInitialModal(data)
+    } else if (typeModal === "delete") {
+      setTypeModal("modal-delete-client")
+      setStateModal(true)
+      setDataInitialModal(data)
     }
   }
 
@@ -263,6 +269,20 @@ const Clients = () => {
             onClick={handleClickEditUSer}
             isDisabled={typeModal === "modal-edit-client"}
             initialData={dataInitialModal}
+          />
+
+          <Modal
+            stateModal={stateModal}
+            setStateModal={setStateModal}
+            title={"Do you want to delete a client?"}
+            textButton={"Delete"}
+            typeButton={ButtonType.PRIMARY}
+            onClick={() =>
+              dispatch(deleteClient(dataInitialModal ? dataInitialModal : ""))
+            }
+            isDisabled={typeModal === "modal-delete-client"}
+            buttonCloseModal={true}
+            spanAlert={"alert"}
           />
           <section className='clientsPage'>
             <h3>Clients</h3>
@@ -311,8 +331,11 @@ const Clients = () => {
                                 <Button
                                   type={ButtonType.ERROR}
                                   value={"Delete"}
+                                  // onClick={() =>
+                                  //   dispatch(deleteClient(data.id))
+                                  // }
                                   onClick={() =>
-                                    dispatch(deleteClient(data.id))
+                                    handleClickOnModal("delete", data.id)
                                   }
                                   extraClassName={"buttonTable"}
                                 ></Button>

@@ -25,6 +25,7 @@ export type dataFormType = {
   placeholder: string
   valueSelect?: string[]
   defaultValue?: any
+  isShown?: boolean
 }
 
 export const ModalCrud = ({
@@ -48,7 +49,7 @@ export const ModalCrud = ({
   }, [initialData])
 
   useEffect(() => {
-    if (dataForm?.length !== 0 && !initialData) {
+    if (dataForm?.length && !initialData) {
       const setPropertyForm = dataForm?.reduce(
         (obj: { [key: string]: string }, item: dataFormType) => {
           obj[item.name] = item.defaultValue ? item.defaultValue : ""
@@ -84,26 +85,25 @@ export const ModalCrud = ({
                   ))}
                 </div>
               )}
-              {dataForm?.length !== 0 &&
-                form &&
-                Object.keys(form).length !== 0 && (
-                  <form>
-                    {dataForm?.map((data) => (
-                      <TextField
-                        label={data.label}
-                        name={data.name}
-                        typeTextField={data.typeTextField}
-                        disabled={data.disabled}
-                        type={data.type}
-                        placeholder={data.placeholder}
-                        onChange={handleChange}
-                        valueInput={form[data.name] ? form[data.name] : ""}
-                        valueSelect={data.valueSelect ? data.valueSelect : []}
-                        key={data.name}
-                      ></TextField>
-                    ))}
-                  </form>
-                )}
+              {dataForm?.length && form && Object.keys(form).length && (
+                <form>
+                  {dataForm?.map((data) => (
+                    <TextField
+                      label={data.label}
+                      name={data.name}
+                      typeTextField={data.typeTextField}
+                      disabled={data.disabled}
+                      type={data.type}
+                      placeholder={data.placeholder}
+                      onChange={handleChange}
+                      valueInput={form[data.name] ? form[data.name] : ""}
+                      valueSelect={data.valueSelect ? data.valueSelect : []}
+                      key={data.name}
+                      isShown={data.isShown}
+                    ></TextField>
+                  ))}
+                </form>
+              )}
               {textButton && onClick && (
                 <Button
                   value={textButton}
