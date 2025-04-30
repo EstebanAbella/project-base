@@ -10,19 +10,20 @@ import AccessConsume from "../../wrappers/auth/AccessConsume"
 import { Layout } from "../../wrappers/Layout/Layout"
 import { AppDispatch } from "../../redux/store"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
+import { useUserSelected } from "./useUserSelected"
 
 export const UserSelected = () => {
-  const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
   const { param } = router.query
 
-  const { user, userStatus } = useSelector((state: RootState) => state.user)
+  const { useGetUserHandler, useGetUserData, useGetUserStatus } =
+    useUserSelected()
 
   useEffect(() => {
     if (param) {
-      dispatch(getUser(param as string))
+      useGetUserHandler(param as string)
     }
-  }, [param, dispatch])
+  }, [])
 
   return (
     <AccessConsume>
@@ -31,23 +32,28 @@ export const UserSelected = () => {
           <section className='userSelected'>
             <section className='userSelectedContainer'>
               <>
-                {userStatus === ServerStatus.FETCH && user && (
+                {useGetUserStatus === ServerStatus.FETCH && useGetUserData && (
                   <div className='userSelectedContainerData'>
                     <p>
-                      Id: <span className='userSpan'>{user.id}</span>
+                      Id: <span className='userSpan'>{useGetUserData.id}</span>
                     </p>
                     <p>
-                      Nombre: <span className='userSpan'>{user.name}</span>
+                      Nombre:{" "}
+                      <span className='userSpan'>{useGetUserData.name}</span>
                     </p>
                     <p>
-                      E-mail: <span className='userSpan'>{user.email}</span>
+                      E-mail:{" "}
+                      <span className='userSpan'>{useGetUserData.email}</span>
                     </p>
                     <p>
-                      Role: <span className='userSpan'>{user.role}</span>
+                      Role:{" "}
+                      <span className='userSpan'>{useGetUserData.role}</span>
                     </p>
                   </div>
                 )}
-                {userStatus === ServerStatus.FETCHING && <Loader></Loader>}
+                {useGetUserStatus === ServerStatus.FETCHING && (
+                  <Loader></Loader>
+                )}
               </>
             </section>
           </section>

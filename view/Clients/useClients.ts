@@ -76,9 +76,10 @@ export const useClients = () => {
   }, [])
 
   useEffect(() => {
-    if (!useGetUserData?.id) return
+    // if (!useGetUserData?.id) return
     useGetClientsByUserIdHandler(
-      useGetUserData?.id,
+      // useGetUserData?.id,
+      "2",
       offsetState,
       limit,
       query ?? "",

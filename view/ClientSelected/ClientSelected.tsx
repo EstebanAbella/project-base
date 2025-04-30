@@ -9,21 +9,20 @@ import AccessConsume from "../../wrappers/auth/AccessConsume"
 import { Layout } from "../../wrappers/Layout/Layout"
 import { AppDispatch } from "../../redux/store"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
+import { useClientSelected } from "./useClientSelected"
 
 export const ClientSelected = () => {
   const router = useRouter()
   const { param } = router.query
 
-  const dispatch = useDispatch<AppDispatch>()
-  const { client, clientStatus } = useSelector(
-    (state: RootState) => state.client
-  )
+  const { useGetClientHandler, useGetClientData, useGetClientStatus } =
+    useClientSelected()
 
   useEffect(() => {
     if (param) {
-      dispatch(getClient(param as string))
+      useGetClientHandler(param as string)
     }
-  }, [param, dispatch])
+  }, [])
 
   return (
     <AccessConsume>
@@ -32,24 +31,38 @@ export const ClientSelected = () => {
           <section className='clientSelected'>
             <section className='clientSelectedContainer'>
               <>
-                {clientStatus === ServerStatus.FETCH && client && (
-                  <div className='clientSelectedContainerData'>
-                    <p>
-                      Id: <span className='clientSpan'>{client.id}</span>
-                    </p>
-                    <p>
-                      Nombre: <span className='clientSpan'>{client.name}</span>
-                    </p>
-                    <p>
-                      E-mail: <span className='clientSpan'>{client.email}</span>
-                    </p>
-                    <p>
-                      Addres:{" "}
-                      <span className='clientSpan'>{client.address}</span>
-                    </p>
-                  </div>
+                {useGetClientStatus === ServerStatus.FETCH &&
+                  useGetClientData && (
+                    <div className='clientSelectedContainerData'>
+                      <p>
+                        Id:{" "}
+                        <span className='clientSpan'>
+                          {useGetClientData.id}
+                        </span>
+                      </p>
+                      <p>
+                        Nombre:{" "}
+                        <span className='clientSpan'>
+                          {useGetClientData.name}
+                        </span>
+                      </p>
+                      <p>
+                        E-mail:{" "}
+                        <span className='clientSpan'>
+                          {useGetClientData.email}
+                        </span>
+                      </p>
+                      <p>
+                        Addres:{" "}
+                        <span className='clientSpan'>
+                          {useGetClientData.address}
+                        </span>
+                      </p>
+                    </div>
+                  )}
+                {useGetClientStatus === ServerStatus.FETCHING && (
+                  <Loader></Loader>
                 )}
-                {clientStatus === ServerStatus.FETCHING && <Loader></Loader>}
               </>
             </section>
           </section>
