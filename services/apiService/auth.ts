@@ -1,4 +1,4 @@
-import { loggedUser } from "../../view/Login/authModel.interface"
+import { loggedUser } from "../../interface/authModel.interface"
 import { CustomErrorType } from "../../interface/global"
 import LocalDataService from "../LocalDataService"
 import ApiServiceSingleton from "./ApiService"
