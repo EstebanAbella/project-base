@@ -12,10 +12,10 @@ export const MenuComponent = () => {
   return (
     <header>
       <Button
-        value={"Training"}
+        value={"Clients"}
         type={ButtonType.TERTIARY}
-        icon={"icon-dumbbell-training"}
-        onClick={() => router.push("/botTraining")}
+        icon={"icon-user"}
+        onClick={() => router.push("/clients")}
       ></Button>
 
       <Button

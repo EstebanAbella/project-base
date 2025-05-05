@@ -50,9 +50,8 @@ export const Login = () => {
   }, [restorePasswordStatus])
 
   useEffect(() => {
-    console.log("AAA", loginStatus, sendEmail, tryLogin)
     if (loginStatus === ServerStatus.FETCH && !updateNeeded)
-      router.push("/botTraining")
+      router.push("/clients")
   }, [loginStatus])
 
   useEffect(() => {

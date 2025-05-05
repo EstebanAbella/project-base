@@ -13,7 +13,7 @@ export const BreadcrumbWrapper = ({ children }: BreadcrumbWrapperProps) => {
   return (
     <div>
       <Breadcrumb>
-        <BreadcrumbItem isCurrent={router.pathname === "/"} href='/botTraining'>
+        <BreadcrumbItem isCurrent={router.pathname === "/"} href='/clients'>
           <span className='icon-home breadHomeIcon' />
         </BreadcrumbItem>
         {breadcrumbs &&

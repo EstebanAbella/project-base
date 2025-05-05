@@ -6,7 +6,6 @@
 @import "./_variables";
 @import "./global";
 @import "./icons/iconStyle";
-@import "../components/AdditionalActionsInput/AdditionalActionsInput.scss";
 @import "../components/AlertNoConnection/AlertNoConnection.scss";
 @import "../components/breadcrumb/Breadcrumb.scss";
 @import "../components/Button/Button.scss";
@@ -26,15 +25,11 @@
 @import "../components/Search/Search.scss";
 @import "../components/Step/Step.scss";
 @import "../components/TextField/Textfield.scss";
-@import "../view/botTrainingSelected/BotTrainingSelected.scss";
 @import "../view/ClientSelected/ClientSelected.scss";
 @import "../view/UserSelected/UserSelected.scss";
-@import "../view/BotTraining/BotTrainings.scss";
 @import "../view/Clients/Clients.scss";
 @import "../view/login/Login.scss";
 @import "../view//notAuthorized/NotAuthorized.scss";
-@import "../view/UpdateApp/UpdateApp.scss";
-@import "../view/Updater/Updater.scss";
 @import "../view/Users/Users.scss";
 @import "./components/Form.scss";
 @import "./components/Table.scss";
