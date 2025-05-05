@@ -3,14 +3,14 @@ export interface globalType {
 }
 
 const varnames = {
-  token: 'token',
-  userId: 'userId',
+  token: "token",
+  userId: "userId",
 }
 
 class LocalDataService {
   constructor() {
     if ((global as globalType).localDataService) {
-      throw new Error('New instance cannot be created!!')
+      throw new Error("New instance cannot be created!!")
     }
     ;(global as globalType).localDataService = this
   }
@@ -49,8 +49,18 @@ class LocalDataService {
 
   clearData(): void {
     Object.entries(varnames).forEach((k) => {
-      this.set(k[1], '')
+      this.set(k[1], "")
     })
+  }
+
+  private removeLocalStorage() {
+    if (typeof window !== "undefined") {
+      window.localStorage.clear()
+    }
+  }
+
+  public removeAllLocalStorage(): void {
+    this.removeLocalStorage()
   }
 }
 

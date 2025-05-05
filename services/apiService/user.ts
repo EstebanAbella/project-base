@@ -1,6 +1,6 @@
+import ApiServiceSingleton from "../../api/ApiService"
 import { Paginator } from "../../interface/global"
 import { UserResult } from "../../view/Users/user.interface"
-import ApiServiceSingleton from "./ApiService"
 
 export interface globalType {
   UserService?: UserService

@@ -1,7 +1,8 @@
 import { BotTrainingResult } from "../../view/BotTraining/botTraining.interface"
 import { Paginator } from "../../interface/global"
-import ApiServiceSingleton from "./ApiService"
+
 import axios, { AxiosInstance } from "axios"
+import ApiServiceSingleton from "../../api/ApiService"
 
 export interface globalType {
   BotTrainingService?: BotTrainingService

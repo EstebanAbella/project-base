@@ -6,7 +6,7 @@ import { getUserByToken } from "../../redux/auth/actions"
 import { ServerStatus } from "../../interface/global"
 import { checkUpdater } from "../../redux/updater/actions"
 import router, { useRouter } from "next/router"
-import ApiService from "../../services/apiService/ApiService"
+import ApiService from "../../api/ApiService"
 
 const mapStateToProps = (state: RootState) => {
   const updaterReducer = state.updater
@@ -68,18 +68,6 @@ const SessionProvider = ({
       setIsToken(true)
     }
   }, [loginStatus])
-
-  // useEffect(() => {
-  //   if (loginStatus === ServerStatus.FETCH && updateNeeded) {
-  //     router.push('/updateApp')
-  //   }
-  // }, [loginStatus, updaterCheckerStatus])
-
-  // useEffect(() => {
-  //   if (loginStatus === ServerStatus.FETCH && !updateNeeded) {
-  //     surveyCall()
-  //   }
-  // }, [loginStatus])
 
   return isToken && <>{children}</>
 }

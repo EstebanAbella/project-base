@@ -1,7 +1,7 @@
-import { loggedUser } from "../../interface/authModel.interface"
 import { CustomErrorType } from "../../interface/global"
 import LocalDataService from "../LocalDataService"
-import ApiServiceSingleton from "./ApiService"
+import ApiServiceSingleton from "../../api/ApiService"
+import { loggedUser } from "../../models/models"
 
 export interface globalType {
   AuthService?: AuthService

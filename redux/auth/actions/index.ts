@@ -1,8 +1,8 @@
+import ApiService from "../../../api/ApiService"
 import { DispatchEmptyObject } from "../../../interface/global"
 import { loggedUser } from "../../../models/models"
 import LocalDataService from "../../../services/LocalDataService"
-import ApiService from "../../../services/apiService/ApiService"
-import ApiServiceSingleton from "../../../services/apiService/ApiService"
+
 import AuthServiceSingleton from "../../../services/apiService/auth"
 import * as t from "../types"
 

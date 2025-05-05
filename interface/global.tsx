@@ -26,3 +26,23 @@ export type DispatchObject<T> = ({
   payload: T
 }) => any
 export type DispatchEmptyObject = ({ type }: { type: string }) => any
+
+export type TBaseError = {
+  message: string
+  status: number
+  reasons: string
+}
+
+export type SearchQueryParams = Partial<{
+  searchIn: string
+  q: string
+}>
+
+export type PaginatedQueryParams = Partial<
+  {
+    order: "ASC" | "DESC"
+    limit: number
+    offset: number
+    roles: string
+  } & SearchQueryParams
+>

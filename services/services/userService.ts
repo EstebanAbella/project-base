@@ -1,4 +1,6 @@
-import { Paginator } from "../../interface/global"
+import { apiUrls } from "../../api/apiUrl"
+import HttpServiceSingleton from "../../api/HttpService"
+import { PaginatedQueryParams, Paginator } from "../../interface/global"
 import { UserResult } from "../../view/Users/user.interface"
 import UserServiceSingleton from "../apiService/user"
 
@@ -7,7 +9,13 @@ export class UserService {
 
   async getUser(id: string): Promise<UserResult> {
     try {
-      return await UserServiceSingleton.getUser(id)
+      const { data, error } = await HttpServiceSingleton.get<{
+        user: UserResult
+      }>(`${apiUrls.users}/${id}`)
+
+      if (error) throw error
+
+      return data!.user
     } catch (error) {
       throw error
     }
@@ -21,41 +29,66 @@ export class UserService {
     order?: string,
     roles?: string
   ): Promise<Paginator<UserResult>> {
+    const params = {
+      ...(offset !== undefined && { offset }),
+      ...(limit !== undefined && { limit }),
+      ...(query && { q: query }),
+      ...(filter && { searchIn: filter }),
+      ...(order && { sort: order }),
+      ...(roles && { roles }),
+    }
+
     try {
-      return await UserServiceSingleton.getUsers(
-        offset,
-        limit,
-        query,
-        filter,
-        order,
-        roles
-      )
+      const { data, error } = await HttpServiceSingleton.get<
+        {
+          users: Paginator<UserResult>
+        },
+        PaginatedQueryParams
+      >(apiUrls.users, params)
+
+      if (error) throw error
+
+      return data!.users
     } catch (error) {
       throw error
     }
   }
 
-  async createUser(data: Record<string, string>): Promise<{}> {
+  async createUser(data: { [key: string]: string }): Promise<{}> {
     try {
-      return await UserServiceSingleton.createUser(data)
-    } catch (error) {
-      throw error
+      const { data: responseData, error } = await HttpServiceSingleton.post<
+        {},
+        { [key: string]: string }
+      >(apiUrls.users, data)
+      if (error) throw error
+      return responseData!
+    } catch (err) {
+      throw err
     }
   }
 
   async deleteUser(id: string): Promise<{}> {
     try {
-      return await UserServiceSingleton.deleteUser(id)
-    } catch (error) {
-      throw error
+      const { data: responseData, error } =
+        await HttpServiceSingleton.delete<{}>(`${apiUrls.users}/${id}`)
+      if (error) throw error
+      return responseData!
+    } catch (err) {
+      throw err
     }
   }
 
-  async editUser(data: any): Promise<{}> {
+  async editUser(data: { [key: string]: string }): Promise<{}> {
     try {
-      return await UserServiceSingleton.editUser(data)
-    } catch (error) {
-      throw error
+      if (!data.id) throw new Error("invalidId")
+      const { data: responseData, error } = await HttpServiceSingleton.put<
+        {},
+        { [key: string]: string }
+      >(`${apiUrls.users}/${data.id}`, data)
+      if (error) throw error
+      return responseData!
+    } catch (err) {
+      throw err
     }
   }
 }

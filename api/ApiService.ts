@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios"
-import { CustomErrorType } from "../../interface/global"
+import { CustomErrorType } from "../interface/global"
 
 export interface globalType {
   apiInstance?: ApiService

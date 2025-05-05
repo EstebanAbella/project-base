@@ -2,7 +2,7 @@ import { ServerStatus } from "../../../interface/global"
 import { loggedUser } from "../../../models/models"
 import * as t from "../types"
 import * as _t from "../../updater/types"
-import { AuthReducerPropsType } from "../../../interface/authModel.interface"
+import { AuthReducerPropsType } from "../../../services/apiService/authModel.interface"
 
 const globalState: AuthReducerPropsType = {
   loginStatus: ServerStatus.IDLE,

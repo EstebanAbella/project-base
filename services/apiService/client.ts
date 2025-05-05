@@ -1,6 +1,6 @@
 import { Paginator } from "../../interface/global"
 import { clientType } from "../../view/Clients/client.interface"
-import ApiServiceSingleton from "./ApiService"
+import ApiServiceSingleton from "../../api/ApiService"
 
 export interface globalType {
   ClientService?: ClientService
