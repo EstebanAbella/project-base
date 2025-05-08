@@ -12,6 +12,7 @@ header {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 2px;
 
   .changeThemeContainer {
     display: flex;
@@ -27,8 +28,8 @@ header {
 
   .Button {
     font-size: 16px;
-    padding-left: 10px;
-    justify-content: flex-start;
+    padding: 4px 8px;
+    justify-content: space-between;
     width: 100%;
 
     &.Button.tertiary {

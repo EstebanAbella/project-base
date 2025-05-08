@@ -12,6 +12,13 @@ export const MenuComponent = () => {
   return (
     <header>
       <Button
+        value={"Users"}
+        type={ButtonType.TERTIARY}
+        icon={"icon-user"}
+        onClick={() => router.push("/users")}
+      ></Button>
+
+      <Button
         value={"Clients"}
         type={ButtonType.TERTIARY}
         icon={"icon-user"}
