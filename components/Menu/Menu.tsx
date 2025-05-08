@@ -1,14 +1,14 @@
 import React from "react"
-import { doLogout } from "../../redux/auth/actions"
-import { useDispatch } from "react-redux"
 import { ChangeTheme } from "../ChangeTheme/ChangeTheme"
 import router from "next/router"
 import { Button } from "../Button"
 import { ButtonType } from "../Button/Button"
-import { AppDispatch } from "../../redux/store"
+import { useAuthContext } from "../../context/auth/AuthContext"
+import { ServerStatus } from "../../interface/global"
+import LocalDataService from "../../services/LocalDataService"
 
 export const MenuComponent = () => {
-  const dispatch = useDispatch<AppDispatch>()
+  const { setLoginStatus, setUser } = useAuthContext()
   return (
     <header>
       <Button
@@ -22,7 +22,12 @@ export const MenuComponent = () => {
         value={"Logout"}
         type={ButtonType.TERTIARY}
         icon={"icon-log-in"}
-        onClick={() => dispatch(doLogout())}
+        onClick={() => {
+          setLoginStatus(ServerStatus.IDLE)
+          setUser(null)
+          LocalDataService.clearData()
+          window.location.href = "/login"
+        }}
       ></Button>
 
       <div className='changeThemeContainer'>

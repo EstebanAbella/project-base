@@ -8,7 +8,7 @@ import {
   useGetClientsByUserId,
 } from "./useClientsData"
 import { UseCallOfTables } from "../../hooks/useCallOfTables"
-import { useGetUser } from "../Users/useUsersData"
+import { useAuthContext } from "../../context/auth/AuthContext"
 
 export const useClients = () => {
   const [stateModal, setStateModal] = useState<boolean>(false)
@@ -20,30 +20,27 @@ export const useClients = () => {
   const limit = 5
   const order = "ASC"
 
+  const { user } = useAuthContext()
+
   const {
     useGetClientsByUserIdHandler,
     useGetClientsByUserIdData,
     useGetClientsByUserIdStatus,
   } = useGetClientsByUserId()
 
-  const { useGetUserHandler, useGetUserData, useGetUserStatus } = useGetUser()
+  const { useCreateClientHandler, useCreateClientStatus } = useCreateClient()
 
-  const { useCreateClientHandler, useCreateClientData, useCreateClientStatus } =
-    useCreateClient()
+  const { useEditClientHandler, useEditClientStatus } = useEditClient()
 
-  const { useEditClientHandler, useEditClientData, useEditClientStatus } =
-    useEditClient()
-
-  const { useDeleteClientHandler, useDeleteClientData, useDeleteClientStatus } =
-    useDeleteClient()
+  const { useDeleteClientHandler, useDeleteClientStatus } = useDeleteClient()
 
   const totalItems = useGetClientsByUserIdData?.count
     ? useGetClientsByUserIdData?.count
     : 0
-  const roles = useGetUserData?.role
+  const roles = user?.role
 
   UseCallOfTables({
-    id: useGetUserData?.id,
+    id: user?.id,
     offsetState,
     limit,
     query,
@@ -72,14 +69,9 @@ export const useClients = () => {
   })
 
   useEffect(() => {
-    useGetUserHandler
-  }, [])
-
-  useEffect(() => {
-    // if (!useGetUserData?.id) return
+    if (!user?.id) return
     useGetClientsByUserIdHandler(
-      // useGetUserData?.id,
-      "2",
+      user?.id,
       offsetState,
       limit,
       query ?? "",
@@ -87,7 +79,7 @@ export const useClients = () => {
       order ?? "",
       roles ?? ""
     )
-  }, [useGetUserStatus])
+  }, [user?.id])
 
   useEffect(() => {
     if (useCreateClientStatus === ServerStatus.FETCH) {
@@ -97,7 +89,7 @@ export const useClients = () => {
         setOffsetState((prevOffset) => prevOffset + limit)
       } else {
         useGetClientsByUserIdHandler(
-          useGetUserData?.id,
+          user?.id,
           offsetState,
           limit,
           query ?? "",
@@ -123,7 +115,7 @@ export const useClients = () => {
         setOffsetState((prevOffset) => prevOffset - limit)
       } else {
         useGetClientsByUserIdHandler(
-          useGetUserData?.id,
+          user?.id,
           offsetState,
           limit,
           query ?? "",
@@ -139,7 +131,7 @@ export const useClients = () => {
   useEffect(() => {
     if (useEditClientStatus === ServerStatus.FETCH) {
       useGetClientsByUserIdHandler(
-        useGetUserData?.id,
+        user?.id,
         offsetState,
         limit,
         query ?? "",
@@ -183,7 +175,7 @@ export const useClients = () => {
       disabled: true,
       type: "text",
       placeholder: "UserId",
-      defaultValue: useGetUserData?.id,
+      defaultValue: user?.id,
       isShown: false,
     },
   ]

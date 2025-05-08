@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../redux/rootReducer"
 import { ServerStatus } from "../../interface/global"
 import { doRestorePasswordValidated } from "../../redux/auth/actions"
 import { useRouter } from "next/router"
 import { Loader } from "../../components/Loader/Loader"
 import { Button } from "../../components/Button"
 import { ButtonType } from "../../components/Button/Button"
-import { AppDispatch } from "../../redux/store"
+import { useAuthContext } from "../../context/auth/AuthContext"
+import { useDoRestorePasswordValidated } from "../Login/useLoginData"
 
 export const RestorePassword = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const restorePasswordValidatedStatus = useSelector(
-    (state: RootState) => state.auth.restorePasswordValidatedStatus
-  )
+  const { restorePasswordValidatedStatus } = useAuthContext()
+
+  const { useRestorePasswordValidatedHandler } = useDoRestorePasswordValidated()
   // Datos de la contraseña
   const [password, setPassword] = useState("")
   // Visibilidad Contraseña
@@ -58,12 +56,10 @@ export const RestorePassword = () => {
 
   const handleClick = () => {
     if (validateForm() && tokenParams !== "") {
-      dispatch(
-        doRestorePasswordValidated({
-          newPassword: password,
-          token: tokenParams,
-        })
-      )
+      useRestorePasswordValidatedHandler({
+        newPassword: password,
+        token: tokenParams,
+      })
     }
   }
 

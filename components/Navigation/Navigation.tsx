@@ -1,9 +1,8 @@
 import React from "react"
-import { RootState } from "../../redux/rootReducer"
-import { useSelector } from "react-redux"
+import { useAuthContext } from "../../context/auth/AuthContext"
 
 export const NavigationComponent = () => {
-  const { user } = useSelector((state: RootState) => state.auth)
+  const { user } = useAuthContext()
 
   return (
     <nav className='navigationComponent'>

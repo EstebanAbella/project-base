@@ -1,48 +1,21 @@
-import { PropsWithChildren, useEffect, useState } from "react"
-import { RootState } from "../../redux/rootReducer"
+import { useEffect, useState } from "react"
 import LocalDataService from "../../services/LocalDataService"
-import { connect } from "react-redux"
-import { getUserByToken } from "../../redux/auth/actions"
 import { ServerStatus } from "../../interface/global"
-import { checkUpdater } from "../../redux/updater/actions"
-import router, { useRouter } from "next/router"
+import router from "next/router"
 import ApiService from "../../api/ApiService"
+import { useAuthContext } from "../../context/auth/AuthContext"
+import { useGetUserByToken } from "../../view/Login/useLoginData"
 
-const mapStateToProps = (state: RootState) => {
-  const updaterReducer = state.updater
-  const authReducer = state.auth
-  return {
-    loginStatus: authReducer.loginStatus,
-    updateNeeded: updaterReducer.updateNeeded,
-    updaterCheckerStatus: updaterReducer.updaterCheckerStatus,
-  }
+type SessionProviderProps = {
+  children: JSX.Element | JSX.Element[]
 }
 
-const mapDispatchToProps = {
-  getUserByToken,
-  checkUpdater,
-}
-
-export type SessinProviderProps = PropsWithChildren<{
-  loginStatus: ServerStatus
-  getUserByToken: Function
-  checkUpdater: Function
-  updateNeeded: boolean
-  updaterCheckerStatus: ServerStatus
-}>
-
-const SessionProvider = ({
-  loginStatus,
-  children,
-  getUserByToken,
-  checkUpdater,
-  updateNeeded,
-  updaterCheckerStatus,
-}: SessinProviderProps) => {
+const SessionProvider = ({ children }: SessionProviderProps) => {
   const [isToken, setIsToken] = useState<boolean>(false)
+  const { loginStatus } = useAuthContext()
+  const { useGetUserByTokenHandler } = useGetUserByToken()
 
   useEffect(() => {
-    // checkUpdater()
     const token = LocalDataService.getInstance().getToken()
     if (!token) {
       setIsToken(true)
@@ -50,8 +23,7 @@ const SessionProvider = ({
     }
     if (token) {
       ApiService.setToken(token)
-      getUserByToken()
-      // setIsToken(true)
+      useGetUserByTokenHandler(token)
     }
   }, [])
 
@@ -72,4 +44,4 @@ const SessionProvider = ({
   return isToken && <>{children}</>
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SessionProvider)
+export default SessionProvider

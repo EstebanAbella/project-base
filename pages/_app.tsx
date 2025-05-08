@@ -1,19 +1,16 @@
-import '../styles/_index.scss'
-import SessionProvider from '../wrappers/session/SessinProvider'
-import type { AppProps } from 'next/app'
-import React from 'react'
-import { wrapper } from '../redux/store'
-import { Provider } from 'react-redux'
+import "../styles/_index.scss"
+import SessionProvider from "../wrappers/session/SessinProvider"
+import type { AppProps } from "next/app"
+import React from "react"
+import { AuthProvider } from "../context/auth/AuthContext"
 
-function MainApp({ Component, pageProps, ...rest }: AppProps): JSX.Element {
-  const { store, props } = wrapper.useWrappedStore(rest)
-
+function MainApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <Provider store={store}>
+    <AuthProvider>
       <SessionProvider>
         <Component {...pageProps} />
       </SessionProvider>
-    </Provider>
+    </AuthProvider>
   )
 }
 

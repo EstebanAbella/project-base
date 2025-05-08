@@ -2,51 +2,51 @@ import { useState } from "react"
 import { ServerStatus } from "../../interface/global"
 import { authService } from "../../services/services/authenticationService"
 import { loggedUser } from "../../interface/authModel.interface"
+import { useAuthContext } from "../../context/auth/AuthContext"
 
 export const useDoLogin = () => {
-  const [data, setData] = useState<loggedUser | void>()
-  const [status, setStatus] = useState<ServerStatus>()
+  const { user, setUser, loginStatus, setLoginStatus } = useAuthContext()
 
   const handler = async (email: string, password: string) => {
-    setStatus(ServerStatus.FETCHING)
+    setLoginStatus(ServerStatus.FETCHING)
     try {
       const response = await authService.doLogin(email, password)
-      setData(response)
-      setStatus(ServerStatus.FETCH)
+      setUser(response || null)
+      setLoginStatus(ServerStatus.FETCH)
     } catch (err: any) {
       console.error("Error login:", err)
-      setStatus(ServerStatus.FETCH_ERROR)
+      setLoginStatus(ServerStatus.FETCH_ERROR)
     }
   }
 
   return {
     useLoginHandler: handler,
-    useLoginData: data,
-    useLoginStatus: status,
+    useLoginData: user,
+    useLoginStatus: loginStatus,
   }
 }
 
 export const useDoRestorePassword = () => {
-  const [status, setStatus] = useState<ServerStatus>()
+  const { setRestorePasswordStatus, restorePasswordStatus } = useAuthContext()
 
   const handler = async (data: {
     email: string
     location: string
     backoffice: boolean
   }) => {
-    setStatus(ServerStatus.FETCHING)
+    setRestorePasswordStatus(ServerStatus.FETCHING)
     try {
       await authService.doRestorePassword(data)
-      setStatus(ServerStatus.FETCH)
+      setRestorePasswordStatus(ServerStatus.FETCH)
     } catch (err: any) {
       console.error("Error restore password:", err)
-      setStatus(ServerStatus.FETCH_ERROR)
+      setRestorePasswordStatus(ServerStatus.FETCH_ERROR)
     }
   }
 
   return {
     useRestorePasswordHandler: handler,
-    useRestorePasswordStatus: status,
+    useRestorePasswordStatus: restorePasswordStatus,
   }
 }
 
@@ -71,24 +71,23 @@ export const useDoRestorePasswordValidated = () => {
 }
 
 export const useGetUserByToken = () => {
-  const [data, setData] = useState<loggedUser | null>(null)
-  const [status, setStatus] = useState<ServerStatus>()
+  const { user, setUser, loginStatus, setLoginStatus } = useAuthContext()
 
   const handler = async (token: string) => {
-    setStatus(ServerStatus.FETCHING)
+    setLoginStatus(ServerStatus.FETCHING)
     try {
-      const user = await authService.getUserByToken(token)
-      setData(user)
-      setStatus(ServerStatus.FETCH)
+      const userData = await authService.getUserByToken(token)
+      setUser(userData)
+      setLoginStatus(ServerStatus.FETCH)
     } catch (err: any) {
       console.error("Error get user by token:", err)
-      setStatus(ServerStatus.FETCH_ERROR)
+      setLoginStatus(ServerStatus.FETCH_ERROR)
     }
   }
 
   return {
     useGetUserByTokenHandler: handler,
-    useGetUserByTokenData: data,
-    useGetUserByTokenStatus: status,
+    useGetUserByTokenData: user,
+    useGetUserByTokenStatus: loginStatus,
   }
 }

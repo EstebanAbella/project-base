@@ -1,49 +1,41 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { connect } from "react-redux"
-import { RootState } from "../redux/rootReducer"
-import { ServerStatus } from "../interface/global"
 import { roleMap, RoleType } from "./roleMap"
-
-const mapStateToProps = (state: RootState) => ({
-  userRole: state.auth.user?.role,
-})
-
-const mapDispatchToProps = {}
-
-export type WithAuthPropsType = {
-  userRole?: string
-}
+import { useAuthContext } from "../context/auth/AuthContext"
 
 const withAuth = (WrappedComponent: React.FC) => {
-  const ComponentWithAuth = ({ userRole, ...props }: WithAuthPropsType) => {
-    const [stateUSerRole, setStateUserRole] = useState<boolean>(false)
+  const ComponentWithAuth = (props: any) => {
+    const { user } = useAuthContext()
+    const userRole = user?.role
+    const [isAuthorized, setIsAuthorized] = useState(false)
     const router = useRouter()
+
     const componentName = WrappedComponent.displayName || WrappedComponent.name
     const extractedComponentName =
       componentName.match(/\(([^)]+)\)/)?.[1] || componentName
 
     useEffect(() => {
-      const requiredRole = roleMap[extractedComponentName]
+      const requiredRoles = roleMap[extractedComponentName]
+
       if (
-        userRole !== undefined &&
-        !requiredRole?.includes(userRole as RoleType)
+        userRole &&
+        requiredRoles &&
+        !requiredRoles.includes(userRole as RoleType)
       ) {
-        setStateUserRole(false)
+        setIsAuthorized(false)
         router.push("/notAuthorized")
         return
       }
-      if (userRole === undefined) {
-        setStateUserRole(false)
-      } else {
-        setStateUserRole(true)
-      }
-    }, [userRole])
 
-    return stateUSerRole ? <WrappedComponent {...props} /> : <div></div>
+      setIsAuthorized(!!userRole)
+    }, [userRole, extractedComponentName])
+
+    return isAuthorized ? <WrappedComponent {...props} /> : <div></div>
   }
 
-  return connect(mapStateToProps, mapDispatchToProps)(ComponentWithAuth)
+  ComponentWithAuth.displayName = `WithAuth(${WrappedComponent.displayName || WrappedComponent.name})`
+
+  return ComponentWithAuth
 }
 
 export default withAuth
