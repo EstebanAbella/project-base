@@ -1,12 +1,9 @@
 import React, { useEffect } from "react"
 import { useIsNavigationOnline } from "../../hooks/useIsNavigationOnline"
+import NotificationService from "../../services/NotificationService"
 
 export const AlertNoConnectionComponent = () => {
   const isOnline = useIsNavigationOnline()
-  useEffect(() => {
-    // TODO
-    //emit event for the component that is listening to it
-  }, [isOnline])
   return (
     <section
       className={`alertConnection ${
