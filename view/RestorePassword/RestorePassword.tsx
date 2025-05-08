@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { ServerStatus } from "../../interface/global"
-import { doRestorePasswordValidated } from "../../redux/auth/actions"
 import { useRouter } from "next/router"
 import { Loader } from "../../components/Loader/Loader"
 import { Button } from "../../components/Button"

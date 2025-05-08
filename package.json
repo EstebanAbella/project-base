@@ -1,5 +1,5 @@
 {
-  "name": "pwa-pedidos",
+  "name": "pwa",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,18 +10,13 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^17.0.0",
-    "@reduxjs/toolkit": "^2.6.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "jsonwebtoken": "^9.0.2",
     "next": "12.3.0",
     "next-pwa": "^5.6.0",
-    "next-redux-wrapper": "^8.0.0",
     "react": "^18",
     "react-dom": "^18",
-    "react-redux": "^9.1.1",
-    "redux": "^5.0.1",
-    "redux-thunk": "^3.1.0",
     "sass": "^1.74.1"
   },
   "devDependencies": {

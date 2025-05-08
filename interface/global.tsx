@@ -17,16 +17,6 @@ export enum ServerStatus {
   FETCH_ERROR,
 }
 
-/* Redux Dispatc Obj */
-export type DispatchObject<T> = ({
-  type,
-  payload,
-}: {
-  type: string
-  payload: T
-}) => any
-export type DispatchEmptyObject = ({ type }: { type: string }) => any
-
 export type TBaseError = {
   message: string
   status: number
