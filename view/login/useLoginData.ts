@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { ServerStatus } from "../../interface/global"
 import { authService } from "../../services/services/authenticationService"
-import { loggedUser } from "../../interface/authModel.interface"
 import { useAuthContext } from "../../context/auth/AuthContext"
 
 export const useDoLogin = () => {

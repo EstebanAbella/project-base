@@ -1,13 +1,9 @@
 import { useRouter } from "next/router"
 import React, { useEffect } from "react"
-import { RootState } from "../../redux/rootReducer"
-import { getClient } from "../../redux/client/actions"
-import { useDispatch, useSelector } from "react-redux"
 import { ServerStatus } from "../../interface/global"
 import { Loader } from "../../components/Loader/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
 import { Layout } from "../../wrappers/Layout/Layout"
-import { AppDispatch } from "../../redux/store"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 import { useClientSelected } from "./useClientSelected"
 
@@ -15,14 +11,9 @@ export const ClientSelected = () => {
   const router = useRouter()
   const { param } = router.query
 
-  const { useGetClientHandler, useGetClientData, useGetClientStatus } =
-    useClientSelected()
-
-  useEffect(() => {
-    if (param) {
-      useGetClientHandler(param as string)
-    }
-  }, [])
+  const { useGetClientData, useGetClientStatus } = useClientSelected(
+    param as string
+  )
 
   return (
     <AccessConsume>

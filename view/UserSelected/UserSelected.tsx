@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import React, { useEffect } from "react"
+import React from "react"
 import { ServerStatus } from "../../interface/global"
 import { Loader } from "../../components/Loader/Loader"
 import AccessConsume from "../../wrappers/auth/AccessConsume"
@@ -11,14 +11,7 @@ export const UserSelected = () => {
   const router = useRouter()
   const { param } = router.query
 
-  const { useGetUserHandler, useGetUserData, useGetUserStatus } =
-    useUserSelected()
-
-  useEffect(() => {
-    if (param) {
-      useGetUserHandler(param as string)
-    }
-  }, [])
+  const { useGetUserData, useGetUserStatus } = useUserSelected(param as string)
 
   return (
     <AccessConsume>
