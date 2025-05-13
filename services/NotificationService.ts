@@ -13,13 +13,13 @@ class NotificationService {
   off(event: string, callback: Callback) {
     if (!this.subscribers[event]) return
     this.subscribers[event] = this.subscribers[event].filter(
-      cb => cb !== callback,
+      (cb) => cb !== callback
     )
   }
 
   emit(event: string, ...args: any[]) {
     if (!this.subscribers[event]) return
-    this.subscribers[event].forEach(callback => callback(...args))
+    this.subscribers[event].forEach((callback) => callback(...args))
   }
 }
 

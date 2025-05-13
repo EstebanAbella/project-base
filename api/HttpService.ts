@@ -1,5 +1,6 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios"
 import ApiServiceSingleton from "./ApiService"
+import NotificationService from "../services/NotificationService"
 
 export interface ApiResponse<T> {
   data: T | null
@@ -40,6 +41,7 @@ class HttpService {
       >(url, { ...(params ? { params } : {}) })
       return { data: response.data, error: null }
     } catch (error: any) {
+      NotificationService.emit("error", error.message ?? "Error desconocido")
       return { data: null, error: error.response?.data?.error ?? error.message }
     }
   }
@@ -71,6 +73,7 @@ class HttpService {
 
       return { ...res, data: response.data }
     } catch (error: any) {
+      NotificationService.emit("error", error.message ?? "Error desconocido")
       return { ...res, error: error.response?.data?.error ?? error.message }
     }
   }
@@ -98,6 +101,7 @@ class HttpService {
 
       return { ...res, data: response.data }
     } catch (error: any) {
+      NotificationService.emit("error", error.message ?? "Error desconocido")
       return { ...res, error: error.response?.data?.error ?? error.message }
     }
   }
@@ -119,6 +123,7 @@ class HttpService {
 
       return { ...res, data: response.data }
     } catch (error: any) {
+      NotificationService.emit("error", error.message ?? "Error desconocido")
       return { ...res, error: error.response?.data?.error ?? error.message }
     }
   }
