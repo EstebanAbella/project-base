@@ -1,4 +1,4 @@
-import { ServerStatus } from "./global"
+import { TPermissionsObject } from "./global"
 
 export type loggedUser = {
   name: string
@@ -7,13 +7,5 @@ export type loggedUser = {
   password: string
   role: string
   token?: string
-}
-
-export type AuthReducerPropsType = {
-  loginStatus: ServerStatus
-  user?: loggedUser
-  loginStatusMessage?: string
-  restorePasswordStatus: ServerStatus
-  restorePasswordValidatedStatus: ServerStatus
-  authUserByTokenStatus: ServerStatus
+  permissions: TPermissionsObject
 }

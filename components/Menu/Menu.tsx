@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { ChangeTheme } from "../ChangeTheme/ChangeTheme"
 import router from "next/router"
 import { Button } from "../Button"
@@ -6,24 +6,43 @@ import { ButtonType } from "../Button/Button"
 import { useAuthContext } from "../../context/auth/AuthContext"
 import { ServerStatus } from "../../interface/global"
 import LocalDataService from "../../services/LocalDataService"
+import { TSidebarItem } from "./Menu.interface"
+import { buildItemsWithPermissions } from "../../Utils/buildItemsWithPermissions"
+
+export const sidebarItemsArray: TSidebarItem[] = [
+  {
+    value: "Users",
+    type: ButtonType.TERTIARY,
+    icon: "icon-user",
+    route: "/users",
+    section: "user",
+  },
+  {
+    value: "Clients",
+    type: ButtonType.TERTIARY,
+    icon: "icon-user",
+    route: "/clients",
+    section: "client",
+  },
+]
 
 export const MenuComponent = () => {
   const { setLoginStatus, setUser } = useAuthContext()
+  const itemsSidebar = buildItemsWithPermissions(sidebarItemsArray)
+
   return (
     <header>
-      <Button
-        value={"Users"}
-        type={ButtonType.TERTIARY}
-        icon={"icon-user"}
-        onClick={() => router.push("/users")}
-      ></Button>
-
-      <Button
-        value={"Clients"}
-        type={ButtonType.TERTIARY}
-        icon={"icon-user"}
-        onClick={() => router.push("/clients")}
-      ></Button>
+      {itemsSidebar?.map((item) => {
+        return (
+          <Button
+            key={item.route}
+            value={item.value}
+            type={item.type}
+            icon={item.icon}
+            onClick={() => router.push(`${item.route}`)}
+          />
+        )
+      })}
 
       <Button
         value={"Logout"}

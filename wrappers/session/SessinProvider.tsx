@@ -11,14 +11,14 @@ type SessionProviderProps = {
 }
 
 const SessionProvider = ({ children }: SessionProviderProps) => {
-  const [isToken, setIsToken] = useState<boolean>(false)
+  const [seeChildren, setSeeChildren] = useState<boolean>(false)
   const { loginStatus, setUser } = useAuthContext()
   const { useGetUserByTokenHandler } = useGetUserByToken()
 
   useEffect(() => {
     const token = LocalDataService.getInstance().getToken()
     if (!token) {
-      setIsToken(true)
+      setSeeChildren(true)
       router.push("/login")
     }
     if (token) {
@@ -31,18 +31,18 @@ const SessionProvider = ({ children }: SessionProviderProps) => {
     if (loginStatus === ServerStatus.FETCH_ERROR) {
       LocalDataService.clearData()
       setUser(null)
-      setIsToken(true)
+      setSeeChildren(true)
       router.push("/login")
     }
     if (loginStatus === ServerStatus.FETCHING) {
-      setIsToken(false)
+      setSeeChildren(false)
     }
     if (loginStatus === ServerStatus.FETCH) {
-      setIsToken(true)
+      setSeeChildren(true)
     }
   }, [loginStatus])
 
-  return isToken && <>{children}</>
+  return seeChildren && <>{children}</>
 }
 
 export default SessionProvider

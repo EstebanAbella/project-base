@@ -1,3 +1,5 @@
+import { PERMISSIONS_NAMES, SECTIONS_NAMES } from "../Utils/Constants"
+
 export type Paginator<T> = {
   items: T[]
   count: number
@@ -35,4 +37,11 @@ export type PaginatedQueryParams = Partial<
     offset: number
     roles: string
   } & SearchQueryParams
+>
+
+export type TSectionName = (typeof SECTIONS_NAMES)[number]
+export type TPermissionName = (typeof PERMISSIONS_NAMES)[number]
+
+export type TPermissionsObject = Partial<
+  Record<TSectionName, TPermissionName[]>
 >

@@ -1,9 +1,8 @@
 import { apiUrls } from "../../api/apiUrl"
 import HttpServiceSingleton from "../../api/HttpService"
-import { CustomErrorType } from "../../interface/global"
 import LocalDataService from "../LocalDataService"
-import { loggedUser } from "../../models/models"
 import ApiServiceSingleton from "../../api/ApiService"
+import { loggedUser } from "../../interface/authModel.interface"
 
 export class AuthService {
   constructor() {}

@@ -82,6 +82,8 @@ export const useGetUserByToken = () => {
       setLoginStatus(ServerStatus.FETCH)
     } catch (err: any) {
       console.error("Error get user by token:", err)
+      LocalDataService.clearData()
+      setUser(null)
       setLoginStatus(ServerStatus.FETCH_ERROR)
     }
   }
