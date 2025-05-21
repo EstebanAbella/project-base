@@ -24,6 +24,7 @@ export class AuthService {
       ApiServiceSingleton.setToken(user.token)
       LocalDataService.getInstance().saveToken(user.token)
       LocalDataService.getInstance().saveUserId(user.id)
+      LocalDataService.getInstance().saveUser(user)
       return user
     } catch (error) {
       throw error
@@ -72,7 +73,6 @@ export class AuthService {
       }>(`${apiUrls.userByToken}?token=${token}`)
 
       if (error) throw error
-
       return data!.user
     } catch (error) {
       throw error
