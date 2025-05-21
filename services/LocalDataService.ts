@@ -1,10 +1,13 @@
+import { loggedUser } from "../interface/authModel.interface"
+
 export interface globalType {
   localDataService?: LocalDataService
 }
 
-const varnames = {
+const varNames = {
   token: "token",
   userId: "userId",
+  user: "user",
 }
 
 class LocalDataService {
@@ -27,20 +30,35 @@ class LocalDataService {
     return window.localStorage.getItem(key) as T
   }
 
+  saveUser(user: loggedUser): void {
+    return this.set(varNames.user, JSON.stringify(user))
+  }
+
   saveUserId(userId: string): void {
-    return this.set(varnames.userId, userId)
+    return this.set(varNames.userId, userId)
   }
 
   saveToken(token: string): void {
-    return this.set(varnames.token, token)
+    return this.set(varNames.token, token)
+  }
+
+  getUser(): loggedUser | null {
+    const data = localStorage.getItem(varNames.user)
+    if (!data) return null
+    try {
+      return JSON.parse(data) as loggedUser
+    } catch (error) {
+      console.error("Error parsing user from localStorage:", error)
+      return null
+    }
   }
 
   getUserId(): string {
-    return this.get(varnames.userId)
+    return this.get(varNames.userId)
   }
 
   getToken(): string {
-    return this.get(varnames.token)
+    return this.get(varNames.token)
   }
 
   getVersion(): string {
@@ -48,7 +66,7 @@ class LocalDataService {
   }
 
   clearData(): void {
-    Object.entries(varnames).forEach((k) => {
+    Object.entries(varNames).forEach((k) => {
       this.set(k[1], "")
     })
   }
