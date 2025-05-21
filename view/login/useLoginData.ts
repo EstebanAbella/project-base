@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ServerStatus } from "../../interface/global"
 import { authService } from "../../services/services/authenticationService"
 import { useAuthContext } from "../../context/auth/AuthContext"
+import LocalDataService from "../../services/LocalDataService"
 
 export const useDoLogin = () => {
   const { user, setUser, loginStatus, setLoginStatus } = useAuthContext()
@@ -77,6 +78,7 @@ export const useGetUserByToken = () => {
     try {
       const userData = await authService.getUserByToken(token)
       setUser(userData)
+      LocalDataService.getInstance().saveUser(userData)
       setLoginStatus(ServerStatus.FETCH)
     } catch (err: any) {
       console.error("Error get user by token:", err)

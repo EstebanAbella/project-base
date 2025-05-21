@@ -12,7 +12,7 @@ type SessionProviderProps = {
 
 const SessionProvider = ({ children }: SessionProviderProps) => {
   const [isToken, setIsToken] = useState<boolean>(false)
-  const { loginStatus } = useAuthContext()
+  const { loginStatus, setUser } = useAuthContext()
   const { useGetUserByTokenHandler } = useGetUserByToken()
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const SessionProvider = ({ children }: SessionProviderProps) => {
   useEffect(() => {
     if (loginStatus === ServerStatus.FETCH_ERROR) {
       LocalDataService.clearData()
+      setUser(null)
       setIsToken(true)
       router.push("/login")
     }
