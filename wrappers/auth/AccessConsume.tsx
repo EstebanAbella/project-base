@@ -10,11 +10,12 @@ type AccessConsumePropsType = {
 const AccessConsume = ({ children }: AccessConsumePropsType): any => {
   const [canAccess, setCanAccess] = useState(false)
 
-  const { loginStatus } = useAuthContext()
+  const { loginStatus, setUser } = useAuthContext()
 
   useEffect(() => {
     if (loginStatus === ServerStatus.FETCH_ERROR) {
       setCanAccess(false)
+      setUser(null)
       LocalDataService.clearData()
       window.location.href = "/login"
     }
