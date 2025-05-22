@@ -37,6 +37,22 @@ export const UserSelected = () => {
                       Role:{" "}
                       <span className='userSpan'>{useGetUserData.role}</span>
                     </p>
+                    <p>
+                      Permissions:
+                      <br />
+                      {Object.entries(useGetUserData.permissions).map(
+                        ([section, actions]) => {
+                          return (
+                            <div key={section} className='userSpan'>
+                              {section}:{" "}
+                              {Array.isArray(actions)
+                                ? actions.join(", ")
+                                : "No permissions"}
+                            </div>
+                          )
+                        }
+                      )}
+                    </p>
                   </div>
                 )}
                 {useGetUserStatus === ServerStatus.FETCHING && (

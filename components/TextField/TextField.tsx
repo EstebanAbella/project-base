@@ -1,3 +1,5 @@
+import { SelectMultiple } from "../SelectMultiple/SelectMultiple"
+
 export enum TextFieldType {
   PRIMARY = "primary",
   SECONDARY = "secondary",
@@ -11,6 +13,15 @@ export enum TextFieldType {
   LINK = "link",
 }
 
+export type typeTextField =
+  | "text"
+  | "number"
+  | "email"
+  | "password"
+  | "select"
+  | "select-multiple"
+  | "textarea"
+
 export const TextField = ({
   valueInput = "",
   label = "",
@@ -18,16 +29,16 @@ export const TextField = ({
   typeTextField = TextFieldType.PRIMARY,
   disabled = false,
   onChange = () => {},
-  type = "",
+  type = "text",
   placeholder = "",
   valueSelect = [],
   rows = 2,
   isShown = true,
 }: {
-  valueInput?: string
+  valueInput?: string | string[]
   label?: string
   name?: string
-  type?: string
+  type?: typeTextField
   typeTextField?: TextFieldType
   disabled?: boolean
   onChange?: (e: any) => void
@@ -63,6 +74,14 @@ export const TextField = ({
             </option>
           ))}
         </select>
+      )}
+      {type === "select-multiple" && (
+        <SelectMultiple
+          name='permissions'
+          options={["view", "create", "update", "delete", "import", "export"]}
+          value={Array.isArray(valueInput) ? valueInput : []}
+          onChange={onChange}
+        />
       )}
 
       {type === "textarea" && (

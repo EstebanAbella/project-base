@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { StaticImageData } from "next/image"
 import { Button, ButtonType } from "../Button/Button"
-import { TextField, TextFieldType } from "../TextField/TextField"
+import { TextField, TextFieldType, typeTextField } from "../TextField/TextField"
 
 export type ModalPropsType = {
   img?: string
@@ -62,8 +61,15 @@ export const ModalCrud = ({
   }, [dataForm])
 
   const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
-    const name = (e.target as HTMLInputElement).name
-    const value = (e.target as HTMLInputElement).value
+    const target = e.target as HTMLInputElement | HTMLSelectElement
+    const { name, type } = target
+
+    let value: string | string[] = target.value
+
+    if (type === "select-multiple" && target instanceof HTMLSelectElement) {
+      value = Array.from(target.selectedOptions, (option) => option.value)
+    }
+
     setForm({ ...form, [name]: value })
   }
 
@@ -93,7 +99,7 @@ export const ModalCrud = ({
                       name={data.name}
                       typeTextField={data.typeTextField}
                       disabled={data.disabled}
-                      type={data.type}
+                      type={data.type as typeTextField}
                       placeholder={data.placeholder}
                       onChange={handleChange}
                       valueInput={form[data.name] ? form[data.name] : ""}

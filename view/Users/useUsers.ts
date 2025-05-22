@@ -163,6 +163,15 @@ export const useUsers = () => {
       placeholder: "-",
       valueSelect: ["user", "admin"],
     },
+    {
+      label: "Permissions",
+      name: "permissions",
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: "select-multiple",
+      placeholder: "-",
+      valueSelect: ["view", "create", "update", "delete", "import", "export"],
+    },
   ]
 
   const editUserObject = [
@@ -198,6 +207,15 @@ export const useUsers = () => {
       type: "select",
       placeholder: "-",
       valueSelect: ["user", "admin"],
+    },
+    {
+      label: "Permissions",
+      name: "permissions",
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: "select-multiple",
+      placeholder: "-",
+      valueSelect: ["view", "create", "update", "delete", "import", "export"],
     },
   ]
 

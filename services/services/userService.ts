@@ -2,7 +2,6 @@ import { apiUrls } from "../../api/apiUrl"
 import HttpServiceSingleton from "../../api/HttpService"
 import { PaginatedQueryParams, Paginator } from "../../interface/global"
 import { UserResult } from "../../view/Users/user.interface"
-import UserServiceSingleton from "../apiService/user"
 
 export class UserService {
   constructor() {}
