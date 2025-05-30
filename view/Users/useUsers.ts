@@ -173,16 +173,16 @@ export const useUsers = () => {
       moduleName: "user",
       checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
-    // {
-    //   label: "Permissions",
-    //   name: "permissions",
-    //   typeTextField: TextFieldType.PRIMARY,
-    //   disabled: false,
-    //   type: "checkbox",
-    //   placeholder: "-",
-    //   moduleName: "admin",
-    //   checkboxItems: ["view", "create", "update", "delete", "import", "export"],
-    // },
+    {
+      label: "Permissions",
+      name: "permissions",
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: "checkbox",
+      placeholder: "-",
+      moduleName: "client",
+      checkboxItems: ["view", "create", "update", "delete", "import", "export"],
+    },
   ]
 
   const editUserObject = [
@@ -229,16 +229,16 @@ export const useUsers = () => {
       moduleName: "user",
       checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
-    // {
-    //   label: "Permissions",
-    //   name: "permissions",
-    //   typeTextField: TextFieldType.PRIMARY,
-    //   disabled: false,
-    //   type: "checkbox",
-    //   placeholder: "-",
-    //   moduleName: "admin",
-    //   checkboxItems: ["view", "create", "update", "delete", "import", "export"],
-    // },
+    {
+      label: "Permissions",
+      name: "permissions",
+      typeTextField: TextFieldType.PRIMARY,
+      disabled: false,
+      type: "checkbox",
+      placeholder: "-",
+      moduleName: "client",
+      checkboxItems: ["view", "create", "update", "delete", "import", "export"],
+    },
   ]
 
   const handleClickOnModal = (typeModal: string, data?: any) => {

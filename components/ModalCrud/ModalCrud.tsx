@@ -92,7 +92,7 @@ export const ModalCrud = ({
               )}
               {dataForm?.length && form && Object.keys(form || {}).length && (
                 <form>
-                  {dataForm?.map((data) => (
+                  {dataForm?.map((data, index) => (
                     <TextField
                       label={data.label}
                       name={data.name}
@@ -103,7 +103,7 @@ export const ModalCrud = ({
                       onChange={handleChange}
                       valueInput={form[data.name]}
                       valueSelect={data.valueSelect ? data.valueSelect : []}
-                      key={data.name}
+                      key={`${data.name}${index}`}
                       isShown={data.isShown}
                       checkboxItems={data.checkboxItems}
                       moduleName={data.moduleName}

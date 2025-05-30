@@ -26,7 +26,6 @@ const CheckboxComponent: React.FC<CheckboxComponentProps> = ({
   const [enabled, setEnabled] = useState(false)
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([])
 
-  // 🔁 Solo actualizamos si de verdad hay diferencias
   useEffect(() => {
     const newPermissions = value[moduleName] || []
 
@@ -40,22 +39,23 @@ const CheckboxComponent: React.FC<CheckboxComponentProps> = ({
     }
   }, [value, moduleName])
 
-  // Comunicar cambios al padre (solo si cambia algo en enabled o selectedPermissions)
   useEffect(() => {
     const finalValue = enabled ? selectedPermissions : []
-    // ⚠️ Si value[moduleName] ya tiene ese mismo valor, no hacemos onChange
     const current = value[moduleName] || []
     const same =
       current.length === finalValue.length &&
       current.every((v) => finalValue.includes(v))
 
     if (!same) {
+      const updatedValue = {
+        ...value,
+        [moduleName]: finalValue,
+      }
+
       onChange({
         target: {
           name,
-          value: {
-            [moduleName]: finalValue,
-          },
+          value: updatedValue,
           type: "checkbox-group",
         },
       })
