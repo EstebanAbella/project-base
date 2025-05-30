@@ -168,10 +168,21 @@ export const useUsers = () => {
       name: "permissions",
       typeTextField: TextFieldType.PRIMARY,
       disabled: false,
-      type: "select-multiple",
+      type: "checkbox",
       placeholder: "-",
-      valueSelect: ["view", "create", "update", "delete", "import", "export"],
+      moduleName: "user",
+      checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
+    // {
+    //   label: "Permissions",
+    //   name: "permissions",
+    //   typeTextField: TextFieldType.PRIMARY,
+    //   disabled: false,
+    //   type: "checkbox",
+    //   placeholder: "-",
+    //   moduleName: "admin",
+    //   checkboxItems: ["view", "create", "update", "delete", "import", "export"],
+    // },
   ]
 
   const editUserObject = [
@@ -213,10 +224,21 @@ export const useUsers = () => {
       name: "permissions",
       typeTextField: TextFieldType.PRIMARY,
       disabled: false,
-      type: "select-multiple",
+      type: "checkbox",
       placeholder: "-",
-      valueSelect: ["view", "create", "update", "delete", "import", "export"],
+      moduleName: "user",
+      checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
+    // {
+    //   label: "Permissions",
+    //   name: "permissions",
+    //   typeTextField: TextFieldType.PRIMARY,
+    //   disabled: false,
+    //   type: "checkbox",
+    //   placeholder: "-",
+    //   moduleName: "admin",
+    //   checkboxItems: ["view", "create", "update", "delete", "import", "export"],
+    // },
   ]
 
   const handleClickOnModal = (typeModal: string, data?: any) => {

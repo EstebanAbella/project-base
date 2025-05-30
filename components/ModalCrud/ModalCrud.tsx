@@ -25,6 +25,8 @@ export type dataFormType = {
   valueSelect?: string[]
   defaultValue?: any
   isShown?: boolean
+  checkboxItems?: string[]
+  moduleName?: string
 }
 
 export const ModalCrud = ({
@@ -39,16 +41,13 @@ export const ModalCrud = ({
   isDisabled,
   initialData,
 }: ModalPropsType) => {
-  const [form, setForm] = useState<any>()
+  const [form, setForm] = useState<any>({})
 
   useEffect(() => {
     if (initialData) {
+      console.log("[initialData]: ", initialData)
       setForm(initialData)
-    }
-  }, [initialData])
-
-  useEffect(() => {
-    if (dataForm?.length && !initialData) {
+    } else if (dataForm?.length) {
       const setPropertyForm = dataForm?.reduce(
         (obj: { [key: string]: string }, item: dataFormType) => {
           obj[item.name] = item.defaultValue ? item.defaultValue : ""
@@ -58,7 +57,7 @@ export const ModalCrud = ({
       )
       setForm(setPropertyForm)
     }
-  }, [dataForm])
+  }, [initialData, dataForm])
 
   const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
     const target = e.target as HTMLInputElement | HTMLSelectElement
@@ -91,7 +90,7 @@ export const ModalCrud = ({
                   ))}
                 </div>
               )}
-              {dataForm?.length && form && Object.keys(form).length && (
+              {dataForm?.length && form && Object.keys(form || {}).length && (
                 <form>
                   {dataForm?.map((data) => (
                     <TextField
@@ -102,10 +101,12 @@ export const ModalCrud = ({
                       type={data.type as typeTextField}
                       placeholder={data.placeholder}
                       onChange={handleChange}
-                      valueInput={form[data.name] ? form[data.name] : ""}
+                      valueInput={form[data.name]}
                       valueSelect={data.valueSelect ? data.valueSelect : []}
                       key={data.name}
                       isShown={data.isShown}
+                      checkboxItems={data.checkboxItems}
+                      moduleName={data.moduleName}
                     ></TextField>
                   ))}
                 </form>

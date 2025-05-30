@@ -1,3 +1,4 @@
+import CheckboxComponent from "../CheckboxComponent/CheckboxComponent"
 import { SelectMultiple } from "../SelectMultiple/SelectMultiple"
 
 export enum TextFieldType {
@@ -21,6 +22,7 @@ export type typeTextField =
   | "select"
   | "select-multiple"
   | "textarea"
+  | "checkbox"
 
 export const TextField = ({
   valueInput = "",
@@ -34,8 +36,10 @@ export const TextField = ({
   valueSelect = [],
   rows = 2,
   isShown = true,
+  checkboxItems,
+  moduleName,
 }: {
-  valueInput?: string | string[]
+  valueInput?: any
   label?: string
   name?: string
   type?: typeTextField
@@ -46,7 +50,10 @@ export const TextField = ({
   valueSelect?: string[]
   rows?: number
   isShown?: boolean
+  checkboxItems?: string[]
+  moduleName?: string
 }) => {
+  console.log("valueInput", valueInput)
   return (
     <div className={`textField ${typeTextField}`}>
       {isShown && <label>{label}</label>}
@@ -77,10 +84,21 @@ export const TextField = ({
       )}
       {type === "select-multiple" && (
         <SelectMultiple
-          name='permissions'
-          options={["view", "create", "update", "delete", "import", "export"]}
-          value={Array.isArray(valueInput) ? valueInput : []}
+          name={name}
           onChange={onChange}
+          value={Array.isArray(valueInput) ? valueInput : []}
+          options={valueSelect}
+        />
+      )}
+
+      {type === "checkbox" && checkboxItems && moduleName && (
+        <CheckboxComponent
+          name={name}
+          label={label}
+          value={valueInput}
+          onChange={onChange}
+          moduleName={moduleName}
+          checkboxItems={checkboxItems}
         />
       )}
 
