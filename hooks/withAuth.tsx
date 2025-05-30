@@ -1,34 +1,37 @@
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { roleMap, RoleType } from "./roleMap"
 import { useAuthContext } from "../context/auth/AuthContext"
+import { TPermissionsObject, TSectionName } from "../interface/global"
 
 const withAuth = (WrappedComponent: React.FC) => {
   const ComponentWithAuth = (props: any) => {
     const { user } = useAuthContext()
-    const userRole = user?.role
-    const [isAuthorized, setIsAuthorized] = useState(false)
     const router = useRouter()
-
-    const componentName = WrappedComponent.displayName || WrappedComponent.name
-    const extractedComponentName =
-      componentName.match(/\(([^)]+)\)/)?.[1] || componentName
+    const [isAuthorized, setIsAuthorized] = useState(false)
 
     useEffect(() => {
-      const requiredRoles = roleMap[extractedComponentName]
-
-      if (
-        userRole &&
-        requiredRoles &&
-        !requiredRoles.includes(userRole as RoleType)
-      ) {
+      if (!user) {
         setIsAuthorized(false)
         router.push("/notAuthorized")
         return
       }
 
-      setIsAuthorized(!!userRole)
-    }, [userRole, extractedComponentName])
+      const permissions: TPermissionsObject = user.permissions || {}
+
+      const path = router.pathname.toLowerCase()
+
+      const matchedSection = Object.keys(permissions).find((section) =>
+        path.includes(section)
+      ) as TSectionName | undefined
+
+      if (!matchedSection || !permissions[matchedSection]?.includes("view")) {
+        setIsAuthorized(false)
+        router.push("/notAuthorized")
+        return
+      }
+
+      setIsAuthorized(true)
+    }, [user, router.pathname])
 
     return isAuthorized ? <WrappedComponent {...props} /> : <div></div>
   }
