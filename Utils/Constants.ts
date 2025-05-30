@@ -7,7 +7,7 @@ export const INTERVAL_OF_UPDATED_IN_MINS = 60
 export const WAIT_PER_NEXT_UPDATING_IN_MINS = 0
 
 //
-export const SECTIONS_NAMES = ["user", "client"] as const
+export const SECTIONS_NAMES = ["user", "userSelected", "client"] as const
 
 export const PERMISSIONS_NAMES = [
   "view",
@@ -29,5 +29,6 @@ export const PERMISSIONS: Record<TPermissionName, TPermissionName> = {
 
 export const SECTIONS: Record<TSectionName, TSectionName> = {
   user: "user",
+  userSelected: "userSelected",
   client: "client",
 }

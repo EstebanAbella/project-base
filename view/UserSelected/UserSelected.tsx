@@ -6,8 +6,9 @@ import AccessConsume from "../../wrappers/auth/AccessConsume"
 import { Layout } from "../../wrappers/Layout/Layout"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 import { useUserSelected } from "./useUserSelected"
+import withAuth from "../../hooks/withAuth"
 
-export const UserSelected = () => {
+const UserSelected = () => {
   const router = useRouter()
   const { param } = router.query
 
@@ -66,3 +67,5 @@ export const UserSelected = () => {
     </AccessConsume>
   )
 }
+
+export default withAuth(UserSelected)

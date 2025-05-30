@@ -41,6 +41,7 @@ export const mocked_users: loggedUser[] = [
     role: "admin",
     permissions: {
       user: ["view", "create", "update", "delete", "import", "export"],
+      userSelected: ["view"],
       client: ["view", "create", "update", "delete", "import", "export"],
     },
   },
