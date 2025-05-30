@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from "react"
+import { CheckboxComponentProps } from "./CheckboxComponent.interface"
 
-interface CheckboxComponentProps {
-  name: string
-  label: string
-  value: { [moduleName: string]: string[] }
-  onChange: (e: {
-    target: {
-      name: string
-      value: { [moduleName: string]: string[] }
-      type: string
-    }
-  }) => void
-  checkboxItems: string[]
-  moduleName: string
-}
-
-const CheckboxComponent: React.FC<CheckboxComponentProps> = ({
+const CheckboxComponent = ({
   name,
   label,
   value,
   onChange,
   checkboxItems,
   moduleName,
-}) => {
+}: CheckboxComponentProps) => {
   const [enabled, setEnabled] = useState(false)
   const [selectedPermissions, setSelectedPermissions] = useState<string[]>([])
 
@@ -69,26 +55,28 @@ const CheckboxComponent: React.FC<CheckboxComponentProps> = ({
   }
 
   return (
-    <div style={{ marginBottom: "1rem" }}>
-      <label>
+    <div className='checkboxModuleComponent'>
+      <label className='containerModuleName'>
+        <strong style={{ marginLeft: "8px" }}>{moduleName}</strong>
         <input
           type='checkbox'
           checked={enabled}
           onChange={() => setEnabled(!enabled)}
+          className='inputCheck'
         />
-        <strong style={{ marginLeft: "8px" }}>{moduleName}</strong>
       </label>
 
-      <div style={{ marginLeft: "24px", marginTop: "4px" }}>
+      <div className='containerChecks'>
         {checkboxItems.map((perm) => (
-          <label key={perm} style={{ display: "block" }}>
+          <label key={perm} className='labelChecks'>
+            <span style={{ marginLeft: "6px" }}>{perm}</span>
             <input
+              className='inputCheck'
               type='checkbox'
               disabled={!enabled}
               checked={selectedPermissions.includes(perm)}
               onChange={() => handlePermissionToggle(perm)}
             />
-            <span style={{ marginLeft: "6px" }}>{perm}</span>
           </label>
         ))}
       </div>

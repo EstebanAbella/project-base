@@ -1,0 +1,18 @@
+.checkboxModuleComponent {
+  .containerModuleName {
+    display: flex;
+  }
+  .inputCheck {
+    width: auto !important;
+    margin-left: 16px;
+  }
+
+  .containerChecks {
+    display: flex;
+    flex-direction: column;
+
+    .labelChecks {
+      display: flex;
+    }
+  }
+}

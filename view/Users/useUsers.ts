@@ -174,7 +174,7 @@ export const useUsers = () => {
       checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
     {
-      label: "Permissions",
+      label: "",
       name: "permissions",
       typeTextField: TextFieldType.PRIMARY,
       disabled: false,
@@ -230,7 +230,7 @@ export const useUsers = () => {
       checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
     {
-      label: "Permissions",
+      label: "",
       name: "permissions",
       typeTextField: TextFieldType.PRIMARY,
       disabled: false,
