@@ -170,7 +170,7 @@ export const useUsers = () => {
       disabled: false,
       type: "checkbox",
       placeholder: "-",
-      moduleName: "user",
+      moduleName: "users",
       checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
     {
@@ -190,7 +190,7 @@ export const useUsers = () => {
       disabled: false,
       type: "checkbox",
       placeholder: "-",
-      moduleName: "client",
+      moduleName: "clients",
       checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
   ]
@@ -236,7 +236,7 @@ export const useUsers = () => {
       disabled: false,
       type: "checkbox",
       placeholder: "-",
-      moduleName: "user",
+      moduleName: "users",
       checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
     {
@@ -256,7 +256,7 @@ export const useUsers = () => {
       disabled: false,
       type: "checkbox",
       placeholder: "-",
-      moduleName: "client",
+      moduleName: "clients",
       checkboxItems: ["view", "create", "update", "delete", "import", "export"],
     },
   ]

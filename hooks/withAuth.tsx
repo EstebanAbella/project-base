@@ -61,32 +61,28 @@ const withAuth = (WrappedComponent: React.FC) => {
       }
 
       const permissions: TPermissionsObject = user.permissions || {}
-
-      const path = router.pathname.toLowerCase()
+      const path = router.pathname
       const firstSegment = path.split("/").filter(Boolean)[0]
 
-      const protectedSections = Object.keys(permissions)
-      const isProtectedRoute = protectedSections.includes(firstSegment)
+      const isProtectedRoute = Object.keys(permissions).includes(firstSegment)
 
       if (isProtectedRoute) {
         const hasViewPermission =
           permissions[firstSegment as TSectionName]?.includes("view")
-
         if (!hasViewPermission) {
           setIsAuthorized(false)
           router.push("/notAuthorized")
           return
         }
       }
-
+      console.log("asd", permissions, path, firstSegment, isProtectedRoute)
       setIsAuthorized(true)
     }, [user, router.pathname])
 
-    return isAuthorized ? <WrappedComponent {...props} /> : <div></div>
+    return isAuthorized ? <WrappedComponent {...props} /> : null
   }
 
   ComponentWithAuth.displayName = `WithAuth(${WrappedComponent.displayName || WrappedComponent.name})`
-
   return ComponentWithAuth
 }
 

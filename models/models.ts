@@ -40,9 +40,9 @@ export const mocked_users: loggedUser[] = [
     password: "admin",
     role: "admin",
     permissions: {
-      user: ["view", "create", "update", "delete", "import", "export"],
+      users: ["view", "create", "update", "delete", "import", "export"],
       userSelected: ["view"],
-      client: ["view", "create", "update", "delete", "import", "export"],
+      clients: ["view", "create", "update", "delete", "import", "export"],
     },
   },
   {
@@ -52,7 +52,9 @@ export const mocked_users: loggedUser[] = [
     password: "user",
     role: "user",
     permissions: {
-      client: ["view", "create", "update", "delete", "import", "export"],
+      users: [],
+      userSelected: [],
+      clients: ["view", "create", "update", "delete", "import", "export"],
     },
   },
   {
@@ -62,7 +64,9 @@ export const mocked_users: loggedUser[] = [
     password: "user",
     role: "user",
     permissions: {
-      client: ["view", "create", "update", "delete", "import", "export"],
+      users: [],
+      userSelected: [],
+      clients: ["view", "create", "update", "delete", "import", "export"],
     },
   },
   {
@@ -72,7 +76,9 @@ export const mocked_users: loggedUser[] = [
     password: "user",
     role: "user",
     permissions: {
-      client: ["view", "create", "update", "delete", "import", "export"],
+      users: [],
+      userSelected: [],
+      clients: ["view", "create", "update", "delete", "import", "export"],
     },
   },
   {
@@ -82,7 +88,9 @@ export const mocked_users: loggedUser[] = [
     password: "user",
     role: "user",
     permissions: {
-      client: ["view", "create", "update", "delete", "import", "export"],
+      users: [],
+      userSelected: [],
+      clients: ["view", "create", "update", "delete", "import", "export"],
     },
   },
   {
@@ -92,7 +100,9 @@ export const mocked_users: loggedUser[] = [
     password: "user",
     role: "user",
     permissions: {
-      client: ["view", "create", "update", "delete", "import", "export"],
+      users: [],
+      userSelected: [],
+      clients: ["view", "create", "update", "delete", "import", "export"],
     },
   },
   {
@@ -102,7 +112,9 @@ export const mocked_users: loggedUser[] = [
     password: "user",
     role: "user",
     permissions: {
-      client: ["view", "create", "update", "delete", "import", "export"],
+      users: [],
+      userSelected: [],
+      clients: ["view", "create", "update", "delete", "import", "export"],
     },
   },
   {
@@ -112,7 +124,9 @@ export const mocked_users: loggedUser[] = [
     password: "user",
     role: "user",
     permissions: {
-      client: ["view", "create", "update", "delete", "import", "export"],
+      users: [],
+      userSelected: [],
+      clients: ["view", "create", "update", "delete", "import", "export"],
     },
   },
 ]

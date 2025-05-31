@@ -15,14 +15,14 @@ export const sidebarItemsArray: TSidebarItem[] = [
     type: ButtonType.TERTIARY,
     icon: "icon-user",
     route: "/users",
-    section: "user",
+    section: "users",
   },
   {
     value: "Clients",
     type: ButtonType.TERTIARY,
     icon: "icon-user",
     route: "/clients",
-    section: "client",
+    section: "clients",
   },
 ]
 
