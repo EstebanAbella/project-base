@@ -168,7 +168,7 @@ export const useUsers = () => {
       name: "permissions",
       typeTextField: TextFieldType.PRIMARY,
       disabled: false,
-      type: "checkbox",
+      type: "checkboxModule",
       placeholder: "-",
       moduleName: {
         users: ["view", "create", "update", "delete", "import", "export"],
@@ -217,7 +217,7 @@ export const useUsers = () => {
       name: "permissions",
       typeTextField: TextFieldType.PRIMARY,
       disabled: false,
-      type: "checkbox",
+      type: "checkboxModule",
       placeholder: "-",
       moduleName: {
         users: ["view", "create", "update", "delete", "import", "export"],

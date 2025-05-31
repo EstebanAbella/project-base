@@ -1,4 +1,4 @@
-import CheckboxComponent from "../CheckboxComponent/CheckboxComponent"
+import CheckboxComponentModule from "../CheckboxComponentModule/CheckboxComponentModule"
 import { SelectMultiple } from "../SelectMultiple/SelectMultiple"
 
 export enum TextFieldType {
@@ -22,7 +22,7 @@ export type typeTextField =
   | "select"
   | "select-multiple"
   | "textarea"
-  | "checkbox"
+  | "checkboxModule"
 
 export const TextField = ({
   valueInput = "",
@@ -90,8 +90,8 @@ export const TextField = ({
         />
       )}
 
-      {type === "checkbox" && moduleName && (
-        <CheckboxComponent
+      {type === "checkboxModule" && moduleName && (
+        <CheckboxComponentModule
           name={name}
           label={label}
           value={valueInput || {}}

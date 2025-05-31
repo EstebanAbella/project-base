@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { CheckboxComponentProps } from "./CheckboxComponent.interface"
+import { CheckboxComponentProps } from "./CheckboxComponentModule.interface"
 
-const CheckboxComponent = ({
+const CheckboxComponentModule = ({
   name,
   label,
   moduleName,
@@ -86,4 +86,4 @@ const CheckboxComponent = ({
   )
 }
 
-export default CheckboxComponent
+export default CheckboxComponentModule
