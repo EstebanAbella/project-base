@@ -36,8 +36,8 @@ export const TextField = ({
   valueSelect = [],
   rows = 2,
   isShown = true,
-  checkboxItems,
   moduleName,
+  setForm,
 }: {
   valueInput?: any
   label?: string
@@ -50,8 +50,8 @@ export const TextField = ({
   valueSelect?: string[]
   rows?: number
   isShown?: boolean
-  checkboxItems?: string[]
-  moduleName?: string
+  moduleName?: Record<string, string[]>
+  setForm: Function
 }) => {
   console.log("valueInput", valueInput)
   return (
@@ -91,14 +91,18 @@ export const TextField = ({
         />
       )}
 
-      {type === "checkbox" && checkboxItems && moduleName && (
+      {type === "checkbox" && moduleName && (
         <CheckboxComponent
           name={name}
           label={label}
-          value={valueInput}
-          onChange={onChange}
+          value={valueInput || {}}
           moduleName={moduleName}
-          checkboxItems={checkboxItems}
+          onChange={(newPermissions) => {
+            setForm((prev: any) => ({
+              ...prev,
+              [name]: newPermissions,
+            }))
+          }}
         />
       )}
 

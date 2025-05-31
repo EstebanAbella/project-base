@@ -25,8 +25,7 @@ export type dataFormType = {
   valueSelect?: string[]
   defaultValue?: any
   isShown?: boolean
-  checkboxItems?: string[]
-  moduleName?: string
+  moduleName?: Record<string, string[]>
 }
 
 export const ModalCrud = ({
@@ -104,8 +103,8 @@ export const ModalCrud = ({
                       valueSelect={data.valueSelect ? data.valueSelect : []}
                       key={`${data.name}${index}`}
                       isShown={data.isShown}
-                      checkboxItems={data.checkboxItems}
                       moduleName={data.moduleName}
+                      setForm={setForm}
                     ></TextField>
                   ))}
                 </form>

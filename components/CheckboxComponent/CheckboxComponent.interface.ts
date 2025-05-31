@@ -1,14 +1,7 @@
 export interface CheckboxComponentProps {
   name: string
   label: string
-  value: { [moduleName: string]: string[] }
-  onChange: (e: {
-    target: {
-      name: string
-      value: { [moduleName: string]: string[] }
-      type: string
-    }
-  }) => void
-  checkboxItems: string[]
-  moduleName: string
+  moduleName: Record<string, string[]>
+  value: Record<string, string[]>
+  onChange: (value: Record<string, string[]>) => void
 }

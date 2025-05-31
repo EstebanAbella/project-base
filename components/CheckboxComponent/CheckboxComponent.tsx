@@ -4,81 +4,84 @@ import { CheckboxComponentProps } from "./CheckboxComponent.interface"
 const CheckboxComponent = ({
   name,
   label,
+  moduleName,
   value,
   onChange,
-  checkboxItems,
-  moduleName,
 }: CheckboxComponentProps) => {
-  const [enabled, setEnabled] = useState(false)
-  const [selectedPermissions, setSelectedPermissions] = useState<string[]>([])
+  const [selectedModules, setSelectedModules] = useState<
+    Record<string, string[]>
+  >({})
 
   useEffect(() => {
-    const newPermissions = value[moduleName] || []
+    const initialState: Record<string, string[]> = {}
+    Object.keys(moduleName).forEach((mod) => {
+      initialState[mod] = value[mod] || []
+    })
+    setSelectedModules(initialState)
+  }, [moduleName, value])
 
-    const samePermissions =
-      selectedPermissions.length === newPermissions.length &&
-      selectedPermissions.every((p) => newPermissions.includes(p))
-
-    if (!samePermissions || enabled !== newPermissions.length > 0) {
-      setEnabled(newPermissions.length > 0)
-      setSelectedPermissions(newPermissions)
+  const handleModuleToggle = (mod: string) => {
+    const alreadySelected = selectedModules[mod]?.length > 0
+    const updated = {
+      ...selectedModules,
+      [mod]: alreadySelected ? [] : [...(moduleName[mod] || [])],
     }
-  }, [value, moduleName])
 
-  useEffect(() => {
-    const finalValue = enabled ? selectedPermissions : []
-    const current = value[moduleName] || []
-    const same =
-      current.length === finalValue.length &&
-      current.every((v) => finalValue.includes(v))
+    setSelectedModules(updated)
+    onChange(updated)
+  }
 
-    if (!same) {
-      const updatedValue = {
-        ...value,
-        [moduleName]: finalValue,
-      }
+  const handlePermissionToggle = (mod: string, permission: string) => {
+    const current = selectedModules[mod] || []
+    const updatedPermissions = current.includes(permission)
+      ? current.filter((p) => p !== permission)
+      : [...current, permission]
 
-      onChange({
-        target: {
-          name,
-          value: updatedValue,
-          type: "checkbox-group",
-        },
-      })
+    const updated = {
+      ...selectedModules,
+      [mod]: updatedPermissions,
     }
-  }, [enabled, selectedPermissions])
 
-  const handlePermissionToggle = (perm: string) => {
-    setSelectedPermissions((prev) =>
-      prev.includes(perm) ? prev.filter((p) => p !== perm) : [...prev, perm]
-    )
+    setSelectedModules(updated)
+    onChange(updated)
   }
 
   return (
-    <div className='checkboxModuleComponent'>
-      <label className='containerModuleName'>
-        <strong style={{ marginLeft: "8px" }}>{moduleName}</strong>
-        <input
-          type='checkbox'
-          checked={enabled}
-          onChange={() => setEnabled(!enabled)}
-          className='inputCheck'
-        />
-      </label>
+    <div className='checkboxComponent'>
+      <label className='labelMain'>{label}</label>
+      <div className='moduleList'>
+        {Object.keys(moduleName).map((mod) => {
+          const isActive = (selectedModules[mod] || []).length > 0
+          const allPermissions = moduleName[mod] || []
 
-      <div className='containerChecks'>
-        {checkboxItems.map((perm) => (
-          <label key={perm} className='labelChecks'>
-            <span style={{ marginLeft: "6px" }}>{perm}</span>
-            <input
-              className='inputCheck'
-              type='checkbox'
-              disabled={!enabled}
-              checked={selectedPermissions.includes(perm)}
-              onChange={() => handlePermissionToggle(perm)}
-            />
-          </label>
-        ))}
+          return (
+            <div key={mod} className='moduleBlock'>
+              <label className='moduleLabel'>
+                <input
+                  type='checkbox'
+                  checked={isActive}
+                  onChange={() => handleModuleToggle(mod)}
+                />
+                {mod}
+              </label>
+
+              {isActive && (
+                <div className='permissions'>
+                  {allPermissions.map((perm) => (
+                    <label key={perm} className='permissionItem'>
+                      <input
+                        type='checkbox'
+                        checked={(selectedModules[mod] || []).includes(perm)}
+                        onChange={() => handlePermissionToggle(mod, perm)}
+                      />
+                      {perm}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
