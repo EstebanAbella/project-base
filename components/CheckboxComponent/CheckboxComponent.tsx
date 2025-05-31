@@ -48,7 +48,6 @@ const CheckboxComponent = ({
 
   return (
     <div className='checkboxComponent'>
-      <label className='labelMain'>{label}</label>
       <div className='moduleList'>
         {Object.keys(moduleName).map((mod) => {
           const isActive = (selectedModules[mod] || []).length > 0

@@ -53,7 +53,6 @@ export const TextField = ({
   moduleName?: Record<string, string[]>
   setForm: Function
 }) => {
-  console.log("valueInput", valueInput)
   return (
     <div className={`textField ${typeTextField}`}>
       {isShown && <label>{label}</label>}
