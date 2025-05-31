@@ -45,7 +45,6 @@ export const ModalCrud = ({
 
   useEffect(() => {
     if (initialData) {
-      console.log("[initialData]: ", initialData)
       setForm(initialData)
     } else if (dataForm?.length) {
       const setPropertyForm = dataForm?.reduce(
