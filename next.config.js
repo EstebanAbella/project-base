@@ -1,10 +1,9 @@
 // eslint-disable
 /** @type {import('next').NextConfig} */
-const withPWA = require("next-pwa")({
-  dest: "public",
-})
+const isDev = process.env.NODE_ENV === "development"
+const withPWA = require("next-pwa")
 
-const nextConfig = withPWA({
+const baseConfig = {
   reactStrictMode: true,
   swcMinify: true,
   async redirects() {
@@ -47,18 +46,18 @@ const nextConfig = withPWA({
       target: "es2015",
     },
   },
-  // eslint: {
-  //   // Warning: This allows production builds to successfully complete even if
-  //   // your project has ESLint errors.
-  //   ignoreDuringBuilds: true,
-  // },
-  // typescript: {
-  //   // !! WARN !!
-  //   // Dangerously allow production builds to successfully complete even if
-  //   // your project has type errors.
-  //   // !! WARN !!
-  //   ignoreBuildErrors: true,
-  // },
-})
+}
 
-module.exports = nextConfig
+module.exports = isDev
+  ? baseConfig
+  : withPWA({
+      ...baseConfig,
+      pwa: {
+        dest: "public",
+        disable: false,
+        injectManifest: {
+          swSrc: "service-worker.js",
+          swDest: "sw.js",
+        },
+      },
+    })
