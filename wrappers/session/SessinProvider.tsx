@@ -18,6 +18,8 @@ const SessionProvider = ({ children }: SessionProviderProps) => {
   useEffect(() => {
     const token = LocalDataService.getInstance().getToken()
     if (!token) {
+      LocalDataService.clearData()
+      setUser(null)
       setSeeChildren(true)
       router.push("/login")
     }

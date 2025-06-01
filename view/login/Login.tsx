@@ -48,6 +48,7 @@ export const Login = () => {
               onChange={handleChange}
               onKeyDown={(e) => handleKeyPress(e)}
               className={`${userNameEmpty ? "inputError" : ""}`}
+              autoComplete='username'
             />
 
             <div className='messageForm'>
@@ -71,6 +72,7 @@ export const Login = () => {
                 onChange={handleChange}
                 onKeyDown={(e) => handleKeyPress(e)}
                 className={`input ${passwordEmpty ? "inputError" : ""}`}
+                autoComplete={"current-password"}
               />
               <span
                 className={showPassword ? "icon-eye" : "icon-eye-off"}

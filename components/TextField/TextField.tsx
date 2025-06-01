@@ -68,6 +68,7 @@ export const TextField = ({
             onChange={onChange}
             type={type}
             placeholder={placeholder}
+            autoComplete={type === "password" ? "current-password" : "off"}
           />
         )}
 
