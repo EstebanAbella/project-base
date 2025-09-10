@@ -1,5 +1,6 @@
 @use "../../styles/utilities";
 @use "../../styles/mixins";
+@use "../../styles/variables";
 
 .modal {
   position: fixed;
@@ -27,7 +28,7 @@
     max-width: 560px;
     max-height: 700px;
     padding: 5px;
-    background-color: $white;
+    background-color: variables.$white;
     border-radius: 7px;
     overflow-y: auto;
     display: flex;
@@ -38,7 +39,7 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      color: $black;
+      color: variables.$black;
       font-size: 15px;
       cursor: pointer;
     }
@@ -57,12 +58,12 @@
       @include mixins.custom_scrollbar();
 
       label {
-        color: $black;
+        color: variables.$black;
       }
 
       .textModal {
         text-align: center;
-        color: $black;
+        color: variables.$black;
         font-weight: utilities.font-weight(semibold);
         font-size: 20px;
       }

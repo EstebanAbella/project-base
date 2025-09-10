@@ -1,4 +1,5 @@
 @use "../../styles/utilities";
+@use "../../styles/variables";
 
 header {
   position: fixed;
@@ -7,7 +8,7 @@ header {
   width: 120px;
   height: 100vh;
   background-color: #202c33;
-  color: $white;
+  color: variables.$white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +35,7 @@ header {
 
     &.Button.tertiary {
       font-weight: utilities.font-weight(semibold);
-      color: $white !important;
+      color: variables.$white !important;
     }
 
     > span {
