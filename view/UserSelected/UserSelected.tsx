@@ -33,11 +33,10 @@ const UserSelected = () => {
                     <span className='userSpan'>{useGetUserData.email}</span>
                   </p>
                   <p>
-                    Role:{" "}
-                    <span className='userSpan'>{useGetUserData.role}</span>
+                    Rol: <span className='userSpan'>{useGetUserData.role}</span>
                   </p>
                   <p>
-                    Permissions:
+                    Permisos:
                     <br />
                     {Object.entries(useGetUserData.permissions).map(
                       ([section, actions]) => {
