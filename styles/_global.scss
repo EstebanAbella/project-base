@@ -1,4 +1,6 @@
-@import "./variables";
+@use "./variables";
+@use "./mixins";
+@use "./utilities";
 
 body {
   &.themeDark {
@@ -54,7 +56,7 @@ body {
 input,
 select,
 textarea {
-  background-color: $white;
+  background-color: variables.$white;
   padding: 0px;
   padding: 5px 10px;
   position: relative;
@@ -62,9 +64,9 @@ textarea {
   margin: 0px;
   border: none;
   width: 100%;
-  color: $grayDark;
+  color: variables.$grayDark;
   outline: none;
-  border: 1px solid $borderForm;
+  border: 1px solid variables.$borderForm;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,14 +74,14 @@ textarea {
   transition: 0.5s all;
 
   &.inputError {
-    border: 1px solid $stateError;
+    border: 1px solid variables.$stateError;
   }
 
   &:focus {
-    border: 1px solid $focusInput;
+    border: 1px solid variables.$focusInput;
 
     &:not(:focus-visible) {
-      border: 1px solid $borderForm !important;
+      border: 1px solid variables.$borderForm !important;
     }
   }
 }

@@ -1,4 +1,4 @@
-@import "../variables";
+@use "../variables";
 
 .buttonTable {
   padding: 7px;
@@ -23,11 +23,11 @@
   }
 
   .tableThead {
-    background-color: $greenApp;
+    background-color: variables.$greenApp;
     tr {
-      background-color: $greenApp;
+      background-color: variables.$greenApp;
       th {
-        background-color: $greenApp;
+        background-color: variables.$greenApp;
         color: $white;
         text-align: center;
       }

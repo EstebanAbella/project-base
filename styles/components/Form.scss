@@ -1,4 +1,7 @@
-@import "../utilities";
+@use "../utilities";
+@use "../variables";
+@use "../fonts";
+@use "../mixins";
 
 form {
   margin: 0px;
@@ -17,7 +20,7 @@ form {
     align-items: center;
 
     > h1 {
-      font-family: $font-family-custom;
+      font-family: fonts.$font-family-custom;
       margin-bottom: 36px;
     }
   }
@@ -50,7 +53,7 @@ form {
     input,
     select,
     textarea {
-      background-color: $white;
+      background-color: variables.$white;
       padding: 0px;
       padding: 5px 10px;
       position: relative;
@@ -60,13 +63,13 @@ form {
       width: 100%;
       color: $grayDark;
       outline: none;
-      border: 1px solid $borderForm;
+      border: 1px solid variables.$borderForm;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 7px;
       &.inputError {
-        border: 1px solid $stateError;
+        border: 1px solid variables.$stateError;
       }
     }
     input.input {
