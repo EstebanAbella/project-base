@@ -13,7 +13,7 @@ export const ModalTable: React.FC<ModalTableProps> = ({
     <div className='modalOverlay'>
       <div className='modalContent'>
         <span className={`icon-close close`} onClick={onClose}></span>
-        <h4>Column configuration</h4>
+        <h4>Customize table</h4>
         {children}
       </div>
     </div>

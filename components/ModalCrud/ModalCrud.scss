@@ -32,7 +32,7 @@
     border-radius: 7px;
     overflow-y: auto;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     @include mixins.custom_scrollbar();
 
     .close {

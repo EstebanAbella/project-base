@@ -3,7 +3,7 @@ import useFocusTrap from "../../hooks/useFocusTrap"
 import useDropdownDirection from "./useDropdownDirection"
 
 interface FilterSearchInPropsType {
-  filterOptions: { id: number; name: string }[]
+  filterOptions: { id: string; name: string }[]
   setFilter: Function
 }
 
@@ -35,7 +35,7 @@ export const FilterSearchIn = ({
     }
   }
 
-  const handleEscapeKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleEscapeKey = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === "Escape" && isOpen) {
       setIsOpen(false)
     }
@@ -43,7 +43,9 @@ export const FilterSearchIn = ({
 
   useEffect(() => {
     if (isOpen) {
-      const firstOption = containerRef.current?.querySelector(`.list`)
+      const firstOption = containerRef.current?.querySelector(
+        `.list`
+      ) as HTMLElement | null
       firstOption?.focus()
     }
   }, [isOpen])
@@ -64,7 +66,8 @@ export const FilterSearchIn = ({
   }, [containerRef])
 
   const handleClick = () => {
-    setSelectedOption("")
+    setSelectedOption(null)
+    setFilter("")
   }
 
   return (
@@ -81,7 +84,9 @@ export const FilterSearchIn = ({
           type='text'
           placeholder='Filter'
           readOnly
-          value={selectedOption || ""}
+          value={
+            filterOptions.find((opt) => opt.id === selectedOption)?.name || ""
+          }
           tabIndex={-1}
         />
         <span className={`arrow ${isOpen ? `topTriangle` : `buttonTriangle`}`}>
@@ -91,15 +96,15 @@ export const FilterSearchIn = ({
 
       {isOpen && (
         <ul className={`optionsList ${openUpwards ? "top" : "bottom"}`}>
-          {filterOptions.map((option) => (
+          {filterOptions?.map((option) => (
             <li
               key={option.id}
-              className={`option ${selectedOption === option.name ? "selected" : ""} list`}
-              onClick={() => handleSelect(option.name)}
+              className={`option ${selectedOption === option.id ? "selected" : ""} list`}
+              onClick={() => handleSelect(option.id)}
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleSelect(option.name)
+                  handleSelect(option.id)
                 }
                 if (e.key === "Escape") {
                   handleEscapeKey(e)
@@ -107,9 +112,7 @@ export const FilterSearchIn = ({
               }}
             >
               {option.name}
-              {selectedOption === option.name && (
-                <span className='check'>✓</span>
-              )}
+              {selectedOption === option.id && <span className='check'>✓</span>}
             </li>
           ))}
         </ul>
@@ -117,7 +120,10 @@ export const FilterSearchIn = ({
 
       {selectedOption && (
         <div className='containerSelectedLabel'>
-          <p className='selectedLabel'>{selectedOption}</p>
+          <p className='selectedLabel'>
+            {" "}
+            {filterOptions.find((opt) => opt.id === selectedOption)?.name}
+          </p>
           <span
             className='icon-close close'
             onClick={handleClick}

@@ -1,5 +1,6 @@
 @use "../../styles/variables";
 @use "../../styles/mixins";
+@use "../../styles/utilities";
 
 .customSelect {
   position: relative;
@@ -70,6 +71,7 @@
     overflow-y: auto;
     border-radius: 7px;
     @include mixins.custom_scrollbar();
+    z-index: utilities.z-index(double);
 
     .option {
       padding: 8px;

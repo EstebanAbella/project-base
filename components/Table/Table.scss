@@ -1,4 +1,5 @@
 @use "../../styles//variables";
+@use "../../styles/utilities";
 
 .tableContainer {
   width: 100%;
@@ -10,28 +11,76 @@
     cursor: default;
     border: none;
 
+    .tableTheadComparison {
+      background-color: variables.$colorApp;
+      position: sticky;
+      top: 0;
+      z-index: utilities.z-index(basic);
+
+      tr {
+        background-color: variables.$colorApp;
+        th {
+          background-color: variables.$colorApp;
+          color: variables.$white;
+          font-weight: 600;
+          padding: 12px;
+          text-transform: uppercase;
+          font-size: 0.85rem;
+          letter-spacing: 0.03em;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+          &:first-child {
+            border-top-left-radius: 6px;
+          }
+
+          &:last-child {
+            border-top-right-radius: 6px;
+          }
+        }
+      }
+    }
+
     tr {
       border-top: none;
+      transition: background-color 0.15s ease;
+
+      &:nth-child(even) {
+        background-color: #f9fafb;
+      }
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
     }
 
     th,
     td {
-      padding: 10px;
+      padding: 10px 12px;
       text-align: left;
       border: none;
       overflow: hidden;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #e5e7eb;
       color: variables.$black;
+      vertical-align: middle;
+      font-size: 0.95rem;
+
+      @media (max-width: 768px) {
+        padding: 8px;
+        font-size: 0.9rem;
+      }
     }
 
     .tdContent {
       display: -webkit-box;
+      display: box;
       -webkit-line-clamp: 4;
+      line-clamp: 4;
       -webkit-box-orient: vertical;
+      box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: normal;
+      max-height: 5.6em;
     }
 
     .columnSmall {
@@ -82,4 +131,13 @@
       cursor: pointer;
     }
   }
+}
+
+.ContainerFilterSearchInTable {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
 }

@@ -29,7 +29,7 @@ export const Login = () => {
       <div className='containerLoginForm'>
         <form>
           <div className='logoContainer'>
-            <h1>Rosbot</h1>
+            <h1>Project base</h1>
             {/* <Logo width='240' srcLogo={""} /> */}
           </div>
           {!sendEmail ? (
