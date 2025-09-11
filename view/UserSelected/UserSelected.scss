@@ -1,27 +1,88 @@
+// .userSelected {
+//   position: relative;
+//   width: 100%;
+//   min-height: 100vh;
+//   padding-top: 15vh;
+
+//   .userSelectedContainer {
+//     position: relative;
+//     width: 100%;
+//     min-height: 80vh;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: column;
+
+//     .userSelectedContainerData {
+//       position: relative;
+//       width: 100%;
+//       min-height: 80vh;
+//       display: flex;
+//       justify-content: flex-start;
+//       align-items: flex-start;
+//       flex-direction: column;
+//       padding-top: 10vh;
+//     }
+//   }
+// }
 .userSelected {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  padding-top: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 2rem;
+  min-height: 83vh;
+  background-color: var(--background-primary);
 
   .userSelectedContainer {
-    position: relative;
+    background: var(--background-secondary);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    max-width: 600px;
     width: 100%;
-    min-height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    animation: fadeIn 0.3s ease;
 
-    .userSelectedContainerData {
-      position: relative;
-      width: 100%;
-      min-height: 80vh;
+    .userTitle {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    .userInfo {
       display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
       flex-direction: column;
-      padding-top: 10vh;
+      gap: 1.2rem;
+
+      p {
+        margin: 0.5rem 0;
+        font-size: 1rem;
+
+        strong {
+          font-weight: 600;
+        }
+
+        .userSpan {
+          font-weight: 400;
+          color: #444;
+        }
+      }
+
+      .permissions {
+        .permissionsList {
+          margin-top: 0.5rem;
+
+          .permissionItem {
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+
+            .permissionSection {
+              font-weight: 600;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -18,40 +18,40 @@ export const ClientSelected = () => {
     <Layout>
       <BreadcrumbWrapper>
         <section className='clientSelected'>
-          <section className='clientSelectedContainer'>
-            <>
-              {useGetClientStatus === ServerStatus.FETCH &&
-                useGetClientData && (
-                  <div className='clientSelectedContainerData'>
-                    <p>
-                      Id:{" "}
-                      <span className='clientSpan'>{useGetClientData.id}</span>
-                    </p>
-                    <p>
-                      Nombre:{" "}
-                      <span className='clientSpan'>
-                        {useGetClientData.name}
-                      </span>
-                    </p>
-                    <p>
-                      E-mail:{" "}
-                      <span className='clientSpan'>
-                        {useGetClientData.email}
-                      </span>
-                    </p>
-                    <p>
-                      Addres:{" "}
-                      <span className='clientSpan'>
-                        {useGetClientData.address}
-                      </span>
-                    </p>
+          <div className='clientSelectedCard'>
+            {useGetClientStatus === ServerStatus.FETCH && useGetClientData && (
+              <>
+                <h2 className='clientTitle'>Detalles del Cliente</h2>
+                <div className='clientInfo'>
+                  <div className='clientRow'>
+                    <span className='clientLabel'>ID:</span>
+                    <span className='clientValue'>{useGetClientData.id}</span>
                   </div>
-                )}
-              {useGetClientStatus === ServerStatus.FETCHING && (
-                <Loader></Loader>
-              )}
-            </>
-          </section>
+                  <div className='clientRow'>
+                    <span className='clientLabel'>Nombre:</span>
+                    <span className='clientValue'>{useGetClientData.name}</span>
+                  </div>
+                  <div className='clientRow'>
+                    <span className='clientLabel'>E-mail:</span>
+                    <span className='clientValue'>
+                      {useGetClientData.email}
+                    </span>
+                  </div>
+                  <div className='clientRow'>
+                    <span className='clientLabel'>Dirección:</span>
+                    <span className='clientValue'>
+                      {useGetClientData.address}
+                    </span>
+                  </div>
+                </div>
+              </>
+            )}
+            {useGetClientStatus === ServerStatus.FETCHING && (
+              <div className='loaderWrapper'>
+                <Loader />
+              </div>
+            )}
+          </div>
         </section>
       </BreadcrumbWrapper>
     </Layout>
