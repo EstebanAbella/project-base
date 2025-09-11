@@ -42,9 +42,6 @@ const baseConfig = {
   },
   typescript: {
     ignoreBuildErrors: true,
-    compilerOptions: {
-      target: "es2015",
-    },
   },
 }
 
