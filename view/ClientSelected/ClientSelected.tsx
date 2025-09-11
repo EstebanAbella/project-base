@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import React, { useEffect } from "react"
+import React from "react"
 import { ServerStatus } from "../../interface/global"
 import { Loader } from "../../components/Loader/Loader"
 import { Layout } from "../../wrappers/Layout/Layout"

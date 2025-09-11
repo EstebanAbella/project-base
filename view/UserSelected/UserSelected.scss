@@ -1,30 +1,5 @@
-// .userSelected {
-//   position: relative;
-//   width: 100%;
-//   min-height: 100vh;
-//   padding-top: 15vh;
+@use "../../styles/variables";
 
-//   .userSelectedContainer {
-//     position: relative;
-//     width: 100%;
-//     min-height: 80vh;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     flex-direction: column;
-
-//     .userSelectedContainerData {
-//       position: relative;
-//       width: 100%;
-//       min-height: 80vh;
-//       display: flex;
-//       justify-content: flex-start;
-//       align-items: flex-start;
-//       flex-direction: column;
-//       padding-top: 10vh;
-//     }
-//   }
-// }
 .userSelected {
   display: flex;
   justify-content: center;
@@ -34,7 +9,7 @@
   background-color: var(--background-primary);
 
   .userSelectedContainer {
-    background: var(--background-secondary);
+    background: variables.$white;
     border-radius: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     padding: 2.5rem;
@@ -61,11 +36,12 @@
 
         strong {
           font-weight: 600;
+          color: variables.$black;
         }
 
         .userSpan {
           font-weight: 400;
-          color: #444;
+          color: variables.$black;
         }
       }
 

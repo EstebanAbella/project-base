@@ -13,53 +13,6 @@ const UserSelected = () => {
 
   const { useGetUserData, useGetUserStatus } = useUserSelected(param as string)
 
-  // return (
-  //   <Layout>
-  //     <BreadcrumbWrapper>
-  //       <section className='userSelected'>
-  //         <section className='userSelectedContainer'>
-  //           <>
-  //             {useGetUserStatus === ServerStatus.FETCH && useGetUserData && (
-  //               <div className='userSelectedContainerData'>
-  //                 <p>
-  //                   Id: <span className='userSpan'>{useGetUserData.id}</span>
-  //                 </p>
-  //                 <p>
-  //                   Nombre:{" "}
-  //                   <span className='userSpan'>{useGetUserData.name}</span>
-  //                 </p>
-  //                 <p>
-  //                   E-mail:{" "}
-  //                   <span className='userSpan'>{useGetUserData.email}</span>
-  //                 </p>
-  //                 <p>
-  //                   Rol: <span className='userSpan'>{useGetUserData.role}</span>
-  //                 </p>
-  //                 <p>
-  //                   Permisos:
-  //                   <br />
-  //                   {Object.entries(useGetUserData.permissions).map(
-  //                     ([section, actions]) => {
-  //                       return (
-  //                         <div key={section} className='userSpan'>
-  //                           {section}:{" "}
-  //                           {Array.isArray(actions)
-  //                             ? actions.join(", ")
-  //                             : "No permissions"}
-  //                         </div>
-  //                       )
-  //                     }
-  //                   )}
-  //                 </p>
-  //               </div>
-  //             )}
-  //             {useGetUserStatus === ServerStatus.FETCHING && <Loader></Loader>}
-  //           </>
-  //         </section>
-  //       </section>
-  //     </BreadcrumbWrapper>
-  //   </Layout>
-  // )
   return (
     <Layout>
       <BreadcrumbWrapper>

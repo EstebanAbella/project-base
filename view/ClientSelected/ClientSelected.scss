@@ -1,3 +1,5 @@
+@use "../../styles/variables";
+
 .clientSelected {
   display: flex;
   justify-content: center;
@@ -7,7 +9,7 @@
   background-color: var(--background-primary);
 
   .clientSelectedCard {
-    background: var(--background-secondary);
+    background: variables.$white;
     border-radius: 1.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     padding: 2.5rem;
