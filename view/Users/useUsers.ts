@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { ServerStatus } from "../../interface/global"
 import { TextFieldType } from "../../components/TextField/TextField"
 import {
@@ -34,7 +34,9 @@ export const useUsers = () => {
   const { useDeleteUserHandler, useDeleteUserData, useDeleteUserStatus } =
     useDeleteUser()
 
-  const totalItems = useGetUsersData?.count ? useGetUsersData?.count : 0
+  const totalItems = useMemo(() => {
+    return useGetUsersData?.count ?? 0
+  }, [useGetUsersData?.count])
   const roles = useGetUserData?.role
 
   UseCallOfTables({
@@ -254,6 +256,18 @@ export const useUsers = () => {
     useDeleteUserHandler(data)
   }
 
+  const columns = [
+    { name: "Id", id: "id" },
+    {
+      name: "Name",
+      id: "name",
+      isLink: true,
+      linkBasePath: "/userSelected",
+    },
+    { name: "E-mail", id: "email" },
+    { name: "Role", id: "role" },
+  ]
+
   return {
     createUserObject,
     editUserObject,
@@ -273,5 +287,7 @@ export const useUsers = () => {
     setOffsetState,
     setStateModal,
     handleClickDeleteUSer,
+    columns,
+    setFilter,
   }
 }

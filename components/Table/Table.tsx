@@ -18,6 +18,7 @@ type TableProps = {
     onEdit: (row: any) => void
     onDelete: (row: any) => void
   }
+  isSearch?: boolean
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -25,6 +26,7 @@ export const Table: React.FC<TableProps> = ({
   data,
   haveActions = true,
   actions,
+  isSearch = false,
 }) => {
   //
   const [query, setQuery] = useState<string>("")
@@ -127,10 +129,12 @@ export const Table: React.FC<TableProps> = ({
 
   return (
     <>
-      <div className='ContainerFilterSearchInTable'>
-        <Search query={query} setQuery={setQuery} />
-        <FilterSearchIn filterOptions={filterOptions} setFilter={setFilter} />
-      </div>
+      {isSearch && (
+        <div className='ContainerFilterSearchInTable'>
+          <Search query={query} setQuery={setQuery} />
+          <FilterSearchIn filterOptions={filterOptions} setFilter={setFilter} />
+        </div>
+      )}
       <div className='tableContainer'>
         <table className='table table-striped custom-bg'>
           <thead className='table-dark tableTheadComparison'>

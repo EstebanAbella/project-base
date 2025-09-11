@@ -10,6 +10,8 @@ import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 import { useUsers } from "./useUsers"
 import { Modal } from "../../components/Modal"
 import { Table } from "../../components/Table/Table"
+import { Search } from "../../components/Search"
+import { FilterSearchIn } from "../../components/FilterSearchIn"
 
 const Users = () => {
   const {
@@ -31,19 +33,9 @@ const Users = () => {
     setOffsetState,
     setStateModal,
     handleClickDeleteUSer,
+    columns,
+    setFilter,
   } = useUsers()
-
-  const columns = [
-    { name: "Id", id: "id" },
-    {
-      name: "Name",
-      id: "name",
-      isLink: true,
-      linkBasePath: "/userSelected",
-    },
-    { name: "E-mail", id: "email" },
-    { name: "Role", id: "role" },
-  ]
 
   return (
     <Layout>
@@ -92,6 +84,10 @@ const Users = () => {
           </section>
 
           <section className='containerTable'>
+            <div className='ContainerFilterSearchInTable'>
+              <Search query={query} setQuery={setQuery} />
+              <FilterSearchIn filterOptions={columns} setFilter={setFilter} />
+            </div>
             {useGetUsersStatus !== ServerStatus.FETCHING && (
               <Table
                 columns={columns}

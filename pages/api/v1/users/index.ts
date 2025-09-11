@@ -22,9 +22,22 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
       const offsetNumber = parseInt(offset as string)
       const limitNumber = parseInt(limit as string)
       const searchQuery = (q as string)?.toLowerCase() || ""
-      const allUsers = UserService.getAllUsers().filter((data) =>
-        data.name.toLowerCase().includes(searchQuery)
-      )
+      const allUsers = UserService.getAllUsers().filter((data) => {
+        if (!searchQuery) return true
+        const query = searchQuery.toLowerCase()
+
+        if (searchIn) {
+          const field = searchIn as keyof typeof data
+          const value = data[field]
+          if (!value) return false
+          return value.toString().toLowerCase().includes(query)
+        } else {
+          return Object.values(data).some((value) => {
+            if (!value) return false
+            return value.toString().toLowerCase().includes(query)
+          })
+        }
+      })
       const paginatedUsers = allUsers.slice(
         offsetNumber,
         offsetNumber + limitNumber

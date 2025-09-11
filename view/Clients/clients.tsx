@@ -11,6 +11,8 @@ import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 import { Modal } from "../../components/Modal"
 import { useClients } from "./useClients"
 import { Table } from "../../components/Table"
+import { Search } from "../../components/Search"
+import { FilterSearchIn } from "../../components/FilterSearchIn"
 
 const Clients = () => {
   const {
@@ -32,16 +34,9 @@ const Clients = () => {
     setOffsetState,
     setStateModal,
     handleClickDeleteClient,
+    columns,
+    setFilter,
   } = useClients()
-
-  const columns = [
-    { id: "id", name: "Id" },
-    { id: "name", name: "Name", isLink: true, linkBasePath: "/clientSelected" },
-    { id: "email", name: "E-mail" },
-    { id: "address", name: "Address" },
-  ]
-
-  const clientsData = useGetClientsByUserIdData?.items ?? []
 
   return (
     <Layout>
@@ -90,10 +85,14 @@ const Clients = () => {
           </section>
 
           <section className='containerTable'>
+            <div className='ContainerFilterSearchInTable'>
+              <Search query={query} setQuery={setQuery} />
+              <FilterSearchIn filterOptions={columns} setFilter={setFilter} />
+            </div>
             {useGetClientsByUserIdStatus !== ServerStatus.FETCHING && (
               <Table
                 columns={columns}
-                data={clientsData}
+                data={useGetClientsByUserIdData?.items ?? []}
                 haveActions={true}
                 actions={{
                   onEdit: (row) => handleClickOnModal("edit", row),

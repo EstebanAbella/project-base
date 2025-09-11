@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { ServerStatus } from "../../interface/global"
 import { TextFieldType } from "../../components/TextField/TextField"
 import {
@@ -34,9 +34,10 @@ export const useClients = () => {
 
   const { useDeleteClientHandler, useDeleteClientStatus } = useDeleteClient()
 
-  const totalItems = useGetClientsByUserIdData?.count
-    ? useGetClientsByUserIdData?.count
-    : 0
+  const totalItems = useMemo(() => {
+    return useGetClientsByUserIdData?.count ?? 0
+  }, [useGetClientsByUserIdData?.count])
+
   const roles = user?.role
 
   UseCallOfTables({
@@ -234,6 +235,13 @@ export const useClients = () => {
     useDeleteClientHandler(data)
   }
 
+  const columns = [
+    { id: "id", name: "Id" },
+    { id: "name", name: "Name", isLink: true, linkBasePath: "/clientSelected" },
+    { id: "email", name: "E-mail" },
+    { id: "address", name: "Address" },
+  ]
+
   return {
     createClientObject,
     editClientObject,
@@ -253,5 +261,7 @@ export const useClients = () => {
     setOffsetState,
     setStateModal,
     handleClickDeleteClient,
+    columns,
+    setFilter,
   }
 }

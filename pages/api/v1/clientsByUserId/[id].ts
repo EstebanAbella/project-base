@@ -27,64 +27,56 @@ const route = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
         )
 
         if (!user) {
-          res.status(404).json({
-            message: "User not found",
-          })
+          res.status(404).json({ message: "User not found" })
           return
         }
-        //
+
         const { offset = 0, limit = 10, q, searchIn } = req.query
         const offsetNumber = parseInt(offset as string)
         const limitNumber = parseInt(limit as string)
         const searchQuery = (q as string)?.toLowerCase() || ""
-        //
-        if (user?.role === "admin") {
-          const allClients = ClientService.getAllClients().filter((data) =>
-            data.name.toLowerCase().includes(searchQuery)
-          )
-          //
-          const paginatedClients = allClients.slice(
-            offsetNumber,
-            offsetNumber + limitNumber
-          )
-          const totalItems = allClients.length
-          const clients: Paginator<clientType> = {
-            items: paginatedClients,
-            count: totalItems,
-            actualPage: Math.ceil(offsetNumber / limitNumber) + 1,
-            pages: Math.ceil(totalItems / limitNumber),
-          }
-          //
-          res.status(200).json({
-            message: "OK",
-            clients,
-          })
-        } else {
-          const allClients = ClientService.getAllClients()
-            .filter((clients) => clients.userId === req.query.id)
-            .filter((data) => data.name.toLowerCase().includes(searchQuery))
-          const paginatedClients = allClients.slice(
-            offsetNumber,
-            offsetNumber + limitNumber
-          )
-          const totalItems = allClients.length
-          const clients: Paginator<clientType> = {
-            items: paginatedClients,
-            count: totalItems,
-            actualPage: Math.ceil(offsetNumber / limitNumber) + 1,
-            pages: Math.ceil(totalItems / limitNumber),
-          }
-          if (clients) {
-            res.status(200).json({
-              message: clients ? "OK" : "Clients not found",
-              clients,
-            })
-          } else {
-            res.status(404).json({
-              message: "client not found",
-            })
-          }
+
+        let allClients = ClientService.getAllClients()
+
+        if (user.role !== "admin") {
+          allClients = allClients.filter((client) => client.userId === user.id)
         }
+
+        if (searchQuery) {
+          allClients = allClients.filter((data) => {
+            if (searchIn) {
+              const field = searchIn as keyof typeof data
+              const value = data[field]
+              return value
+                ? value.toString().toLowerCase().includes(searchQuery)
+                : false
+            } else {
+              return Object.values(data).some((value) =>
+                value
+                  ? value.toString().toLowerCase().includes(searchQuery)
+                  : false
+              )
+            }
+          })
+        }
+
+        const paginatedClients = allClients.slice(
+          offsetNumber,
+          offsetNumber + limitNumber
+        )
+
+        const totalItems = allClients.length
+        const clients: Paginator<clientType> = {
+          items: paginatedClients,
+          count: totalItems,
+          actualPage: Math.ceil(offsetNumber / limitNumber) + 1,
+          pages: Math.ceil(totalItems / limitNumber),
+        }
+
+        res.status(200).json({
+          message: clients.items.length ? "OK" : "Clients not found",
+          clients,
+        })
       }
       break
     }
