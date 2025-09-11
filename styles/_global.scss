@@ -48,7 +48,8 @@ body {
   a,
   label,
   .table > :not(caption) > * > *,
-  td {
+  td,
+  tr {
     color: var(--themeColor);
   }
 }

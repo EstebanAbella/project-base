@@ -18,9 +18,7 @@
       z-index: utilities.z-index(basic);
 
       tr {
-        background-color: variables.$colorApp;
         th {
-          background-color: variables.$colorApp;
           color: variables.$white;
           font-weight: 600;
           padding: 12px;
@@ -44,13 +42,9 @@
       border-top: none;
       transition: background-color 0.15s ease;
 
-      &:nth-child(even) {
-        background-color: #f9fafb;
-      }
-
-      &:hover {
-        background-color: #f3f4f6;
-      }
+      // &:nth-child(even) {
+      //   background-color: #f9fafb;
+      // }
     }
 
     th,
@@ -60,7 +54,6 @@
       border: none;
       overflow: hidden;
       border-bottom: 1px solid #e5e7eb;
-      color: variables.$black;
       vertical-align: middle;
       font-size: 0.95rem;
 
