@@ -10,34 +10,32 @@ export const ChangeTheme = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as ThemeType | null
     const body = document.querySelector("body")
     if (!body) return
-    const bodyClass = body.className
-    if (!bodyClass) return
-    if (bodyClass === ThemeType.THEMEDARK) {
-      setStateCheck(true)
-    } else {
-      setStateCheck(false)
-    }
+
+    const themeToApply = savedTheme || ThemeType.THEMELIGHT
+    body.classList.remove(ThemeType.THEMEDARK, ThemeType.THEMELIGHT)
+    body.classList.add(themeToApply)
+
+    setStateCheck(themeToApply === ThemeType.THEMEDARK)
     setLoading(true)
   }, [])
 
   const handleChangeTheme = () => {
     const body = document.querySelector("body")
     if (!body) return
-    const bodyClass = body.className
-    if (!bodyClass) return
-    body.classList.remove(bodyClass)
-    body.classList.add(
-      bodyClass === ThemeType.THEMEDARK
-        ? ThemeType.THEMELIGHT
-        : ThemeType.THEMEDARK
-    )
-    setStateCheck(!stateCheck)
-  }
 
-  const handleCheckboxChange = () => {
-    handleChangeTheme()
+    const newTheme = body.classList.contains(ThemeType.THEMEDARK)
+      ? ThemeType.THEMELIGHT
+      : ThemeType.THEMEDARK
+
+    body.classList.remove(ThemeType.THEMEDARK, ThemeType.THEMELIGHT)
+    body.classList.add(newTheme)
+
+    localStorage.setItem("theme", newTheme)
+
+    setStateCheck(newTheme === ThemeType.THEMEDARK)
   }
 
   return (
@@ -51,7 +49,7 @@ export const ChangeTheme = () => {
             autoComplete='off'
             name='checkList'
             id='checkList'
-            onChange={handleCheckboxChange}
+            onChange={handleChangeTheme}
             checked={stateCheck}
           />
           <label className='checkboxLabel' tabIndex={0} htmlFor='checkList'>
