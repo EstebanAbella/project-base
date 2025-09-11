@@ -15,6 +15,9 @@
   .containerTable {
     min-height: 352px;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
     > table {
       width: 100%;
