@@ -9,7 +9,10 @@ export type ModalPropsType = {
   typeButton?: ButtonType
   onClick?: (e: any) => void
   setStateModal: (e: any) => void | undefined
-  stateModal: boolean
+  stateModal: {
+    type: string
+    state: boolean
+  }
   dataForm?: Array<dataFormType>
   isDisabled: boolean
   initialData?: any
@@ -41,7 +44,7 @@ export const ModalCrud = ({
   initialData,
 }: ModalPropsType) => {
   const [form, setForm] = useState<any>({})
-
+  console.log("ad")
   useEffect(() => {
     if (initialData) {
       setForm(initialData)
@@ -73,11 +76,11 @@ export const ModalCrud = ({
   return (
     <>
       {isDisabled ? (
-        <section className={`modal ${stateModal ? "open" : "close"}`}>
+        <section className={`modal ${stateModal.state ? "open" : "close"}`}>
           <div className='modalContainer'>
             <span
               className='icon-close close'
-              onClick={() => setStateModal(false)}
+              onClick={() => setStateModal({ type: "", state: false })}
             ></span>
             <div className='modalContent'>
               {img && <img src={img}></img>}

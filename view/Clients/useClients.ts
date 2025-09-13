@@ -11,8 +11,10 @@ import { UseCallOfTables } from "../../hooks/useCallOfTables"
 import { useAuthContext } from "../../context/auth/AuthContext"
 
 export const useClients = () => {
-  const [stateModal, setStateModal] = useState<boolean>(false)
-  const [typeModal, setTypeModal] = useState<string>("")
+  const [stateModal, setStateModal] = useState<{
+    type: string
+    state: boolean
+  }>({ type: "", state: false })
   const [dataInitialModal, setDataInitialModal] = useState()
   const [filter, setFilter] = useState<string>("")
   const [query, setQuery] = useState<string>("")
@@ -99,7 +101,7 @@ export const useClients = () => {
           roles ?? ""
         )
       }
-      setStateModal(false)
+      setStateModal({ type: "", state: false })
     }
   }, [useCreateClientStatus])
 
@@ -125,7 +127,7 @@ export const useClients = () => {
           roles ?? ""
         )
       }
-      setStateModal(false)
+      setStateModal({ type: "", state: false })
     }
   }, [useDeleteClientStatus])
 
@@ -140,7 +142,7 @@ export const useClients = () => {
         order ?? "",
         roles ?? ""
       )
-      setStateModal(false)
+      setStateModal({ type: "", state: false })
     }
   }, [useEditClientStatus])
 
@@ -210,15 +212,12 @@ export const useClients = () => {
 
   const handleClickOnModal = (typeModal: string, data?: any) => {
     if (typeModal === "create") {
-      setTypeModal("modal-create-client")
-      setStateModal(true)
+      setStateModal({ type: "modal-create-client", state: true })
     } else if (typeModal === "edit") {
-      setTypeModal("modal-edit-client")
-      setStateModal(true)
+      setStateModal({ type: "modal-edit-client", state: true })
       setDataInitialModal(data)
     } else if (typeModal === "delete") {
-      setTypeModal("modal-delete-client")
-      setStateModal(true)
+      setStateModal({ type: "modal-delete-client", state: true })
       setDataInitialModal(data)
     }
   }
@@ -254,7 +253,6 @@ export const useClients = () => {
     query,
     totalItems,
     stateModal,
-    typeModal,
     dataInitialModal,
     limit,
     setQuery,
