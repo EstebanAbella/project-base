@@ -12,10 +12,10 @@ export type ModalPropsType = {
   typeButton?: ButtonType
   onClick?: (e: any) => void
   setStateModal: (e: any) => void | undefined
-  stateModal: boolean
-  isDisabled: boolean
-  dataForm?: any
-  initialData?: any
+  stateModal: {
+    type: string
+    state: boolean
+  }
   buttonCloseModal?: boolean
   loader?: boolean
   spanAlert?: string
@@ -29,9 +29,6 @@ export const Modal = ({
   stateModal,
   setStateModal,
   onClick,
-  isDisabled,
-  dataForm,
-  initialData,
   title,
   buttonCloseModal = false,
   loader = false,
@@ -39,49 +36,42 @@ export const Modal = ({
 }: ModalPropsType) => {
   return (
     <>
-      {isDisabled ? (
-        <section className={`modal ${stateModal ? "open" : "close"}`}>
-          <div className={`modalContainer`}>
-            <span
-              className={`icon-close close`}
-              onClick={() => setStateModal(false)}
-            ></span>
-            <div className={`modalContent`}>
-              {(text || title) && (
-                <div className={`textModal`}>
-                  {title && <h5>{title}</h5>}
-                  {text && text.map((data) => <p>{data}</p>)}
-                </div>
-              )}
-              {spanAlert && (
-                <div className={`containerSpan`}>
-                  <span className={`icon-${spanAlert} ${spanAlert}`}></span>
-                </div>
-              )}
-              {img && <img src={img}></img>}
-              {loader && <Loader></Loader>}
-              {onClick && (
-                <section className={`containerButtonModalCreate`}>
-                  {buttonCloseModal && (
-                    <Button
-                      value={"Cancel"}
-                      onClick={() => setStateModal(false)}
-                      type={ButtonType.SECONDARY}
-                    ></Button>
-                  )}
+      <section className={`modal ${stateModal.state ? "open" : "close"}`}>
+        <div className={`modalContainer`}>
+          <span className={`icon-close close`} onClick={setStateModal}></span>
+          <div className={`modalContent`}>
+            {(text || title) && (
+              <div className={`textModal`}>
+                {title && <h5>{title}</h5>}
+                {text && text.map((data) => <p>{data}</p>)}
+              </div>
+            )}
+            {spanAlert && (
+              <div className={`containerSpan`}>
+                <span className={`icon-${spanAlert} ${spanAlert}`}></span>
+              </div>
+            )}
+            {img && <img src={img}></img>}
+            {loader && <Loader></Loader>}
+            {onClick && (
+              <section className={`containerButtonModalCreate`}>
+                {buttonCloseModal && (
                   <Button
-                    value={textButton}
-                    onClick={(e) => onClick(e)}
-                    type={typeButton}
+                    value={"Cancel"}
+                    onClick={setStateModal}
+                    type={ButtonType.SECONDARY}
                   ></Button>
-                </section>
-              )}
-            </div>
+                )}
+                <Button
+                  value={textButton}
+                  onClick={(e) => onClick(e)}
+                  type={typeButton}
+                ></Button>
+              </section>
+            )}
           </div>
-        </section>
-      ) : (
-        ""
-      )}
+        </div>
+      </section>
     </>
   )
 }

@@ -14,7 +14,6 @@ export type ModalPropsType = {
     state: boolean
   }
   dataForm?: Array<dataFormType>
-  isDisabled: boolean
   initialData?: any
 }
 
@@ -40,25 +39,36 @@ export const ModalCrud = ({
   setStateModal,
   onClick,
   dataForm,
-  isDisabled,
   initialData,
 }: ModalPropsType) => {
-  const [form, setForm] = useState<any>({})
-  console.log("ad")
+  const [form, setForm] = useState(() => {
+    if (initialData) return initialData
+    if (dataForm?.length) {
+      return dataForm.reduce(
+        (obj: { [key: string]: string }, item: dataFormType) => {
+          obj[item.name] = item.defaultValue ?? ""
+          return obj
+        },
+        {}
+      )
+    }
+    return {}
+  })
+
   useEffect(() => {
     if (initialData) {
       setForm(initialData)
     } else if (dataForm?.length) {
       const setPropertyForm = dataForm?.reduce(
         (obj: { [key: string]: string }, item: dataFormType) => {
-          obj[item.name] = item.defaultValue ? item.defaultValue : ""
+          obj[item.name] = item.defaultValue ?? ""
           return obj
         },
         {}
       )
       setForm(setPropertyForm)
     }
-  }, [initialData, dataForm])
+  }, [stateModal.type, initialData])
 
   const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
     const target = e.target as HTMLInputElement | HTMLSelectElement
@@ -74,57 +84,48 @@ export const ModalCrud = ({
   }
 
   return (
-    <>
-      {isDisabled ? (
-        <section className={`modal ${stateModal.state ? "open" : "close"}`}>
-          <div className='modalContainer'>
-            <span
-              className='icon-close close'
-              onClick={() => setStateModal({ type: "", state: false })}
-            ></span>
-            <div className='modalContent'>
-              {img && <img src={img}></img>}
-              {text && (
-                <div className='textModal'>
-                  {text.map((data) => (
-                    <p>{data}</p>
-                  ))}
-                </div>
-              )}
-              {dataForm?.length && form && Object.keys(form || {}).length && (
-                <form>
-                  {dataForm?.map((data, index) => (
-                    <TextField
-                      label={data.label}
-                      name={data.name}
-                      typeTextField={data.typeTextField}
-                      disabled={data.disabled}
-                      type={data.type as typeTextField}
-                      placeholder={data.placeholder}
-                      onChange={handleChange}
-                      valueInput={form[data.name]}
-                      valueSelect={data.valueSelect ? data.valueSelect : []}
-                      key={`${data.name}${index}`}
-                      isShown={data.isShown}
-                      moduleName={data.moduleName}
-                      setForm={setForm}
-                    ></TextField>
-                  ))}
-                </form>
-              )}
-              {textButton && onClick && (
-                <Button
-                  value={textButton}
-                  onClick={() => onClick(form)}
-                  type={typeButton}
-                ></Button>
-              )}
+    <section className={`modal ${stateModal.state ? "open" : "close"}`}>
+      <div className='modalContainer'>
+        <span className='icon-close close' onClick={setStateModal}></span>
+        <div className='modalContent'>
+          {img && <img src={img}></img>}
+          {text && (
+            <div className='textModal'>
+              {text.map((data) => (
+                <p>{data}</p>
+              ))}
             </div>
-          </div>
-        </section>
-      ) : (
-        ""
-      )}
-    </>
+          )}
+          {dataForm?.length && form && Object.keys(form || {}).length && (
+            <form>
+              {dataForm?.map((data, index) => (
+                <TextField
+                  label={data.label}
+                  name={data.name}
+                  typeTextField={data.typeTextField}
+                  disabled={data.disabled}
+                  type={data.type as typeTextField}
+                  placeholder={data.placeholder}
+                  onChange={handleChange}
+                  valueInput={form[data.name]}
+                  valueSelect={data.valueSelect ? data.valueSelect : []}
+                  key={`${data.name}${index}`}
+                  isShown={data.isShown}
+                  moduleName={data.moduleName}
+                  setForm={setForm}
+                ></TextField>
+              ))}
+            </form>
+          )}
+          {textButton && onClick && (
+            <Button
+              value={textButton}
+              onClick={() => onClick(form)}
+              type={typeButton}
+            ></Button>
+          )}
+        </div>
+      </div>
+    </section>
   )
 }
