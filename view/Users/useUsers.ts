@@ -11,7 +11,10 @@ import {
 import { UseCallOfTables } from "../../hooks/useCallOfTables"
 
 export const useUsers = () => {
-  const [stateModal, setStateModal] = useState<boolean>(false)
+  const [stateModal, setStateModal] = useState<{
+    type: string
+    state: boolean
+  }>({ type: "", state: false })
   const [typeModal, setTypeModal] = useState<string>("")
   const [dataInitialModal, setDataInitialModal] = useState()
   const [filter, setFilter] = useState<string>("")
@@ -88,7 +91,7 @@ export const useUsers = () => {
           roles ?? ""
         )
       }
-      setStateModal(false)
+      setStateModal({ type: "", state: false })
     }
   }, [useCreateUserStatus])
 
@@ -113,7 +116,7 @@ export const useUsers = () => {
           roles ?? ""
         )
       }
-      setStateModal(false)
+      setStateModal({ type: "", state: false })
     }
   }, [useDeleteUserStatus])
 
@@ -127,119 +130,125 @@ export const useUsers = () => {
         order ?? "",
         roles ?? ""
       )
-      setStateModal(false)
+      setStateModal({ type: "", state: false })
     }
   }, [useEditUserStatus])
 
-  const createUserObject = [
-    {
-      label: "Nombre",
-      name: "name",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "Escriba su nombre",
-    },
-    {
-      label: "E-mail",
-      name: "email",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "email",
-      placeholder: "email@email.com",
-    },
-    {
-      label: "Password",
-      name: "password",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "password",
-      placeholder: "Password",
-    },
-    {
-      label: "Role",
-      name: "role",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "select",
-      placeholder: "-",
-      valueSelect: ["user", "admin"],
-    },
-    {
-      label: "Permissions",
-      name: "permissions",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "checkboxModule",
-      placeholder: "-",
-      moduleName: {
-        users: ["view", "create", "update", "delete", "import", "export"],
-        userSelected: ["view", "import", "export"],
-        clients: ["view", "create", "update", "delete", "import", "export"],
+  const createUserObject = useMemo(
+    () => [
+      {
+        label: "Nombre",
+        name: "name",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "text",
+        placeholder: "Escriba su nombre",
       },
-    },
-  ]
+      {
+        label: "E-mail",
+        name: "email",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "email",
+        placeholder: "email@email.com",
+      },
+      {
+        label: "Password",
+        name: "password",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "password",
+        placeholder: "Password",
+      },
+      {
+        label: "Role",
+        name: "role",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "select",
+        placeholder: "-",
+        valueSelect: ["user", "admin"],
+      },
+      {
+        label: "Permissions",
+        name: "permissions",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "checkboxModule",
+        placeholder: "-",
+        moduleName: {
+          users: ["view", "create", "update", "delete", "import", "export"],
+          userSelected: ["view", "import", "export"],
+          clients: ["view", "create", "update", "delete", "import", "export"],
+        },
+      },
+    ],
+    []
+  )
 
-  const editUserObject = [
-    {
-      label: "Nombre",
-      name: "name",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "Escriba su nombre",
-    },
-    {
-      label: "E-mail",
-      name: "email",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "email",
-      placeholder: "email@email.com",
-    },
-    {
-      label: "Password",
-      name: "password",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "password",
-      placeholder: "Password",
-    },
-    {
-      label: "Role",
-      name: "role",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "select",
-      placeholder: "-",
-      valueSelect: ["user", "admin"],
-    },
-    {
-      label: "Permissions",
-      name: "permissions",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "checkboxModule",
-      placeholder: "-",
-      moduleName: {
-        users: ["view", "create", "update", "delete", "import", "export"],
-        userSelected: ["view", "import", "export"],
-        clients: ["view", "create", "update", "delete", "import", "export"],
+  const editUserObject = useMemo(
+    () => [
+      {
+        label: "Nombre",
+        name: "name",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "text",
+        placeholder: "Escriba su nombre",
       },
-    },
-  ]
+      {
+        label: "E-mail",
+        name: "email",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "email",
+        placeholder: "email@email.com",
+      },
+      {
+        label: "Password",
+        name: "password",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "password",
+        placeholder: "Password",
+      },
+      {
+        label: "Role",
+        name: "role",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "select",
+        placeholder: "-",
+        valueSelect: ["user", "admin"],
+      },
+      {
+        label: "Permissions",
+        name: "permissions",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "checkboxModule",
+        placeholder: "-",
+        moduleName: {
+          users: ["view", "create", "update", "delete", "import", "export"],
+          userSelected: ["view", "import", "export"],
+          clients: ["view", "create", "update", "delete", "import", "export"],
+        },
+      },
+    ],
+    []
+  )
 
   const handleClickOnModal = (typeModal: string, data?: any) => {
     if (typeModal === "create") {
-      setTypeModal("modal-create-user")
-      setStateModal(true)
+      setTypeModal("create")
+      setStateModal({ type: "create", state: true })
     } else if (typeModal === "edit") {
-      setTypeModal("modal-edit-user")
-      setStateModal(true)
+      setTypeModal("edit")
+      setStateModal({ type: "edit", state: true })
       setDataInitialModal(data)
     } else if (typeModal === "delete") {
-      setTypeModal("modal-delete-user")
-      setStateModal(true)
+      setTypeModal("delete")
+      setStateModal({ type: "delete", state: true })
       setDataInitialModal(data)
     }
   }

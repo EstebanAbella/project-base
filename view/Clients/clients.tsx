@@ -5,13 +5,12 @@ import withAuth from "../../hooks/withAuth"
 import { Layout } from "../../wrappers/Layout"
 import { Loader } from "../../components/Loader"
 import { Pagination } from "../../components/Pagination"
-import { ModalCrud } from "../../components/ModalCrud"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
-import { Modal } from "../../components/Modal"
 import { useClients } from "./useClients"
 import { Table } from "../../components/Table"
 import { Search } from "../../components/Search"
 import { FilterSearchIn } from "../../components/FilterSearchIn"
+import { ModalManager } from "../../components/ModalManager"
 
 const Clients = () => {
   const {
@@ -39,72 +38,26 @@ const Clients = () => {
   return (
     <Layout>
       <BreadcrumbWrapper>
-        {/* <ModalCrud
+        <ModalManager
           stateModal={stateModal}
           setStateModal={setStateModal}
-          dataForm={createClientObject}
-          textButton={"Add client"}
-          typeButton={ButtonType.SUCCESS}
-          onClick={handleClickCreateClient}
-          isDisabled={typeModal === "modal-create-client"}
-        />
-
-        <ModalCrud
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          dataForm={editClientObject}
-          textButton={"Update client"}
-          typeButton={ButtonType.INFORMATION}
-          onClick={handleClickEditClient}
-          isDisabled={typeModal === "modal-edit-client"}
           initialData={dataInitialModal}
-        /> */}
-        <ModalCrud
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          dataForm={
-            stateModal.type === "modal-create-client"
-              ? createClientObject
-              : stateModal.type === "modal-edit-client"
-                ? editClientObject
-                : []
-          }
-          textButton={
-            stateModal.type === "modal-create-client"
-              ? "Add client"
-              : stateModal.type === "modal-edit-client"
-                ? "Update client"
-                : "Delete"
-          }
-          typeButton={
-            stateModal.type === "modal-create-client"
-              ? ButtonType.SUCCESS
-              : stateModal.type === "modal-edit-client"
-                ? ButtonType.INFORMATION
-                : ButtonType.PRIMARY
-          }
-          onClick={
-            stateModal.type === "modal-create-client"
-              ? handleClickCreateClient
-              : stateModal.type === "modal-edit-client"
-                ? handleClickEditClient
-                : () => handleClickDeleteClient(dataInitialModal)
-          }
-          isDisabled={!!stateModal.type}
-          initialData={dataInitialModal}
+          handleClickDelete={handleClickDeleteClient}
+          handleClickCreate={handleClickCreateClient}
+          handleClickEdit={handleClickEditClient}
+          createObject={createClientObject}
+          editObject={editClientObject}
+          title={{
+            delete: "Do you want to delete a client?",
+            create: "",
+            update: "",
+          }}
+          textButton={{
+            delete: "Delete",
+            create: "Add client",
+            update: "Update client",
+          }}
         />
-
-        {/* <Modal
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          title={"Do you want to delete a client?"}
-          textButton={"Delete"}
-          typeButton={ButtonType.PRIMARY}
-          onClick={() => handleClickDeleteClient(dataInitialModal)}
-          isDisabled={typeModal === "modal-delete-client"}
-          buttonCloseModal={true}
-          spanAlert={"alert"}
-        /> */}
         <section className='clientsPage'>
           <h3>Clients</h3>
           <section className='addClientAction'>

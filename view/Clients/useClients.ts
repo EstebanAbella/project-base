@@ -146,78 +146,84 @@ export const useClients = () => {
     }
   }, [useEditClientStatus])
 
-  const createClientObject = [
-    {
-      label: "Nombre",
-      name: "name",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "Escriba su nombre",
-    },
-    {
-      label: "E-mail",
-      name: "email",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "email",
-      placeholder: "email@email.com",
-    },
-    {
-      label: "Dirección",
-      name: "address",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "Dirección",
-    },
-    {
-      label: "UserId",
-      name: "userId",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: true,
-      type: "text",
-      placeholder: "UserId",
-      defaultValue: user?.id,
-      isShown: false,
-    },
-  ]
+  const createClientObject = useMemo(
+    () => [
+      {
+        label: "Nombre",
+        name: "name",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "text",
+        placeholder: "Escriba su nombre",
+      },
+      {
+        label: "E-mail",
+        name: "email",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "email",
+        placeholder: "email@email.com",
+      },
+      {
+        label: "Dirección",
+        name: "address",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "text",
+        placeholder: "Dirección",
+      },
+      {
+        label: "UserId",
+        name: "userId",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: true,
+        type: "text",
+        placeholder: "UserId",
+        defaultValue: user?.id,
+        isShown: false,
+      },
+    ],
+    [user?.id]
+  )
 
-  const editClientObject = [
-    {
-      label: "Nombre",
-      name: "name",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "Escriba su nombre",
-    },
-    {
-      label: "E-mail",
-      name: "email",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "email",
-      placeholder: "email@email.com",
-    },
-    {
-      label: "Dirección",
-      name: "address",
-      typeTextField: TextFieldType.PRIMARY,
-      disabled: false,
-      type: "text",
-      placeholder: "Dirección",
-    },
-  ]
+  const editClientObject = useMemo(
+    () => [
+      {
+        label: "Nombre",
+        name: "name",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "text",
+        placeholder: "Escriba su nombre",
+      },
+      {
+        label: "E-mail",
+        name: "email",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "email",
+        placeholder: "email@email.com",
+      },
+      {
+        label: "Dirección",
+        name: "address",
+        typeTextField: TextFieldType.PRIMARY,
+        disabled: false,
+        type: "text",
+        placeholder: "Dirección",
+      },
+    ],
+    [user?.id]
+  )
 
   const handleClickOnModal = (typeModal: string, data?: any) => {
     if (typeModal === "create") {
-      setStateModal({ type: "modal-create-client", state: true })
+      setStateModal({ type: "create", state: true })
     } else if (typeModal === "edit") {
-      setStateModal({ type: "modal-edit-client", state: true })
+      setStateModal({ type: "edit", state: true })
       setDataInitialModal(data)
     } else if (typeModal === "delete") {
-      setStateModal({ type: "modal-delete-client", state: true })
+      setStateModal({ type: "delete", state: true })
       setDataInitialModal(data)
     }
   }

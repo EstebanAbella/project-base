@@ -4,14 +4,13 @@ import { Layout } from "../../wrappers/Layout/Layout"
 import { Button, ButtonType } from "../../components/Button/Button"
 import { Pagination } from "../../components/Pagination/Pagination"
 import { Loader } from "../../components/Loader/Loader"
-import { ModalCrud } from "../../components/ModalCrud"
 import withAuth from "../../hooks/withAuth"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 import { useUsers } from "./useUsers"
-import { Modal } from "../../components/Modal"
 import { Table } from "../../components/Table/Table"
 import { Search } from "../../components/Search"
 import { FilterSearchIn } from "../../components/FilterSearchIn"
+import { ModalManager } from "../../components/ModalManager"
 
 const Users = () => {
   const {
@@ -26,7 +25,6 @@ const Users = () => {
     query,
     totalItems,
     stateModal,
-    typeModal,
     dataInitialModal,
     limit,
     setQuery,
@@ -40,37 +38,25 @@ const Users = () => {
   return (
     <Layout>
       <BreadcrumbWrapper>
-        <ModalCrud
+        <ModalManager
           stateModal={stateModal}
           setStateModal={setStateModal}
-          dataForm={createUserObject}
-          textButton={"Add user"}
-          typeButton={ButtonType.SUCCESS}
-          onClick={handleClickCreateUSer}
-          isDisabled={typeModal === "modal-create-user"}
-        />
-
-        <ModalCrud
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          dataForm={editUserObject}
-          textButton={"Update user"}
-          typeButton={ButtonType.INFORMATION}
-          onClick={handleClickEditUSer}
-          isDisabled={typeModal === "modal-edit-user"}
           initialData={dataInitialModal}
-        />
-
-        <Modal
-          stateModal={stateModal}
-          setStateModal={setStateModal}
-          title={"Do you want to delete a user?"}
-          textButton={"Delete"}
-          typeButton={ButtonType.PRIMARY}
-          onClick={() => handleClickDeleteUSer(dataInitialModal)}
-          isDisabled={typeModal === "modal-delete-user"}
-          buttonCloseModal={true}
-          spanAlert={"alert"}
+          handleClickDelete={handleClickDeleteUSer}
+          handleClickCreate={handleClickCreateUSer}
+          handleClickEdit={handleClickEditUSer}
+          createObject={createUserObject}
+          editObject={editUserObject}
+          title={{
+            delete: "Do you want to delete a user?",
+            create: "",
+            update: "",
+          }}
+          textButton={{
+            delete: "Delete",
+            create: "Add user",
+            update: "Update user",
+          }}
         />
         <section className='usersPage'>
           <h3>Users</h3>
