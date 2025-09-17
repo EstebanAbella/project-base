@@ -73,10 +73,15 @@ export const TextField = ({
         )}
 
       {type === "select" && (
-        <select name={name} disabled={disabled} onChange={onChange}>
+        <select
+          name={name}
+          disabled={disabled}
+          onChange={onChange}
+          value={valueInput || "-"}
+        >
           <option value={"-"}>-</option>
           {valueSelect.map((data) => (
-            <option value={data} key={data} selected={valueInput === data}>
+            <option value={data} key={data}>
               {data}
             </option>
           ))}
