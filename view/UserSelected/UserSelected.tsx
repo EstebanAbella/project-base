@@ -42,18 +42,27 @@ const UserSelected = () => {
                     <div className='permissions'>
                       <strong>Permisos:</strong>
                       <div className='permissionsList'>
-                        {Object.entries(useGetUserData.permissions).map(
-                          ([section, actions]) => (
-                            <div key={section} className='permissionItem'>
-                              <span className='permissionSection'>
-                                {section}:
-                              </span>{" "}
-                              {Array.isArray(actions)
-                                ? actions.join(", ")
-                                : "No permissions"}
+                        {useGetUserData?.permissions &&
+                          Object.keys(useGetUserData.permissions).length >
+                            0 && (
+                            <div className='permissionsList'>
+                              {Object.entries(useGetUserData.permissions).map(
+                                ([section, actions]) =>
+                                  Array.isArray(actions) &&
+                                  actions.length > 0 && (
+                                    <div
+                                      key={section}
+                                      className='permissionItem'
+                                    >
+                                      <span className='permissionSection'>
+                                        {section}:
+                                      </span>{" "}
+                                      {actions.join(", ")}
+                                    </div>
+                                  )
+                              )}
                             </div>
-                          )
-                        )}
+                          )}
                       </div>
                     </div>
                   </div>
