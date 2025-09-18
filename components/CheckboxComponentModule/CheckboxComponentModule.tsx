@@ -60,6 +60,7 @@ const CheckboxComponentModule = ({
                   type='checkbox'
                   checked={isActive}
                   onChange={() => handleModuleToggle(mod)}
+                  className='moduleLabelCheckbox'
                 />
                 {mod}
               </label>

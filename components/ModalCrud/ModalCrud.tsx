@@ -85,9 +85,9 @@ export const ModalCrud = ({
 
   return (
     <section className={`modal ${stateModal.state ? "open" : "close"}`}>
-      <div className='modalContainer'>
+      <div className='modalContainerCrud'>
         <span className='icon-close close' onClick={setStateModal}></span>
-        <div className='modalContent'>
+        <div className='modalContentCrud'>
           {img && <img src={img}></img>}
           {text && (
             <div className='textModal'>

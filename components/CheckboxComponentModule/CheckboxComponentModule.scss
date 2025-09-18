@@ -20,6 +20,15 @@
     .moduleLabel {
       font-weight: utilities.font-weight(semibold);
       text-transform: capitalize;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+
+      .moduleLabelCheckbox {
+        width: auto;
+      }
     }
 
     .permissions {

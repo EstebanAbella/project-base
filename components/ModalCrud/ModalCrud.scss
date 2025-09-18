@@ -18,8 +18,8 @@
     display: none;
   }
 
-  .modalContainer {
-    position: absolute;
+  .modalContainerCrud {
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -32,27 +32,28 @@
     border-radius: 7px;
     overflow-y: auto;
     display: flex;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     @include mixins.custom_scrollbar();
 
     .close {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 20px;
+      right: 20px;
       color: variables.$black;
       font-size: 15px;
       cursor: pointer;
+      z-index: utilities.z-index(triple);
     }
 
-    > .modalContent {
+    > .modalContentCrud {
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
       gap: 25px;
       width: 100%;
       height: 100%;
-      padding: 36px 15px 15px;
+      padding: 36px 22px;
       max-height: 100%;
       overflow-y: auto;
       @include mixins.custom_scrollbar();
