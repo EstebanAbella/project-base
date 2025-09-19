@@ -1,1 +1,1 @@
-export { AlertNoConnection } from "./AlertNoConnection"
+export { AlertNoConnectionComponent } from "./AlertNoConnection"
