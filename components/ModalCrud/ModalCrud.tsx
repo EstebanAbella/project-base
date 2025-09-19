@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Button, ButtonType } from "../Button/Button"
 import { TextField, TextFieldType, typeTextField } from "../TextField/TextField"
+import { FormGeneric } from "../FormGeneric"
 
 export type ModalPropsType = {
   img?: string
@@ -97,7 +98,7 @@ export const ModalCrud = ({
             </div>
           )}
           {dataForm?.length && form && Object.keys(form || {}).length && (
-            <form>
+            <FormGeneric>
               {dataForm?.map((data, index) => (
                 <TextField
                   label={data.label}
@@ -115,7 +116,7 @@ export const ModalCrud = ({
                   setForm={setForm}
                 ></TextField>
               ))}
-            </form>
+            </FormGeneric>
           )}
           {textButton && onClick && (
             <Button

@@ -2,6 +2,7 @@ import { ServerStatus } from "../../interface/global"
 import { Button } from "../../components/Button"
 import { ButtonType } from "../../components/Button/Button"
 import { useLogin } from "./useLogin"
+import { FormGeneric } from "../../components/FormGeneric"
 
 export const Login = () => {
   const {
@@ -27,7 +28,7 @@ export const Login = () => {
     <main>
       <div className='imageLogin'></div>
       <div className='containerLoginForm'>
-        <form>
+        <FormGeneric>
           <div className='logoContainer'>
             <h1>Project base</h1>
             {/* <Logo width='240' srcLogo={""} /> */}
@@ -150,7 +151,7 @@ export const Login = () => {
               </div>
             )}
           </div>
-        </form>
+        </FormGeneric>
         <section className='credentials'>
           <h6>Credentials:</h6>
           <p>E-mail: admin@admin.com</p>

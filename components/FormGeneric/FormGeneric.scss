@@ -1,7 +1,7 @@
-@use "../utilities";
-@use "../variables";
-@use "../fonts";
-@use "../mixins";
+@use "../../styles/utilities";
+@use "../../styles/variables";
+@use "../../styles/fonts";
+@use "../../styles/mixins";
 
 form {
   margin: 0;
