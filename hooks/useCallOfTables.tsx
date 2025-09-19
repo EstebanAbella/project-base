@@ -61,5 +61,5 @@ export const UseCallOfTables = ({
       loadData()
     }
     setInitialRender(false)
-  }, [offsetState, query])
+  }, [offsetState, query, filter])
 }
