@@ -151,6 +151,13 @@ export const Login = () => {
             )}
           </div>
         </form>
+        <section className='credentials'>
+          <h6>Credentials:</h6>
+          <p>E-mail: admin@admin.com</p>
+          <p>Password: admin</p>
+          <p>E-mail: user@user.com</p>
+          <p>Password: user</p>
+        </section>
       </div>
     </main>
   )

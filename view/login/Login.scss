@@ -23,6 +23,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  display: block;
 }
 
 .containerLoginForm {
@@ -82,5 +83,28 @@
   .buttonContainerForm .Button {
     font-size: 16px;
     padding: 6px 14px;
+  }
+
+  .credentials {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 50px;
+    padding: 0 10px;
+
+    p {
+      margin: 0;
+      font-size: 12px;
+    }
+  }
+}
+
+@media #{media-queries.$max-sm} {
+  .imageLogin {
+    display: none;
+  }
+  .containerLoginForm {
+    width: 100%;
   }
 }

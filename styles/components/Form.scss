@@ -4,8 +4,8 @@
 @use "../mixins";
 
 form {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0 10px;
   position: relative;
   display: flex;
   justify-content: center;
