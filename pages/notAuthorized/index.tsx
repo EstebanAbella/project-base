@@ -1,5 +1,5 @@
 import React from "react"
-import { NotAuthorized } from "../../view/NotAuthorized/notAuthorized"
+import { NotAuthorized } from "../../view/NotAuthorized/NotAuthorized"
 
 const NotAuthorizedPage = () => {
   return <NotAuthorized />

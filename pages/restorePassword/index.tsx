@@ -1,5 +1,5 @@
 import React from "react"
-import { RestorePassword } from "../../view/RestorePassword/restorePassword"
+import { RestorePassword } from "../../view/RestorePassword/RestorePassword"
 
 const RestorePasswordPage = () => {
   return <RestorePassword />
