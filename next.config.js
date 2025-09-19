@@ -48,13 +48,6 @@ const baseConfig = {
 module.exports = isDev
   ? baseConfig
   : withPWA({
-      ...baseConfig,
-      pwa: {
-        dest: "public",
-        disable: false,
-        injectManifest: {
-          swSrc: "service-worker.js",
-          swDest: "sw.js",
-        },
-      },
-    })
+      dest: "public",
+      disable: false,
+    })(baseConfig)
