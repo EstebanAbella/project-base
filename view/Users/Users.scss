@@ -1,0 +1,39 @@
+.usersPage {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+
+  .addUserAction {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .containerTable {
+    width: 100%;
+    min-height: 352px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    > table {
+      width: 100%;
+    }
+
+    .containerTableLoader {
+      position: relative;
+      width: 100%;
+      min-height: 345px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+  }
+}

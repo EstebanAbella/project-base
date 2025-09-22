@@ -1,0 +1,73 @@
+@use "../../styles/utilities";
+@use "../../styles/mixins";
+@use "../../styles/variables";
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: utilities.z-index(triple);
+  background-color: #000000ce;
+
+  &.open {
+    display: block;
+  }
+  &.close {
+    display: none;
+  }
+
+  .modalContainerCrud {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    min-height: 34%;
+    max-width: 560px;
+    max-height: 600px;
+    padding: 5px;
+    background-color: variables.$white;
+    border-radius: 7px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    @include mixins.custom_scrollbar();
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: variables.$black;
+      font-size: 15px;
+      cursor: pointer;
+      z-index: utilities.z-index(triple);
+    }
+
+    > .modalContentCrud {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 100%;
+      height: 100%;
+      padding: 36px 22px;
+      max-height: 100%;
+      overflow-y: auto;
+      @include mixins.custom_scrollbar();
+
+      label {
+        color: variables.$black;
+      }
+
+      .textModal {
+        text-align: center;
+        color: variables.$black;
+        font-weight: utilities.font-weight(semibold);
+        font-size: 20px;
+      }
+    }
+  }
+}

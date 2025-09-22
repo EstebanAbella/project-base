@@ -1,0 +1,23 @@
+@use "../../styles/media-queries";
+
+.layout {
+  position: relative;
+  min-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 120px;
+
+  .children {
+    min-width: 88%;
+    max-width: 88%;
+    min-height: 100vh;
+    flex-direction: column;
+
+    @media #{media-queries.$max-sm} {
+      min-width: 96%;
+      max-width: 96%;
+    }
+  }
+}

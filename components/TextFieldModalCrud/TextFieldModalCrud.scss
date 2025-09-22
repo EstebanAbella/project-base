@@ -1,0 +1,92 @@
+@use "../../styles/variables";
+
+.textField {
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+
+  &.itIsVisible {
+    display: none;
+  }
+
+  select {
+    appearance: none;
+    option {
+      appearance: none;
+      &:hover {
+        background-color: #d3d3d3 !important;
+      }
+    }
+  }
+  .textField label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .isRequiredIcon {
+    color: variables.$red;
+  }
+  .textField.primary {
+    border-color: variables.$greenApp;
+    &:focus {
+      border-color: variables.$grayMid;
+    }
+  }
+  .textField.secondary {
+    border-color: variables.$stateInformation;
+    &:focus {
+      border-color: variables.$stateInformation;
+    }
+  }
+  .textField.tertiary {
+    border-color: variables.$greenApp;
+    &:focus {
+      border-color: variables.$grayMid;
+    }
+  }
+  .textField.danger {
+    border-color: variables.$stateError;
+    &:focus {
+      border-color: variables.$stateError;
+    }
+  }
+  .textField.warning {
+    border-color: variables.$stateError;
+    &:focus {
+      border-color: variables.$stateError;
+    }
+  }
+  .textField.success {
+    border-color: variables.$stateSuccess;
+    &:focus {
+      border-color: variables.$stateSuccess;
+    }
+  }
+  .textField.info {
+    border-color: variables.$stateInformation;
+    &:focus {
+      border-color: variables.$stateInformation;
+    }
+  }
+  .textField.light {
+    border-color: variables.$white;
+    &:focus {
+      border-color: variables.$white;
+    }
+  }
+  .textField.dark {
+    border-color: variables.$black;
+    &:focus {
+      border-color: variables.$black;
+    }
+  }
+  .textField.link {
+    border-color: transparent;
+    &:focus {
+      border-color: transparent;
+    }
+  }
+}

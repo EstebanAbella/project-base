@@ -1,0 +1,37 @@
+// Fonts
+
+$weights: (
+  thin: 100,
+  light: 300,
+  regular: 400,
+  semibold: 600,
+  bold: 700,
+  black: 900,
+);
+
+@function font-weight($weight) {
+  @if (map-has-key($weights, $weight)) {
+    @return map-get($weights, $weight);
+  } @else {
+    @error "The provided value for font-weight (#{$weight}) doesn't exist.";
+  }
+}
+
+$zIndex: (
+  back: -1,
+  neutral: 0,
+  basic: 1,
+  double: 2,
+  triple: 3,
+  quadruple: 4,
+  quintuple: 5,
+  sextuple: 6,
+);
+
+@function z-index($value) {
+  @if (map-has-key($zIndex, $value)) {
+    @return map-get($zIndex, $value);
+  } @else {
+    @error "z-index (#{$value}) doesn't exist.";
+  }
+}

@@ -1,0 +1,109 @@
+@use "../../styles/variables";
+
+.Button {
+  color: variables.$white;
+  padding: 4px 26px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 22px;
+  border-color: transparent;
+  outline: none;
+  box-shadow: none;
+  appearance: auto;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  transition: 0.5s all;
+
+  &.disabled {
+    cursor: default;
+  }
+
+  &.Button.primary {
+    background-color: variables.$colorApp;
+    border: 1px solid variables.$colorApp;
+    color: variables.$white;
+    &:hover {
+      background-color: variables.$colorAppHover;
+    }
+    &.disabled {
+      background-color: variables.$grayLight;
+      border: 1px solid variables.$grayLight;
+    }
+  }
+  &.Button.secondary {
+    background-color: variables.$white;
+    border: 1px solid variables.$colorApp;
+    color: variables.$colorApp;
+    &:hover {
+      border: 1px solid variables.$grayMid;
+      color: variables.$grayMid;
+    }
+    &.disabled {
+      border-color: variables.$grayLight;
+      border: 1px solid variables.$grayLight;
+      color: variables.$grayLight;
+    }
+  }
+  &.Button.tertiary {
+    border-color: none;
+    color: variables.$colorApp;
+    background-color: transparent;
+    &.disabled {
+      color: variables.$grayLight;
+    }
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+  &.Button.success {
+    background-color: variables.$stateSuccess;
+    border-color: 1px solid variables.$stateSuccess;
+    color: variables.$white;
+    &:hover {
+      opacity: 0.8;
+    }
+    &.disabled {
+      background-color: variables.$grayLight;
+      border-color: 1px solid variables.$grayLight;
+    }
+  }
+  &.Button.error {
+    background-color: variables.$stateError;
+    border-color: 1px solid variables.$stateError;
+    color: variables.$white;
+    &:hover {
+      opacity: 0.8;
+    }
+    &.disabled {
+      background-color: variables.$grayLight;
+      border-color: 1px solid variables.$grayLight;
+    }
+  }
+  &.Button.information {
+    background-color: variables.$stateInformation;
+    border-color: 1px solid variables.$stateInformation;
+    color: variables.$white;
+    &:hover {
+      opacity: 0.8;
+    }
+    &.disabled {
+      background-color: variables.$grayLight;
+      border-color: 1px solid variables.$grayLight;
+    }
+  }
+  &.Button.login {
+    background-color: variables.$greenApp;
+    border-color: 1px solid variables.$greenApp;
+    color: variables.$white;
+    &:hover {
+      background-color: variables.$hoverGreenApp;
+    }
+    &.disabled {
+      background-color: variables.$grayLight;
+      border-color: 1px solid variables.$grayLight;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@use "../../styles/variables";
+
+.tagInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .isRequiredIcon {
+    color: variables.$red;
+  }
+
+  .inputContainer {
+    display: flex;
+    align-items: center;
+    border: 1px solid variables.$borderForm;
+    border-radius: 7px;
+    background-color: variables.$white;
+    padding: 4px;
+    transition: 0.5s all;
+
+    &:focus-within {
+      border: 1px solid variables.$focusInput;
+    }
+
+    .inputTag {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      padding: 4px;
+      background-color: variables.$white;
+    }
+
+    .addButton {
+      background: variables.$stateSuccess;
+      border: none;
+      color: variables.$white;
+      padding: 4px 8px;
+      cursor: pointer;
+      border-radius: 4px;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .tagList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 10px;
+
+    .tagItem {
+      display: flex;
+      align-items: center;
+      background-color: variables.$selectedOptions;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+
+      .close {
+        color: variables.$stateError;
+        margin-left: 8px;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}

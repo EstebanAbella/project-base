@@ -1,0 +1,39 @@
+@use "../../styles//variables";
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000ce;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  background: variables.$white;
+  padding: 20px;
+  padding-top: 54px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+
+  .close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    color: variables.$black;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  h4 {
+    margin-bottom: 26px;
+    cursor: default;
+  }
+}

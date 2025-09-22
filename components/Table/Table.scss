@@ -1,0 +1,146 @@
+@use "../../styles//variables";
+@use "../../styles/utilities";
+
+.tableContainer {
+  width: 100%;
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    cursor: default;
+    border: none;
+
+    .tableTheadComparison {
+      background-color: variables.$colorApp;
+      position: sticky;
+      top: 0;
+      z-index: utilities.z-index(basic);
+
+      tr {
+        th {
+          color: variables.$white;
+          font-weight: 600;
+          padding: 12px;
+          text-transform: uppercase;
+          font-size: 0.85rem;
+          letter-spacing: 0.03em;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+          &:first-child {
+            border-top-left-radius: 6px;
+          }
+
+          &:last-child {
+            border-top-right-radius: 6px;
+          }
+        }
+      }
+    }
+
+    tr {
+      border-top: none;
+      transition: background-color 0.15s ease;
+
+      // &:nth-child(even) {
+      //   background-color: #f9fafb;
+      // }
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      text-align: left;
+      border: none;
+      overflow: hidden;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: middle;
+      font-size: 0.95rem;
+
+      @media (max-width: 768px) {
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+    }
+
+    .tdContent {
+      display: -webkit-box;
+      display: flex;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      -webkit-box-orient: vertical;
+      box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      max-height: 5.6em;
+    }
+
+    .columnSmall {
+      width: 80px;
+
+      .columnSmallIcon {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > span {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .containerButtonTable {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 10px;
+
+      .iconActions {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .columnList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .columnListItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid variables.$borderForm;
+    border-radius: 7px;
+    margin-bottom: 6px;
+    background-color: variables.$white;
+    cursor: grab;
+
+    > span {
+      cursor: pointer;
+    }
+  }
+}
+
+.ContainerFilterSearchInTable {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.buttonTable {
+  padding: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  font-size: 15px;
+  gap: 5px;
+  min-width: 70px;
+}

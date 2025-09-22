@@ -1,0 +1,1 @@
+export { ModalCrud } from "./ModalCrud"

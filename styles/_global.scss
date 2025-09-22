@@ -1,0 +1,94 @@
+@use "./variables";
+@use "./mixins";
+@use "./utilities";
+
+body {
+  &.themeDark {
+    --themeColor: #ffff;
+    --themeBackgroundColor: #111b21;
+    --invertedThemeColor: #202c33;
+  }
+
+  &.themeLight {
+    --themeColor: #202c33;
+    --themeBackgroundColor: #e7e8e9;
+    --invertedThemeColor: #ffff;
+  }
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--themeBackgroundColor);
+  @include mixins.custom_scrollbar();
+
+  #__next {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    main {
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol,
+  a,
+  label,
+  .table > :not(caption) > * > *,
+  td,
+  tr {
+    color: var(--themeColor);
+  }
+}
+
+input,
+select,
+textarea {
+  background-color: variables.$white;
+  padding: 0px;
+  padding: 5px 10px;
+  position: relative;
+  z-index: utilities.z-index(double);
+  margin: 0px;
+  border: none;
+  width: 100%;
+  color: variables.$grayDark;
+  outline: none;
+  border: 1px solid variables.$borderForm;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  transition: 0.5s all;
+
+  &.inputError {
+    border: 1px solid variables.$stateError;
+  }
+
+  &:focus {
+    border: 1px solid variables.$focusInput;
+
+    &:not(:focus-visible) {
+      border: 1px solid variables.$borderForm !important;
+    }
+  }
+}
+input.input {
+  padding-right: 2.5rem;
+}
+textarea {
+  @include mixins.custom_scrollbar();
+}

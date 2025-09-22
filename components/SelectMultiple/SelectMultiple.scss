@@ -1,0 +1,74 @@
+@use "../../styles/variables";
+@use "../../styles/utilities";
+@use "../../styles/mixins";
+
+.custom-select-wrapper {
+  position: relative;
+  max-width: 100%;
+  color: variables.$grayDark;
+}
+
+.custom-select-wrapper.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.selected-display {
+  border: 1px solid variables.$borderForm;
+  border-radius: 7px;
+  padding: 8px 32px 8px 12px;
+  background-color: variables.$white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  > .positionIconCheck {
+    position: absolute;
+    right: 12px;
+    z-index: utilities.z-index(double);
+    font-size: 0.9rem;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+
+    &.rotated {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.options-list {
+  position: absolute;
+  width: 100%;
+  background-color: variables.$white;
+  border: 1px solid variables.$borderForm;
+  border-radius: 6px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: utilities.z-index(triple);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  @include mixins.custom_scrollbar();
+}
+
+.option {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.option:hover {
+  background-color: variables.$borderForm;
+}
+
+.option.selected {
+  background-color: variables.$colorApp;
+  color: variables.$white;
+}

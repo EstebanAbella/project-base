@@ -1,0 +1,28 @@
+@mixin custom_scrollbar(
+    $trackColor: #f3f3f3,
+    $thumbColor: rgba(0 0 0 / 0.3),
+    $widthSize: 5px,
+    $heightSize: 5px,
+    $thumbColorHover: rgba(0 0 0 / 0.3),
+    $borderRadius: 8px,
+    $border: 4px solid rgba(0 0 0 / 0),
+    $boxShadow: inset -1px -1px 0 rgba(0 0 0 / 0.05) inset 1px 1px 0 rgba(0 0 0 / 0.05)
+) {
+    &::-webkit-scrollbar {
+        width: $widthSize;
+        height: $heightSize;
+
+        &-track {
+            background: $trackColor;
+            border-radius: $borderRadius;
+        }
+        &-thumb {
+            background: $thumbColor;
+            border-radius: $borderRadius;
+            border: $border;
+            &:hover {
+                background: $thumbColorHover;
+            }
+        }
+    }
+}

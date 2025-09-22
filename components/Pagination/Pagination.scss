@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  width: 100%;
+
+  .paginationControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    p {
+      margin: 0;
+    }
+
+    .nonePoint {
+      display: none;
+    }
+
+    > button {
+      border-radius: 7px;
+      padding: 4px;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      > span {
+        display: none;
+      }
+    }
+  }
+}

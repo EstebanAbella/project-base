@@ -1,0 +1,34 @@
+@use "../../styles/utilities";
+@use "../../styles/variables";
+
+.containerPopover {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  min-width: 330px;
+  height: 40px;
+  bottom: 38px;
+  right: 20px;
+  z-index: 5;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background-color: variables.$red;
+}
+
+.popover {
+  display: flex;
+  align-items: center;
+}
+
+.popoverText {
+  margin-left: 8px;
+  font-size: 14px;
+  color: white;
+  font-weight: utilities.font-weight(semibold);
+}
+
+.closeButton {
+  border: none;
+  color: white !important;
+  padding: 6px !important;
+}

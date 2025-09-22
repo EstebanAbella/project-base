@@ -1,0 +1,70 @@
+@use "../../styles/variables";
+
+.userSelected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 2rem;
+  min-height: 83vh;
+  background-color: var(--background-primary);
+
+  .userSelectedContainer {
+    background: variables.$white;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    max-width: 600px;
+    width: 100%;
+    animation: fadeIn 0.3s ease;
+
+    .userTitle {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    .userInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+
+      p {
+        margin: 0.5rem 0;
+        font-size: 1rem;
+
+        strong {
+          font-weight: 600;
+          color: variables.$black;
+        }
+
+        .userSpan {
+          font-weight: 400;
+          color: variables.$black;
+        }
+      }
+
+      .permissions {
+        .permissionsList {
+          margin-top: 0.5rem;
+
+          .permissionItem {
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+
+            .permissionSection {
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+    .loaderWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 200px;
+    }
+  }
+}
