@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react"
+"use client"
+import { ReactNode, useEffect, useState } from "react"
 import LocalDataService from "../../services/LocalDataService"
 import { ServerStatus } from "../../interface/global"
-import router from "next/router"
+import { useRouter } from "next/navigation"
 import ApiService from "../../apiService/ApiService"
 import { useAuthContext } from "../../context/auth/AuthContext"
 import { useGetUserByToken } from "../../view/Login/useLoginData"
 
 type SessionProviderProps = {
-  children: JSX.Element | JSX.Element[]
+  children: ReactNode
 }
 
 const SessionProvider = ({ children }: SessionProviderProps) => {
   const [seeChildren, setSeeChildren] = useState<boolean>(false)
   const { loginStatus, setUser } = useAuthContext()
   const { useGetUserByTokenHandler } = useGetUserByToken()
+  const router = useRouter()
 
   useEffect(() => {
     const token = LocalDataService.getInstance().getToken()

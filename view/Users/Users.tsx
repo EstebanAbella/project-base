@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 import { ServerStatus } from "../../interface/global"
 import { Layout } from "../../wrappers/Layout/Layout"

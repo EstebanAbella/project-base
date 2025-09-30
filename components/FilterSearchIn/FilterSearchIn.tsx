@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useRef, useState } from "react"
 import useFocusTrap from "../../hooks/useFocusTrap"
 import useDropdownDirection from "./useDropdownDirection"

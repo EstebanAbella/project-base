@@ -1,6 +1,7 @@
+"use client"
 import React, { useEffect, useState } from "react"
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd"
-import router from "next/router"
+import { useRouter } from "next/navigation"
 import { ModalTable } from "./ModalTable"
 import { Search } from "../Search"
 import { FilterSearchIn } from "../FilterSearchIn"
@@ -29,6 +30,7 @@ export const Table: React.FC<TableProps> = ({
   isSearch = false,
 }) => {
   //
+  const router = useRouter()
   const [query, setQuery] = useState<string>("")
   const [filter, setFilter] = useState<string>("")
   const filterOptions = columns.map((col) => ({

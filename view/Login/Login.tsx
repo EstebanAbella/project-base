@@ -1,3 +1,4 @@
+"use client"
 import { ServerStatus } from "../../interface/global"
 import { Button } from "../../components/Button"
 import { ButtonType } from "../../components/Button/Button"
@@ -106,7 +107,7 @@ export const Login = () => {
                 }
                 type={ButtonType.LOGIN}
                 onClick={(e) => {
-                  e.preventDefault(), handleLogin()
+                  ;(e.preventDefault(), handleLogin())
                 }}
                 disabled={stateButton}
               />

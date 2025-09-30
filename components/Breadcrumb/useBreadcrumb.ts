@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 
 const pathMappings: { [key: string]: string } = {
@@ -18,12 +18,12 @@ type Breadcrumb = {
 }
 
 export const useBreadcrumb = () => {
-  const router = useRouter()
+  const pathname = usePathname()
   const [breadcrumbs, setBreadcrumbs] = useState<Breadcrumb[]>()
 
   useEffect(() => {
-    const pathWithoutQuery = router.asPath.split("?")[0]
-    let pathArray = pathWithoutQuery.replace("/panel/", "/").split("/")
+    if (!pathname) return
+    let pathArray = pathname.replace("/panel/", "/").split("/")
     pathArray.shift()
 
     pathArray = pathArray.filter((path) => path !== "")
@@ -48,7 +48,7 @@ export const useBreadcrumb = () => {
       })
 
     setBreadcrumbs(breadcrumbs)
-  }, [router.asPath])
+  }, [pathname])
 
   return breadcrumbs
 }

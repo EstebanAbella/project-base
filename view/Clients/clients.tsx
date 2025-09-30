@@ -1,4 +1,4 @@
-import React from "react"
+"use client"
 import { Button, ButtonType } from "../../components/Button/Button"
 import { ServerStatus } from "../../interface/global"
 import withAuth from "../../hooks/withAuth"

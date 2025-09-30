@@ -1,6 +1,7 @@
+"use client"
 import React, { useEffect, useState } from "react"
 import { ServerStatus } from "../../interface/global"
-import { useRouter } from "next/router"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Loader } from "../../components/Loader/Loader"
 import { Button } from "../../components/Button"
 import { ButtonType } from "../../components/Button/Button"
@@ -32,17 +33,18 @@ export const RestorePassword = () => {
   const [stateButton, setStateButton] = useState<boolean>(true)
 
   const router = useRouter()
-  const { token } = router.query
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const token = searchParams?.get("token")
+    if (token) setTokenParams(token)
+  }, [searchParams])
 
   useEffect(() => {
     if (restorePasswordValidatedStatus === ServerStatus.FETCH) {
       router.push("/login")
     }
   }, [restorePasswordValidatedStatus])
-
-  useEffect(() => {
-    token && setTokenParams(token as string)
-  }, [token])
 
   useEffect(() => {
     if (password === "" && passwordRepeated === "") return

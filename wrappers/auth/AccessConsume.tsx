@@ -1,10 +1,11 @@
+"use client"
 import React, { useEffect, useState } from "react"
 import LocalDataService from "../../services/LocalDataService"
 import { ServerStatus } from "../../interface/global"
 import { useAuthContext } from "../../context/auth/AuthContext"
 
 type AccessConsumePropsType = {
-  children: JSX.Element | JSX.Element[]
+  children: React.ReactNode
 }
 
 const AccessConsume = ({ children }: AccessConsumePropsType): any => {

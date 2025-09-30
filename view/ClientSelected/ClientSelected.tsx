@@ -1,15 +1,15 @@
-import { useRouter } from "next/router"
+"use client"
 import React from "react"
 import { ServerStatus } from "../../interface/global"
 import { Loader } from "../../components/Loader/Loader"
 import { Layout } from "../../wrappers/Layout/Layout"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 import { useClientSelected } from "./useClientSelected"
+interface Props {
+  param: string
+}
 
-export const ClientSelected = () => {
-  const router = useRouter()
-  const { param } = router.query
-
+export const ClientSelected = ({ param }: Props) => {
   const { useGetClientData, useGetClientStatus } = useClientSelected(
     param as string
   )

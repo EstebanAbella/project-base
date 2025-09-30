@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+"use client"
 import { ChangeTheme } from "../ChangeTheme/ChangeTheme"
-import router from "next/router"
+import { useRouter } from "next/navigation"
 import { Button } from "../Button"
 import { ButtonType } from "../Button/Button"
 import { useAuthContext } from "../../context/auth/AuthContext"
@@ -29,6 +29,7 @@ export const sidebarItemsArray: TSidebarItem[] = [
 export const MenuComponent = () => {
   const { setLoginStatus, setUser } = useAuthContext()
   const itemsSidebar = buildItemsWithPermissions(sidebarItemsArray)
+  const router = useRouter()
 
   return (
     <header>

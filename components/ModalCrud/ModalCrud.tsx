@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react"
 import { Button, ButtonType } from "../Button/Button"
 import { TextField, TextFieldType, typeTextField } from "../TextField/TextField"

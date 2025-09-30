@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export enum ButtonType {
   PRIMARY = "primary",
   SECONDARY = "secondary",
@@ -18,7 +20,7 @@ export const Button = ({
   extraClassName = "",
   ariaLabel,
 }: {
-  value?: string | JSX.Element
+  value?: string | ReactNode
   type?: ButtonType
   disabled?: boolean
   onClick?: (e: any) => void

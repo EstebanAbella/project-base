@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react"
-import { useRouter } from "next/router"
+import { useRouter, usePathname } from "next/navigation"
 import { useAuthContext } from "../context/auth/AuthContext"
 import { TPermissionsObject, TSectionName } from "../interface/global"
 
-const withAuth = (WrappedComponent: React.FC) => {
+function withAuth<P extends object>(WrappedComponent: React.ComponentType<P>) {
   const ComponentWithAuth = (props: any) => {
     const { user } = useAuthContext()
     const router = useRouter()
+    const pathname = usePathname()
     const [isAuthorized, setIsAuthorized] = useState(false)
 
     useEffect(() => {
       if (!user) {
         setIsAuthorized(false)
-        router.push("/notAuthorized")
+        router.replace("/notAuthorized")
         return
       }
 
       const permissions: TPermissionsObject = user.permissions || {}
-      const path = router.pathname
-      const firstSegment = path.split("/").filter(Boolean)[0]
+      const firstSegment = pathname?.split("/").filter(Boolean)[0] ?? ""
 
       const isProtectedRoute = Object.keys(permissions).includes(firstSegment)
 
@@ -32,7 +32,7 @@ const withAuth = (WrappedComponent: React.FC) => {
         }
       }
       setIsAuthorized(true)
-    }, [user, router.pathname])
+    }, [user, pathname])
 
     return isAuthorized ? <WrappedComponent {...props} /> : null
   }

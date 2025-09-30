@@ -1,5 +1,8 @@
+"use client"
 import { useState, useCallback } from "react"
-const useDropdownDirection = (containerRef: React.RefObject<HTMLElement>) => {
+const useDropdownDirection = (
+  containerRef: React.RefObject<HTMLElement | null>
+) => {
   const [openUpwards, setOpenUpwards] = useState<boolean>(false)
   const handleToggle = useCallback(() => {
     if (containerRef.current) {

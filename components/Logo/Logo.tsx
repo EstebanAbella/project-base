@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { ReactNode } from "react"
 
 type LogoPropsType = {
   srcLogo: string
@@ -12,7 +13,7 @@ export const Logo = ({
   height = 100,
   classLogo = "",
   srcLogo,
-}: LogoPropsType): JSX.Element => {
+}: LogoPropsType): ReactNode => {
   return (
     <Image
       src={srcLogo}

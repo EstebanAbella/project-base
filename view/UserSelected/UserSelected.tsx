@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+"use client"
 import React from "react"
 import { ServerStatus } from "../../interface/global"
 import { Loader } from "../../components/Loader/Loader"
@@ -6,11 +6,11 @@ import { Layout } from "../../wrappers/Layout/Layout"
 import { BreadcrumbWrapper } from "../../wrappers/breadcrumbWrapper"
 import { useUserSelected } from "./useUserSelected"
 import withAuth from "../../hooks/withAuth"
+interface Props {
+  param: string
+}
 
-const UserSelected = () => {
-  const router = useRouter()
-  const { param } = router.query
-
+const UserSelected = ({ param }: Props) => {
   const { useGetUserData, useGetUserStatus } = useUserSelected(param as string)
 
   return (

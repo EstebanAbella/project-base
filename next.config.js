@@ -5,7 +5,6 @@ const withPWA = require("next-pwa")
 
 const baseConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   async redirects() {
     return [
       {

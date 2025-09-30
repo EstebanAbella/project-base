@@ -1,6 +1,5 @@
-import React, { useEffect } from "react"
+"use client"
 import { useIsNavigationOnline } from "../../hooks/useIsNavigationOnline"
-import NotificationService from "../../services/NotificationService"
 
 export const AlertNoConnectionComponent = () => {
   const isOnline = useIsNavigationOnline()

@@ -1,8 +1,9 @@
-import React from "react"
-import router from "next/router"
+"use client"
+import { useRouter } from "next/navigation"
 import { Button, ButtonType } from "../../components/Button/Button"
 
 export const NotAuthorized = () => {
+  const router = useRouter()
   return (
     <div className='notAuthorized'>
       <h1>Not Authorized</h1>

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { createContext, useContext, useState } from "react"
 import { AuthContextType } from "./AuthContext.interface"
 import { ServerStatus } from "../../interface/global"
